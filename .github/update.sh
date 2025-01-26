@@ -10,7 +10,7 @@ for i in ${LIST} ; do
     echo "# $(echo ${i} | sed -e 's/_/ /g' -e 's/\b\(.\)/\u\1/g')" > ${i}.md
     LIST2=$(find ${i} -mindepth 1 -maxdepth 1 -type f -name "chapter_*.md")
     for j in ${LIST2} ; do
-        TITLE=$(cat ${j} | grep -m 1 -oP "(?<=# ).*")
+        TITLE=$(cat ${j} | grep "^# " | sed "s/^# /  - /g")
         echo "## $(echo "${j}" | sed "s/.*chapter_0*//g" | sed "s/\..*//g"). [$(echo ${TITLE} | sed -e 's/_/ /g' -e 's/\b\(.\)/\u\1/g')](${j})" >> ${i}.md
         cat ${j} | grep "^## " | sed "s/^## /  - /g" >> ${i}.md
     done
