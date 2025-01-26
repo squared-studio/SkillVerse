@@ -1,3 +1,3 @@
 # VLSI Training
-  - [Git](git.md)
+  - ## [Git](git.md)
 
