@@ -50,4 +50,31 @@
   - Array Uniqueness Methods
   - Array Sum Methods
   - Exercise
+## 8. [Control Statements](SystemVerilog/chapter_008.md)
+  - case
+  - if-else
+  - repeat
+  - while
+  - for
+  - foreach
+  - forever
+  - continue
+  - break
+  - fork-join
+  - fork-join_any
+  - fork-join_none
+  - Exercise
+## 9. [Procedural Blocks](SystemVerilog/chapter_009.md)
+  - assign
+  - always
+  - always_comb
+  - always_ff
+  - always_latch
+  - initial
+  - final
+  - Exercise
+## 10. [Methods](SystemVerilog/chapter_010.md)
+  - task
+  - function
+  - Exercise
 
