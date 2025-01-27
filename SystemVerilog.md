@@ -43,4 +43,11 @@
   - Associative Arrays
   - Queues
   - Exercise
+## 7. [Array Manipulation](SystemVerilog/chapter_007.md)
+  - Array Reduction Methods
+  - Array Ordering Methods
+  - Array Searching Methods
+  - Array Uniqueness Methods
+  - Array Sum Methods
+  - Exercise
 
