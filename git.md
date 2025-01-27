@@ -1,6 +1,7 @@
 # Git
 ## 1. [Introduction](git/chapter_00001.md)
   - What is Git?
+  - Why Use Git?
   - Install Git
 ## 2. [Getting Started](git/chapter_00002.md)
   - Creating a new git repository in GitHub (cli)
@@ -27,4 +28,9 @@
   - `git diff`
   - `git reset`
   - `git stash`
+## 5. [Merge Conflicts](git/chapter_00005.md)
+  - What is a Merge Conflict?
+  - How to Identify a Merge Conflict
+  - Steps to Resolve a Merge Conflict
+  - Tips for Avoiding Merge Conflicts
 
