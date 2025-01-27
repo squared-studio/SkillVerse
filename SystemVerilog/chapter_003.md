@@ -13,7 +13,7 @@ Arithmetic operators perform mathematical operations.
 - `%` : Modulus
 
 ### Example
-```systemverilog
+```SV
 module arithmetic_example;
     int a = 10, b = 5;
     int sum, diff, prod, quot, mod;
@@ -39,7 +39,7 @@ Relational operators compare two values.
 - `!==` : Case inequality (compares including X and Z values)
 
 ### Example
-```systemverilog
+```SV
 module relational_example;
     int a = 10, b = 5;
     bit result;
@@ -63,7 +63,7 @@ Logical operators perform logical operations.
 - `!` : Logical NOT
 
 ### Example
-```systemverilog
+```SV
 module logical_example;
     bit a = 1, b = 0;
     bit result;
@@ -83,7 +83,7 @@ Bitwise operators perform bit-level operations.
 - `~` : Bitwise NOT
 
 ### Example
-```systemverilog
+```SV
 module bitwise_example;
     bit [3:0] a = 4'b1010, b = 4'b0101;
     bit [3:0] result;
@@ -104,7 +104,7 @@ Shift operators shift bits left or right.
 - `>>>` : Arithmetic right shift
 
 ### Example
-```systemverilog
+```SV
 module shift_example;
     bit [3:0] a = 4'b1010;
     bit [3:0] result;
@@ -123,12 +123,12 @@ endmodule
 Blocking assignments use the `=` operator and execute sequentially. Each statement must complete before the next one begins.
 
 ### Syntax
-```systemverilog
+```SV
 variable = expression;
 ```
 
 ### Example
-```systemverilog
+```SV
 module blocking_example;
     reg a, b, c;
     initial begin
@@ -143,12 +143,12 @@ endmodule
 Non-blocking assignments use the `<=` operator and execute concurrently. All right-hand side expressions are evaluated first, and then the assignments are made.
 
 ### Syntax
-```systemverilog
+```SV
 variable <= expression;
 ```
 
 ### Example
-```systemverilog
+```SV
 module nonblocking_example;
     reg a, b, c;
     initial begin
@@ -173,7 +173,7 @@ Choosing the correct type of assignment is crucial for the correct behavior of y
   - Example: Assigning values in a clocked process, such as flip-flops.
 
 ### Example
-```systemverilog
+```SV
 module example;
     reg clk, reset;
     reg [3:0] a, b, c;
