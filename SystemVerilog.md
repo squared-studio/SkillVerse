@@ -4,7 +4,7 @@
   - Significance
   - Simple "Hello, World!" Example
   - Exercise
-## 2. [System Tasks](SystemVerilog/chapter_002.md)
+## 2. [Basic System Tasks](SystemVerilog/chapter_002.md)
   - $display
   - $monitor
   - $time
