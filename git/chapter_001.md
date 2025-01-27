@@ -102,5 +102,3 @@ git --version
 ```
 
 This command will display the installed version of Git, confirming that the installation was successful.
-
-If you encounter any issues during the installation process or need further assistance, just let me know!
