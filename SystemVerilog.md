@@ -1,10 +1,10 @@
 # SystemVerilog
-## 1. [Introduction](SystemVerilog/chapter_001.md)
+## 1. [Introduction](SystemVerilog/chapter_00001.md)
   - Purpose
   - Significance
   - Simple "Hello, World!" Example
   - Exercise
-## 2. [Basic System Tasks](SystemVerilog/chapter_002.md)
+## 2. [Basic System Tasks](SystemVerilog/chapter_00002.md)
   - $display
   - $monitor
   - $time
@@ -13,11 +13,11 @@
   - $random
   - $dumpfile
   - $dumpvars
-## 3. [Operators & Assignments](SystemVerilog/chapter_003.md)
+## 3. [Operators & Assignments](SystemVerilog/chapter_00003.md)
   - Operators
   - Assignments
   - Exercise
-## 4. [Data Types](SystemVerilog/chapter_004.md)
+## 4. [Data Types](SystemVerilog/chapter_00004.md)
   - reg
   - wire
   - integer
@@ -31,15 +31,15 @@
   - int
   - longint
   - shortreal
-## 5. [Advanced Data Types](SystemVerilog/chapter_005.md)
+## 5. [Advanced Data Types](SystemVerilog/chapter_00005.md)
   - enum
   - typedef
   - struct
-## 6. [String](SystemVerilog/chapter_006.md)
+## 6. [String](SystemVerilog/chapter_00006.md)
   - Declaring and Initializing Strings
   - String Methods
   - Exercise
-## 7. [Arrays](SystemVerilog/chapter_007.md)
+## 7. [Arrays](SystemVerilog/chapter_00007.md)
   - Introduction
   - Packed and Unpacked Arrays
   - Fixed-Size Arrays
@@ -47,14 +47,14 @@
   - Associative Arrays
   - Queues
   - Exercise
-## 8. [Array Manipulation](SystemVerilog/chapter_008.md)
+## 8. [Array Manipulation](SystemVerilog/chapter_00008.md)
   - Array Reduction Methods
   - Array Ordering Methods
   - Array Searching Methods
   - Array Uniqueness Methods
   - Array Sum Methods
   - Exercise
-## 9. [Control Statements](SystemVerilog/chapter_009.md)
+## 9. [Control Statements](SystemVerilog/chapter_00009.md)
   - case
   - if-else
   - repeat
@@ -68,7 +68,7 @@
   - fork-join_any
   - fork-join_none
   - Exercise
-## 10. [Procedural Blocks](SystemVerilog/chapter_010.md)
+## 10. [Procedural Blocks](SystemVerilog/chapter_00010.md)
   - assign
   - always
   - always_comb
@@ -77,7 +77,7 @@
   - initial
   - final
   - Exercise
-## 11. [Methods](SystemVerilog/chapter_011.md)
+## 11. [Methods](SystemVerilog/chapter_00011.md)
   - task
   - function
   - Exercise
