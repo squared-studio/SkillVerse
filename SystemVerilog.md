@@ -13,7 +13,11 @@
   - $random
   - $dumpfile
   - $dumpvars
-## 3. [Data Types](SystemVerilog/chapter_003.md)
+## 3. [Operators & Assignments](SystemVerilog/chapter_003.md)
+  - Operators
+  - Assignments
+  - Exercise
+## 4. [Data Types](SystemVerilog/chapter_004.md)
   - reg
   - wire
   - integer
@@ -27,15 +31,15 @@
   - int
   - longint
   - shortreal
-## 4. [Advanced Data Types](SystemVerilog/chapter_004.md)
+## 5. [Advanced Data Types](SystemVerilog/chapter_005.md)
   - enum
   - typedef
   - struct
-## 5. [String](SystemVerilog/chapter_005.md)
+## 6. [String](SystemVerilog/chapter_006.md)
   - Declaring and Initializing Strings
   - String Methods
   - Exercise
-## 6. [Arrays](SystemVerilog/chapter_006.md)
+## 7. [Arrays](SystemVerilog/chapter_007.md)
   - Introduction
   - Packed and Unpacked Arrays
   - Fixed-Size Arrays
@@ -43,14 +47,14 @@
   - Associative Arrays
   - Queues
   - Exercise
-## 7. [Array Manipulation](SystemVerilog/chapter_007.md)
+## 8. [Array Manipulation](SystemVerilog/chapter_008.md)
   - Array Reduction Methods
   - Array Ordering Methods
   - Array Searching Methods
   - Array Uniqueness Methods
   - Array Sum Methods
   - Exercise
-## 8. [Control Statements](SystemVerilog/chapter_008.md)
+## 9. [Control Statements](SystemVerilog/chapter_009.md)
   - case
   - if-else
   - repeat
@@ -64,7 +68,7 @@
   - fork-join_any
   - fork-join_none
   - Exercise
-## 9. [Procedural Blocks](SystemVerilog/chapter_009.md)
+## 10. [Procedural Blocks](SystemVerilog/chapter_010.md)
   - assign
   - always
   - always_comb
@@ -73,12 +77,8 @@
   - initial
   - final
   - Exercise
-## 10. [Methods](SystemVerilog/chapter_010.md)
+## 11. [Methods](SystemVerilog/chapter_011.md)
   - task
   - function
-  - Exercise
-## 11. [Operators & Assignments](SystemVerilog/chapter_011.md)
-  - Operators
-  - Assignments
   - Exercise
 
