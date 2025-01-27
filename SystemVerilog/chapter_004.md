@@ -1,74 +1,134 @@
-# Advanced Data Types
+# Data Types
 
-## enum
-An `enum` is used to define a set of named values, which makes the code more readable and maintainable.
+## reg
+A `reg` is a data type used to represent variables that hold their value until explicitly changed.
 ```SV
-typedef enum logic [1:0] {
-    IDLE = 2'b00,
-    RUNNING = 2'b01,
-    PAUSED = 2'b10,
-    STOPPED = 2'b11
-} state_t;
-
-state_t currentState;
+reg myReg;
 initial begin
-    currentState = IDLE;
-    #10 currentState = RUNNING;
+    myReg = 1'b0;
+    #10 myReg = 1'b1;
 end
 ```
 
 ### Exercise
-Create an `enum` type for traffic light states (RED, YELLOW, GREEN), and simulate the state transitions.
+Create a `reg` variable, toggle its value every 5 time units, and print out its value using `$display`.
 
-## typedef
-A `typedef` is used to create a new data type name, which can simplify complex type definitions and improve code readability.
+## wire
+A `wire` is used to connect different elements and continuously drive a value.
 ```SV
-typedef int unsigned uint32_t;
-uint32_t myUnsignedInt;
-initial myUnsignedInt = 32'hFFFFFFFF;
+wire myWire;
+assign myWire = myReg;
 ```
 
 ### Exercise
-Create a `typedef` for a 16-bit signed integer and use it to declare a variable.
+Create a `wire` that connects two `reg` variables, observe the changes, and print out the values using `$display`.
 
-## struct
-A `struct` is used to group different data types into a single composite type.
-
-### Packed Struct
-A packed struct is a contiguous set of bits, which can be used for bit-level operations.
+## integer
+An `integer` is a general-purpose variable used for arithmetic operations.
 ```SV
-typedef struct packed {
-    logic [7:0] byte_field;
-    int integer_field;
-} packedStruct_t;
-
-packedStruct_t myPackedStruct;
-initial begin
-    myPackedStruct.byte_field = 8'hFF;
-    myPackedStruct.integer_field = 42;
-    $display("Packed Struct: byte_field = %h, integer_field = %0d", myPackedStruct.byte_field, myPackedStruct.integer_field);
-    myPackedStruct = '{8'hAA, 100};
-    $display("Packed Struct: byte_field = %h, integer_field = %0d", myPackedStruct.byte_field, myPackedStruct.integer_field);
-end
-```
-
-### Unpacked Struct
-An unpacked struct is a collection of variables that are not necessarily contiguous in memory.
-```SV
-typedef struct {
-    logic [7:0] byte_field;
-    int integer_field;
-} unpackedStruct_t;
-
-unpackedStruct_t myUnpackedStruct;
-initial begin
-    myUnpackedStruct.byte_field = 8'hFF;
-    myUnpackedStruct.integer_field = 42;
-    $display("Unpacked Struct: byte_field = %h, integer_field = %0d", myUnpackedStruct.byte_field, myUnpackedStruct.integer_field);
-    myUnpackedStruct = '{byte_field: 8'hBB, integer_field: 200};
-    $display("Unpacked Struct: byte_field = %h, integer_field = %0d", myUnpackedStruct.byte_field, myUnpackedStruct.integer_field);
-end
+integer myInt;
+initial myInt = 42;
 ```
 
 ### Exercise
-Create a packed struct and an unpacked struct to represent a 3D point with `x`, `y`, and `z` coordinates, and initialize them with some values.
+Create an `integer` variable, perform basic arithmetic operations on it, and print out the results using `$display`.
+
+## real
+A `real` is used to represent floating-point numbers.
+```SV
+real myReal;
+initial myReal = 3.14;
+```
+
+### Exercise
+Create a `real` variable, perform basic arithmetic operations on it, and print out the results using `$display`.
+
+## time
+A `time` is used to store simulation time values.
+```SV
+time myTime;
+initial myTime = $time;
+```
+
+### Exercise
+Create a `time` variable, display the current simulation time using `$display`.
+
+## realtime
+A `realtime` is similar to `real` but specifically used for time values.
+```SV
+realtime myRealTime;
+initial myRealTime = $realtime;
+```
+
+### Exercise
+Create a `realtime` variable, display the current simulation time using `$display`.
+
+## logic
+A `logic` is a 4-state data type that can be used in place of `reg` or `wire`.
+```SV
+logic myLogic;
+initial myLogic = 1'b0;
+```
+
+### Exercise
+Create a `logic` variable, toggle its value every 5 time units, and print out its value using `$display`.
+
+## bit
+A `bit` is a 2-state data type (0 or 1).
+```SV
+bit myBit;
+initial myBit = 1'b1;
+```
+
+### Exercise
+Create a `bit` variable, toggle its value every 5 time units, and print out its value using `$display`.
+
+## byte
+A `byte` is an 8-bit data type.
+```SV
+byte myByte;
+initial myByte = 8'hFF;
+```
+
+### Exercise
+Create a `byte` variable, perform bitwise operations on it, and print out the results using `$display`.
+
+## shortint
+A `shortint` is a 16-bit signed integer.
+```SV
+shortint myShortInt;
+initial myShortInt = 16'sh1234;
+```
+
+### Exercise
+Create a `shortint` variable, perform arithmetic operations on it, and print out the results using `$display`.
+
+## int
+An `int` is a 32-bit signed integer.
+```SV
+int myInt;
+initial myInt = 32'h12345678;
+```
+
+### Exercise
+Create an `int` variable, perform arithmetic operations on it, and print out the results using `$display`.
+
+## longint
+A `longint` is a 64-bit signed integer.
+```SV
+longint myLongInt;
+initial myLongInt = 64'h123456789ABCDEF0;
+```
+
+### Exercise
+Create a `longint` variable, perform arithmetic operations on it, and print out the results using `$display`.
+
+## shortreal
+A `shortreal` is a 32-bit floating-point number.
+```SV
+shortreal myShortReal;
+initial myShortReal = 3.14;
+```
+
+### Exercise
+Create a `shortreal` variable, perform arithmetic operations on it, and print out the results using `$display`.

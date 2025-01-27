@@ -1,62 +1,74 @@
-# string
-A `string` is a dynamic array of characters used to store text. SystemVerilog provides several methods to manipulate strings.
+# Advanced Data Types
 
-## Declaring and Initializing Strings
+## enum
+An `enum` is used to define a set of named values, which makes the code more readable and maintainable.
 ```SV
-string myString;
+typedef enum logic [1:0] {
+    IDLE = 2'b00,
+    RUNNING = 2'b01,
+    PAUSED = 2'b10,
+    STOPPED = 2'b11
+} state_t;
+
+state_t currentState;
 initial begin
-    myString = "Hello, SystemVerilog!";
-    $display("%s", myString);
+    currentState = IDLE;
+    #10 currentState = RUNNING;
 end
 ```
 
-## String Methods
+### Exercise
+Create an `enum` type for traffic light states (RED, YELLOW, GREEN), and simulate the state transitions.
 
-### len()
-The `len()` method returns the length of the string.
+## typedef
+A `typedef` is used to create a new data type name, which can simplify complex type definitions and improve code readability.
 ```SV
-string myString = "Hello";
-int length;
+typedef int unsigned uint32_t;
+uint32_t myUnsignedInt;
+initial myUnsignedInt = 32'hFFFFFFFF;
+```
+
+### Exercise
+Create a `typedef` for a 16-bit signed integer and use it to declare a variable.
+
+## struct
+A `struct` is used to group different data types into a single composite type.
+
+### Packed Struct
+A packed struct is a contiguous set of bits, which can be used for bit-level operations.
+```SV
+typedef struct packed {
+    logic [7:0] byte_field;
+    int integer_field;
+} packedStruct_t;
+
+packedStruct_t myPackedStruct;
 initial begin
-    length = myString.len();
-    $display("Length: %0d", length);
+    myPackedStruct.byte_field = 8'hFF;
+    myPackedStruct.integer_field = 42;
+    $display("Packed Struct: byte_field = %h, integer_field = %0d", myPackedStruct.byte_field, myPackedStruct.integer_field);
+    myPackedStruct = '{8'hAA, 100};
+    $display("Packed Struct: byte_field = %h, integer_field = %0d", myPackedStruct.byte_field, myPackedStruct.integer_field);
 end
 ```
 
-### tolower()
-The `tolower()` method converts all characters in the string to lowercase.
+### Unpacked Struct
+An unpacked struct is a collection of variables that are not necessarily contiguous in memory.
 ```SV
-string myString = "HELLO";
+typedef struct {
+    logic [7:0] byte_field;
+    int integer_field;
+} unpackedStruct_t;
+
+unpackedStruct_t myUnpackedStruct;
 initial begin
-    myString = myString.tolower();
-    $display("%s", myString);
+    myUnpackedStruct.byte_field = 8'hFF;
+    myUnpackedStruct.integer_field = 42;
+    $display("Unpacked Struct: byte_field = %h, integer_field = %0d", myUnpackedStruct.byte_field, myUnpackedStruct.integer_field);
+    myUnpackedStruct = '{byte_field: 8'hBB, integer_field: 200};
+    $display("Unpacked Struct: byte_field = %h, integer_field = %0d", myUnpackedStruct.byte_field, myUnpackedStruct.integer_field);
 end
 ```
 
-### toupper()
-The `toupper()` method converts all characters in the string to uppercase.
-```SV
-string myString = "hello";
-initial begin
-    myString = myString.toupper();
-    $display("%s", myString);
-end
-```
-
-### substr()
-The `substr()` method extracts a substring from the string.
-```SV
-string myString = "Hello, SystemVerilog!";
-string subString;
-initial begin
-    subString = myString.substr(7, 10);
-    $display("%s", subString);
-end
-```
-
-## Exercise
-1. Create a string variable and initialize it with a sentence.
-2. Use the `len()` method to find the length of the string.
-3. Convert the string to uppercase using the `toupper()` method.
-4. Extract a substring from the string using the `substr()` method.
-5. Display all the results using `$display`.
+### Exercise
+Create a packed struct and an unpacked struct to represent a 3D point with `x`, `y`, and `z` coordinates, and initialize them with some values.

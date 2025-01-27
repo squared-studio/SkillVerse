@@ -1,86 +1,88 @@
-# Methods
+# Procedural Blocks
 
-SystemVerilog provides two types of methods to encapsulate reusable code: `task` and `function`.
+SystemVerilog provides several types of procedural blocks to describe the behavior of hardware. These include `assign`, `always`, `always_comb`, `always_ff`, `always_latch`, `initial`, `final`, `function`, and `task`.
 
-## task
-A `task` is used to encapsulate a sequence of statements that can include time-consuming operations such as delays or event control. Tasks can have input, output, and inout arguments.
-
-### Syntax
+## assign
+The `assign` statement is used for continuous assignments in combinational logic.
 ```SV
-task task_name(input_type input_arg, output_type output_arg, inout_type inout_arg);
-    // Task body
-endtask
+module assign_example;
+    wire a, b, c;
+    assign c = a & b;
+endmodule
 ```
 
-### Example
+## always
+The `always` block is used to describe behavior that should be executed repeatedly.
 ```SV
-task add(input int a, input int b, output int sum);
-    sum = a + b;
-endtask
+module always_example;
+    reg clk;
+    always #5 clk = ~clk;
+endmodule
 ```
 
-### Lifetime
-Tasks can have either static or automatic lifetime:
-- **Static**: Variables retain their values between calls.
-- **Automatic**: Variables are reinitialized each time the task is called.
-
+## always_comb
+The `always_comb` block is used to describe combinational logic.
 ```SV
-task automatic add(input int a, input int b, output int sum);
-    sum = a + b;
-endtask
-```
-```SV
-task static add(input int a, output int sum);
-    static int sum = 0;
-    sum = a + sum;
-endtask
+module always_comb_example;
+    logic a, b, c;
+    always_comb begin
+        c = a & b;
+    end
+endmodule
 ```
 
-## function
-A `function` is used to encapsulate a sequence of statements that execute without any time-consuming operations. Functions can have input arguments and return a single value.
-
-### Syntax
+## always_ff
+The `always_ff` block is used to describe sequential logic with flip-flops.
 ```SV
-function return_type function_name(input_type input_arg);
-    // Function body
-    return return_value;
-endfunction
+module always_ff_example;
+    logic clk, reset, q;
+    always_ff @(posedge clk or posedge reset) begin
+        if (reset)
+            q <= 1'b0;
+        else
+            q <= ~q;
+    end
+endmodule
 ```
 
-### Example
+## always_latch
+The `always_latch` block is used to describe latch-based logic.
 ```SV
-function int add(input int a, input int b);
-    add = a + b;
-endfunction
-```
-```SV
-function int add(input int a, input int b);
-    return a + b;
-endfunction
+module always_latch_example;
+    logic enable, d, q;
+    always_latch begin
+        if (enable)
+            q <= d;
+    end
+endmodule
 ```
 
-### Lifetime
-Functions can also have either static or automatic lifetime:
-- **Static**: Variables retain their values between calls.
-- **Automatic**: Variables are reinitialized each time the function is called.
-
+## initial
+The `initial` block is used to describe behavior that should be executed once at the beginning of the simulation.
 ```SV
-function automatic int add(input int a, input int b);
-    add = a + b;
-endfunction
+module initial_example;
+    initial begin
+        $display("Simulation started");
+        #10 $finish;
+    end
+endmodule
 ```
+
+## final
+The `final` block is used to describe behavior that should be executed once at the end of the simulation.
 ```SV
-function static int add(input int a);
-    static int sum = 0;
-    sum = a + sum;
-    return sum;
-endfunction
+module final_example;
+    final begin
+        $display("Simulation ended");
+    end
+endmodule
 ```
 
 ## Exercise
-1. Create a `task` that takes two integers as input and outputs their sum.
-2. Create a `task` that takes an integer array as input and outputs the maximum value in the array.
-3. Create a `function` that takes two integers as input and returns their product.
-4. Create a `function` that takes an integer as input and returns its factorial.
-5. Modify the `task` from exercise 1 to take one input and sum with previous result using static lifetime.
-6. Modify the `function` from exercise 3 to take one input and multiply with previous result using static lifetime.
+1. Create a module that uses the `assign` statement to perform a continuous assignment.
+2. Create a module that uses the `always` block to generate a clock signal.
+3. Create a module that uses the `always_comb` block to describe combinational logic.
+4. Create a module that uses the `always_ff` block to describe sequential logic with flip-flops.
+5. Create a module that uses the `always_latch` block to describe latch-based logic.
+6. Create a module that uses the `initial` block to print a message at the beginning of the simulation.
+7. Create a module that uses the `final` block to print a message at the end of the simulation.

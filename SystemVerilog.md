@@ -77,4 +77,8 @@
   - task
   - function
   - Exercise
+## 11. [Operators & Assignments](SystemVerilog/chapter_011.md)
+  - Operators
+  - Assignments
+  - Exercise
 

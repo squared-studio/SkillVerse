@@ -1,187 +1,150 @@
-# Control Statements
+# Array Manipulation
 
-Control statements in SystemVerilog are used to control the flow of execution in a program. These statements include conditional statements, loops, and concurrent statements.
+SystemVerilog provides several built-in methods to manipulate arrays. These methods can be used to perform operations such as searching, sorting, and reducing arrays.
 
-## case
-The `case` statement is used to execute one of several blocks of code based on the value of an expression.
+## Array Reduction Methods
+
+### and()
+The `and()` method performs a bitwise AND reduction on all elements of the array.
 ```SV
-module case_example;
-    int a = 2;
-    initial begin
-        case (a)
-            1: $display("a is 1");
-            2: $display("a is 2");
-            3: $display("a is 3");
-            default: $display("a is not 1, 2, or 3");
-        endcase
-    end
-endmodule
+int myArray[4] = '{1, 1, 1, 1};
+int result;
+initial begin
+    result = myArray.and();
+    $display("AND reduction: %0d", result);
+end
 ```
 
-## if-else
-The `if-else` statement is used to execute a block of code based on a condition.
-The `else if` statement is used to check multiple conditions in sequence.
+### or()
+The `or()` method performs a bitwise OR reduction on all elements of the array.
 ```SV
-module if_else_example;
-    int a = 5;
-    initial begin
-        if (a > 10) begin
-            $display("a is greater than 10");
-        end else if (a > 5) begin
-            $display("a is greater than 5 but less than or equal to 10");
-        end else if (a > 0) begin
-            $display("a is greater than 0 but less than or equal to 5");
-        end else begin
-            $display("a is less than or equal to 0");
-        end
-    end
-endmodule
+int myArray[4] = '{1, 0, 1, 0};
+int result;
+initial begin
+    result = myArray.or();
+    $display("OR reduction: %0d", result);
+end
 ```
 
-## repeat
-The `repeat` statement is used to execute a block of code a fixed number of times.
+### xor()
+The `xor()` method performs a bitwise XOR reduction on all elements of the array.
 ```SV
-module repeat_example;
-    int i;
-    initial begin
-        repeat (5) begin
-            $display("Iteration: %0d", i);
-            i++;
-        end
-    end
-endmodule
+int myArray[4] = '{1, 0, 1, 0};
+int result;
+initial begin
+    result = myArray.xor();
+    $display("XOR reduction: %0d", result);
+end
 ```
 
-## while
-The `while` statement is used to execute a block of code as long as a condition is true.
+## Array Ordering Methods
+
+### reverse()
+The `reverse()` method reverses the order of elements in the array.
 ```SV
-module while_example;
-    int i = 0;
-    initial begin
-        while (i < 5) begin
-            $display("Iteration: %0d", i);
-            i++;
-        end
-    end
-endmodule
+int myArray[4] = '{1, 2, 3, 4};
+initial begin
+    myArray.reverse();
+    $display("Reversed array: %p", myArray);
+end
 ```
 
-## for
-The `for` statement is used to execute a block of code a fixed number of times, with an initialization, condition, and increment.
+### sort()
+The `sort()` method sorts the elements of the array in ascending order.
 ```SV
-module for_example;
-    initial begin
-        for (int i = 0; i < 5; i++) begin
-            $display("Iteration: %0d", i);
-        end
-    end
-endmodule
+int myArray[4] = '{4, 3, 2, 1};
+initial begin
+    myArray.sort();
+    $display("Sorted array: %p", myArray);
+end
 ```
 
-## foreach
-The `foreach` statement is used to iterate over the elements of an array.
+### rsort()
+The `rsort()` method sorts the elements of the array in descending order.
 ```SV
-module foreach_example;
-    int myArray[5] = '{1, 2, 3, 4, 5};
-    initial begin
-        foreach (myArray[i]) begin
-            $display("Element at index %0d: %0d", i, myArray[i]);
-        end
-    end
-endmodule
+int myArray[4] = '{1, 2, 3, 4};
+initial begin
+    myArray.rsort();
+    $display("Reverse sorted array: %p", myArray);
+end
 ```
 
-## forever
-The `forever` statement is used to execute a block of code indefinitely.
+## Array Searching Methods
+
+### find()
+The `find()` method returns the indices of elements that match a given condition.
 ```SV
-module forever_example;
-    initial begin
-        forever begin
-            $display("This will print forever");
-            #10; // Delay to prevent infinite loop
-        end
-    end
-endmodule
+int myArray[4] = '{1, 2, 3, 4};
+int indices[];
+initial begin
+    indices = myArray.find(x) with (x > 2);
+    $display("Indices of elements > 2: %p", indices);
+end
 ```
 
-## continue
-The `continue` statement is used to skip the remaining code in the current iteration of a loop and proceed to the next iteration.
+### find_index()
+The `find_index()` method returns the index of the first element that matches a given condition.
 ```SV
-module continue_example;
-    initial begin
-        for (int i = 0; i < 5; i++) begin
-            if (i == 2) continue;
-            $display("Iteration: %0d", i);
-        end
-    end
-endmodule
+int myArray[4] = '{1, 2, 3, 4};
+int index;
+initial begin
+    index = myArray.find_index(x) with (x > 2);
+    $display("Index of first element > 2: %0d", index);
+end
 ```
 
-## break
-The `break` statement is used to exit a loop prematurely.
+### find_first()
+The `find_first()` method returns the first element that matches a given condition.
 ```SV
-module break_example;
-    initial begin
-        for (int i = 0; i < 5; i++) begin
-            if (i == 2) break;
-            $display("Iteration: %0d", i);
-        end
-    end
-endmodule
+int myArray[4] = '{1, 2, 3, 4};
+int element;
+initial begin
+    element = myArray.find_first(x) with (x > 2);
+    $display("First element > 2: %0d", element);
+end
 ```
 
-## fork-join
-The `fork-join` statement is used to execute multiple blocks of code concurrently.
+### find_last()
+The `find_last()` method returns the last element that matches a given condition.
 ```SV
-module fork_join_example;
-    initial begin
-        fork
-            $display("Block 1");
-            $display("Block 2");
-        join
-    end
-endmodule
+int myArray[4] = '{1, 2, 3, 4};
+int element;
+initial begin
+    element = myArray.find_last(x) with (x > 2);
+    $display("Last element > 2: %0d", element);
+end
 ```
 
-## fork-join_any
-The `fork-join_any` statement is used to execute multiple blocks of code concurrently, and the execution continues as soon as any one of the blocks completes.
+## Array Uniqueness Methods
+
+### unique()
+The `unique()` method returns the unique elements of the array.
 ```SV
-module fork_join_any_example;
-    initial begin
-        fork
-            #10 $display("Block 1");
-            #20 $display("Block 2");
-        join_any
-        $display("One of the blocks has completed");
-    end
-endmodule
+int myArray[4] = '{1, 2, 2, 3};
+int uniqueArray[];
+initial begin
+    uniqueArray = myArray.unique();
+    $display("Unique elements: %p", uniqueArray);
+end
 ```
 
-## fork-join_none
-The `fork-join_none` statement is used to execute multiple blocks of code concurrently, and the execution continues immediately without waiting for any of the blocks to complete.
+## Array Sum Methods
+
+### sum()
+The `sum()` method returns the sum of all elements in the array.
 ```SV
-module fork_join_none_example;
-    initial begin
-        fork
-            #10 $display("Block 1");
-            #20 $display("Block 2");
-        join_none
-        $display("Execution continues immediately");
-    end
-endmodule
+int myArray[4] = '{1, 2, 3, 4};
+int result;
+initial begin
+    result = myArray.sum();
+    $display("Sum of elements: %0d", result);
+end
 ```
 
 ## Exercise
-1. Create a module that uses a `case` statement to print a message based on the value of a variable.
-2. Create a module that uses an `if-else` statement to check if a number is positive or negative.
-3. Create a module that uses an `else if` statement to check multiple conditions in sequence.
-4. Create a module that uses a `repeat` statement to print a message 5 times.
-5. Create a module that uses a `while` statement to print numbers from 0 to 4.
-6. Create a module that uses a `for` statement to print numbers from 0 to 4.
-7. Create a module that uses a `foreach` statement to iterate over an array and print its elements.
-8. Create a module that uses a `forever` statement to print a message indefinitely with a delay.
-9. Create a module that uses a `continue` statement to skip printing the number 2 in a loop.
-10. Create a module that uses a `break` statement to exit a loop when the number 2 is encountered.
-11. Create a module that uses a `fork-join` statement to execute two blocks of code concurrently.
-12. Create a module that uses a `fork-join_any` statement to execute two blocks of code concurrently and continue execution as soon as one block completes.
-13. Create a module that uses a `fork-join_none` statement to execute two blocks of code concurrently and continue execution immediately.
+1. Create an array and perform a bitwise AND reduction using the `and()` method.
+2. Reverse the order of elements in an array using the `reverse()` method.
+3. Sort an array in ascending order using the `sort()` method.
+4. Find the indices of elements greater than a given value using the `find()` method.
+5. Return the unique elements of an array using the `unique()` method.
+6. Calculate the sum of all elements in an array using the `sum()` method.

@@ -1,134 +1,203 @@
-# Data Types
+# Operators & Assignments
 
-## reg
-A `reg` is a data type used to represent variables that hold their value until explicitly changed.
-```SV
-reg myReg;
-initial begin
-    myReg = 1'b0;
-    #10 myReg = 1'b1;
-end
+SystemVerilog provides a variety of operators and assignment types to describe hardware behavior. Understanding these operators and assignments is essential for writing efficient and correct hardware descriptions.
+
+## Operators
+
+### Arithmetic Operators
+Arithmetic operators perform mathematical operations.
+- `+` : Addition
+- `-` : Subtraction
+- `*` : Multiplication
+- `/` : Division
+- `%` : Modulus
+
+### Example
+```systemverilog
+module arithmetic_example;
+    int a = 10, b = 5;
+    int sum, diff, prod, quot, mod;
+    initial begin
+        sum = a + b;
+        diff = a - b;
+        prod = a * b;
+        quot = a / b;
+        mod = a % b;
+    end
+endmodule
 ```
 
-### Exercise
-Create a `reg` variable, toggle its value every 5 time units, and print out its value using `$display`.
+### Relational Operators
+Relational operators compare two values.
+- `==` : Equal to
+- `!=` : Not equal to
+- `<` : Less than
+- `<=` : Less than or equal to
+- `>` : Greater than
+- `>=` : Greater than or equal to
+- `===` : Case equality (compares including X and Z values)
+- `!==` : Case inequality (compares including X and Z values)
 
-## wire
-A `wire` is used to connect different elements and continuously drive a value.
-```SV
-wire myWire;
-assign myWire = myReg;
+### Example
+```systemverilog
+module relational_example;
+    int a = 10, b = 5;
+    bit result;
+    initial begin
+        result = (a == b);  // result is 0
+        result = (a != b);  // result is 1
+        result = (a < b);   // result is 0
+        result = (a <= b);  // result is 0
+        result = (a > b);   // result is 1
+        result = (a >= b);  // result is 1
+        result = (a === b); // result is 0
+        result = (a !== b); // result is 1
+    end
+endmodule
 ```
 
-### Exercise
-Create a `wire` that connects two `reg` variables, observe the changes, and print out the values using `$display`.
+### Logical Operators
+Logical operators perform logical operations.
+- `&&` : Logical AND
+- `||` : Logical OR
+- `!` : Logical NOT
 
-## integer
-An `integer` is a general-purpose variable used for arithmetic operations.
-```SV
-integer myInt;
-initial myInt = 42;
+### Example
+```systemverilog
+module logical_example;
+    bit a = 1, b = 0;
+    bit result;
+    initial begin
+        result = a && b; // result is 0
+        result = a || b; // result is 1
+        result = !a;     // result is 0
+    end
+endmodule
 ```
 
-### Exercise
-Create an `integer` variable, perform basic arithmetic operations on it, and print out the results using `$display`.
+### Bitwise Operators
+Bitwise operators perform bit-level operations.
+- `&` : Bitwise AND
+- `|` : Bitwise OR
+- `^` : Bitwise XOR
+- `~` : Bitwise NOT
 
-## real
-A `real` is used to represent floating-point numbers.
-```SV
-real myReal;
-initial myReal = 3.14;
+### Example
+```systemverilog
+module bitwise_example;
+    bit [3:0] a = 4'b1010, b = 4'b0101;
+    bit [3:0] result;
+    initial begin
+        result = a & b; // result is 4'b0000
+        result = a | b; // result is 4'b1111
+        result = a ^ b; // result is 4'b1111
+        result = ~a;    // result is 4'b0101
+    end
+endmodule
 ```
 
-### Exercise
-Create a `real` variable, perform basic arithmetic operations on it, and print out the results using `$display`.
+### Shift Operators
+Shift operators shift bits left or right.
+- `<<` : Logical left shift
+- `>>` : Logical right shift
+- `<<<` : Arithmetic left shift
+- `>>>` : Arithmetic right shift
 
-## time
-A `time` is used to store simulation time values.
-```SV
-time myTime;
-initial myTime = $time;
+### Example
+```systemverilog
+module shift_example;
+    bit [3:0] a = 4'b1010;
+    bit [3:0] result;
+    initial begin
+        result = a << 1;  // result is 4'b0100
+        result = a >> 1;  // result is 4'b0101
+        result = a <<< 1; // result is 4'b0100
+        result = a >>> 1; // result is 4'b0101
+    end
+endmodule
 ```
 
-### Exercise
-Create a `time` variable, display the current simulation time using `$display`.
+## Assignments
 
-## realtime
-A `realtime` is similar to `real` but specifically used for time values.
-```SV
-realtime myRealTime;
-initial myRealTime = $realtime;
+### Blocking Assignments
+Blocking assignments use the `=` operator and execute sequentially. Each statement must complete before the next one begins.
+
+### Syntax
+```systemverilog
+variable = expression;
 ```
 
-### Exercise
-Create a `realtime` variable, display the current simulation time using `$display`.
-
-## logic
-A `logic` is a 4-state data type that can be used in place of `reg` or `wire`.
-```SV
-logic myLogic;
-initial myLogic = 1'b0;
+### Example
+```systemverilog
+module blocking_example;
+    reg a, b, c;
+    initial begin
+        a = 1;
+        b = a;
+        c = b;
+    end
+endmodule
 ```
 
-### Exercise
-Create a `logic` variable, toggle its value every 5 time units, and print out its value using `$display`.
+### Non-blocking Assignments
+Non-blocking assignments use the `<=` operator and execute concurrently. All right-hand side expressions are evaluated first, and then the assignments are made.
 
-## bit
-A `bit` is a 2-state data type (0 or 1).
-```SV
-bit myBit;
-initial myBit = 1'b1;
+### Syntax
+```systemverilog
+variable <= expression;
 ```
 
-### Exercise
-Create a `bit` variable, toggle its value every 5 time units, and print out its value using `$display`.
-
-## byte
-A `byte` is an 8-bit data type.
-```SV
-byte myByte;
-initial myByte = 8'hFF;
+### Example
+```systemverilog
+module nonblocking_example;
+    reg a, b, c;
+    initial begin
+        a <= 1;
+        b <= a;
+        c <= b;
+    end
+endmodule
 ```
 
-### Exercise
-Create a `byte` variable, perform bitwise operations on it, and print out the results using `$display`.
+### Choosing Between Blocking and Non-blocking
+Choosing the correct type of assignment is crucial for the correct behavior of your design.
 
-## shortint
-A `shortint` is a 16-bit signed integer.
-```SV
-shortint myShortInt;
-initial myShortInt = 16'sh1234;
+- **Blocking Assignments (`=`)**:
+  - Use in combinational logic within `always_comb` blocks.
+  - Execute sequentially, making them suitable for describing operations that must occur in a specific order.
+  - Example: Assigning values in a combinational logic block.
+
+- **Non-blocking Assignments (`<=`)**:
+  - Use in sequential logic within `always_ff` blocks.
+  - Execute concurrently, making them suitable for describing operations that occur simultaneously.
+  - Example: Assigning values in a clocked process, such as flip-flops.
+
+### Example
+```systemverilog
+module example;
+    reg clk, reset;
+    reg [3:0] a, b, c;
+
+    // Combinational logic using blocking assignments
+    always_comb begin
+        a = b + c;
+    end
+
+    // Sequential logic using non-blocking assignments
+    always_ff @(posedge clk or posedge reset) begin
+        if (reset)
+            b <= 4'b0000;
+        else
+            b <= a;
+    end
+endmodule
 ```
 
-### Exercise
-Create a `shortint` variable, perform arithmetic operations on it, and print out the results using `$display`.
-
-## int
-An `int` is a 32-bit signed integer.
-```SV
-int myInt;
-initial myInt = 32'h12345678;
-```
-
-### Exercise
-Create an `int` variable, perform arithmetic operations on it, and print out the results using `$display`.
-
-## longint
-A `longint` is a 64-bit signed integer.
-```SV
-longint myLongInt;
-initial myLongInt = 64'h123456789ABCDEF0;
-```
-
-### Exercise
-Create a `longint` variable, perform arithmetic operations on it, and print out the results using `$display`.
-
-## shortreal
-A `shortreal` is a 32-bit floating-point number.
-```SV
-shortreal myShortReal;
-initial myShortReal = 3.14;
-```
-
-### Exercise
-Create a `shortreal` variable, perform arithmetic operations on it, and print out the results using `$display`.
+## Exercise
+1. Create a module that uses arithmetic operators to perform addition, subtraction, multiplication, division, and modulus operations.
+2. Create a module that uses relational operators to compare two values.
+3. Create a module that uses logical operators to perform logical operations.
+4. Create a module that uses bitwise operators to perform bit-level operations.
+5. Create a module that uses shift operators to shift bits left and right.
+6. Create a module that uses blocking assignments to describe combinational logic.
+7. Create a module that uses non-blocking assignments to describe sequential logic.
