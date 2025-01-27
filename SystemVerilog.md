@@ -27,4 +27,20 @@
   - int
   - longint
   - shortreal
+## 4. [Advanced Data Types](SystemVerilog/chapter_004.md)
+  - enum
+  - typedef
+  - struct
+## 5. [String](SystemVerilog/chapter_005.md)
+  - Declaring and Initializing Strings
+  - String Methods
+  - Exercise
+## 6. [Arrays](SystemVerilog/chapter_006.md)
+  - Introduction
+  - Packed and Unpacked Arrays
+  - Fixed-Size Arrays
+  - Dynamic Arrays
+  - Associative Arrays
+  - Queues
+  - Exercise
 
