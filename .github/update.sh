@@ -16,7 +16,7 @@ for i in ${LIST} ; do
     count=1
     LIST2=$(find ${i} -mindepth 1 -maxdepth 1 -type f -name "temp_chapter_*.md")
         for j in ${LIST2} ; do
-            FINAL_NAME=$(echo ${j} | sed "s/temp_chapter_.*\./chapter_$(printf "%03d." ${count})/g")
+            FINAL_NAME=$(echo ${j} | sed "s/temp_chapter_.*\./chapter_$(printf "%05d." ${count})/g")
             mv ${j} ${FINAL_NAME}
             count=$((count + 1))
         done
