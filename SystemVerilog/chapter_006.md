@@ -7,7 +7,7 @@ An array is a collection of variables of the same type, accessed using an index.
 
 ### Packed Arrays
 Packed arrays are contiguous sets of bits, which can be used to represent vectors or multi-dimensional arrays.
-```systemverilog
+```SV
 logic [7:0] packedArray;
 initial begin
     packedArray = 8'b10101010;
@@ -17,7 +17,7 @@ end
 
 ### Unpacked Arrays
 Unpacked arrays are collections of variables that are not necessarily contiguous in memory.
-```systemverilog
+```SV
 int unpackedArray[5];
 initial begin
     unpackedArray[0] = 10;
@@ -31,7 +31,7 @@ end
 
 ## Fixed-Size Arrays
 A fixed-size array has a predefined number of elements.
-```systemverilog
+```SV
 int myArray[5];
 initial begin
     myArray[0] = 10;
@@ -47,7 +47,7 @@ end
 
 #### size()
 The `size()` method returns the number of elements in the array.
-```systemverilog
+```SV
 int myArray[5] = '{1, 2, 3, 4, 5};
 int size;
 initial begin
@@ -58,7 +58,7 @@ end
 
 ## Dynamic Arrays
 A dynamic array can change its size during runtime.
-```systemverilog
+```SV
 int myDynamicArray[];
 initial begin
     myDynamicArray = new[5];
@@ -75,7 +75,7 @@ end
 
 #### new()
 The `new()` method allocates memory for the dynamic array.
-```systemverilog
+```SV
 int myDynamicArray[];
 initial begin
     myDynamicArray = new[5];
@@ -85,7 +85,7 @@ end
 
 #### size()
 The `size()` method returns the number of elements in the dynamic array.
-```systemverilog
+```SV
 int myDynamicArray[];
 initial begin
     myDynamicArray = new[5];
@@ -95,7 +95,7 @@ end
 
 #### delete()
 The `delete()` method removes all elements from the dynamic array.
-```systemverilog
+```SV
 int myDynamicArray[];
 initial begin
     myDynamicArray = new[5];
@@ -106,7 +106,7 @@ end
 
 ## Associative Arrays
 An associative array uses an index of any data type to access its elements.
-```systemverilog
+```SV
 int myAssocArray[string];
 initial begin
     myAssocArray["one"] = 1;
@@ -120,7 +120,7 @@ end
 
 #### num()
 The `num()` method returns the number of elements in the associative array.
-```systemverilog
+```SV
 int myAssocArray[string];
 initial begin
     myAssocArray["one"] = 1;
@@ -131,7 +131,7 @@ end
 
 #### size()
 The `size()` method returns the number of elements in the associative array.
-```systemverilog
+```SV
 int myAssocArray[string];
 initial begin
     myAssocArray["one"] = 1;
@@ -142,7 +142,7 @@ end
 
 #### delete()
 The `delete()` method removes all elements from the associative array.
-```systemverilog
+```SV
 int myAssocArray[string];
 initial begin
     myAssocArray["one"] = 1;
@@ -154,7 +154,7 @@ end
 
 #### delete(index)
 The `delete(index)` method removes the element at the specified index from the associative array.
-```systemverilog
+```SV
 int myAssocArray[string];
 initial begin
     myAssocArray["one"] = 1;
@@ -166,7 +166,7 @@ end
 
 #### exists()
 The `exists()` method checks if an element exists in the associative array.
-```systemverilog
+```SV
 int myAssocArray[string];
 initial begin
     myAssocArray["one"] = 1;
@@ -180,7 +180,7 @@ end
 
 #### first()
 The `first()` method returns the first index in the associative array.
-```systemverilog
+```SV
 int myAssocArray[string];
 string firstIndex;
 initial begin
@@ -192,7 +192,7 @@ end
 
 #### last()
 The `last()` method returns the last index in the associative array.
-```systemverilog
+```SV
 int myAssocArray[string];
 string lastIndex;
 initial begin
@@ -205,7 +205,7 @@ end
 
 #### next()
 The `next()` method returns the next index in the associative array.
-```systemverilog
+```SV
 int myAssocArray[string];
 string currentIndex, nextIndex;
 initial begin
@@ -219,7 +219,7 @@ end
 
 #### prev()
 The `prev()` method returns the previous index in the associative array.
-```systemverilog
+```SV
 int myAssocArray[string];
 string currentIndex, prevIndex;
 initial begin
@@ -233,7 +233,7 @@ end
 
 ## Queues
 A queue is a variable-size, ordered collection of elements.
-```systemverilog
+```SV
 int myQueue[$];
 initial begin
     myQueue.push_back(10);
@@ -247,7 +247,7 @@ end
 
 #### size()
 The `size()` method returns the number of elements in the queue.
-```systemverilog
+```SV
 int myQueue[$];
 initial begin
     myQueue.push_back(10);
@@ -258,7 +258,7 @@ end
 
 #### delete()
 The `delete()` method removes all elements from the queue.
-```systemverilog
+```SV
 int myQueue[$];
 initial begin
     myQueue.push_back(10);
@@ -270,7 +270,7 @@ end
 
 #### delete(index)
 The `delete(index)` method removes the element at the specified index from the queue.
-```systemverilog
+```SV
 int myQueue[$];
 initial begin
     myQueue.push_back(10);
@@ -282,7 +282,7 @@ end
 
 #### insert()
 The `insert()` method inserts an element at a specified position in the queue.
-```systemverilog
+```SV
 int myQueue[$];
 initial begin
     myQueue.push_back(10);
@@ -294,7 +294,7 @@ end
 
 #### pop_front()
 The `pop_front()` method removes and returns the first element of the queue.
-```systemverilog
+```SV
 int myQueue[$];
 int firstElement;
 initial begin
@@ -307,7 +307,7 @@ end
 
 #### pop_back()
 The `pop_back()` method removes and returns the last element of the queue.
-```systemverilog
+```SV
 int myQueue[$];
 int lastElement;
 initial begin
@@ -320,7 +320,7 @@ end
 
 #### push_front()
 The `push_front()` method adds an element to the front of the queue.
-```systemverilog
+```SV
 int myQueue[$];
 initial begin
     myQueue.push_front(10);
@@ -331,7 +331,7 @@ end
 
 #### push_back()
 The `push_back()` method adds an element to the end of the queue.
-```systemverilog
+```SV
 int myQueue[$];
 initial begin
     myQueue.push_back(10);

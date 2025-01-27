@@ -6,7 +6,7 @@ SystemVerilog provides several built-in methods to manipulate arrays. These meth
 
 ### and()
 The `and()` method performs a bitwise AND reduction on all elements of the array.
-```systemverilog
+```SV
 int myArray[4] = '{1, 1, 1, 1};
 int result;
 initial begin
@@ -17,7 +17,7 @@ end
 
 ### or()
 The `or()` method performs a bitwise OR reduction on all elements of the array.
-```systemverilog
+```SV
 int myArray[4] = '{1, 0, 1, 0};
 int result;
 initial begin
@@ -28,7 +28,7 @@ end
 
 ### xor()
 The `xor()` method performs a bitwise XOR reduction on all elements of the array.
-```systemverilog
+```SV
 int myArray[4] = '{1, 0, 1, 0};
 int result;
 initial begin
@@ -41,7 +41,7 @@ end
 
 ### reverse()
 The `reverse()` method reverses the order of elements in the array.
-```systemverilog
+```SV
 int myArray[4] = '{1, 2, 3, 4};
 initial begin
     myArray.reverse();
@@ -51,7 +51,7 @@ end
 
 ### sort()
 The `sort()` method sorts the elements of the array in ascending order.
-```systemverilog
+```SV
 int myArray[4] = '{4, 3, 2, 1};
 initial begin
     myArray.sort();
@@ -61,7 +61,7 @@ end
 
 ### rsort()
 The `rsort()` method sorts the elements of the array in descending order.
-```systemverilog
+```SV
 int myArray[4] = '{1, 2, 3, 4};
 initial begin
     myArray.rsort();
@@ -73,7 +73,7 @@ end
 
 ### find()
 The `find()` method returns the indices of elements that match a given condition.
-```systemverilog
+```SV
 int myArray[4] = '{1, 2, 3, 4};
 int indices[];
 initial begin
@@ -84,7 +84,7 @@ end
 
 ### find_index()
 The `find_index()` method returns the index of the first element that matches a given condition.
-```systemverilog
+```SV
 int myArray[4] = '{1, 2, 3, 4};
 int index;
 initial begin
@@ -95,7 +95,7 @@ end
 
 ### find_first()
 The `find_first()` method returns the first element that matches a given condition.
-```systemverilog
+```SV
 int myArray[4] = '{1, 2, 3, 4};
 int element;
 initial begin
@@ -106,7 +106,7 @@ end
 
 ### find_last()
 The `find_last()` method returns the last element that matches a given condition.
-```systemverilog
+```SV
 int myArray[4] = '{1, 2, 3, 4};
 int element;
 initial begin
@@ -119,7 +119,7 @@ end
 
 ### unique()
 The `unique()` method returns the unique elements of the array.
-```systemverilog
+```SV
 int myArray[4] = '{1, 2, 2, 3};
 int uniqueArray[];
 initial begin
@@ -132,7 +132,7 @@ end
 
 ### sum()
 The `sum()` method returns the sum of all elements in the array.
-```systemverilog
+```SV
 int myArray[4] = '{1, 2, 3, 4};
 int result;
 initial begin

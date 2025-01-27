@@ -2,7 +2,7 @@
 
 ## enum
 An `enum` is used to define a set of named values, which makes the code more readable and maintainable.
-```systemverilog
+```SV
 typedef enum logic [1:0] {
     IDLE = 2'b00,
     RUNNING = 2'b01,
@@ -22,7 +22,7 @@ Create an `enum` type for traffic light states (RED, YELLOW, GREEN), and simulat
 
 ## typedef
 A `typedef` is used to create a new data type name, which can simplify complex type definitions and improve code readability.
-```systemverilog
+```SV
 typedef int unsigned uint32_t;
 uint32_t myUnsignedInt;
 initial myUnsignedInt = 32'hFFFFFFFF;
@@ -36,7 +36,7 @@ A `struct` is used to group different data types into a single composite type.
 
 ### Packed Struct
 A packed struct is a contiguous set of bits, which can be used for bit-level operations.
-```systemverilog
+```SV
 typedef struct packed {
     logic [7:0] byte_field;
     int integer_field;
@@ -54,7 +54,7 @@ end
 
 ### Unpacked Struct
 An unpacked struct is a collection of variables that are not necessarily contiguous in memory.
-```systemverilog
+```SV
 typedef struct {
     logic [7:0] byte_field;
     int integer_field;

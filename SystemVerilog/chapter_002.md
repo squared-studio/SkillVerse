@@ -4,7 +4,7 @@ SystemVerilog provides several system tasks for various purposes such as display
 
 ## $display
 The `$display` task is used to print messages to the console.
-```systemverilog
+```SV
 module display_example;
     initial begin
         $display("Hello, SystemVerilog!");
@@ -15,7 +15,7 @@ This example prints "Hello, SystemVerilog!" to the console.
 
 ## $monitor
 The `$monitor` task continuously monitors and prints the values of variables whenever they change.
-```systemverilog
+```SV
 module monitor_example;
     reg [3:0] a, b;
     initial begin
@@ -31,7 +31,7 @@ This example prints the values of `a` and `b` whenever they change.
 
 ## $time
 The `$time` task returns the current simulation time.
-```systemverilog
+```SV
 module time_example;
     initial begin
         #5 $display("Current time: %0t", $time);
@@ -42,7 +42,7 @@ This example prints the current simulation time after 5 time units.
 
 ## $finish
 The `$finish` task terminates the simulation.
-```systemverilog
+```SV
 module finish_example;
     initial begin
         $display("Simulation will finish now.");
@@ -54,7 +54,7 @@ This example prints a message and then ends the simulation.
 
 ## $stop
 The `$stop` task pauses the simulation and allows for interactive debugging.
-```systemverilog
+```SV
 module stop_example;
     initial begin
         $display("Simulation will stop now.");
@@ -66,7 +66,7 @@ This example prints a message and then pauses the simulation.
 
 ## $random
 The `$random` task generates random numbers.
-```systemverilog
+```SV
 module random_example;
     initial begin
         $display("Random number: %0d", $random);
@@ -77,7 +77,7 @@ This example prints a random number to the console.
 
 ## $dumpfile
 The `$dumpfile` task specifies the name of the dump file to store simulation waveforms.
-```systemverilog
+```SV
 module dumpfile_example;
     initial begin
         $dumpfile("waveform.vcd");
@@ -88,7 +88,7 @@ This example specifies "waveform.vcd" as the dump file to store simulation wavef
 
 ## $dumpvars
 The `$dumpvars` task dumps the values of variables to the dump file for waveform viewing.
-```systemverilog
+```SV
 module dumpvars_example;
     reg [3:0] a, b;
     initial begin

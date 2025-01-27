@@ -2,7 +2,7 @@
 
 ## reg
 A `reg` is a data type used to represent variables that hold their value until explicitly changed.
-```systemverilog
+```SV
 reg myReg;
 initial begin
     myReg = 1'b0;
@@ -15,7 +15,7 @@ Create a `reg` variable, toggle its value every 5 time units, and print out its 
 
 ## wire
 A `wire` is used to connect different elements and continuously drive a value.
-```systemverilog
+```SV
 wire myWire;
 assign myWire = myReg;
 ```
@@ -25,7 +25,7 @@ Create a `wire` that connects two `reg` variables, observe the changes, and prin
 
 ## integer
 An `integer` is a general-purpose variable used for arithmetic operations.
-```systemverilog
+```SV
 integer myInt;
 initial myInt = 42;
 ```
@@ -35,7 +35,7 @@ Create an `integer` variable, perform basic arithmetic operations on it, and pri
 
 ## real
 A `real` is used to represent floating-point numbers.
-```systemverilog
+```SV
 real myReal;
 initial myReal = 3.14;
 ```
@@ -45,7 +45,7 @@ Create a `real` variable, perform basic arithmetic operations on it, and print o
 
 ## time
 A `time` is used to store simulation time values.
-```systemverilog
+```SV
 time myTime;
 initial myTime = $time;
 ```
@@ -55,7 +55,7 @@ Create a `time` variable, display the current simulation time using `$display`.
 
 ## realtime
 A `realtime` is similar to `real` but specifically used for time values.
-```systemverilog
+```SV
 realtime myRealTime;
 initial myRealTime = $realtime;
 ```
@@ -65,7 +65,7 @@ Create a `realtime` variable, display the current simulation time using `$displa
 
 ## logic
 A `logic` is a 4-state data type that can be used in place of `reg` or `wire`.
-```systemverilog
+```SV
 logic myLogic;
 initial myLogic = 1'b0;
 ```
@@ -75,7 +75,7 @@ Create a `logic` variable, toggle its value every 5 time units, and print out it
 
 ## bit
 A `bit` is a 2-state data type (0 or 1).
-```systemverilog
+```SV
 bit myBit;
 initial myBit = 1'b1;
 ```
@@ -85,7 +85,7 @@ Create a `bit` variable, toggle its value every 5 time units, and print out its 
 
 ## byte
 A `byte` is an 8-bit data type.
-```systemverilog
+```SV
 byte myByte;
 initial myByte = 8'hFF;
 ```
@@ -95,7 +95,7 @@ Create a `byte` variable, perform bitwise operations on it, and print out the re
 
 ## shortint
 A `shortint` is a 16-bit signed integer.
-```systemverilog
+```SV
 shortint myShortInt;
 initial myShortInt = 16'sh1234;
 ```
@@ -105,7 +105,7 @@ Create a `shortint` variable, perform arithmetic operations on it, and print out
 
 ## int
 An `int` is a 32-bit signed integer.
-```systemverilog
+```SV
 int myInt;
 initial myInt = 32'h12345678;
 ```
@@ -115,7 +115,7 @@ Create an `int` variable, perform arithmetic operations on it, and print out the
 
 ## longint
 A `longint` is a 64-bit signed integer.
-```systemverilog
+```SV
 longint myLongInt;
 initial myLongInt = 64'h123456789ABCDEF0;
 ```
@@ -125,7 +125,7 @@ Create a `longint` variable, perform arithmetic operations on it, and print out 
 
 ## shortreal
 A `shortreal` is a 32-bit floating-point number.
-```systemverilog
+```SV
 shortreal myShortReal;
 initial myShortReal = 3.14;
 ```

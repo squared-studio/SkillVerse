@@ -18,7 +18,7 @@ SystemVerilog's significance lies in its ability to:
 ## Simple "Hello, World!" Example
 Below is a simple "Hello, World!" example in SystemVerilog to demonstrate basic syntax and simulation.
 
-```systemverilog
+```SV
 module hello_world;
     // Initial block runs once at the beginning of the simulation
     initial begin

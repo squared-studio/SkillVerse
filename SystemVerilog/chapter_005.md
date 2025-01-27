@@ -2,7 +2,7 @@
 A `string` is a dynamic array of characters used to store text. SystemVerilog provides several methods to manipulate strings.
 
 ## Declaring and Initializing Strings
-```systemverilog
+```SV
 string myString;
 initial begin
     myString = "Hello, SystemVerilog!";
@@ -14,7 +14,7 @@ end
 
 ### len()
 The `len()` method returns the length of the string.
-```systemverilog
+```SV
 string myString = "Hello";
 int length;
 initial begin
@@ -25,7 +25,7 @@ end
 
 ### tolower()
 The `tolower()` method converts all characters in the string to lowercase.
-```systemverilog
+```SV
 string myString = "HELLO";
 initial begin
     myString = myString.tolower();
@@ -35,7 +35,7 @@ end
 
 ### toupper()
 The `toupper()` method converts all characters in the string to uppercase.
-```systemverilog
+```SV
 string myString = "hello";
 initial begin
     myString = myString.toupper();
@@ -45,7 +45,7 @@ end
 
 ### substr()
 The `substr()` method extracts a substring from the string.
-```systemverilog
+```SV
 string myString = "Hello, SystemVerilog!";
 string subString;
 initial begin
