@@ -1,86 +1,86 @@
 # RTL Design Verification
-## 1. [Chapter 1: Overview Of Verification](RTL_design_verification/chapter_00001.md)
+## 1. [Overview Of Verification](RTL_design_verification/chapter_00001.md)
   - Importance of Verification in Digital Design
   - Verification vs. Validation
   - Verification Methodologies
-## 2. [Chapter 2: Verification Planning And Strategy](RTL_design_verification/chapter_00002.md)
+## 2. [Verification Planning And Strategy](RTL_design_verification/chapter_00002.md)
   - Verification Plan (Test Plan)
   - Coverage Goals
   - Defining Verification Metrics
   - Exercises
-## 3. [Chapter 3: Basics Of Verification In SystemVerilog](RTL_design_verification/chapter_00003.md)
+## 3. [Basics Of Verification In SystemVerilog](RTL_design_verification/chapter_00003.md)
   - SystemVerilog Constructs for Verification
   - Interfaces and Virtual Interfaces
   - Randomization and Constraints
   - Exercises
-## 4. [Chapter 4: Writing Testbenches](RTL_design_verification/chapter_00004.md)
+## 4. [Writing Testbenches](RTL_design_verification/chapter_00004.md)
   - Structure of a Testbench
   - Stimulus Generation
   - Checker and Monitor Implementation
   - Exercises
-## 5. [Chapter 5: Assertions In SystemVerilog](RTL_design_verification/chapter_00005.md)
+## 5. [Assertions In SystemVerilog](RTL_design_verification/chapter_00005.md)
   - Introduction to Assertions
   - Immediate and Concurrent Assertions
   - Writing Effective Assertions
   - Exercises
-## 6. [Chapter 6: Functional Coverage](RTL_design_verification/chapter_00006.md)
+## 6. [Functional Coverage](RTL_design_verification/chapter_00006.md)
   - Coverage Types: Code, Functional, Assertion
   - Defining and Collecting Coverage
   - Analyzing and Improving Coverage
   - Exercises
-## 7. [Chapter 7: Constrained Random Verification](RTL_design_verification/chapter_00007.md)
+## 7. [Constrained Random Verification](RTL_design_verification/chapter_00007.md)
   - Random Stimulus Generation
   - Constraint Solving
   - Controlling Randomization
   - Exercises
-## 8. [Chapter 8: UVM (Universal Verification Methodology)](RTL_design_verification/chapter_00008.md)
+## 8. [UVM (Universal Verification Methodology)](RTL_design_verification/chapter_00008.md)
   - Introduction to UVM
   - UVM Components: Agents, Drivers, Monitors
   - Writing UVM Testbenches
   - Exercises
-## 9. [Chapter 9: Verification IP (VIP)](RTL_design_verification/chapter_00009.md)
+## 9. [Verification IP (VIP)](RTL_design_verification/chapter_00009.md)
   - Creating Reusable Verification Components
   - Developing and Integrating VIPs
   - Exercises
-## 10. [Chapter 10: Scoreboarding And Self-Checking Testbenches](RTL_design_verification/chapter_00010.md)
+## 10. [Scoreboarding And Self-Checking Testbenches](RTL_design_verification/chapter_00010.md)
   - Scoreboarding Concepts
   - Implementing Scoreboards
   - Self-Checking Mechanisms
   - Exercises
-## 11. [Chapter 11: Transaction-Level Modeling (TLM)](RTL_design_verification/chapter_00011.md)
+## 11. [Transaction-Level Modeling (TLM)](RTL_design_verification/chapter_00011.md)
   - Introduction to TLM
   - Writing and Using TLM Components
   - Benefits of TLM in Verification
   - Exercises
-## 12. [Chapter 12: Debugging Techniques](RTL_design_verification/chapter_00012.md)
+## 12. [Debugging Techniques](RTL_design_verification/chapter_00012.md)
   - Common Bugs in Verification
   - Debugging Tools and Techniques
   - Waveform Analysis
   - Exercises
-## 13. [Chapter 13: Optimizing Verification Efficiency](RTL_design_verification/chapter_00013.md)
+## 13. [Optimizing Verification Efficiency](RTL_design_verification/chapter_00013.md)
   - Reducing Simulation Time
   - Improving Test Coverage
   - Using Assertions for Debugging
   - Exercises
-## 14. [Chapter 14: Project 1 - Verifying A Simple Processor](RTL_design_verification/chapter_00014.md)
+## 14. [Project 1 - Verifying A Simple Processor](RTL_design_verification/chapter_00014.md)
   - Developing a Verification Plan
   - Writing and Running Testbenches
   - Analyzing Coverage and Results
   - Exercises
-## 15. [Chapter 15: Project 2 - Verifying A Communication Protocol](RTL_design_verification/chapter_00015.md)
+## 15. [Project 2 - Verifying A Communication Protocol](RTL_design_verification/chapter_00015.md)
   - Defining Verification Requirements
   - Creating Constrained Random Tests
   - Implementing Functional Coverage
   - Exercises
-## 16. [Chapter 16: Case Studies](RTL_design_verification/chapter_00016.md)
+## 16. [Case Studies](RTL_design_verification/chapter_00016.md)
   - Real-World Verification Projects
   - Lessons Learned from Industry Practices
   - Exercises
-## 17. [Chapter 17: Using Simulation Tools](RTL_design_verification/chapter_00017.md)
+## 17. [Using Simulation Tools](RTL_design_verification/chapter_00017.md)
   - Introduction to Simulation Tools (e.g., ModelSim, VCS)
   - Running Simulations and Analyzing Results
   - Exercises
-## 18. [Chapter 18: Scripting For Verification](RTL_design_verification/chapter_00018.md)
+## 18. [Scripting For Verification](RTL_design_verification/chapter_00018.md)
   - Writing Scripts for Automation
   - Using Python/Perl for Verification Tasks
   - Integrating Scripts with Verification Environments
