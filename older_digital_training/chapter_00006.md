@@ -1,4 +1,4 @@
-# Task 6 : GNU Make
+# GNU Make
 
 ## Introduction
 GNU Make is a powerful tool that automates the process of building executable programs and libraries from source code. It's a build automation tool that was designed to manage dependencies in your project. 

@@ -1,11 +1,11 @@
 # Older Analog Training
-## 1. [Task 1 : Linux Terminal](older_analog_training/chapter_00001.md)
+## 1. [Linux Terminal](older_analog_training/chapter_00001.md)
   - Introduction
   - Commonly used commands
-## 2. [Task 2 : Introduction To Git](older_analog_training/chapter_00002.md)
+## 2. [Introduction To Git](older_analog_training/chapter_00002.md)
   - Introduction
   - Commonly used git commands
-## 3. [Task 3 : Digital Circuit Components](older_analog_training/chapter_00003.md)
+## 3. [Digital Circuit Components](older_analog_training/chapter_00003.md)
   - NOT Gate
   - AND Gate
   - OR Gate
@@ -14,7 +14,7 @@
   - NOR Gate
   - XNOR Gate
   - Exercise
-## 4. [Task 4 : Vi IMproved (VIM)](older_analog_training/chapter_00004.md)
+## 4. [Vi IMproved (VIM)](older_analog_training/chapter_00004.md)
   - Introduction
   - Install
   - Simple Exercise

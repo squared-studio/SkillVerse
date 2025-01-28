@@ -1,4 +1,4 @@
-# Task 22 : Demultiplexer
+# Demultiplexer
 
 ## Self Study
 - [Demultiplexer](https://vlsiverify.com/verilog/verilog-codes/demultiplexer/)

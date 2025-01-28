@@ -1,4 +1,4 @@
-# Task 20 : Gray to Binary Code Converter
+# Gray to Binary Code Converter
 
 ## Self Study
 - [Gray to Binary Code Converter](https://vlsiverify.com/verilog/verilog-codes/gray-to-binary/)

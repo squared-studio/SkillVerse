@@ -1,4 +1,4 @@
-# Task 4 : Vi IMproved (VIM)
+# Vi IMproved (VIM)
 
 
 ## Introduction

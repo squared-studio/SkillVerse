@@ -1,4 +1,4 @@
-# Task 28 : Asynchronous FIFO
+# Asynchronous FIFO
 
 ## Self Study
 - [Asynchronous FIFO](https://vlsiverify.com/verilog/verilog-codes/asynchronous-fifo/)

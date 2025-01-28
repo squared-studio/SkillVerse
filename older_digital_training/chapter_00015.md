@@ -1,4 +1,4 @@
-# Task 15 : Simple SystemVerilog Exercises
+# Simple SystemVerilog Exercises
 
 ## Self Study
 - [CONSTRAINTS                                              ](https://www.chipverify.com/systemverilog/systemverilog-constraints)

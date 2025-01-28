@@ -1,4 +1,4 @@
-# Task 7 : Xilinx Vivado
+# Xilinx Vivado
 
 ## Introduction
 **AMD Vivado** is a comprehensive design software suite for synthesis and analysis of hardware description language (HDL) designs. It is specifically designed for AMD adaptive SoCs and FPGAs. The suite includes various tools for **Design Entry**, **Synthesis**, **Place and Route**, and **Verification/Simulation**. These tools enable faster design iterations and help in quickly meeting your FMAX targets. Vivado brings unique features such as **Report QoR Assessment (RQA)**, **Report QoR Suggestions (RQS)**, and **Intelligent Design Runs (IDR)**. These features help you close timing and converge on your performance goals in days instead of weeks, resulting in significant productivity gains. Moreover, Vivado supports design entry in traditional HDL like VHDL and Verilog. It also supports a graphical user interface-based tool called the **IP Integrator (IPI)** that allows for a Plug-and-Play IP Integration Design Environment.

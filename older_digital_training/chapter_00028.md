@@ -1,4 +1,4 @@
-# Task 27 : Synchronous FIFO
+# Synchronous FIFO
 
 ## Self Study
 - [Synchronous FIFO](https://vlsiverify.com/verilog/verilog-codes/synchronous-fifo/)

@@ -1,4 +1,4 @@
-# Task 19 : Testbench Example
+# Testbench Example
 
 ## Documentation
 ### [Click here to see the Design Documentation](https://github.com/DSi-DV/rv64g-core/blob/main/document/rtl/pipeline.md)

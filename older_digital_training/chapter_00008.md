@@ -1,4 +1,4 @@
-# Task 8 : Simple SystemVerilog Exercises
+# Simple SystemVerilog Exercises
 
 ## Self Study
 - [INTRODUCTION                                             ](https://www.chipverify.com/tutorials/systemverilog)

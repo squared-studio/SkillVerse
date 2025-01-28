@@ -1,4 +1,4 @@
-# Task 12 : Simple SystemVerilog Exercises
+# Simple SystemVerilog Exercises
 
 ## Self Study
 - [INTERPROCESS COMMUNICATION                               ](https://www.chipverify.com/systemverilog/systemverilog-interprocess-communication)

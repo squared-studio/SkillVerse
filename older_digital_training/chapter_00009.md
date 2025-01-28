@@ -1,4 +1,4 @@
-# Task 9 : Simple SystemVerilog Exercises
+# Simple SystemVerilog Exercises
 
 ## Self Study
 - [ENUMERATION                                              ](https://www.chipverify.com/systemverilog/systemverilog-enumeration)

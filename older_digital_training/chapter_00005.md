@@ -1,4 +1,4 @@
-# Task 5 : Icarus Verilog
+# Icarus Verilog
 
 ## Introduction
 **Icarus Verilog** is an open-source implementation of the Verilog hardware description language. It is a compiler that generates netlists in the desired format (EDIF) and a simulator. It supports the 1995, 2001, and 2005 versions of the standard, portions of SystemVerilog, and some extensions.

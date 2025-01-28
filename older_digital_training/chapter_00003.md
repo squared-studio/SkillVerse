@@ -1,4 +1,4 @@
-# Task 3 : Digital Circuit Components
+# Digital Circuit Components
 
 ## NOT Gate
 A NOT gate, also known as an inverter, has one input and one output. The output is the inverse of the input. If the input is 1, the output is 0, and vice versa.

@@ -1,4 +1,4 @@
-# Task 26 : Moore Sequence Detector
+# Moore Sequence Detector
 
 ## Self Study
 - [Moore Sequence Detector](https://vlsiverify.com/verilog/verilog-codes/moore-sequence-detector/)

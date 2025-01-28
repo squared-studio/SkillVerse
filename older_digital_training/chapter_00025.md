@@ -1,4 +1,4 @@
-# Task 24 : Decoder
+# Decoder
 
 ## Self Study
 - [Decoder](https://vlsiverify.com/verilog/verilog-codes/decoder/)

@@ -1,4 +1,4 @@
-# Task 18 : Simple SystemVerilog Exercises
+# Simple SystemVerilog Exercises
 
 ## Self Study
 - [FUNCTIONAL COVERAGE                                      ](https://www.chipverify.com/systemverilog/systemverilog-functional-coverage)

@@ -1,4 +1,4 @@
-# Task 10 : Simple SystemVerilog Exercises
+# Simple SystemVerilog Exercises
 
 ## Self Study
 - [STRUCT                                                   ](https://www.chipverify.com/systemverilog/systemverilog-struct)

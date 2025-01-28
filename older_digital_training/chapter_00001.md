@@ -1,4 +1,4 @@
-# Task 1 : Linux Terminal
+# Linux Terminal
 
 ## Introduction
 

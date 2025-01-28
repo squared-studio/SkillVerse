@@ -1,4 +1,4 @@
-# Task 21 : Multiplexer
+# Multiplexer
 
 ## Self Study
 - [Multiplexer](https://vlsiverify.com/verilog/verilog-codes/multiplexer/)

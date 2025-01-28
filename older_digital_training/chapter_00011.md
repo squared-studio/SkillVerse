@@ -1,4 +1,4 @@
-# Task 11 : Simple SystemVerilog Exercises
+# Simple SystemVerilog Exercises
 
 ## Self Study
 - [UNIQUE PRIORITY IF ELSE                                  ](https://www.chipverify.com/systemverilog/systemverilog-unique-priority-if-else)

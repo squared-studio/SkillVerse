@@ -1,4 +1,4 @@
-# Task 13 : Simple SystemVerilog Exercises
+# Simple SystemVerilog Exercises
 
 ## Self Study
 - [CLASS                                                    ](https://www.chipverify.com/systemverilog/systemverilog-class)

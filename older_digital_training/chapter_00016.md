@@ -1,4 +1,4 @@
-# Task 16 : Simple SystemVerilog Exercises
+# Simple SystemVerilog Exercises
 
 ## Self Study
 - [SOLVE BEFORE                                             ](https://www.chipverify.com/systemverilog/systemverilog-solve-before)

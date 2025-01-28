@@ -1,4 +1,4 @@
-# Task 17 : Simple SystemVerilog Exercises
+# Simple SystemVerilog Exercises
 
 ## Self Study
 - [PROGRAM BLOCK                                            ](https://www.chipverify.com/systemverilog/systemverilog-program-block)

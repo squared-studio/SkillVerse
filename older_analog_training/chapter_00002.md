@@ -1,4 +1,4 @@
-# Task 2 : Introduction to git
+# Introduction to git
 
 ## Introduction
 
