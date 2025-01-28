@@ -16,8 +16,6 @@ $ git init
 ```
 After running these commands, your project directory becomes a Git repository, ready for you to start tracking changes, making commits, and much more.
 
-
-
 ## `git clone`
 The `git clone` command is used to create a copy of an existing Git repository. This command is helpful when you want to take an existing project (hosted on a remote server like GitHub) and create a local copy on your machine. It not only creates a working copy of the project, but it also downloads the entire history of changes.
 
@@ -37,8 +35,6 @@ $ git clone https://github.com/username/repository-name.git
 
 It's a handy command to quickly get a full-fledged copy of a project and start working on it immediately.
 
-
-
 ## `git status`
 The `git status` command is super useful for checking the current state of your working directory and staging area in a Git repository. It provides information about the changes that have been made, what files are being tracked, and what files are staged for the next commit.
 
@@ -54,8 +50,6 @@ $ git status
 - **Reminds of New Branch:** It shows which branch you're currently on and if your branch is ahead or behind the remote branch.
 
 It's like getting a real-time status update on your project, helping you stay organized and aware of your progress.
-
-
 
 ## `git add`
 The `git add` command is used to add changes in the working directory to the staging area. In other words, it tells Git that you want to include updates to a particular file(s) or all files in the next commit. The `git add` command doesn't actually affect the remote repository until you run `git commit` followed by `git push`.
@@ -76,8 +70,6 @@ $ git add .
 - **Incremental Commits:** Allows you to break your work into smaller, manageable pieces by staging parts of a project at a time.
 
 This command is key to controlling what gets included in your commits and ensuring you're versioning exactly what you intend to.
-
-
 
 ## `git commit`
 The `git commit` command is used to save your changes to the local repository. Once changes are staged using `git add`, you commit them with `git commit` to create a snapshot of your project at a certain point in time. This snapshot can be referenced or reverted to in the future.
@@ -101,8 +93,6 @@ After running this command, your changes are now committed to your local reposit
 
 Remember, to push these commits to a remote repository, you'd use the `git push` command.
 
-
-
 ## `git push`
 The `git push` command is used to upload your local repository content to a remote repository. After you've made commits in your local repository, the `git push` command allows you to send those commits to a remote repository (like GitHub, GitLab, or Bitbucket) so others can access and collaborate on the project.
 
@@ -121,8 +111,6 @@ In this example:
 - **Track Progress:** Ensures your remote repository reflects your local repository's state.
 
 Using `git push` keeps your work backed up and shareable with others working on the same project.
-
-
 
 ## `git fetch`
 The `git fetch` command is used to download commits, files, and references from a remote repository into your local repository. Unlike `git pull`, it doesn't automatically merge the changes into your working branch. Instead, it allows you to review the updates before integrating them, giving you more control over the merge process.
@@ -158,8 +146,6 @@ In this example:
 
 Using `git fetch` gives you the flexibility to see what changes have been made in the remote repository before deciding to merge them into your local branch, making it a valuable tool for managing updates and collaborations effectively.
 
-
-
 ## `git pull`
 The `git pull` command is used to fetch and download content from a remote repository and immediately update the local repository to match that content. It's a combination of two commands: `git fetch` (which downloads the new data) and `git merge` (which integrates it into your local branch).
 
@@ -178,8 +164,6 @@ In this example:
 - **Resolve Conflicts:** If there are conflicting changes, you'll be prompted to resolve them during the merge process.
 
 Using `git pull` helps you keep your local work in sync with the remote repository, making sure you're always working with the most current version of the project.
-
-
 
 ## `git checkout`
 The `git checkout` command is a versatile tool in Git that can be used for various purposes, such as switching between branches or restoring files. It essentially changes the state of your working directory to match the specified branch or commit.
@@ -221,8 +205,6 @@ $ git checkout HEAD~1 -- filename.txt
 ```
 
 The `git checkout` command is incredibly powerful and can be used in different scenarios to manage your code effectively.
-
-
 
 ## `git log`
 The `git log` command is used to display the commit history of a Git repository. It shows a list of all the commits made to the repository, along with details like commit hashes, author names, dates, and commit messages. This command is incredibly helpful for tracking changes and understanding the project's evolution.
@@ -270,8 +252,6 @@ Date:   Sun Jan 26 10:00:00 2025 +0900
 
 Using `git log` allows you to dive into the history of your project and understand the changes made over time.
 
-
-
 ## `git diff`
 The `git diff` command is used to show the differences between various Git data sources. It allows you to see changes between commits, the working directory, and the staging area. This command is incredibly useful for reviewing what has changed before making a commit or seeing what was changed in a specific commit.
 
@@ -313,8 +293,6 @@ The output shows the lines that were added, removed, or modified. In this exampl
 
 Using `git diff` helps you understand what has changed in your files and ensures that you're committing exactly what you intend to.
 
-
-
 ## `git reset`
 The `git reset` command is a powerful tool in Git that allows you to undo changes in your repository. It can be used to unstage files or to reset your working directory to a previous commit. Depending on the options you use, `git reset` can modify the staging area, the working directory, and/or the commit history.
 
@@ -349,8 +327,6 @@ $ git reset --hard commit-hash
 ```
 
 Using `git reset` gives you the flexibility to undo changes at various levels, making it easier to manage your project's state.
-
-
 
 ## `git stash`
 The `git stash` command is used to temporarily save (or "stash") changes in your working directory that are not yet ready to be committed. This is particularly useful if you need to switch branches or make some other changes but don't want to commit your current work yet.
