@@ -3,7 +3,7 @@
   - ## [git](git.md)
   - ## [older analog training](older_analog_training.md)
   - ## [older digital training](older_digital_training.md)
-  - ## [RTL Design](RTL_Design.md)
-  - ## [RTL Design Verification](RTL_Design_Verification.md)
+  - ## [RTL design](RTL_design.md)
+  - ## [RTL design verification](RTL_design_verification.md)
   - ## [SystemVerilog](SystemVerilog.md)
 
