@@ -1,4 +1,4 @@
-# Chapter 17: SystemVerilog Assertions (SVA)
+# SystemVerilog Assertions (SVA)
 
 ## Introduction
 SystemVerilog Assertions (SVA) are used to specify and check properties of a design. They help in detecting and diagnosing errors by verifying that certain conditions hold true during simulation.
@@ -7,7 +7,7 @@ SystemVerilog Assertions (SVA) are used to specify and check properties of a des
 Immediate assertions are evaluated immediately when the statement is executed.
 
 ### Example
-```systemverilog
+```SV
 module immediate_assertion_example;
   int a = 5;
   initial begin
@@ -20,7 +20,7 @@ endmodule
 Concurrent assertions are evaluated over a period of time and are used to check temporal properties.
 
 ### Example
-```systemverilog
+```SV
 module concurrent_assertion_example;
   logic clk, rst, a, b;
   initial begin
@@ -54,7 +54,7 @@ endmodule
 Assertions can have different severity levels: `fatal`, `error`, `warning`, and `info`.
 
 ### Example
-```systemverilog
+```SV
 module assertion_severity_example;
   int a = -1;
   initial begin
@@ -70,7 +70,7 @@ endmodule
 Cover properties are used to specify conditions that should be covered during simulation.
 
 ### Example
-```systemverilog
+```SV
 module cover_property_example;
   logic clk, rst, a, b;
   initial begin

@@ -1,4 +1,4 @@
-# Chapter 2: Built-in System Tasks and System Functions
+# Built-in System Tasks and System Functions
 
 ## Display Tasks
 SystemVerilog provides several tasks for displaying information during simulation.
@@ -6,7 +6,7 @@ SystemVerilog provides several tasks for displaying information during simulatio
 ### `$display`
 Displays information at the time of execution.
 
-```systemverilog
+```SV
 module display_example;
   initial begin
     $display("Hello, SystemVerilog!");
@@ -17,7 +17,7 @@ endmodule
 ### `$monitor`
 Continuously monitors and displays information whenever a specified variable changes.
 
-```systemverilog
+```SV
 module monitor_example;
   reg [3:0] a;
   initial begin
@@ -32,7 +32,7 @@ endmodule
 ### `$strobe`
 Displays information at the end of the current simulation time step.
 
-```systemverilog
+```SV
 module strobe_example;
   initial begin
     $strobe("End of time step: %0t", $time);
@@ -46,7 +46,7 @@ Tasks for generating waveform files for post-simulation analysis.
 ### `$dumpfile`
 Specifies the name of the dump file.
 
-```systemverilog
+```SV
 module dumpfile_example;
   initial begin
     $dumpfile("waveform.vcd");
@@ -57,7 +57,7 @@ endmodule
 ### `$dumpvars`
 Dumps the variables to the specified dump file.
 
-```systemverilog
+```SV
 module dumpvars_example;
   reg clk;
   initial begin
@@ -75,7 +75,7 @@ Tasks for retrieving simulation time.
 ### `$time`
 Returns the current simulation time as a 64-bit integer.
 
-```systemverilog
+```SV
 module time_example;
   initial begin
     $display("Current time: %0t", $time);
@@ -86,7 +86,7 @@ endmodule
 ### `$stime`
 Returns the current simulation time as a 32-bit integer.
 
-```systemverilog
+```SV
 module stime_example;
   initial begin
     $display("Current time (32-bit): %0d", $stime);
@@ -97,7 +97,7 @@ endmodule
 ### `$realtime`
 Returns the current simulation time as a real number.
 
-```systemverilog
+```SV
 module realtime_example;
   initial begin
     $display("Current time (real): %0f", $realtime);
@@ -111,7 +111,7 @@ Tasks for controlling the simulation.
 ### `$finish`
 Terminates the simulation.
 
-```systemverilog
+```SV
 module finish_example;
   initial begin
     $display("Simulation will finish now.");
@@ -123,7 +123,7 @@ endmodule
 ### `$stop`
 Pauses the simulation.
 
-```systemverilog
+```SV
 module stop_example;
   initial begin
     $display("Simulation will stop now.");
@@ -135,7 +135,7 @@ endmodule
 ### `$exit`
 Terminates the simulation and exits the simulator.
 
-```systemverilog
+```SV
 module exit_example;
   initial begin
     $display("Simulation will exit now.");

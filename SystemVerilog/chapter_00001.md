@@ -1,4 +1,4 @@
-# Chapter 1: Introduction to SystemVerilog
+# Introduction to SystemVerilog
 
 ## What is SystemVerilog?
 SystemVerilog is a hardware description and verification language (HDVL) that extends Verilog, a hardware description language (HDL). It is used for designing and verifying digital systems, such as integrated circuits (ICs) and field-programmable gate arrays (FPGAs).

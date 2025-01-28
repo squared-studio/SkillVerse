@@ -1,4 +1,4 @@
-# Chapter 9: Tasks and Functions
+# Tasks and Functions
 
 ## Introduction
 Tasks and functions in SystemVerilog are used to encapsulate and reuse code. They help in creating modular and maintainable designs.
@@ -11,7 +11,7 @@ Tasks and functions in SystemVerilog are used to encapsulate and reuse code. The
 Tasks are defined using the `task` keyword and are called using their name.
 
 ### Example
-```systemverilog
+```SV
 module task_example;
   task display_message(input string message);
     $display("%s", message);
@@ -27,7 +27,7 @@ endmodule
 Functions are defined using the `function` keyword and are called using their name.
 
 ### Example
-```systemverilog
+```SV
 module function_example;
   function int add(input int a, input int b);
     add = a + b;
@@ -46,7 +46,7 @@ endmodule
 - **Automatic**: Variables are unique to each call to the task or function.
 
 ### Example
-```systemverilog
+```SV
 module automatic_example;
   task automatic increment(input int a, output int b);
     begin
@@ -66,7 +66,7 @@ endmodule
 Functions must have a return type, which specifies the type of value they return.
 
 ### Example
-```systemverilog
+```SV
 module return_type_example;
   function int multiply(input int a, input int b);
     multiply = a * b;

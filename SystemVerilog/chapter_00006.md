@@ -1,4 +1,4 @@
-# Chapter 6: Operators
+# Operators
 
 ## Introduction
 Operators in SystemVerilog are used to perform various operations on data. They can be classified into several categories, including arithmetic, logical, bitwise, reduction, and comparison operators.
@@ -15,7 +15,7 @@ Arithmetic operators are used to perform mathematical operations.
 | `%`      | Modulus     | `a % b` |
 
 ### Example
-```systemverilog
+```SV
 module arithmetic_example;
   int a = 10;
   int b = 5;
@@ -39,7 +39,7 @@ Logical operators are used to perform logical operations.
 | `!`      | Logical NOT | `!a`     |
 
 ### Example
-```systemverilog
+```SV
 module logical_example;
   bit a = 1;
   bit b = 0;
@@ -66,7 +66,7 @@ Bitwise operators are used to perform bit-level operations.
 | `>>>`    | Arithmetic Right Shift | `a >>> b` |
 
 ### Example
-```systemverilog
+```SV
 module bitwise_example;
   logic [3:0] a = 4'b1100;
   logic [3:0] b = 4'b1010;
@@ -93,7 +93,7 @@ Reduction operators are used to perform bitwise reduction operations.
 | `^`      | Reduction XOR | `^a` |
 
 ### Example
-```systemverilog
+```SV
 module reduction_example;
   logic [3:0] a = 4'b1100;
   initial begin
@@ -119,7 +119,7 @@ Comparison operators are used to compare two values.
 | `!==`    | Case inequality | `a !== b` |
 
 ### Example
-```systemverilog
+```SV
 module comparison_example;
   int a = 10;
   int b = 5;

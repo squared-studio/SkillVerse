@@ -1,4 +1,4 @@
-# Chapter 14: Classes
+# Classes
 
 ## Introduction
 Classes in SystemVerilog are used to create object-oriented models. They provide a way to encapsulate data and functionality, making the design more modular and reusable.
@@ -7,7 +7,7 @@ Classes in SystemVerilog are used to create object-oriented models. They provide
 Classes are defined using the `class` keyword.
 
 ### Example
-```systemverilog
+```SV
 class SimpleClass;
   int a;
   function void display();
@@ -20,7 +20,7 @@ endclass
 Objects are instances of classes and are created using the `new` keyword.
 
 ### Example
-```systemverilog
+```SV
 module class_example;
   initial begin
     SimpleClass obj = new();
@@ -34,7 +34,7 @@ endmodule
 Inheritance allows a class to inherit properties and methods from another class.
 
 ### Example
-```systemverilog
+```SV
 class BaseClass;
   int a;
   function void display();
@@ -64,7 +64,7 @@ endmodule
 Polymorphism allows a method to behave differently based on the object that calls it.
 
 ### Example
-```systemverilog
+```SV
 class BaseClass;
   virtual function void display();
     $display("BaseClass display");
@@ -90,7 +90,7 @@ endmodule
 Encapsulation is the practice of hiding the internal details of a class and exposing only the necessary methods.
 
 ### Example
-```systemverilog
+```SV
 class EncapsulatedClass;
   int a;
   function void set_a(int value);
@@ -114,7 +114,7 @@ endmodule
 Classes in SystemVerilog can also be used for randomization.
 
 ### Example
-```systemverilog
+```SV
 class RandomClass;
   rand int a;
   constraint a_constraint { a > 0 && a < 100; }

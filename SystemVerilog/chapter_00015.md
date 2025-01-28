@@ -1,4 +1,4 @@
-# Chapter 15: Package
+# Package
 
 ## Introduction
 Packages in SystemVerilog are used to group related declarations, such as data types, constants, functions, and tasks. They help in organizing and reusing code across multiple modules and files.
@@ -7,7 +7,7 @@ Packages in SystemVerilog are used to group related declarations, such as data t
 Packages are defined using the `package` keyword.
 
 ### Example
-```systemverilog
+```SV
 package my_package;
   // Declarations
   typedef int my_int;
@@ -21,7 +21,7 @@ endpackage
 Packages can be imported into modules or other packages using the `import` keyword.
 
 ### Example
-```systemverilog
+```SV
 module package_example;
   import my_package::*;
   initial begin
@@ -36,7 +36,7 @@ endmodule
 Items declared in a package can be accessed using the package scope resolution operator `::`.
 
 ### Example
-```systemverilog
+```SV
 module package_scope_example;
   initial begin
     my_package::my_int a = 10;
@@ -50,7 +50,7 @@ endmodule
 Packages can be exported to make their contents available to other packages or modules.
 
 ### Example
-```systemverilog
+```SV
 package my_package;
   export my_int, add;
   typedef int my_int;

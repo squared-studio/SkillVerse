@@ -1,4 +1,4 @@
-# Chapter 10: Interprocess Communications
+# Interprocess Communications
 
 ## Introduction
 Interprocess communication in SystemVerilog allows different processes to communicate and synchronize with each other. The primary mechanisms for interprocess communication are mailboxes and semaphores.
@@ -17,14 +17,14 @@ A mailbox is a communication channel that allows processes to send and receive m
 ### Creating a Mailbox
 A mailbox is created using the `mailbox` keyword.
 
-```systemverilog
+```SV
 mailbox mbox = new();
 ```
 
 ### Sending Messages
 Messages are sent to a mailbox using the `put` method.
 
-```systemverilog
+```SV
 module mailbox_put_example;
   mailbox mbox = new();
   initial begin
@@ -37,7 +37,7 @@ endmodule
 ### Receiving Messages
 Messages are received from a mailbox using the `get` method.
 
-```systemverilog
+```SV
 module mailbox_get_example;
   mailbox mbox = new();
   int msg;
@@ -52,7 +52,7 @@ endmodule
 ### Non-blocking Send and Receive
 Non-blocking send and receive operations can be performed using the `try_put` and `try_get` methods.
 
-```systemverilog
+```SV
 module mailbox_try_example;
   mailbox mbox = new();
   int msg;
@@ -79,14 +79,14 @@ A semaphore is a synchronization primitive that controls access to shared resour
 ### Creating a Semaphore
 A semaphore is created using the `semaphore` keyword and initialized with a count.
 
-```systemverilog
+```SV
 semaphore sem = new(1);
 ```
 
 ### Acquiring a Semaphore
 A semaphore is acquired using the `get` method.
 
-```systemverilog
+```SV
 module semaphore_get_example;
   semaphore sem = new(1);
   initial begin
@@ -99,7 +99,7 @@ endmodule
 ### Releasing a Semaphore
 A semaphore is released using the `put` method.
 
-```systemverilog
+```SV
 module semaphore_put_example;
   semaphore sem = new(1);
   initial begin
@@ -114,7 +114,7 @@ endmodule
 ### Non-blocking Acquire and Release
 Non-blocking acquire and release operations can be performed using the `try_get` and `try_put` methods.
 
-```systemverilog
+```SV
 module semaphore_try_example;
   semaphore sem = new(1);
   initial begin

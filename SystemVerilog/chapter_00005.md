@@ -1,4 +1,4 @@
-# Chapter 5: Array Manipulation
+# Array Manipulation
 
 ## Introduction
 SystemVerilog provides several built-in methods for manipulating arrays. These methods can be used to perform various operations on arrays, such as finding elements, sorting, reversing, and more.
@@ -28,115 +28,115 @@ SystemVerilog provides several built-in methods for manipulating arrays. These m
 
 ## Examples
 ### `find()`
-```systemverilog
+```SV
 int array[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 int found[] = array.find(x > 5);
 ```
 
 ### `find_index()`
-```systemverilog
+```SV
 int array[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 int indices[] = array.find_index(x > 5);
 ```
 
 ### `find_first()`
-```systemverilog
+```SV
 int array[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 int first = array.find_first(x > 5);
 ```
 
 ### `find_first_index()`
-```systemverilog
+```SV
 int array[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 int first_index = array.find_first_index(x > 5);
 ```
 
 ### `find_last()`
-```systemverilog
+```SV
 int array[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 int last = array.find_last(x > 5);
 ```
 
 ### `find_last_index()`
-```systemverilog
+```SV
 int array[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 int last_index = array.find_last_index(x > 5);
 ```
 
 ### `min()`
-```systemverilog
+```SV
 int array[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 int min_val = array.min();
 ```
 
 ### `max()`
-```systemverilog
+```SV
 int array[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 int max_val = array.max();
 ```
 
 ### `unique()`
-```systemverilog
+```SV
 int array[] = {1, 2, 2, 3, 4, 4, 5};
 int unique_vals[] = array.unique();
 ```
 
 ### `unique_index()`
-```systemverilog
+```SV
 int array[] = {1, 2, 2, 3, 4, 4, 5};
 int unique_indices[] = array.unique_index();
 ```
 
 ### `reverse()`
-```systemverilog
+```SV
 int array[] = {1, 2, 3, 4, 5};
 array.reverse();
 ```
 
 ### `sort()`
-```systemverilog
+```SV
 int array[] = {5, 3, 1, 4, 2};
 array.sort();
 ```
 
 ### `rsort()`
-```systemverilog
+```SV
 int array[] = {5, 3, 1, 4, 2};
 array.rsort();
 ```
 
 ### `shuffle()`
-```systemverilog
+```SV
 int array[] = {1, 2, 3, 4, 5};
 array.shuffle();
 ```
 
 ### `sum()`
-```systemverilog
+```SV
 int array[] = {1, 2, 3, 4, 5};
 int total = array.sum();
 ```
 
 ### `product()`
-```systemverilog
+```SV
 int array[] = {1, 2, 3, 4, 5};
 int prod = array.product();
 ```
 
 ### `and()`
-```systemverilog
+```SV
 int array[] = {1, 2, 3, 4, 5};
 int and_result = array.and();
 ```
 
 ### `or()`
-```systemverilog
+```SV
 int array[] = {1, 2, 3, 4, 5};
 int or_result = array.or();
 ```
 
 ### `xor()`
-```systemverilog
+```SV
 int array[] = {1, 2, 3, 4, 5};
 int xor_result = array.xor();
 ```

@@ -1,4 +1,4 @@
-# Chapter 11: Interfaces
+# Interfaces
 
 ## Introduction
 Interfaces in SystemVerilog are used to simplify the connection and communication between different modules. They encapsulate the signals and functionality required for communication, making the design more modular and maintainable.
@@ -7,7 +7,7 @@ Interfaces in SystemVerilog are used to simplify the connection and communicatio
 Interfaces are defined using the `interface` keyword.
 
 ### Example
-```systemverilog
+```SV
 interface simple_interface;
   logic clk;
   logic rst;
@@ -19,7 +19,7 @@ endinterface
 Interfaces can be used in modules to connect and communicate with other modules.
 
 ### Example
-```systemverilog
+```SV
 module producer(simple_interface intf);
   always_ff @(posedge intf.clk or posedge intf.rst) begin
     if (intf.rst)
@@ -56,7 +56,7 @@ endmodule
 Modports are used to specify the direction of signals in an interface for different modules.
 
 ### Example
-```systemverilog
+```SV
 interface modport_interface;
   logic clk;
   logic rst;

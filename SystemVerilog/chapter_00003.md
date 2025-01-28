@@ -1,4 +1,4 @@
-# Chapter 3: Data Types
+# Data Types
 
 ## Built-in Data Types
 SystemVerilog provides a rich set of built-in data types for modeling hardware.
@@ -6,91 +6,91 @@ SystemVerilog provides a rich set of built-in data types for modeling hardware.
 ### `reg`
 A register data type used to store values. (4-state, unsigned)
 
-```systemverilog
+```SV
 reg [3:0] a;
 ```
 
 ### `wire`
 A wire data type used to connect different components. (4-state, unsigned)
 
-```systemverilog
+```SV
 wire b;
 ```
 
 ### `integer`
 A general-purpose integer data type. (4-state, signed)
 
-```systemverilog
+```SV
 integer count;
 ```
 
 ### `real`
 A real number data type. (signed)
 
-```systemverilog
+```SV
 real pi = 3.14;
 ```
 
 ### `time`
 A 64-bit time data type. (unsigned)
 
-```systemverilog
+```SV
 time t;
 ```
 
 ### `realtime`
 A real number time data type. (unsigned)
 
-```systemverilog
+```SV
 realtime rt;
 ```
 
 ### `logic`
 A 4-state data type that can represent 0, 1, X, and Z. (4-state, unsigned)
 
-```systemverilog
+```SV
 logic [7:0] data;
 ```
 
 ### `bit`
 A 2-state data type that can represent 0 and 1. (2-state, unsigned)
 
-```systemverilog
+```SV
 bit flag;
 ```
 
 ### `byte`
 An 8-bit data type. (2-state, signed)
 
-```systemverilog
+```SV
 byte b;
 ```
 
 ### `shortint`
 A 16-bit signed integer. (2-state, signed)
 
-```systemverilog
+```SV
 shortint si;
 ```
 
 ### `int`
 A 32-bit signed integer. (2-state, signed)
 
-```systemverilog
+```SV
 int i;
 ```
 
 ### `longint`
 A 64-bit signed integer. (2-state, signed)
 
-```systemverilog
+```SV
 longint li;
 ```
 
 ### `shortreal`
 A 32-bit real number. (signed)
 
-```systemverilog
+```SV
 shortreal sr;
 ```
 
@@ -100,35 +100,35 @@ SystemVerilog also provides advanced built-in data types for specific purposes.
 ### `tri`
 A tri-state data type. (4-state, unsigned)
 
-```systemverilog
+```SV
 tri t;
 ```
 
 ### `tri0`
 A tri-state data type with a default value of 0. (3-state, unsigned)
 
-```systemverilog
+```SV
 tri0 t0;
 ```
 
 ### `tri1`
 A tri-state data type with a default value of 1. (3-state, unsigned)
 
-```systemverilog
+```SV
 tri1 t1;
 ```
 
 ### `wand`
 A wired-AND data type. (4-state, unsigned)
 
-```systemverilog
+```SV
 wand wa;
 ```
 
 ### `wor`
 A wired-OR data type. (4-state, unsigned)
 
-```systemverilog
+```SV
 wor wo;
 ```
 
@@ -138,7 +138,7 @@ SystemVerilog allows users to define their own data types.
 ### `enum`
 An enumerated type. (depends on base type)
 
-```systemverilog
+```SV
 typedef enum {RED, GREEN, BLUE} color_t;
 color_t color;
 ```
@@ -146,7 +146,7 @@ color_t color;
 ### `struct`
 A structure type. (depends on member types)
 
-```systemverilog
+```SV
 typedef struct {
   int x;
   int y;
@@ -157,7 +157,7 @@ point_t p;
 ### `union`
 A union type. (depends on member types)
 
-```systemverilog
+```SV
 typedef union {
   int i;
   real r;
@@ -168,7 +168,7 @@ data_t d;
 ### `typedef`
 A type definition. (depends on base type)
 
-```systemverilog
+```SV
 typedef int my_int;
 my_int a;
 ```
@@ -179,14 +179,14 @@ SystemVerilog supports both packed and unpacked arrays.
 ### Packed Array
 A packed array is a contiguous set of bits.
 
-```systemverilog
+```SV
 logic [7:0] packed_array;
 ```
 
 ### Unpacked Array
 An unpacked array is an array of elements.
 
-```systemverilog
+```SV
 int unpacked_array [0:3];
 ```
 

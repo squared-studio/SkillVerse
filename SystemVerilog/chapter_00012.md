@@ -1,4 +1,4 @@
-# Chapter 12: Modules
+# Modules
 
 ## Introduction
 Modules in SystemVerilog are the basic building blocks of a design. They encapsulate functionality and can be instantiated to create hierarchical designs.
@@ -7,7 +7,7 @@ Modules in SystemVerilog are the basic building blocks of a design. They encapsu
 Modules are defined using the `module` keyword.
 
 ### Example
-```systemverilog
+```SV
 module simple_module;
   // Module contents
 endmodule
@@ -17,7 +17,7 @@ endmodule
 Modules can have ports for input and output signals, and parameters for configuration.
 
 ### Example
-```systemverilog
+```SV
 module parameterized_module #(parameter WIDTH = 8) (
   input logic clk,
   input logic rst,
@@ -32,7 +32,7 @@ endmodule
 Modules can be instantiated within other modules to create hierarchical designs.
 
 ### Example
-```systemverilog
+```SV
 module top;
   logic clk;
   logic rst;
@@ -59,7 +59,7 @@ endmodule
 Modules can be connected to create complex hierarchical designs.
 
 ### Example
-```systemverilog
+```SV
 module submodule (
   input logic clk,
   input logic rst,

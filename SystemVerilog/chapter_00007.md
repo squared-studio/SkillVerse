@@ -1,4 +1,4 @@
-# Chapter 7: Control Flow
+# Control Flow
 
 ## Introduction
 Control flow statements in SystemVerilog are used to control the execution of code based on certain conditions. They include conditional statements, case statements, and loops.
@@ -9,7 +9,7 @@ Conditional statements are used to execute code based on a condition.
 ### `if-else`
 The `if-else` statement executes code if a condition is true, and optionally executes different code if the condition is false.
 
-```systemverilog
+```SV
 module if_else_if_example;
   int a = 10;
   initial begin
@@ -30,7 +30,7 @@ Case statements are used to execute code based on the value of a variable.
 ### `case`
 The `case` statement selects one of several blocks of code to execute based on the value of a variable.
 
-```systemverilog
+```SV
 module case_example;
   int a = 2;
   initial begin
@@ -47,7 +47,7 @@ endmodule
 ### `casez`
 The `casez` statement treats `z` and `?` as don't-care values.
 
-```systemverilog
+```SV
 module casez_example;
   logic [3:0] a = 4'b1010;
   initial begin
@@ -62,7 +62,7 @@ endmodule
 ### `casex`
 The `casex` statement treats `x`, `z`, and `?` as don't-care values.
 
-```systemverilog
+```SV
 module casex_example;
   logic [3:0] a = 4'b10x0;
   initial begin
@@ -80,7 +80,7 @@ Loops are used to execute a block of code multiple times.
 ### `repeat`
 The `repeat` loop executes a block of code a fixed number of times.
 
-```systemverilog
+```SV
 module repeat_example;
   int i;
   initial begin
@@ -95,7 +95,7 @@ endmodule
 ### `while`
 The `while` loop executes a block of code as long as a condition is true.
 
-```systemverilog
+```SV
 module while_example;
   int i = 0;
   initial begin
@@ -110,7 +110,7 @@ endmodule
 ### `for`
 The `for` loop executes a block of code a fixed number of times, with an initialization, condition, and increment.
 
-```systemverilog
+```SV
 module for_example;
   initial begin
     for (int i = 0; i < 5; i++) begin
@@ -123,7 +123,7 @@ endmodule
 ### `foreach`
 The `foreach` loop iterates over the elements of an array.
 
-```systemverilog
+```SV
 module foreach_example;
   int array[5] = {0, 1, 2, 3, 4};
   initial begin
@@ -137,7 +137,7 @@ endmodule
 ### `forever`
 The `forever` loop executes a block of code indefinitely.
 
-```systemverilog
+```SV
 module forever_example;
   int i = 0;
   initial begin

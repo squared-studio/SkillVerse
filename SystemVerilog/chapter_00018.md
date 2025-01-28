@@ -1,4 +1,4 @@
-# Chapter 18: Coverage
+# Coverage
 
 ## Introduction
 Coverage in SystemVerilog is used to measure how thoroughly a design has been tested. It helps in identifying untested parts of the design and improving the overall quality of the verification process. Coverage can be classified into code coverage and functional coverage.
@@ -10,7 +10,7 @@ Code coverage measures how much of the design code has been executed during simu
 Statement coverage measures the number of statements that have been executed.
 
 ### Example
-```systemverilog
+```SV
 module statement_coverage_example;
   int a = 0;
   initial begin
@@ -26,7 +26,7 @@ endmodule
 Branch coverage measures the number of branches that have been executed.
 
 ### Example
-```systemverilog
+```SV
 module branch_coverage_example;
   int a = 0;
   initial begin
@@ -44,7 +44,7 @@ endmodule
 Toggle coverage measures the number of times a signal changes its value.
 
 ### Example
-```systemverilog
+```SV
 module toggle_coverage_example;
   logic clk;
   initial begin
@@ -61,7 +61,7 @@ Functional coverage measures how well the functionality of the design has been t
 Covergroups are used to define coverage points and collect coverage data.
 
 ### Example
-```systemverilog
+```SV
 module covergroup_example;
   covergroup cg;
     coverpoint a;
@@ -82,7 +82,7 @@ endmodule
 Coverpoints are used to specify the points in the design that need to be covered.
 
 ### Example
-```systemverilog
+```SV
 module coverpoint_example;
   covergroup cg;
     coverpoint a;
@@ -103,7 +103,7 @@ endmodule
 Cross coverage measures the coverage of combinations of different coverpoints.
 
 ### Example
-```systemverilog
+```SV
 module cross_coverage_example;
   covergroup cg;
     coverpoint a;

@@ -1,4 +1,4 @@
-# Chapter 16: File Operators
+# File Operators
 
 ## Introduction
 File operators in SystemVerilog are used to read from and write to files. They provide a way to interact with external files for tasks such as logging simulation results, reading input data, and more.
@@ -7,7 +7,7 @@ File operators in SystemVerilog are used to read from and write to files. They p
 File reading is performed using the `$fopen`, `$fgets`, and `$fscanf` functions.
 
 ### Example
-```systemverilog
+```SV
 module file_read_example;
   int file, r;
   string line;
@@ -30,7 +30,7 @@ endmodule
 File writing is performed using the `$fopen`, `$fwrite`, and `$fclose` functions.
 
 ### Example
-```systemverilog
+```SV
 module file_write_example;
   int file;
   initial begin
@@ -49,7 +49,7 @@ endmodule
 SystemVerilog provides several built-in functions for file handling.
 
 ### Example
-```systemverilog
+```SV
 module file_handling_example;
   int file;
   initial begin

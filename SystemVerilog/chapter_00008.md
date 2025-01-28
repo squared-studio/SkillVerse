@@ -1,4 +1,4 @@
-# Chapter 8: Procedural Blocks
+# Procedural Blocks
 
 ## Introduction
 Procedural blocks in SystemVerilog are used to describe the behavior of hardware. They include initial blocks, final blocks, and always blocks.
@@ -6,7 +6,7 @@ Procedural blocks in SystemVerilog are used to describe the behavior of hardware
 ## Initial Blocks
 Initial blocks are used to execute code once at the beginning of the simulation.
 
-```systemverilog
+```SV
 module initial_example;
   initial begin
     $display("This is an initial block.");
@@ -17,7 +17,7 @@ endmodule
 ## Final Blocks
 Final blocks are used to execute code once at the end of the simulation.
 
-```systemverilog
+```SV
 module final_example;
   final begin
     $display("This is a final block.");
@@ -31,7 +31,7 @@ Always blocks are used to describe behavior that should be executed repeatedly.
 ### `always`
 The `always` block executes code continuously.
 
-```systemverilog
+```SV
 module always_example;
   logic clk;
   always begin
@@ -43,7 +43,7 @@ endmodule
 ### `always_comb`
 The `always_comb` block is used to describe combinational logic.
 
-```systemverilog
+```SV
 module always_comb_example;
   logic a, b, c;
   always_comb begin
@@ -55,7 +55,7 @@ endmodule
 ### `always_ff`
 The `always_ff` block is used to describe sequential logic.
 
-```systemverilog
+```SV
 module always_ff_example;
   logic clk, reset, q, d;
   always_ff @(posedge clk or posedge reset) begin
@@ -70,7 +70,7 @@ endmodule
 ### `always_latch`
 The `always_latch` block is used to describe latch behavior.
 
-```systemverilog
+```SV
 module always_latch_example;
   logic enable, q, d;
   always_latch begin
@@ -86,7 +86,7 @@ Assignments in SystemVerilog can be blocking or non-blocking.
 ### Blocking Assignments
 Blocking assignments are executed sequentially.
 
-```systemverilog
+```SV
 module blocking_example;
   int a, b;
   initial begin
@@ -100,7 +100,7 @@ endmodule
 ### Non-blocking Assignments
 Non-blocking assignments are executed concurrently.
 
-```systemverilog
+```SV
 module nonblocking_example;
   int a, b;
   initial begin

@@ -1,4 +1,4 @@
-# Chapter 4: Array
+# Array
 
 ## Introduction
 Arrays in SystemVerilog are used to store collections of data elements. They can be packed or unpacked, fixed-size, dynamic, associative, or queues.
@@ -7,21 +7,21 @@ Arrays in SystemVerilog are used to store collections of data elements. They can
 ### Packed Array
 A packed array is a contiguous set of bits.
 
-```systemverilog
+```SV
 logic [7:0] packed_array;
 ```
 
 ### Unpacked Array
 An unpacked array is an array of elements.
 
-```systemverilog
+```SV
 int unpacked_array [0:3];
 ```
 
 ## Fixed Size Array
 A fixed-size array has a predefined number of elements.
 
-```systemverilog
+```SV
 int fixed_array [0:9];
 ```
 
@@ -33,7 +33,7 @@ int fixed_array [0:9];
 ## Dynamic Array
 A dynamic array can change its size during runtime.
 
-```systemverilog
+```SV
 int dynamic_array [];
 initial begin
   dynamic_array = new[10]; // Allocate 10 elements
@@ -50,7 +50,7 @@ end
 ## Associative Array
 An associative array uses an index of any data type to access its elements.
 
-```systemverilog
+```SV
 int associative_array [string];
 initial begin
   associative_array["key1"] = 1;
@@ -74,7 +74,7 @@ end
 ## Queue
 A queue is a variable-size, ordered collection of elements.
 
-```systemverilog
+```SV
 int queue [$];
 initial begin
   queue.push_back(1);

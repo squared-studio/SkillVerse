@@ -1,4 +1,4 @@
-# Chapter 13: Randomization
+# Randomization
 
 ## Introduction
 Randomization in SystemVerilog is used to generate random values for variables, which is essential for creating effective testbenches. SystemVerilog provides built-in support for randomization, including random variables, constraints, and randomization methods.
@@ -7,7 +7,7 @@ Randomization in SystemVerilog is used to generate random values for variables, 
 Random variables are declared using the `rand` or `randc` keywords.
 
 ### Example
-```systemverilog
+```SV
 module random_variable_example;
   rand int a;
   initial begin
@@ -21,7 +21,7 @@ endmodule
 Constraints are used to restrict the range or values of random variables.
 
 ### Example
-```systemverilog
+```SV
 module constraint_example;
   rand int a;
   constraint a_constraint { a > 0 && a < 100; }
@@ -39,7 +39,7 @@ Randomization methods are used to generate random values for variables.
 The `randomize()` method generates random values for all random variables in the scope.
 
 ### Example
-```systemverilog
+```SV
 module randomize_example;
   rand int a;
   rand int b;
@@ -54,7 +54,7 @@ endmodule
 The `srandom()` method sets the seed for the random number generator.
 
 ### Example
-```systemverilog
+```SV
 module srandom_example;
   rand int a;
   initial begin
