@@ -1,4 +1,4 @@
-# Chapter 4: Writing Testbenches
+# Writing Testbenches
 
 ## Structure of a Testbench
 A testbench is a top-level module used to verify the functionality of a design. It typically includes stimulus generation, response checking, and result reporting.

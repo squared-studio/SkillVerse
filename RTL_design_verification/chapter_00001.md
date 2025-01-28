@@ -1,4 +1,4 @@
-# Chapter 1: Overview of Verification
+# Overview of Verification
 
 ## Importance of Verification in Digital Design
 Verification ensures that the design meets its specifications and functions correctly. It helps identify and fix bugs early in the design process, reducing the cost and time required for debugging later.

@@ -1,4 +1,4 @@
-# Chapter 14: Project 1 - Verifying a Simple Processor
+# Project 1 - Verifying a Simple Processor
 
 ## Developing a Verification Plan
 Create a verification plan outlining the scope, objectives, and resources required for verifying a simple processor.

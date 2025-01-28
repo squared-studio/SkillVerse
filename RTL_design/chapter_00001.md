@@ -1,4 +1,4 @@
-# Chapter 1: Overview of RTL Design
+# Overview of RTL Design
 
 ## What is RTL Design?
 RTL (Register Transfer Level) design is a high-level abstraction for describing the behavior and structure of digital circuits. It focuses on the flow of data between registers and the logical operations performed on that data.

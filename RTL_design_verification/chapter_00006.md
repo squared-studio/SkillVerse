@@ -1,4 +1,4 @@
-# Chapter 6: Functional Coverage
+# Functional Coverage
 
 ## Coverage Types: Code, Functional, Assertion
 Functional coverage measures how much of the design's functionality has been exercised during testing.

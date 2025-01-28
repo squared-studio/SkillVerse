@@ -1,4 +1,4 @@
-# Chapter 17: Using Simulation Tools
+# Using Simulation Tools
 
 ## Introduction to Simulation Tools (e.g., ModelSim, VCS)
 Learn about different simulation tools used in verification, such as ModelSim and VCS.

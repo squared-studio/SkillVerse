@@ -1,4 +1,4 @@
-# Chapter 13: Case Studies
+# Case Studies
 
 ## Analyzing Real-World RTL Designs
 In this section, we will analyze real-world RTL designs to understand the design choices and trade-offs made by engineers.
@@ -6,7 +6,7 @@ In this section, we will analyze real-world RTL designs to understand the design
 ### Case Study 1: Simple ALU Design
 We will analyze a simple ALU design to understand how arithmetic and logical operations are implemented.
 
-```systemverilog
+```SV
 module case_study_alu (
     input logic [3:0] a,
     input logic [3:0] b,
@@ -29,7 +29,7 @@ endmodule
 ### Case Study 2: UART Transmitter
 We will analyze a UART transmitter design to understand how serial communication is implemented.
 
-```systemverilog
+```SV
 module case_study_uart_tx (
     input logic clk,
     input logic reset,

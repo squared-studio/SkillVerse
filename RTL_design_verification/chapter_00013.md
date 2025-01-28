@@ -1,4 +1,4 @@
-# Chapter 13: Optimizing Verification Efficiency
+# Optimizing Verification Efficiency
 
 ## Reducing Simulation Time
 Techniques for reducing simulation time include using faster simulators, optimizing testbenches, and parallelizing simulations.

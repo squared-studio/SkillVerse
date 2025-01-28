@@ -1,10 +1,10 @@
-# Chapter 11: Designing a Simple Processor
+# Designing a Simple Processor
 
 ## Designing the Datapath
 The datapath of a processor includes all the components that process data, such as ALUs, registers, and multiplexers.
 
 ### Example: Simple ALU
-```systemverilog
+```SV
 module simple_alu (
     input logic [3:0] a,
     input logic [3:0] b,
@@ -28,7 +28,7 @@ endmodule
 The control unit generates control signals to direct the operation of the datapath components.
 
 ### Example: Simple Control Unit
-```systemverilog
+```SV
 module control_unit (
     input logic [3:0] opcode,
     output logic [1:0] alu_op,
@@ -89,7 +89,7 @@ endmodule
 Integrate the datapath and control unit to form a complete processor and test its functionality.
 
 ### Example: Simple Processor Integration
-```systemverilog
+```SV
 module simple_processor (
     input logic clk,
     input logic reset,

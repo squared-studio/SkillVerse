@@ -1,4 +1,4 @@
-# Chapter 10: Scoreboarding and Self-Checking Testbenches
+# Scoreboarding and Self-Checking Testbenches
 
 ## Scoreboarding Concepts
 Scoreboards are used to compare expected and actual outputs, ensuring the correctness of the design.

@@ -1,4 +1,4 @@
-# Chapter 2: Verification Planning and Strategy
+# Verification Planning and Strategy
 
 ## Verification Plan (Test Plan)
 A verification plan outlines the strategy and approach for verifying a design. It includes the scope, objectives, and resources required for the verification process.

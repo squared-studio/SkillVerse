@@ -1,4 +1,4 @@
-# Chapter 15: Project 2 - Verifying a Communication Protocol
+# Project 2 - Verifying a Communication Protocol
 
 ## Defining Verification Requirements
 Define the verification requirements for a communication protocol, including functional and performance requirements.

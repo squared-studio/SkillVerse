@@ -1,10 +1,10 @@
-# Chapter 9: RTL Design Optimization
+# RTL Design Optimization
 
 ## Area Optimization Techniques
 Area optimization focuses on reducing the silicon area required for a design, which can lower costs and improve performance.
 
 ### Example: Area Optimization
-```systemverilog
+```SV
 module area_optimized_adder (
     input logic [3:0] a,
     input logic [3:0] b,
@@ -19,7 +19,7 @@ endmodule
 Speed optimization aims to increase the operating frequency of a design by reducing the critical path and improving timing.
 
 ### Example: Speed Optimization
-```systemverilog
+```SV
 module speed_optimized_adder (
     input logic [3:0] a,
     input logic [3:0] b,
@@ -43,7 +43,7 @@ endmodule
 Power optimization reduces the power consumption of a design, which is critical for battery-operated devices and reducing heat dissipation.
 
 ### Example: Power Optimization
-```systemverilog
+```SV
 module power_optimized_counter (
     input logic clk,
     input logic reset,

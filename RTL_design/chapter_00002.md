@@ -1,4 +1,4 @@
-# Chapter 2: Fundamentals of Digital Logic Design
+# Fundamentals of Digital Logic Design
 
 ## Combinational Logic
 Combinational logic circuits are those whose outputs depend only on the current inputs. Examples include logic gates, multiplexers, and arithmetic circuits.

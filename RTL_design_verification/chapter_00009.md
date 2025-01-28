@@ -1,4 +1,4 @@
-# Chapter 9: Verification IP (VIP)
+# Verification IP (VIP)
 
 ## Creating Reusable Verification Components
 Verification IP (VIP) consists of reusable verification components that can be used across multiple projects.

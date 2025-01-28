@@ -1,4 +1,4 @@
-# Chapter 16: Case Studies
+# Case Studies
 
 ## Real-World Verification Projects
 Study real-world verification projects to understand the challenges and solutions in verification.

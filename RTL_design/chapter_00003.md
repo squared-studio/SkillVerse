@@ -1,4 +1,4 @@
-# Chapter 3: RTL Modeling Techniques
+# RTL Modeling Techniques
 
 ## Combinational Logic in SystemVerilog
 Combinational logic in SystemVerilog is modeled using continuous assignments and procedural blocks. The `assign` statement is used for continuous assignments, while `always_comb` blocks are used for procedural assignments.
@@ -13,7 +13,7 @@ Sequential logic is modeled using `always_ff` blocks in SystemVerilog. These blo
 ## Examples
 
 ### Example 1: Combinational Logic in SystemVerilog
-```systemverilog
+```SV
 module mux_2to1 (
     input logic a,
     input logic b,
@@ -25,7 +25,7 @@ endmodule
 ```
 
 ### Example 2: Sequential Logic in SystemVerilog
-```systemverilog
+```SV
 module shift_register (
     input logic clk,
     input logic reset,
@@ -43,7 +43,7 @@ endmodule
 
 ### Example 3: Synchronous vs Asynchronous Design
 #### Synchronous Design
-```systemverilog
+```SV
 module sync_reset (
     input logic clk,
     input logic reset,
@@ -59,7 +59,7 @@ endmodule
 ```
 
 #### Asynchronous Design
-```systemverilog
+```SV
 module async_reset (
     input logic clk,
     input logic reset,

@@ -1,10 +1,10 @@
-# Chapter 7: Memory Design
+# Memory Design
 
 ## Designing RAM and ROM
 RAM (Random Access Memory) and ROM (Read-Only Memory) are essential components in digital systems. RAM is used for temporary storage, while ROM is used for permanent storage.
 
 ### Example: Simple RAM
-```systemverilog
+```SV
 module simple_ram (
     input logic clk,
     input logic we,
@@ -23,7 +23,7 @@ endmodule
 ```
 
 ### Example: Simple ROM
-```systemverilog
+```SV
 module simple_rom (
     input logic [3:0] addr,
     output logic [7:0] data_out
@@ -39,7 +39,7 @@ endmodule
 FIFO buffers are used to store data in the order it was received and retrieve it in the same order.
 
 ### Example: Simple FIFO
-```systemverilog
+```SV
 module simple_fifo (
     input logic clk,
     input logic reset,

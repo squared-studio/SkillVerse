@@ -1,4 +1,4 @@
-# Chapter 7: Constrained Random Verification
+# Constrained Random Verification
 
 ## Random Stimulus Generation
 Random stimulus generation creates diverse test scenarios to thoroughly test the design.

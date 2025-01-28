@@ -1,10 +1,10 @@
-# Chapter 10: Coding Guidelines and Best Practices
+# Coding Guidelines and Best Practices
 
 ## Writing Readable and Maintainable Code
 Readable and maintainable code is essential for long-term project success. Use meaningful names, consistent formatting, and comments to improve code readability.
 
 ### Example: Readable Code
-```systemverilog
+```SV
 module readable_code (
     input logic clk,
     input logic reset,
@@ -24,7 +24,7 @@ endmodule
 Common pitfalls include improper use of blocking and non-blocking assignments, incorrect reset handling, and poor state machine design.
 
 ### Example: Avoiding Blocking and Non-Blocking Assignment Issues
-```systemverilog
+```SV
 module non_blocking_example (
     input logic clk,
     input logic reset,
@@ -44,7 +44,7 @@ endmodule
 Comments and documentation help others understand your code. Use comments to explain the purpose of modules, signals, and complex logic.
 
 ### Example: Effective Comments
-```systemverilog
+```SV
 module commented_code (
     input logic clk,
     input logic reset,

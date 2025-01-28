@@ -1,4 +1,4 @@
-# Chapter 14: Synthesis and Implementation
+# Synthesis and Implementation
 
 ## Basics of Synthesis Tools
 Synthesis tools convert RTL code into a gate-level netlist, which can be used for physical implementation. Common synthesis tools include Synopsys Design Compiler and Cadence Genus.
@@ -46,7 +46,7 @@ set_max_capacitance 0.2 [all_nets]
 Post-synthesis simulation verifies the functionality of the synthesized netlist. It ensures that the design behaves as expected after synthesis.
 
 ### Example: Post-Synthesis Testbench
-```systemverilog
+```SV
 module post_synthesis_tb;
     logic clk;
     logic reset;

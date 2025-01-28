@@ -1,10 +1,10 @@
-# Chapter 12: Designing a Communication Protocol
+# Designing a Communication Protocol
 
 ## Implementing UART (Universal Asynchronous Receiver/Transmitter)
 UART is a serial communication protocol used for asynchronous data transmission.
 
 ### Example: Simple UART Transmitter
-```systemverilog
+```SV
 module uart_tx (
     input logic clk,
     input logic reset,
@@ -57,7 +57,7 @@ endmodule
 SPI is a synchronous serial communication protocol used for short-distance communication.
 
 ### Example: Simple SPI Master
-```systemverilog
+```SV
 module spi_master (
     input logic clk,
     input logic reset,

@@ -1,4 +1,4 @@
-# Chapter 5: Assertions in SystemVerilog
+# Assertions in SystemVerilog
 
 ## Introduction to Assertions
 Assertions are used to check for specific conditions in the design, ensuring that the design behaves as expected.

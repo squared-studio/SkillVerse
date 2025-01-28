@@ -1,4 +1,4 @@
-# Chapter 3: Basics of Verification in SystemVerilog
+# Basics of Verification in SystemVerilog
 
 ## SystemVerilog Constructs for Verification
 SystemVerilog provides various constructs specifically designed for verification, including classes, randomization, and assertions.

@@ -1,4 +1,4 @@
-# Chapter 18: Scripting for Verification
+# Scripting for Verification
 
 ## Writing Scripts for Automation
 Write scripts to automate verification tasks, improving efficiency and reducing manual effort.

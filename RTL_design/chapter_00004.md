@@ -1,10 +1,10 @@
-# Chapter 4: Designing Combinational Circuits
+# Designing Combinational Circuits
 
 ## Multiplexers and Demultiplexers
 Multiplexers (MUX) select one of many input signals and forward the selected input to a single output line. Demultiplexers (DEMUX) take a single input signal and select one of many data output lines.
 
 ### Example: 4-to-1 Multiplexer
-```systemverilog
+```SV
 module mux_4to1 (
     input logic [3:0] data,
     input logic [1:0] sel,
@@ -21,7 +21,7 @@ endmodule
 Encoders convert 2^n input lines into an n-bit code. Decoders perform the reverse operation, converting an n-bit code into 2^n output lines.
 
 ### Example: 2-to-4 Decoder
-```systemverilog
+```SV
 module decoder_2to4 (
     input logic [1:0] in,
     output logic [3:0] out
@@ -34,7 +34,7 @@ endmodule
 Arithmetic circuits perform arithmetic operations like addition, subtraction, and multiplication.
 
 ### Example: 4-bit Adder
-```systemverilog
+```SV
 module adder_4bit (
     input logic [3:0] a,
     input logic [3:0] b,

@@ -1,10 +1,10 @@
-# Chapter 6: Pipelining and Parallelism
+# Pipelining and Parallelism
 
 ## Basics of Pipelining
 Pipelining is a technique where multiple instruction phases are overlapped to improve performance.
 
 ### Example: 2-Stage Pipeline
-```systemverilog
+```SV
 module pipeline_stage (
     input logic clk,
     input logic reset,
@@ -34,7 +34,7 @@ Pipeline stages are implemented by breaking down a process into smaller stages, 
 Data hazards occur when pipeline stages depend on the results of previous stages. Techniques like forwarding and stalling are used to handle these hazards.
 
 ### Example: Data Hazard Handling
-```systemverilog
+```SV
 module hazard_handling (
     input logic clk,
     input logic reset,

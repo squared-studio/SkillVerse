@@ -1,4 +1,4 @@
-# Chapter 11: Transaction-Level Modeling (TLM)
+# Transaction-Level Modeling (TLM)
 
 ## Introduction to TLM
 Transaction-Level Modeling (TLM) abstracts the communication between components, making verification more efficient.

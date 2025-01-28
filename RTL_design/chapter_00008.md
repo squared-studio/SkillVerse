@@ -1,10 +1,10 @@
-# Chapter 8: Low Power Design Techniques
+# Low Power Design Techniques
 
 ## Clock Gating
 Clock gating is a technique used to reduce dynamic power consumption by disabling the clock signal to inactive modules.
 
 ### Example: Clock Gating
-```systemverilog
+```SV
 module clock_gating (
     input logic clk,
     input logic enable,
@@ -18,7 +18,7 @@ endmodule
 Power gating reduces static power consumption by shutting off the power supply to inactive modules.
 
 ### Example: Power Gating
-```systemverilog
+```SV
 module power_gating (
     input logic power_enable,
     output logic power
@@ -31,7 +31,7 @@ endmodule
 DVFS adjusts the voltage and frequency of a circuit dynamically based on workload requirements to save power.
 
 ### Example: DVFS
-```systemverilog
+```SV
 module dvfs (
     input logic [1:0] mode,
     output logic [1:0] voltage,

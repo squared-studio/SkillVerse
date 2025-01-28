@@ -1,4 +1,4 @@
-# Chapter 12: Debugging Techniques
+# Debugging Techniques
 
 ## Common Bugs in Verification
 Common bugs in verification include incorrect stimulus generation, timing issues, and incorrect assertions.

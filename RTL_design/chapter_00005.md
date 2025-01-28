@@ -1,10 +1,10 @@
-# Chapter 5: Designing Sequential Circuits
+# Designing Sequential Circuits
 
 ## Counters (Up/Down Counters)
 Counters are sequential circuits that count in a binary sequence. They can count up, down, or in a specific pattern.
 
 ### Example: 4-bit Up Counter
-```systemverilog
+```SV
 module up_counter (
     input logic clk,
     input logic reset,
@@ -23,7 +23,7 @@ endmodule
 Shift registers are sequential circuits that shift data in a specific direction (left or right) on each clock cycle.
 
 ### Example: 4-bit Shift Register
-```systemverilog
+```SV
 module shift_register (
     input logic clk,
     input logic reset,
@@ -43,7 +43,7 @@ endmodule
 FSMs are sequential circuits that transition between different states based on inputs and current state.
 
 ### Example: Simple FSM
-```systemverilog
+```SV
 module simple_fsm (
     input logic clk,
     input logic reset,

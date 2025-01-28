@@ -1,4 +1,4 @@
-# Chapter 8: UVM (Universal Verification Methodology)
+# UVM (Universal Verification Methodology)
 
 ## Introduction to UVM
 UVM is a standardized methodology for verifying digital designs, providing a framework for creating reusable verification components.
