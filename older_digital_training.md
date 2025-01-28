@@ -1,8 +1,8 @@
-# Older Digital Training
+# older digital training
 ## 1. [Linux Terminal](older_digital_training/chapter_00001.md)
   - Introduction
   - Commonly used commands
-## 2. [Introduction To Git](older_digital_training/chapter_00002.md)
+## 2. [Introduction to git](older_digital_training/chapter_00002.md)
   - Introduction
   - Commonly used git commands
 ## 3. [Digital Circuit Components](older_digital_training/chapter_00003.md)
@@ -139,11 +139,11 @@
   - Documentation
   - RTL
   - Testbench
-## 20. [Gray To Binary Code Converter](older_digital_training/chapter_00020.md)
+## 20. [Gray to Binary Code Converter](older_digital_training/chapter_00020.md)
   - Self Study
   - Design
   - Testbench
-## 21. [Gray To Binary Code Converter](older_digital_training/chapter_00021.md)
+## 21. [Gray to Binary Code Converter](older_digital_training/chapter_00021.md)
   - Self Study
   - Design
   - Testbench

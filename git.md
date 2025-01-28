@@ -1,4 +1,4 @@
-# Git
+# git
 ## 1. [Introduction](git/chapter_00001.md)
   - What is Git?
   - Why Use Git?

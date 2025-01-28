@@ -1,8 +1,8 @@
-# Older Analog Training
+# older analog training
 ## 1. [Linux Terminal](older_analog_training/chapter_00001.md)
   - Introduction
   - Commonly used commands
-## 2. [Introduction To Git](older_analog_training/chapter_00002.md)
+## 2. [Introduction to git](older_analog_training/chapter_00002.md)
   - Introduction
   - Commonly used git commands
 ## 3. [Digital Circuit Components](older_analog_training/chapter_00003.md)

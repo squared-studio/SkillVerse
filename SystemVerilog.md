@@ -1,12 +1,12 @@
 # SystemVerilog
-## 1. [Introduction To SystemVerilog](SystemVerilog/chapter_00001.md)
+## 1. [Introduction to SystemVerilog](SystemVerilog/chapter_00001.md)
   - What is SystemVerilog?
   - History of SystemVerilog
   - Use Cases of SystemVerilog
   - Advantages of SystemVerilog
   - Key Features of SystemVerilog
   - Conclusion
-## 2. [Built-In System Tasks And System Functions](SystemVerilog/chapter_00002.md)
+## 2. [Built-in System Tasks and System Functions](SystemVerilog/chapter_00002.md)
   - Display Tasks
   - Wavedump Tasks
   - Time-related Tasks
@@ -59,7 +59,7 @@
   - Assignments
   - Exercises
   - Conclusion
-## 9. [Tasks And Functions](SystemVerilog/chapter_00009.md)
+## 9. [Tasks and Functions](SystemVerilog/chapter_00009.md)
   - Introduction
   - Differences between Tasks and Functions
   - Defining and Using Tasks
