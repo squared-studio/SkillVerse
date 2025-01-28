@@ -33,4 +33,13 @@
   - How to Identify a Merge Conflict
   - Steps to Resolve a Merge Conflict
   - Tips for Avoiding Merge Conflicts
+## 6. [Git Workflow](git/chapter_00006.md)
+  - Basic Git Workflow
+  - Advanced Git Workflow
+## 7. [Git Best Practices](git/chapter_00007.md)
+  - Write Meaningful Commit Messages
+  - Use Branches Effectively
+  - Regularly Sync with Remote Repository
+  - Review Code Before Merging
+  - Keep Your Repository Clean
 
