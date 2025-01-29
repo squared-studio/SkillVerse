@@ -19,4 +19,3 @@
   - Install
   - Simple Exercise
   - Study Materials
-

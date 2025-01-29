@@ -85,4 +85,3 @@
   - Using Python/Perl for Verification Tasks
   - Integrating Scripts with Verification Environments
   - Exercises
-

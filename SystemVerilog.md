@@ -135,4 +135,3 @@
   - Functional Coverage
   - Exercises
   - Conclusion
-

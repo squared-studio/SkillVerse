@@ -179,4 +179,3 @@
   - Self Study
   - Design
   - Testbench
-

@@ -42,4 +42,3 @@
   - Regularly Sync with Remote Repository
   - Review Code Before Merging
   - Keep Your Repository Clean
-

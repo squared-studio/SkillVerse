@@ -71,4 +71,3 @@
   - Constraints and Timing Analysis
   - Post-Synthesis Simulation and Verification
   - Exercises
-
