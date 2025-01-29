@@ -40,3 +40,9 @@
   - Setting Up Debug Probes
   - Running the Debug
   - Analyzing Debug Results
+## 9. [IP Catalog and Integration in Vivado](Vivado/chapter_00009.md)
+  - Accessing the IP Catalog
+  - Adding an IP Core to Your Design
+  - Integrating the IP Core
+  - Generating the IP Core
+  - Example: Adding a FIFO IP Core
