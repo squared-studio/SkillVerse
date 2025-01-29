@@ -1,40 +1,113 @@
-# Simulating a Simple RTL on Vivado GUI
+# Command-Line Simulation
 
-In this chapter, we will walk through the steps to simulate a simple RTL (Register Transfer Level) design using the Vivado GUI. Simulation is a crucial step in verifying the functionality of your design before implementing it on hardware.
+In this chapter, we will explore how to perform RTL simulation using Vivado's command-line tools: `xvlog`, `xelab`, and `xsim`. These tools provide a powerful way to automate and script your simulation workflows.
 
-## Creating a New Project
+## Overview of Command-Line Tools
 
-1. Launch Vivado and select "Create New Project" from the Quick Start menu.
-2. Enter a name for your project and choose a location to save it.
-3. Select "RTL Project" and check the box for "Do not specify sources at this time."
-4. Click "Next" and choose the appropriate part for your FPGA board.
-5. Click "Finish" to create the project.
+- **xvlog**: Compiles Verilog and SystemVerilog source files.
+- **xelab**: Elaborates the design and generates a simulation snapshot.
+- **xsim**: Runs the simulation using the generated snapshot.
 
-## Adding RTL Sources
+## Setting Up the Environment
 
-1. In the Flow Navigator, click on "Add Sources."
-2. Select "Add or Create Design Sources" and click "Next."
-3. Click "Add Files" and browse to the location of your RTL files (e.g., Verilog or VHDL files).
-4. Select the files and click "OK," then click "Finish" to add the sources to your project.
+Before running the command-line tools, ensure that the Vivado environment is set up correctly. This can be done by sourcing the Vivado settings script:
 
-## Adding Simulation Sources
+```bash
+source /opt/Xilinx/Vivado/<version>/settings64.sh
+```
 
-1. In the Flow Navigator, click on "Add Sources."
-2. Select "Add or Create Simulation Sources" and click "Next."
-3. Click "Add Files" and browse to the location of your testbench files.
-4. Select the files and click "OK," then click "Finish" to add the simulation sources to your project.
+## Compiling the RTL Sources
+
+Use `xvlog` to compile your Verilog or SystemVerilog source files. For example:
+
+```bash
+xvlog -sv my_design.sv my_testbench.sv
+```
+
+This command compiles `my_design.sv` and `my_testbench.sv` files.
+
+## Elaborating the Design
+
+After compiling the sources, use `xelab` to elaborate the design and create a simulation snapshot. For example:
+
+```bash
+xelab -debug typical my_testbench -s my_sim_snapshot
+```
+
+This command elaborates the `my_testbench` module and creates a simulation snapshot named `my_sim_snapshot`.
 
 ## Running the Simulation
 
-1. In the Flow Navigator, click on "Run Simulation" under the "Simulation" section.
-2. Select "Run Behavioral Simulation" to start the simulation process.
-3. The Vivado simulator will launch, and you will see the simulation waveform window.
-4. Use the waveform window to analyze the signals and verify the functionality of your design.
+Finally, use `xsim` to run the simulation with the generated snapshot. For example:
 
-## Analyzing Simulation Results
+```bash
+xsim my_sim_snapshot -gui
+```
 
-1. Use the zoom and pan tools in the waveform window to navigate through the simulation results.
-2. Check the signal values at different time points to ensure that your design behaves as expected.
-3. If you find any issues, go back to your RTL code, make the necessary changes, and re-run the simulation.
+This command runs the simulation and opens the GUI for waveform analysis.
 
-By following these steps, you can simulate and verify your RTL design using the Vivado GUI. Simulation helps you catch and fix issues early in the design process, ensuring a smoother implementation on hardware.
+## Common Options for Command-Line Tools
+
+Here are some common options for `xvlog`, `xelab`, and `xsim` that you might find useful:
+
+### xvlog Options
+
+- **-sv**: Specifies that the input files are SystemVerilog files.
+- **-d <macro>**: Defines a macro for conditional compilation.
+- **-i <include_dir>**: Specifies the directory to search for include files.
+
+Example:
+```bash
+xvlog -sv -d SIMULATION -i ./include my_design.sv -work work
+```
+
+### xelab Options
+
+- **-debug <level>**: Specifies the debug level (e.g., `typical`, `full`) for the simulation.
+- **-s <snapshot>**: Names the simulation snapshot.
+
+Example:
+```bash
+xelab -debug typical my_testbench -s my_sim_snapshot -L unisim
+```
+
+### xsim Options
+
+- **-gui**: Launches the simulation in the GUI mode.
+- **-R**: Runs the simulation without entering the interactive mode.
+
+Example:
+```bash
+xsim my_sim_snapshot -gui -t run.tcl
+```
+
+By using these options, you can customize and control the behavior of the Vivado command-line tools to better suit your simulation needs.
+
+## Automating the Workflow with a Script
+
+You can automate the entire simulation workflow by creating a shell script. Here is an example script:
+
+```bash
+#!/bin/bash
+
+# Source the Vivado settings
+source /opt/Xilinx/Vivado/<version>/settings64.sh
+
+# Compile the RTL sources
+xvlog -sv my_design.sv my_testbench.sv
+
+# Elaborate the design
+xelab -debug typical my_testbench -s my_sim_snapshot
+
+# Run the simulation
+xsim my_sim_snapshot -gui
+```
+
+Save this script as `run_simulation.sh`, make it executable, and run it:
+
+```bash
+chmod +x run_simulation.sh
+./run_simulation.sh
+```
+
+By following these steps, you can perform RTL simulation using Vivado's command-line tools, allowing for greater flexibility and automation in your design verification process.
