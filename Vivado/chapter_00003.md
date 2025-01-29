@@ -58,7 +58,7 @@ Here are some common options for `xvlog`, `xelab`, and `xsim` that you might fin
 
 Example:
 ```bash
-xvlog -sv -d SIMULATION -i ./include my_design.sv -work work
+xvlog -sv -d SIMULATION -i ./include my_design.sv
 ```
 
 ### xelab Options
@@ -68,7 +68,7 @@ xvlog -sv -d SIMULATION -i ./include my_design.sv -work work
 
 Example:
 ```bash
-xelab -debug typical my_testbench -s my_sim_snapshot -L unisim
+xelab -debug typical my_testbench -s my_sim_snapshot
 ```
 
 ### xsim Options
@@ -78,7 +78,7 @@ xelab -debug typical my_testbench -s my_sim_snapshot -L unisim
 
 Example:
 ```bash
-xsim my_sim_snapshot -gui -t run.tcl
+xsim my_sim_snapshot -R -gui
 ```
 
 By using these options, you can customize and control the behavior of the Vivado command-line tools to better suit your simulation needs.
