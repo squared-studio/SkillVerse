@@ -4,7 +4,7 @@
 rm -r *.md
 
 # Create a new README.md file with a title
-echo "# VLSI Training" > README.md
+echo "# SkillVerse" > README.md
 
 # Find all directories (excluding hidden ones) and store them in LIST
 LIST=$(find -mindepth 1 -maxdepth 1 -type d ! -name ".*" | sed "s/.*\///g")
