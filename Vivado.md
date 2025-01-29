@@ -22,3 +22,21 @@
   - Adding Simulation Sources
   - Running the Simulation
   - Analyzing Simulation Results
+## 5. [Synthesis in Vivado](Vivado/chapter_00005.md)
+  - Setting Up the Synthesis
+  - Analyzing Synthesis Results
+  - Synthesis Settings
+  - Common Synthesis Options
+## 6. [Implementation in Vivado](Vivado/chapter_00006.md)
+  - Setting Up the Implementation
+  - Analyzing Implementation Results
+  - Implementation Settings
+  - Common Implementation Options
+## 7. [Bitstream Generation in Vivado](Vivado/chapter_00007.md)
+  - Generating the Bitstream
+  - Analyzing Bitstream Generation Results
+  - Programming the FPGA
+## 8. [Debugging in Vivado](Vivado/chapter_00008.md)
+  - Setting Up Debug Probes
+  - Running the Debug
+  - Analyzing Debug Results
