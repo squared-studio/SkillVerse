@@ -1,7 +1,7 @@
-# Gray to Binary Code Converter
+# Demultiplexer
 
 ## Self Study
-- [Gray to Binary Code Converter](https://vlsiverify.com/verilog/verilog-codes/gray-to-binary/)
+- [Demultiplexer](https://vlsiverify.com/verilog/verilog-codes/demultiplexer/)
 
 ## Design
   - Write the RTL code

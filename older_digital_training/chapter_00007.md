@@ -1,21 +1,36 @@
-# Xilinx Vivado
+# Simple SystemVerilog Exercises
 
-## Introduction
-**AMD Vivado** is a comprehensive design software suite for synthesis and analysis of hardware description language (HDL) designs. It is specifically designed for AMD adaptive SoCs and FPGAs. The suite includes various tools for **Design Entry**, **Synthesis**, **Place and Route**, and **Verification/Simulation**. These tools enable faster design iterations and help in quickly meeting your FMAX targets. Vivado brings unique features such as **Report QoR Assessment (RQA)**, **Report QoR Suggestions (RQS)**, and **Intelligent Design Runs (IDR)**. These features help you close timing and converge on your performance goals in days instead of weeks, resulting in significant productivity gains. Moreover, Vivado supports design entry in traditional HDL like VHDL and Verilog. It also supports a graphical user interface-based tool called the **IP Integrator (IPI)** that allows for a Plug-and-Play IP Integration Design Environment.
-In summary, AMD Vivado is a powerful tool that helps hardware designers reduce compile times and design iterations, while more accurately estimating power for AMD adaptive SoCs and FPGAs.
+## Self Study
+- [ENUMERATION                                              ](https://www.chipverify.com/systemverilog/systemverilog-enumeration)
+- [ARRAYS                                                   ](https://www.chipverify.com/systemverilog/systemverilog-arrays)
+- [PACKED ARRAYS                                            ](https://www.chipverify.com/systemverilog/systemverilog-packed-arrays)
+- [UNPACKED ARRAYS                                          ](https://www.chipverify.com/systemverilog/systemverilog-unpacked-arrays)
+- [DYNAMIC ARRAY                                            ](https://www.chipverify.com/systemverilog/systemverilog-dynamic-array)
+- [ASSOCIATIVE ARRAY                                        ](https://www.chipverify.com/systemverilog/systemverilog-associative-array)
+- [ARRAY MANIPULATION                                       ](https://www.chipverify.com/systemverilog/systemverilog-array-manipulation)
+- [QUEUE                                                    ](https://www.chipverify.com/systemverilog/systemverilog-queue)
 
-## Install
-**`TODO`** : Ubuntu Example
+## Enumeration
+  - Define an enumeration for the days of the week. Write a function that takes this enumeration as an argument and prints out the day of the week.
 
-## Simple Exercise
-Reuse the `and_gate.v` and `and_gate_tb.v` for previous Task 5 and run it using Vivado Simulator
+## Arrays
+  - Declare a 1-D array of integers. Write a function that calculates the sum of the elements in the array.
 
-**Compile and Run the Simulation**
-```bash
-xvlog and_gate.v and_gate_tb.v
-xelab and_gate_tb -s top
-xsim top -runall
-```
-The `xvlog` command compiles the Verilog files and does lint check. Add `-sv` flag to the `xvlog` command if there are SystemVerilog file. Then the `xelab` command elaborates the top module and prepares executable. Finally the `xsim` command runs the simulation executable.
+## Packed Arrays
+  - Declare a packed array of bits. Write a function that counts the number of '1's in the array.
 
-More command arguments are available. Add `-help` to the respective command for details.
+## Unpacked Arrays
+  - Declare an unpacked array of integers. Write a function that finds the maximum value in the array.
+
+## Dynamic Arrays
+  - Declare a dynamic array of integers. Write a function that adds a given number of elements to the array.
+
+## Associative Arrays
+  - Declare an associative array that maps strings to integers. Write a function that adds a new key-value pair to the array.
+
+## Array Manipulation
+  - Given an array of integers, write a function that reverses the array.
+
+## Queue
+  - Declare a queue of integers. Write functions to add an element to the end of the queue, remove an element from the front of the queue, and print all elements of the queue.
+

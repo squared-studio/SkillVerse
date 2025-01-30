@@ -1,48 +1,43 @@
 # Simple SystemVerilog Exercises
 
 ## Self Study
-- [VIRTUAL METHODS                                          ](https://www.chipverify.com/systemverilog/systemverilog-virtual-methods)
-- [STATIC VARIABLES FUNCTIONS                               ](https://www.chipverify.com/systemverilog/systemverilog-static-variables-functions)
-- [COPYING OBJECTS                                          ](https://www.chipverify.com/systemverilog/systemverilog-copying-objects)
-- [PARAMETERIZED CLASSES                                    ](https://www.chipverify.com/systemverilog/systemverilog-parameterized-classes)
-- [EXTERN                                                   ](https://www.chipverify.com/systemverilog/systemverilog-extern)
-- [LOCAL ACCESS LEVEL                                       ](https://www.chipverify.com/systemverilog/systemverilog-local-access-level)
-- [ABSTRACT CLASS                                           ](https://www.chipverify.com/systemverilog/systemverilog-abstract-class)
-- [RANDOMIZATION                                            ](https://www.chipverify.com/systemverilog/systemverilog-randomization)
+- [SOLVE BEFORE                                             ](https://www.chipverify.com/systemverilog/systemverilog-solve-before)
+- [STATIC CONSTRAINTS                                       ](https://www.chipverify.com/systemverilog/systemverilog-static-constraints)
+- [RANDOMIZATION METHODS                                    ](https://www.chipverify.com/systemverilog/systemverilog-randomization-methods)
+- [INLINE CONSTRAINTS                                       ](https://www.chipverify.com/systemverilog/systemverilog-inline-constraints)
+- [SOFT CONSTRAINTS                                         ](https://www.chipverify.com/systemverilog/systemverilog-soft-constraints)
+- [DISABLE CONSTRAINTS                                      ](https://www.chipverify.com/systemverilog/systemverilog-disable-constraints)
+- [DISABLE RANDOMIZATION                                    ](https://www.chipverify.com/systemverilog/systemverilog-disable-randomization)
+- [RANDCASE                                                 ](https://www.chipverify.com/systemverilog/systemverilog-randcase)
 
-## Virtual Methods
-  - Define a base class with a virtual method.
-  - Define a derived class that overrides this method.
-  - Instantiate both classes and call the method to observe the behavior.
+## `solve` before
+  - Define a class with several interdependent properties and a constraint that uses the `solve` before construct.
+  - Instantiate the class and randomize it to observe the effect of the `solve` before construct.
 
-## Static Variables/Functions
-  - Define a class with a static variable and a static method.
-  - Instantiate the class multiple times and observe the behavior of the static members.
+## Static Constraints
+  - Define a class with a static constraint.
+  - Instantiate the class and randomize it to observe the effect of the static constraint.
 
-## Copying Objects
-  - Define a class with several properties.
-  - Instantiate an object of this class and then create a copy of it.
-  - Modify the original object and observe the effect on the copy.
+## Randomization Methods
+  - Write a testbench that uses the `randomize()` and `pre_randomize()` methods to randomize a class object.
+  - Observe the difference between the two methods.
 
-## Parameterized Classes
-  - Define a parameterized class.
-  - Instantiate this class with different parameters in a testbench.
+## Inline Constraints
+  - Define a class with an inline constraint.
+  - Instantiate the class and randomize it to observe the effect of the inline constraint.
 
-## `extern`
-  - Define a class with an `extern` method.
-  - Provide the implementation of this method outside the class.
-  - Instantiate the class and call the `extern` method.
+## Soft Constraints
+  - Define a class with a soft constraint.
+  - Instantiate the class and randomize it to observe the effect of the soft constraint.
 
-## Local Access Level
-  - Define a class with `local` methods and properties.
-  - Try to access these members from outside the class and observe the behavior.
+## Disable Constraints
+  - Define a class with several constraints and a method that disables one of them.
+  - Instantiate the class, call the method, and randomize the object to observe the effect of disabling the constraint.
 
-## Abstract Class
-  - Define an abstract class with a pure virtual method.
-  - Define a derived class that implements this method.
-  - Instantiate the derived class and call the method.
+## Disable Randomization
+  - Define a class with a method that disables randomization of one of its properties.
+  - Instantiate the class, call the method, and randomize the object to observe the effect of disabling randomization.
 
-## Randomization
-  - Define a class with several properties.
-  - Write a method that randomizes these properties.
-  - Instantiate the class and call the method to generate different sets of property values.
+## `randcase`
+  - Write a testbench that uses the `randcase` construct to select one of several randomization scenarios.
+  - Run the testbench multiple times to observe the different scenarios.

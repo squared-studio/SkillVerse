@@ -1,43 +1,43 @@
 # Simple SystemVerilog Exercises
 
 ## Self Study
-- [SOLVE BEFORE                                             ](https://www.chipverify.com/systemverilog/systemverilog-solve-before)
-- [STATIC CONSTRAINTS                                       ](https://www.chipverify.com/systemverilog/systemverilog-static-constraints)
-- [RANDOMIZATION METHODS                                    ](https://www.chipverify.com/systemverilog/systemverilog-randomization-methods)
-- [INLINE CONSTRAINTS                                       ](https://www.chipverify.com/systemverilog/systemverilog-inline-constraints)
-- [SOFT CONSTRAINTS                                         ](https://www.chipverify.com/systemverilog/systemverilog-soft-constraints)
-- [DISABLE CONSTRAINTS                                      ](https://www.chipverify.com/systemverilog/systemverilog-disable-constraints)
-- [DISABLE RANDOMIZATION                                    ](https://www.chipverify.com/systemverilog/systemverilog-disable-randomization)
-- [RANDCASE                                                 ](https://www.chipverify.com/systemverilog/systemverilog-randcase)
+- [FUNCTIONAL COVERAGE                                      ](https://www.chipverify.com/systemverilog/systemverilog-functional-coverage)
+- [COVERGROUP COVERPOINT                                    ](https://www.chipverify.com/systemverilog/systemverilog-covergroup-coverpoint)
+- [COVERPOINT BINS                                          ](https://www.chipverify.com/systemverilog/systemverilog-coverpoint-bins)
+- [ASSERTIONS                                               ](https://www.chipverify.com/systemverilog/systemverilog-assertions)
+- [IMMEDIATE ASSERTIONS                                     ](https://www.chipverify.com/systemverilog/systemverilog-immediate-assertions)
+- [CONCURRENT ASSERTIONS                                    ](https://www.chipverify.com/systemverilog/systemverilog-concurrent-assertions)
+- [SEQUENCE ROSE FELL STABLE                                ](https://www.chipverify.com/systemverilog/systemverilog-sequence-rose-fell-stable)
+- [ASSERTIONS TIME DELAY                                    ](https://www.chipverify.com/systemverilog/systemverilog-assertions-time-delay)
 
-## `solve` before
-  - Define a class with several interdependent properties and a constraint that uses the `solve` before construct.
-  - Instantiate the class and randomize it to observe the effect of the `solve` before construct.
+## Functional Coverage
+  - Write a testbench that includes a functional coverage model for a simple design.
+  - Run the testbench and analyze the coverage results.
 
-## Static Constraints
-  - Define a class with a static constraint.
-  - Instantiate the class and randomize it to observe the effect of the static constraint.
+## Covergroup and Coverpoint
+  - Define a covergroup with several coverpoints.
+  - Write a testbench that samples the covergroup and prints the coverage results.
 
-## Randomization Methods
-  - Write a testbench that uses the `randomize()` and `pre_randomize()` methods to randomize a class object.
-  - Observe the difference between the two methods.
+## Coverpoint Bins
+  - Modify the covergroup from the previous exercise to include bins for the coverpoints.
+  - Run the testbench again and analyze the bin coverage results.
 
-## Inline Constraints
-  - Define a class with an inline constraint.
-  - Instantiate the class and randomize it to observe the effect of the inline constraint.
+## Assertions
+  - Write a testbench that includes assertions to check the behavior of a simple design.
+  - Run the testbench and observe the assertion results.
 
-## Soft Constraints
-  - Define a class with a soft constraint.
-  - Instantiate the class and randomize it to observe the effect of the soft constraint.
+## Immediate Assertions
+  - Add some immediate assertions to the testbench from the previous exercise.
+  - Run the testbench and observe the immediate assertion results.
 
-## Disable Constraints
-  - Define a class with several constraints and a method that disables one of them.
-  - Instantiate the class, call the method, and randomize the object to observe the effect of disabling the constraint.
+## Concurrent Assertions
+  - Replace some of the immediate assertions in the testbench with concurrent assertions.
+  - Run the testbench and observe the concurrent assertion results.
 
-## Disable Randomization
-  - Define a class with a method that disables randomization of one of its properties.
-  - Instantiate the class, call the method, and randomize the object to observe the effect of disabling randomization.
+## Sequence (`rose`, `fell`, `stable`)
+  - Write a sequence that uses the `rose`, `fell`, and `stable` operators.
+  - Include this sequence in an assertion in the testbench and observe the results.
 
-## `randcase`
-  - Write a testbench that uses the `randcase` construct to select one of several randomization scenarios.
-  - Run the testbench multiple times to observe the different scenarios.
+## Assertions with Time Delay
+  - Write an assertion that includes a time delay.
+  - Include this assertion in the testbench and observe the results.

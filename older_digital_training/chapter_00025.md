@@ -1,7 +1,7 @@
-# Decoder
+# Moore Sequence Detector
 
 ## Self Study
-- [Decoder](https://vlsiverify.com/verilog/verilog-codes/decoder/)
+- [Moore Sequence Detector](https://vlsiverify.com/verilog/verilog-codes/moore-sequence-detector/)
 
 ## Design
   - Write the RTL code

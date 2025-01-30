@@ -2,10 +2,7 @@
 ## 1. [Linux Terminal](older_digital_training/chapter_00001.md)
   - Introduction
   - Commonly used commands
-## 2. [Introduction to git](older_digital_training/chapter_00002.md)
-  - Introduction
-  - Commonly used git commands
-## 3. [Digital Circuit Components](older_digital_training/chapter_00003.md)
+## 2. [Digital Circuit Components](older_digital_training/chapter_00002.md)
   - NOT Gate
   - AND Gate
   - OR Gate
@@ -14,30 +11,25 @@
   - NOR Gate
   - XNOR Gate
   - Exercise
-## 4. [Vi IMproved (VIM)](older_digital_training/chapter_00004.md)
+## 3. [Icarus Verilog](older_digital_training/chapter_00003.md)
   - Introduction
   - Install
   - Simple Exercise
-  - Study Materials
-## 5. [Icarus Verilog](older_digital_training/chapter_00005.md)
+## 4. [GNU Make](older_digital_training/chapter_00004.md)
   - Introduction
   - Install
   - Simple Exercise
-## 6. [GNU Make](older_digital_training/chapter_00006.md)
+## 5. [Xilinx Vivado](older_digital_training/chapter_00005.md)
   - Introduction
   - Install
   - Simple Exercise
-## 7. [Xilinx Vivado](older_digital_training/chapter_00007.md)
-  - Introduction
-  - Install
-  - Simple Exercise
-## 8. [Simple SystemVerilog Exercises](older_digital_training/chapter_00008.md)
+## 6. [Simple SystemVerilog Exercises](older_digital_training/chapter_00006.md)
   - Self Study
   - Datatypes
   - Data Types: logic and bit
   - Data Types: integer and byte
   - Strings
-## 9. [Simple SystemVerilog Exercises](older_digital_training/chapter_00009.md)
+## 7. [Simple SystemVerilog Exercises](older_digital_training/chapter_00007.md)
   - Self Study
   - Enumeration
   - Arrays
@@ -47,7 +39,7 @@
   - Associative Arrays
   - Array Manipulation
   - Queue
-## 10. [Simple SystemVerilog Exercises](older_digital_training/chapter_00010.md)
+## 8. [Simple SystemVerilog Exercises](older_digital_training/chapter_00008.md)
   - Self Study
   - Structs
   - Typedef and Alias
@@ -57,7 +49,7 @@
   - Forever Loop
   - Repeat Loop
   - Break and Continue
-## 11. [Simple SystemVerilog Exercises](older_digital_training/chapter_00011.md)
+## 9. [Simple SystemVerilog Exercises](older_digital_training/chapter_00009.md)
   - Self Study
   - Unique and Priority Constructs
   - Blocking and Non-blocking Assignments
@@ -68,7 +60,7 @@
   - Fork-Join Any and None
   - Disabling Fork Blocks
   - Wait-Fork and Timing Control
-## 12. [Simple SystemVerilog Exercises](older_digital_training/chapter_00012.md)
+## 10. [Simple SystemVerilog Exercises](older_digital_training/chapter_00010.md)
   - Self Study
   - Interprocess Communication
   - Semaphore
@@ -77,7 +69,7 @@
   - Interface Intro
   - Interface Bundles
   - Modport
-## 13. [Simple SystemVerilog Exercises](older_digital_training/chapter_00013.md)
+## 11. [Simple SystemVerilog Exercises](older_digital_training/chapter_00011.md)
   - Self Study
   - Class
   - Class Handle/Object
@@ -87,7 +79,7 @@
   - `typedef` Class
   - Inheritance
   - Polymorphism
-## 14. [Simple SystemVerilog Exercises](older_digital_training/chapter_00014.md)
+## 12. [Simple SystemVerilog Exercises](older_digital_training/chapter_00012.md)
   - Self Study
   - Virtual Methods
   - Static Variables/Functions
@@ -97,7 +89,7 @@
   - Local Access Level
   - Abstract Class
   - Randomization
-## 15. [Simple SystemVerilog Exercises](older_digital_training/chapter_00015.md)
+## 13. [Simple SystemVerilog Exercises](older_digital_training/chapter_00013.md)
   - Self Study
   - Constraints
   - Random Variables
@@ -107,7 +99,7 @@
   - `inside` Constraint
   - Implication Constraint
   - `foreach` Constraint
-## 16. [Simple SystemVerilog Exercises](older_digital_training/chapter_00016.md)
+## 14. [Simple SystemVerilog Exercises](older_digital_training/chapter_00014.md)
   - Self Study
   - `solve` before
   - Static Constraints
@@ -117,7 +109,7 @@
   - Disable Constraints
   - Disable Randomization
   - `randcase`
-## 17. [Simple SystemVerilog Exercises](older_digital_training/chapter_00017.md)
+## 15. [Simple SystemVerilog Exercises](older_digital_training/chapter_00015.md)
   - Self Study
   - Program Block
   - Dynamic Cast
@@ -125,7 +117,7 @@
   - Command Line Input
   - File I/O
   - Scope Resolution Operator
-## 18. [Simple SystemVerilog Exercises](older_digital_training/chapter_00018.md)
+## 16. [Simple SystemVerilog Exercises](older_digital_training/chapter_00016.md)
   - Self Study
   - Functional Coverage
   - Covergroup and Coverpoint
@@ -135,47 +127,47 @@
   - Concurrent Assertions
   - Sequence (`rose`, `fell`, `stable`)
   - Assertions with Time Delay
-## 19. [Testbench Example](older_digital_training/chapter_00019.md)
+## 17. [Testbench Example](older_digital_training/chapter_00017.md)
   - Documentation
   - RTL
   - Testbench
-## 20. [Gray to Binary Code Converter](older_digital_training/chapter_00020.md)
+## 18. [Gray to Binary Code Converter](older_digital_training/chapter_00018.md)
   - Self Study
   - Design
   - Testbench
-## 21. [Gray to Binary Code Converter](older_digital_training/chapter_00021.md)
+## 19. [Gray to Binary Code Converter](older_digital_training/chapter_00019.md)
   - Self Study
   - Design
   - Testbench
-## 22. [Multiplexer](older_digital_training/chapter_00022.md)
+## 20. [Multiplexer](older_digital_training/chapter_00020.md)
   - Self Study
   - Design
   - Testbench
-## 23. [Demultiplexer](older_digital_training/chapter_00023.md)
+## 21. [Demultiplexer](older_digital_training/chapter_00021.md)
   - Self Study
   - Design
   - Testbench
-## 24. [Decoder](older_digital_training/chapter_00024.md)
+## 22. [Decoder](older_digital_training/chapter_00022.md)
   - Self Study
   - Design
   - Testbench
-## 25. [Decoder](older_digital_training/chapter_00025.md)
+## 23. [Decoder](older_digital_training/chapter_00023.md)
   - Self Study
   - Design
   - Testbench
-## 26. [Moore Sequence Detector](older_digital_training/chapter_00026.md)
+## 24. [Moore Sequence Detector](older_digital_training/chapter_00024.md)
   - Self Study
   - Design
   - Testbench
-## 27. [Moore Sequence Detector](older_digital_training/chapter_00027.md)
+## 25. [Moore Sequence Detector](older_digital_training/chapter_00025.md)
   - Self Study
   - Design
   - Testbench
-## 28. [Synchronous FIFO](older_digital_training/chapter_00028.md)
+## 26. [Synchronous FIFO](older_digital_training/chapter_00026.md)
   - Self Study
   - Design
   - Testbench
-## 29. [Asynchronous FIFO](older_digital_training/chapter_00029.md)
+## 27. [Asynchronous FIFO](older_digital_training/chapter_00027.md)
   - Self Study
   - Design
   - Testbench

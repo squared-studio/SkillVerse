@@ -1,43 +1,43 @@
 # Simple SystemVerilog Exercises
 
 ## Self Study
-- [CLASS                                                    ](https://www.chipverify.com/systemverilog/systemverilog-class)
-- [CLASS HANDLE OBJECT                                      ](https://www.chipverify.com/systemverilog/systemverilog-class-handle-object)
-- [CLASS CONSTRUCTOR                                        ](https://www.chipverify.com/systemverilog/systemverilog-class-constructor)
-- [THIS KEYWORD                                             ](https://www.chipverify.com/systemverilog/systemverilog-this-keyword)
-- [SUPER                                                    ](https://www.chipverify.com/systemverilog/systemverilog-super)
-- [TYPEDEF CLASS                                            ](https://www.chipverify.com/systemverilog/systemverilog-typedef-class)
-- [INHERITANCE                                              ](https://www.chipverify.com/systemverilog/systemverilog-inheritance)
-- [POLYMORPHISM                                             ](https://www.chipverify.com/systemverilog/systemverilog-polymorphism)
+- [CONSTRAINTS                                              ](https://www.chipverify.com/systemverilog/systemverilog-constraints)
+- [RANDOM VARIABLES                                         ](https://www.chipverify.com/systemverilog/systemverilog-random-variables)
+- [CONSTRAINT BLOCKS                                        ](https://www.chipverify.com/systemverilog/systemverilog-constraint-blocks)
+- [ARRAY RANDOMIZATION                                      ](https://www.chipverify.com/systemverilog/systemverilog-array-randomization)
+- [CONSTRAINT EXAMPLES                                      ](https://www.chipverify.com/systemverilog/systemverilog-constraint-examples)
+- [CONSTRAINT INSIDE                                        ](https://www.chipverify.com/systemverilog/systemverilog-constraint-inside)
+- [IMPLICATION CONSTRAINT                                   ](https://www.chipverify.com/systemverilog/systemverilog-implication-constraint)
+- [FOREACH CONSTRAINT                                       ](https://www.chipverify.com/systemverilog/systemverilog-foreach-constraint)
 
-## Class
-  - Define a simple class with a few properties and methods.
-  - Instantiate the class in a testbench and call its methods.
+## Constraints
+  - Define a class with several properties and write constraints for them.
+  - Instantiate the class and randomize it to observe the effect of the constraints.
 
-## Class Handle/Object
-  - Modify the class from the previous exercise to include a handle to another object of the same class.
-  - Write a method that uses this handle to interact with the other object.
+## Random Variables
+  - Define a class with a random variable.
+  - Write a testbench that randomizes this variable and prints its value.
 
-## Class Constructor
-  - Add a constructor to the class that initializes its properties.
-  - Instantiate the class with different initial values in the testbench.
+## Constraint Blocks
+  - Define a class with several constraint blocks.
+  - Instantiate the class and randomize it to observe the effect of the different constraint blocks.
 
-## `this` Keyword
-  - Write a method that uses the `this` keyword to refer to the object it's called on.
-  - Call this method from the testbench and observe its behavior.
+## Array Randomization
+  - Define a class with an array and write constraints for the array elements.
+  - Instantiate the class and randomize it to generate different arrays that satisfy the constraints.
 
-## `super` Keyword
-  - Define a subclass of the class from the previous exercises.
-  - Use the `super` keyword in the subclass to call a method from the superclass.
+## Constraint Examples
+  - Look at some examples of constraints and try to understand how they work.
+  - Write your own constraints based on these examples.
 
-## `typedef` Class
-  - Use `typedef` to define a new type based on the class.
-  - Instantiate this new type in the testbench.
+## `inside` Constraint
+  - Define a class with a property and a constraint that uses the `inside` keyword.
+  - Instantiate the class and randomize it to generate values that satisfy the `inside` constraint.
 
-## Inheritance
-  - Define another subclass of the class, adding some new properties and methods.
-  - Instantiate both subclasses in the testbench and call their methods.
+## Implication Constraint
+  - Define a class with a property and an implication constraint.
+  - Instantiate the class and randomize it to observe the effect of the implication constraint.
 
-## Polymorphism
-  - Write a function that takes a handle to the superclass as an argument.
-  - Call this function with objects of both subclasses and observe the behavior.
+## `foreach` Constraint
+  - Define a class with an array and a `foreach` constraint.
+  - Instantiate the class and randomize it to generate arrays that satisfy the `foreach` constraint.

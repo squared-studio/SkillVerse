@@ -1,7 +1,7 @@
-# Demultiplexer
+# Decoder
 
 ## Self Study
-- [Demultiplexer](https://vlsiverify.com/verilog/verilog-codes/demultiplexer/)
+- [Decoder](https://vlsiverify.com/verilog/verilog-codes/decoder/)
 
 ## Design
   - Write the RTL code

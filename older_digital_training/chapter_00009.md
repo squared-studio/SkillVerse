@@ -1,36 +1,51 @@
 # Simple SystemVerilog Exercises
 
 ## Self Study
-- [ENUMERATION                                              ](https://www.chipverify.com/systemverilog/systemverilog-enumeration)
-- [ARRAYS                                                   ](https://www.chipverify.com/systemverilog/systemverilog-arrays)
-- [PACKED ARRAYS                                            ](https://www.chipverify.com/systemverilog/systemverilog-packed-arrays)
-- [UNPACKED ARRAYS                                          ](https://www.chipverify.com/systemverilog/systemverilog-unpacked-arrays)
-- [DYNAMIC ARRAY                                            ](https://www.chipverify.com/systemverilog/systemverilog-dynamic-array)
-- [ASSOCIATIVE ARRAY                                        ](https://www.chipverify.com/systemverilog/systemverilog-associative-array)
-- [ARRAY MANIPULATION                                       ](https://www.chipverify.com/systemverilog/systemverilog-array-manipulation)
-- [QUEUE                                                    ](https://www.chipverify.com/systemverilog/systemverilog-queue)
+- [UNIQUE PRIORITY IF ELSE                                  ](https://www.chipverify.com/systemverilog/systemverilog-unique-priority-if-else)
+- [UNIQUE PRIORITY CASE                                     ](https://www.chipverify.com/systemverilog/systemverilog-unique-priority-case)
+- [BLOCKING NON BLOCKING STATEMENTS                         ](https://www.chipverify.com/verilog/verilog-blocking-non-blocking-statements)
+- [EVENT                                                    ](https://www.chipverify.com/systemverilog/systemverilog-event)
+- [FUNCTIONS                                                ](https://www.chipverify.com/systemverilog/systemverilog-functions)
+- [TASK                                                     ](https://www.chipverify.com/verilog/verilog-task)
+- [THREADS                                                  ](https://www.chipverify.com/systemverilog/systemverilog-threads)
+- [FORK JOIN                                                ](https://www.chipverify.com/systemverilog/systemverilog-fork-join)
+- [FORK JOIN ANY                                            ](https://www.chipverify.com/systemverilog/systemverilog-fork-join-any)
+- [FORK JOIN NONE                                           ](https://www.chipverify.com/systemverilog/systemverilog-fork-join-none)
+- [DISABLE FORK                                             ](https://www.chipverify.com/systemverilog/systemverilog-disable-fork)
+- [WAIT FORK                                                ](https://www.chipverify.com/systemverilog/systemverilog-wait-fork)
 
-## Enumeration
-  - Define an enumeration for the days of the week. Write a function that takes this enumeration as an argument and prints out the day of the week.
+## Unique and Priority Constructs
+  - Create a module that uses both `unique` and `priority` keywords for combinational logic.
+  - Define multiple conditions and ensure that the unique and priority blocks behave as expected.
 
-## Arrays
-  - Declare a 1-D array of integers. Write a function that calculates the sum of the elements in the array.
+## Blocking and Non-blocking Assignments
+  - Write a module that uses both blocking (`=`) and non-blocking (`<=`) assignments.
+  - Observe the differences in behavior during simulation.
 
-## Packed Arrays
-  - Declare a packed array of bits. Write a function that counts the number of '1's in the array.
+## Events and Sensitivity
+  - Declare an event called `clk_event` using the `event` keyword.
+  - Use the `@(clk_event)` construct to trigger a block of code when the event occurs.
 
-## Unpacked Arrays
-  - Declare an unpacked array of integers. Write a function that finds the maximum value in the array.
+## Functions
+  - Create a function that calculates the factorial of an input integer.
+  - Test the function by calling it with different input values.
 
-## Dynamic Arrays
-  - Declare a dynamic array of integers. Write a function that adds a given number of elements to the array.
+## Tasks
+  - Define a task that takes two input arguments and prints their sum.
+  - Call the task from within a module.
 
-## Associative Arrays
-  - Declare an associative array that maps strings to integers. Write a function that adds a new key-value pair to the array.
+## Threads and Fork-Join
+  - Write a program that uses multiple threads (using `fork` and `join`) to perform parallel tasks.
+  - Demonstrate synchronization and communication between threads.
 
-## Array Manipulation
-  - Given an array of integers, write a function that reverses the array.
+## Fork-Join Any and None
+  - Use the `fork-join-any` construct to execute multiple blocks concurrently.
+  - Implement a scenario where any one of the blocks completes first.
 
-## Queue
-  - Declare a queue of integers. Write functions to add an element to the end of the queue, remove an element from the front of the queue, and print all elements of the queue.
+## Disabling Fork Blocks
+  - Create a fork block with multiple child blocks.
+  - Use the `disable` keyword to selectively disable specific child blocks.
 
+## Wait-Fork and Timing Control
+  - Combine `wait` statements with `fork-join` constructs to control timing.
+  - Illustrate how to wait for specific events or conditions before proceeding.

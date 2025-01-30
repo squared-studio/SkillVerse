@@ -1,38 +1,48 @@
 # Simple SystemVerilog Exercises
 
 ## Self Study
-- [INTERPROCESS COMMUNICATION                               ](https://www.chipverify.com/systemverilog/systemverilog-interprocess-communication)
-- [SEMAPHORE                                                ](https://www.chipverify.com/systemverilog/systemverilog-semaphore)
-- [MAILBOX                                                  ](https://www.chipverify.com/systemverilog/systemverilog-mailbox)
-- [INTERFACE                                                ](https://www.chipverify.com/systemverilog/systemverilog-interface)
-- [INTERFACE INTRO                                          ](https://www.chipverify.com/systemverilog/systemverilog-interface-intro)
-- [INTERFACE BUNDLES                                        ](https://www.chipverify.com/systemverilog/systemverilog-interface-bundles)
-- [MODPORT                                                  ](https://www.chipverify.com/systemverilog/systemverilog-modport)
+- [VIRTUAL METHODS                                          ](https://www.chipverify.com/systemverilog/systemverilog-virtual-methods)
+- [STATIC VARIABLES FUNCTIONS                               ](https://www.chipverify.com/systemverilog/systemverilog-static-variables-functions)
+- [COPYING OBJECTS                                          ](https://www.chipverify.com/systemverilog/systemverilog-copying-objects)
+- [PARAMETERIZED CLASSES                                    ](https://www.chipverify.com/systemverilog/systemverilog-parameterized-classes)
+- [EXTERN                                                   ](https://www.chipverify.com/systemverilog/systemverilog-extern)
+- [LOCAL ACCESS LEVEL                                       ](https://www.chipverify.com/systemverilog/systemverilog-local-access-level)
+- [ABSTRACT CLASS                                           ](https://www.chipverify.com/systemverilog/systemverilog-abstract-class)
+- [RANDOMIZATION                                            ](https://www.chipverify.com/systemverilog/systemverilog-randomization)
 
-## Interprocess Communication
-  - Write a SystemVerilog program where two processes communicate using events. One process should generate a random number and the other process should print it.
-  - Modify the above program to use named events.
+## Virtual Methods
+  - Define a base class with a virtual method.
+  - Define a derived class that overrides this method.
+  - Instantiate both classes and call the method to observe the behavior.
 
-## Semaphore
-  - Write a SystemVerilog program where multiple processes access a shared resource using a semaphore.
-  - Experiment with different semaphore counts and observe the behavior.
+## Static Variables/Functions
+  - Define a class with a static variable and a static method.
+  - Instantiate the class multiple times and observe the behavior of the static members.
 
-## Mailbox
-  - Write a SystemVerilog program where one process sends a series of messages (numbers or strings) to another process via a mailbox.
-  - Extend the program to use a bounded mailbox and handle the case when the mailbox is full.
+## Copying Objects
+  - Define a class with several properties.
+  - Instantiate an object of this class and then create a copy of it.
+  - Modify the original object and observe the effect on the copy.
 
-## Interface
-  - Define a simple interface for a bus with data, address, and control signals.
-  - Write a module that uses this interface to perform read and write operations.
+## Parameterized Classes
+  - Define a parameterized class.
+  - Instantiate this class with different parameters in a testbench.
 
-## Interface Intro
-  - Write a testbench that uses the bus interface from the previous exercise.
-  - The testbench should stimulate the bus with a sequence of read and write operations and check the responses.
+## `extern`
+  - Define a class with an `extern` method.
+  - Provide the implementation of this method outside the class.
+  - Instantiate the class and call the `extern` method.
 
-## Interface Bundles
-  - Modify the bus interface to include a bundle of control signals.
-  - Update the module and testbench from the previous exercises to use the modified interface.
+## Local Access Level
+  - Define a class with `local` methods and properties.
+  - Try to access these members from outside the class and observe the behavior.
 
-## Modport
-  - Define a modport in the bus interface for the bus driver (write-only signals) and another modport for the bus monitor (read-only signals).
-  - Update the module and testbench to use the appropriate modports.
+## Abstract Class
+  - Define an abstract class with a pure virtual method.
+  - Define a derived class that implements this method.
+  - Instantiate the derived class and call the method.
+
+## Randomization
+  - Define a class with several properties.
+  - Write a method that randomizes these properties.
+  - Instantiate the class and call the method to generate different sets of property values.

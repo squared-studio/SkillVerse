@@ -1,52 +1,38 @@
 # Simple SystemVerilog Exercises
 
 ## Self Study
-- [STRUCT                                                   ](https://www.chipverify.com/systemverilog/systemverilog-struct)
-- [TYPEDEF ALIAS                                            ](https://www.chipverify.com/systemverilog/systemverilog-typedef-alias)
-- [CONTROL FLOW LOOPS                                       ](https://www.chipverify.com/systemverilog/systemverilog-control-flow-loops)
-- [WHILE DO WHILE LOOP                                      ](https://www.chipverify.com/systemverilog/systemverilog-while-do-while-loop)
-- [WHILE DO WHILE LOOP                                      ](https://www.chipverify.com/systemverilog/systemverilog-while-do-while-loop)
-- [FOREACH LOOP                                             ](https://www.chipverify.com/systemverilog/systemverilog-foreach-loop)
-- [FOR LOOP                                                 ](https://www.chipverify.com/systemverilog/systemverilog-for-loop)
-- [FOREVER LOOP                                             ](https://www.chipverify.com/systemverilog/systemverilog-forever-loop)
-- [REPEAT LOOP                                              ](https://www.chipverify.com/systemverilog/systemverilog-repeat-loop)
-- [BREAK CONTINUE                                           ](https://www.chipverify.com/systemverilog/systemverilog-break-continue)
+- [INTERPROCESS COMMUNICATION                               ](https://www.chipverify.com/systemverilog/systemverilog-interprocess-communication)
+- [SEMAPHORE                                                ](https://www.chipverify.com/systemverilog/systemverilog-semaphore)
+- [MAILBOX                                                  ](https://www.chipverify.com/systemverilog/systemverilog-mailbox)
+- [INTERFACE                                                ](https://www.chipverify.com/systemverilog/systemverilog-interface)
+- [INTERFACE INTRO                                          ](https://www.chipverify.com/systemverilog/systemverilog-interface-intro)
+- [INTERFACE BUNDLES                                        ](https://www.chipverify.com/systemverilog/systemverilog-interface-bundles)
+- [MODPORT                                                  ](https://www.chipverify.com/systemverilog/systemverilog-modport)
 
-## Structs
-  - Define a simple struct called `Person` with fields for `name`, `age`, and `address`.
-  - Create an instance of the `Person` struct and initialize its fields.
-  - Access and modify the fields of the `Person` struct.
+## Interprocess Communication
+  - Write a SystemVerilog program where two processes communicate using events. One process should generate a random number and the other process should print it.
+  - Modify the above program to use named events.
 
-## Typedef and Alias
-  - Create a typedef for a 32-bit unsigned integer called `MyUInt`.
-  - Declare a variable of type `MyUInt` and assign a value to it.
-  - Declare 2 32-bit wires called `bus_1` & `bus_2`.
-  - Use an alias to connect both `bus_1` & `bus_2`.
-  - Drive `bus_1` and check if `bus_2` also get driven.
-  - Repeat the inverse by driving `bus_2` and check if `bus_1` also get driven.
+## Semaphore
+  - Write a SystemVerilog program where multiple processes access a shared resource using a semaphore.
+  - Experiment with different semaphore counts and observe the behavior.
 
-## Control Flow and Loops
-  - Write a SystemVerilog program that prints numbers from 1 to 10 using a `for` loop.
-  - Implement a counter that increments by 2 in each iteration of the loop.
-  - Use an `if` statement to check if a number is even or odd.
+## Mailbox
+  - Write a SystemVerilog program where one process sends a series of messages (numbers or strings) to another process via a mailbox.
+  - Extend the program to use a bounded mailbox and handle the case when the mailbox is full.
 
-## While and Do-While Loops
-  - Create a `while` loop that prints Fibonacci numbers up to a certain limit.
-  - Implement a `do-while` loop that prompts the user for input until a valid value is entered.
+## Interface
+  - Define a simple interface for a bus with data, address, and control signals.
+  - Write a module that uses this interface to perform read and write operations.
 
-## Foreach Loop
-  - Define an array of integers and initialize it with some values.
-  - Use a `foreach` loop to iterate through the array and print its elements.
+## Interface Intro
+  - Write a testbench that uses the bus interface from the previous exercise.
+  - The testbench should stimulate the bus with a sequence of read and write operations and check the responses.
 
-## Forever Loop
-  - Write a program that toggles an output signal using a `forever` loop.
-  - Add a delay inside the loop to control the frequency of toggling.
+## Interface Bundles
+  - Modify the bus interface to include a bundle of control signals.
+  - Update the module and testbench from the previous exercises to use the modified interface.
 
-## Repeat Loop
-  - Create a repeat loop that executes a block of code 5 times.
-  - Perform some operation (e.g., addition, subtraction) within the loop.
-
-## Break and Continue
-  - Use a loop to iterate through an array of strings.
-  - If a specific condition is met (e.g., string length exceeds 5 characters), break out of the loop.
-  - Otherwise, continue to the next iteration.
+## Modport
+  - Define a modport in the bus interface for the bus driver (write-only signals) and another modport for the bus monitor (read-only signals).
+  - Update the module and testbench to use the appropriate modports.

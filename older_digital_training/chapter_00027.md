@@ -1,7 +1,7 @@
-# Moore Sequence Detector
+# Asynchronous FIFO
 
 ## Self Study
-- [Moore Sequence Detector](https://vlsiverify.com/verilog/verilog-codes/moore-sequence-detector/)
+- [Asynchronous FIFO](https://vlsiverify.com/verilog/verilog-codes/asynchronous-fifo/)
 
 ## Design
   - Write the RTL code
