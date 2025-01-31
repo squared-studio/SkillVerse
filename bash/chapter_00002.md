@@ -1,4 +1,4 @@
-# Chapter 2: Basics of Bash
+# Basics of Bash
 
 ## Hello World Script
 Let's start with a simple "Hello World" script. This will help you understand the basic structure of a Bash script.
@@ -117,6 +117,21 @@ b=5
 if [ $a -gt $b ] && [ $a -lt 20 ]; then
   echo "$a is between $b and 20"
 fi
+```
+
+## Exercise
+Create a script that defines a variable with your name and prints a greeting message.
+
+Example solution:
+```bash
+#!/bin/bash
+# This script defines a variable with your name and prints a greeting message
+
+# Define the variable
+name="John Doe"
+
+# Print the greeting message
+echo "Hello, $name!"
 ```
 
 ## Conclusion

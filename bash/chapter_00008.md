@@ -1,4 +1,4 @@
-# Chapter 8: Practical Examples
+# Practical Examples
 
 ## Backup Scripts
 Automate the process of backing up files and directories.
@@ -43,6 +43,21 @@ usage=$(df / | grep / | awk '{ print $5 }' | sed 's/%//')
 if [ $usage -gt $threshold ]; then
   echo "Disk usage is above $threshold%"
 fi
+```
+
+## Exercise
+Create a script that renames all `.log` files in a directory to `.log.bak`. Use a loop to iterate over the files and rename them.
+
+Example solution:
+```bash
+#!/bin/bash
+# This script renames all .log files to .log.bak
+
+# Loop through all .log files
+for file in *.log; do
+  # Rename the file
+  mv "$file" "${file%.log}.log.bak"
+done
 ```
 
 ## Conclusion

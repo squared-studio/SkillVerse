@@ -1,4 +1,4 @@
-# Chapter 7: Error Handling
+# Error Handling
 
 ## Exit Status
 Every command in Bash returns an exit status, which indicates whether the command was successful or not. An exit status of `0` means success, while any non-zero value indicates an error.
@@ -46,6 +46,27 @@ Example:
 #!/bin/bash
 trap 'echo "Line $LINENO: $BASH_COMMAND"' DEBUG
 echo "This is a test"
+```
+
+## Exercise
+Create a script that attempts to create a directory and handles any errors that occur. Use the `trap` command to catch errors and print a message.
+
+Example solution:
+```bash
+#!/bin/bash
+# This script attempts to create a directory and handles errors
+
+# Define the directory name
+directory="new_directory"
+
+# Trap errors and print a message
+trap 'echo "Error: Failed to create directory"; exit 1' ERR
+
+# Attempt to create the directory
+mkdir $directory
+
+# Print success message
+echo "Directory $directory created successfully"
 ```
 
 ## Conclusion

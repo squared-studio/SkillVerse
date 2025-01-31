@@ -1,4 +1,4 @@
-# Chapter 1: Introduction
+# Introduction
 
 ## Course Overview
 Welcome to the Bash Scripting Course! This course is designed to take you from a beginner to an advanced level in Bash scripting. You will learn how to automate tasks, manage files, and create powerful scripts to enhance your productivity.
@@ -37,6 +37,25 @@ Choose a text editor to write your Bash scripts. Some popular options include:
 - Nano
 
 Make sure to configure your text editor to use Unix-style line endings (LF) to avoid issues with script execution.
+
+## Exercise
+Set up your environment by installing Git Bash (if you are on Windows) and create a simple "Hello World" script.
+
+Example solution:
+1. Install Git Bash from the official Git website.
+2. Open Git Bash and create a new file named `hello_world.sh` with the following content:
+   ```bash
+   #!/bin/bash
+   echo "Hello, World!"
+   ```
+3. Make the script executable:
+   ```bash
+   chmod +x hello_world.sh
+   ```
+4. Run the script:
+   ```bash
+   ./hello_world.sh
+   ```
 
 ## Conclusion
 In this chapter, we introduced the course, explained what Bash is, and provided instructions for setting up the environment. In the next chapter, we will dive into the basics of Bash scripting, starting with writing our first "Hello World" script.

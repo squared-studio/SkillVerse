@@ -1,4 +1,4 @@
-# Chapter 6: Advanced Scripting
+# Advanced Scripting
 
 ## Regular Expressions
 Regular expressions are patterns used to match character combinations in strings. They are commonly used with tools like `grep`, `sed`, and `awk`.
@@ -47,6 +47,24 @@ Example:
 #!/bin/bash
 date=$(date)
 echo "Current date and time: $date"
+```
+
+## Exercise
+Create a script that uses `awk` to calculate the sum of numbers in a file. The file should contain one number per line.
+
+Example solution:
+```bash
+#!/bin/bash
+# This script calculates the sum of numbers in a file using awk
+
+# Define the file name
+file="numbers.txt"
+
+# Calculate the sum using awk
+sum=$(awk '{sum += $1} END {print sum}' $file)
+
+# Print the result
+echo "Sum of numbers in $file: $sum"
 ```
 
 ## Conclusion

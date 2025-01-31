@@ -1,4 +1,4 @@
-# Chapter 3: Control Structures
+# Control Structures
 
 ## Conditional Statements
 Conditional statements allow you to execute different commands based on certain conditions.
@@ -83,6 +83,19 @@ case $fruit in
     echo "Unknown fruit"
     ;;
 esac
+```
+
+## Exercise
+Create a script that uses a `for` loop to print numbers from 1 to 10.
+
+Example solution:
+```bash
+#!/bin/bash
+# This script prints numbers from 1 to 10 using a for loop
+
+for i in {1..10}; do
+  echo "Number: $i"
+done
 ```
 
 ## Conclusion

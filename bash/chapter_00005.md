@@ -1,4 +1,4 @@
-# Chapter 5: Working with Files
+# Working with Files
 
 ## File Test Operators
 Bash provides several file test operators to check the properties of files.
@@ -57,6 +57,26 @@ mkdir my_directory
 
 # Remove a directory
 rmdir my_directory
+```
+
+## Exercise
+Create a script that checks if a file exists and is readable. If the file exists and is readable, print its contents.
+
+Example solution:
+```bash
+#!/bin/bash
+# This script checks if a file exists and is readable, then prints its contents
+
+# Define the file name
+file="example.txt"
+
+# Check if the file exists and is readable
+if [ -e $file ] && [ -r $file ]; then
+  # Print the file contents
+  cat $file
+else
+  echo "File does not exist or is not readable"
+fi
 ```
 
 ## Conclusion

@@ -1,4 +1,4 @@
-# Chapter 9: Best Practices
+# Best Practices
 
 ## Writing Readable Code
 Write code that is easy to read and understand.
@@ -69,6 +69,24 @@ Example:
 count=$(cat file.txt | wc -l)
 # Good
 count=$(wc -l < file.txt)
+```
+
+## Exercise
+Create a script that counts the number of files in a directory and prints the result. Use meaningful variable names, proper indentation, and add comments to explain your code.
+
+Example solution:
+```bash
+#!/bin/bash
+# This script counts the number of files in a directory
+
+# Define the directory to search
+directory="/path/to/directory"
+
+# Count the number of files in the directory
+file_count=$(ls $directory | wc -l)
+
+# Print the result
+echo "Number of files in $directory: $file_count"
 ```
 
 ## Conclusion
