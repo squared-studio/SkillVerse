@@ -81,5 +81,3 @@ endmodule
 3. Use `$fscanf` to read formatted input from a file.
 4. Use `$fdisplay` to write formatted output to a file with a newline.
 
-## Conclusion
-File operators in SystemVerilog provide powerful tools for interacting with external files. Understanding how to use these operators is essential for tasks such as logging simulation results, reading input data, and more.

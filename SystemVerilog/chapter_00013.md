@@ -71,5 +71,3 @@ endmodule
 3. Use the `randomize()` method to generate random values for multiple variables.
 4. Use the `srandom()` method to set the seed for the random number generator and generate a random value.
 
-## Conclusion
-Randomization in SystemVerilog provides powerful tools for generating random values and creating effective testbenches. Understanding how to use random variables, constraints, and randomization methods is essential for writing efficient and effective hardware models and testbenches.

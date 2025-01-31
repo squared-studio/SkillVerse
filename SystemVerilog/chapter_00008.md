@@ -121,5 +121,3 @@ endmodule
 7. Use blocking assignments to perform sequential operations.
 8. Use non-blocking assignments to perform concurrent operations.
 
-## Conclusion
-Procedural blocks in SystemVerilog provide powerful tools for describing the behavior of hardware. Understanding these blocks is essential for writing efficient and effective hardware models and testbenches.

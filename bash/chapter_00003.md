@@ -97,6 +97,3 @@ for i in {1..10}; do
   echo "Number: $i"
 done
 ```
-
-## Conclusion
-In this chapter, we covered control structures in Bash, including conditional statements, loops, and case statements. In the next chapter, we will explore functions in Bash scripting.

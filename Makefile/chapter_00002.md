@@ -128,6 +128,3 @@ program: $(OBJ)
 clean:
     rm -f program $(OBJ)
 ```
-
-## Conclusion
-In this chapter, we explored variables and functions in Makefile. We learned how to define and use variables, and we examined various built-in, string manipulation, and conditional functions. In the next chapter, we will delve into targets and dependencies in Makefile.

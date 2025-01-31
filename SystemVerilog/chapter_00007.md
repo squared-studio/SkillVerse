@@ -159,5 +159,3 @@ endmodule
 6. Use a `foreach` loop to sum the elements of an array.
 7. Use a `forever` loop to print a message indefinitely, and break the loop after 10 iterations.
 
-## Conclusion
-Control flow statements in SystemVerilog provide powerful tools for controlling the execution of code. Understanding these statements is essential for writing efficient and effective hardware models and testbenches.

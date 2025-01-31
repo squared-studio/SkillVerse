@@ -61,6 +61,3 @@ multiply() {
 product=$(multiply 5 10)
 echo "Product: $product"
 ```
-
-## Conclusion
-In this chapter, we covered functions in Bash scripting, including defining functions, passing parameters, and returning values. In the next chapter, we will explore working with files in Bash.

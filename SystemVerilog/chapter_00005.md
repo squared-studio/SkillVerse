@@ -148,5 +148,3 @@ int xor_result = array.xor();
 4. Use the `sum()` method to find the sum of all elements in an array.
 5. Use the `unique()` method to find all unique elements in an array.
 
-## Conclusion
-Array manipulation methods in SystemVerilog provide powerful tools for working with arrays. Understanding these methods is essential for efficient hardware modeling and simulation.

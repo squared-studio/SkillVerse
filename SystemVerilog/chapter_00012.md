@@ -102,5 +102,3 @@ endmodule
 3. Connect multiple modules to create a hierarchical design.
 4. Use an initial block to generate a clock signal and reset signal for the modules.
 
-## Conclusion
-Modules in SystemVerilog provide a powerful way to encapsulate functionality and create hierarchical designs. Understanding how to define, instantiate, and connect modules is essential for creating complex and maintainable hardware designs.

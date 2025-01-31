@@ -43,8 +43,6 @@
 - AXI Coherency Extensions (ACE)
 - Performance Optimization Techniques
 
-## Conclusion
-- Summary of Key Concepts
 - Further Reading and Resources
 - Practical Exercises and Projects
 

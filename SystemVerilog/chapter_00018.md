@@ -131,5 +131,3 @@ endmodule
 4. Define a covergroup with coverpoints and collect coverage data.
 5. Define cross coverage for different coverpoints and collect coverage data.
 
-## Conclusion
-Coverage in SystemVerilog provides powerful tools for measuring how thoroughly a design has been tested. Understanding how to use code coverage and functional coverage is essential for improving the quality of the verification process and ensuring that all parts of the design have been tested.

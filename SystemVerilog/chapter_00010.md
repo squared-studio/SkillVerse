@@ -132,5 +132,3 @@ endmodule
 3. Implement non-blocking send and receive operations using a mailbox.
 4. Implement non-blocking acquire and release operations using a semaphore.
 
-## Conclusion
-Interprocess communication mechanisms in SystemVerilog, such as mailboxes and semaphores, provide powerful tools for synchronizing and coordinating processes. Understanding these mechanisms is essential for writing efficient and effective hardware models and testbenches.

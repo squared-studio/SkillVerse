@@ -102,5 +102,3 @@ endmodule
 3. Use different assertion severity levels to report errors.
 4. Write a cover property to check if a condition is met during simulation.
 
-## Conclusion
-SystemVerilog Assertions (SVA) provide powerful tools for specifying and checking properties of a design. Understanding how to use immediate and concurrent assertions, as well as cover properties, is essential for verifying and validating hardware designs.

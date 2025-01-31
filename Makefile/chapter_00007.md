@@ -120,5 +120,3 @@ set(CMAKE_CXX_STANDARD 11)
 add_executable(program main.c utils.c)
 ```
 
-## Conclusion
-In this chapter, we explored real-world examples and projects using Makefile. We learned how to write Makefiles for C/C++ projects, use Makefile with other programming languages, integrate Makefile with other build tools, and examined case studies and real-world examples. This concludes our series on Makefile.

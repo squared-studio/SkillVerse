@@ -157,5 +157,3 @@ endmodule
 10. Resume the simulation after stopping it in the `$stop` example.
 11. Compare the behavior of `$exit` with `$finish`.
 
-## Conclusion
-Built-in system tasks and functions in SystemVerilog provide essential capabilities for displaying information, generating waveforms, retrieving simulation time, and controlling the simulation. Understanding and using these tasks effectively can greatly enhance the simulation and debugging process.

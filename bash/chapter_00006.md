@@ -66,6 +66,3 @@ sum=$(awk '{sum += $1} END {print sum}' $file)
 # Print the result
 echo "Sum of numbers in $file: $sum"
 ```
-
-## Conclusion
-In this chapter, we covered advanced scripting techniques in Bash, including regular expressions, `sed` and `awk`, process substitution, and command substitution. In the next chapter, we will explore error handling in Bash scripting.

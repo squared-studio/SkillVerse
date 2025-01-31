@@ -96,5 +96,3 @@ clean:
     rm -f program $(OBJ)
 ```
 
-## Conclusion
-In this chapter, we explored advanced Makefile features. We learned how to use the `include` directive, Makefile functions, conditional directives, and how to override and append variables. In the next chapter, we will delve into debugging and optimization in Makefile.

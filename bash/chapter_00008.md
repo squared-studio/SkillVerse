@@ -59,6 +59,3 @@ for file in *.log; do
   mv "$file" "${file%.log}.log.bak"
 done
 ```
-
-## Conclusion
-In this chapter, we covered practical examples of Bash scripts, including backup scripts, automation scripts, parsing logs, and system monitoring scripts. In the next chapter, we will explore best practices for writing Bash scripts.

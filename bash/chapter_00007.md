@@ -68,6 +68,3 @@ mkdir $directory
 # Print success message
 echo "Directory $directory created successfully"
 ```
-
-## Conclusion
-In this chapter, we covered error handling in Bash scripting, including exit status, the `trap` command, and debugging techniques. In the next chapter, we will explore practical examples of Bash scripts.

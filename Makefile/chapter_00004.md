@@ -89,6 +89,3 @@ program: $(OBJ)
 clean:
     rm -f program $(OBJ)
 ```
-
-## Conclusion
-In this chapter, we explored pattern rules and wildcards in Makefile. We learned how to use pattern rules, wildcards, automatic variables, and static pattern rules. In the next chapter, we will delve into advanced Makefile features.

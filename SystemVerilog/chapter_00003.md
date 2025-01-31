@@ -202,5 +202,3 @@ int unpacked_array [0:3];
 9. Declare a packed array and initialize it with a value.
 10. Create an unpacked array and iterate over its elements.
 
-## Conclusion
-Understanding the various data types in SystemVerilog is crucial for effectively modeling and simulating digital systems. Built-in data types provide the foundation, while user-defined types offer flexibility and customization.

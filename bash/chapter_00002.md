@@ -133,6 +133,3 @@ name="John Doe"
 # Print the greeting message
 echo "Hello, $name!"
 ```
-
-## Conclusion
-In this chapter, we covered the basics of Bash scripting, including writing a simple script, using basic shell commands, working with variables and data types, and using basic operators. In the next chapter, we will explore control structures in Bash, such as conditional statements and loops.

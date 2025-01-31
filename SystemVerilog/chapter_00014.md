@@ -137,5 +137,3 @@ endmodule
 5. Use encapsulation to hide the internal details of a class.
 6. Create a class with random variables and constraints, and generate random values for its properties.
 
-## Conclusion
-Classes in SystemVerilog provide powerful tools for creating object-oriented models. Understanding how to define, create, and use classes is essential for writing modular and reusable hardware models and testbenches.

@@ -78,6 +78,3 @@ else
   echo "File does not exist or is not readable"
 fi
 ```
-
-## Conclusion
-In this chapter, we covered working with files in Bash, including file test operators, reading and writing files, file permissions, and directory management. In the next chapter, we will explore advanced scripting techniques in Bash.

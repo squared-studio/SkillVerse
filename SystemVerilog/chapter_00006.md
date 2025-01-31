@@ -143,5 +143,3 @@ endmodule
 4. Use reduction operators to perform reduction AND, OR, and XOR operations on a variable.
 5. Use comparison operators to compare two variables using equal to, not equal to, less than, less than or equal to, greater than, greater than or equal to, case equality, and case inequality.
 
-## Conclusion
-Operators in SystemVerilog provide powerful tools for performing various operations on data. Understanding these operators is essential for efficient hardware modeling and simulation.

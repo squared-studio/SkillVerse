@@ -56,6 +56,3 @@ Example solution:
    ```bash
    ./hello_world.sh
    ```
-
-## Conclusion
-In this chapter, we introduced the course, explained what Bash is, and provided instructions for setting up the environment. In the next chapter, we will dive into the basics of Bash scripting, starting with writing our first "Hello World" script.

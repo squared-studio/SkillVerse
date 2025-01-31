@@ -102,5 +102,3 @@ end
 5. Use an associative array to store key-value pairs.
 6. Implement a queue and perform push and pop operations.
 
-## Conclusion
-Arrays in SystemVerilog provide a flexible way to store and manipulate collections of data. Understanding the different types of arrays and their use cases is essential for efficient hardware modeling and simulation.

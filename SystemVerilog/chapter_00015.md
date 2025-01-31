@@ -75,5 +75,3 @@ endmodule
 3. Use the package scope resolution operator to access items in the package.
 4. Export items from a package and use them in a module.
 
-## Conclusion
-Packages in SystemVerilog provide a powerful way to organize and reuse code. Understanding how to define, import, and export packages is essential for writing modular and maintainable hardware models and testbenches.

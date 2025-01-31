@@ -92,6 +92,3 @@ utils.o: utils.c
 clean:
     rm -f program main.o utils.o
 ```
-
-## Conclusion
-In this chapter, we introduced the concept of Makefile, its history, and its importance in the software development process. We also covered the basic syntax and structure of a Makefile and provided a simple example to illustrate how Makefiles work. In the next chapter, we will dive deeper into variables and functions in Makefile.

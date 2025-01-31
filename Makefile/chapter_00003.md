@@ -72,6 +72,3 @@ utils.o: utils.c
 clean:
     rm -f program main.o utils.o
 ```
-
-## Conclusion
-In this chapter, we explored targets and dependencies in Makefile. We learned how to specify targets, dependencies, and write rules. We also discussed phony targets. In the next chapter, we will delve into pattern rules and wildcards in Makefile.

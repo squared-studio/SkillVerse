@@ -86,5 +86,3 @@ endmodule
 3. Use an automatic task to calculate the factorial of a number.
 4. Define a function with a return type of `real` that calculates the area of a circle given its radius.
 
-## Conclusion
-Tasks and functions in SystemVerilog provide powerful tools for creating modular and reusable code. Understanding these constructs is essential for writing efficient and maintainable hardware models and testbenches.

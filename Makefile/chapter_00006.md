@@ -97,5 +97,3 @@ To debug the Makefile, run:
 make -n
 ```
 
-## Conclusion
-In this chapter, we explored debugging and optimization in Makefile. We learned how to debug Makefiles, troubleshoot common errors, optimize Makefiles for performance, and follow best practices. In the next chapter, we will delve into real-world examples and projects using Makefile.

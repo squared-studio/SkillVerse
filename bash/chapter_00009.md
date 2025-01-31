@@ -88,6 +88,3 @@ file_count=$(ls $directory | wc -l)
 # Print the result
 echo "Number of files in $directory: $file_count"
 ```
-
-## Conclusion
-In this chapter, we covered best practices for writing Bash scripts, including writing readable code, commenting and documentation, and script optimization. This concludes the Bash Scripting Course. Happy scripting!
