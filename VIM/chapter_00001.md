@@ -137,6 +137,8 @@ sudo apt-get -y install vim
 | Esc | exit insert mode |
 
 ### Editing
+|Command| Description|
+|-|-|
 | r | replace a single character (does not use insert mode) |
 | J | join line below to the current one |
 | cc | change (replace) an entire line |
@@ -149,6 +151,8 @@ sudo apt-get -y install vim
 | . | repeat last command |
 
 ### Marking text (visual mode)
+|Command| Description|
+|-|-|
 | v | start visual mode, mark lines, then do command (such as y-yank) |
 | V | start Linewise visual mode |
 | o | move to other end of marked area |
@@ -162,6 +166,8 @@ sudo apt-get -y install vim
 | Esc | exit visual mode |
 
 ### Visual commands
+|Command| Description|
+|-|-|
 | > | shift right |
 | < | shift left |
 | y | yank (copy) marked text |
@@ -179,12 +185,16 @@ sudo apt-get -y install vim
 | x | delete (cut) current character |
 
 ### Exiting
+|Command| Description|
+|-|-|
 | :w | write (save) the file, but don't exit |
 | :wq | write (save) and quit |
 | :q | quit (fails if anything has changed) |
 | :q! | quit and throw away changes |
 
 ### Search/Replace
+|Command| Description|
+|-|-|
 | /pattern | search for pattern |
 | ?pattern | search backward for pattern |
 | n | repeat search in same direction |
@@ -193,6 +203,8 @@ sudo apt-get -y install vim
 | :%s/old/new/gc | replace all old with new throughout file with confirmations |
 
 ### Working with multiple files
+|Command| Description|
+|-|-|
 | :e | filename Edit a file in a new buffer |
 | :bnext (or :bn) | go to next buffer |
 | :bprev (of :bp) | go to previous buffer |
