@@ -1,204 +1,189 @@
-# Data Types
+# Data Types in SystemVerilog
 
-## Built-in Data Types
-SystemVerilog provides a rich set of built-in data types for modeling hardware.
+SystemVerilog offers a comprehensive set of **data types** to model hardware behavior and verification environments effectively. Below is a detailed breakdown of these types, categorized for clarity and enhanced with practical examples.
 
-### `reg`
-A register data type used to store values. (4-state, unsigned)
+## **Built-in Data Types**  
+SystemVerilog provides **2-state** (binary) and **4-state** (0, 1, X, Z) data types for hardware modeling and verification.
 
-```SV
-reg [3:0] a;
+### **4-State Types (for RTL Design)**  
+Used for modeling hardware with **unknown (X)** and **high-impedance (Z)** states.
+
+| Type      | Description                          | Example                     |
+|-----------|--------------------------------------|-----------------------------|
+| `reg`     | Legacy 4-state type for storage      | `reg [3:0] counter;`        |
+| `wire`    | Connects components (default: 1-bit) | `wire clk;`                 |
+| `logic`   | Modern replacement for `reg`/`wire`  | `logic [7:0] data_bus;`     |
+| `integer` | 32-bit signed integer (4-state)      | `integer timeout = 100;`    |
+| `time`    | 64-bit unsigned time value           | `time start_time;`          |
+| `realtime`| Real-number time (e.g., delays)      | `realtime delay = 2.5e-9;`  |
+
+```systemverilog
+module design_example;
+  logic [3:0] addr; // Replaces reg/wire in modern designs
+  wire enable;      // Default 1-bit connection
+  integer error_count = 0;
+endmodule
 ```
 
-### `wire`
-A wire data type used to connect different components. (4-state, unsigned)
 
-```SV
-wire b;
+### **2-State Types (for Verification)**  
+Used in testbenches for **high-performance simulation** (no X/Z states).
+
+| Type         | Description                     | Example                   |
+|--------------|---------------------------------|---------------------------|
+| `bit`        | 2-state, unsigned (default: 1-bit) | `bit flag = 1;`           |
+| `byte`       | 8-bit signed integer            | `byte temperature = -5;`  |
+| `shortint`   | 16-bit signed integer           | `shortint offset = 16'hFF;` |
+| `int`        | 32-bit signed integer           | `int packet_size = 1024;` |
+| `longint`    | 64-bit signed integer           | `longint universe_age;`   |
+| `shortreal`  | 32-bit floating-point           | `shortreal voltage = 3.3;`|
+| `real`       | 64-bit floating-point           | `real pi = 3.1415926535;` |
+
+```systemverilog
+module testbench;
+  bit reset = 0;    // 2-state for verification
+  int  transactions = 100;
+  real clock_period = 10.0e-9; // 10ns period
+endmodule
 ```
 
-### `integer`
-A general-purpose integer data type. (4-state, signed)
 
-```SV
-integer count;
+## **Advanced Built-in Types**  
+Specialized types for modeling hardware-specific behavior.
+
+### **Tri-State and Multi-Driver Types**  
+| Type   | Description                     | Example                 |
+|--------|---------------------------------|-------------------------|
+| `tri`   | Tri-state bus (identical to `wire`) | `tri [7:0] data_bus;` |
+| `tri0`  | Pull-down when undriven         | `tri0 enable;`          |
+| `tri1`  | Pull-up when undriven           | `tri1 reset;`           |
+| `wand`  | Wired-AND resolution            | `wand signal;`          |
+| `wor`   | Wired-OR resolution             | `wor interrupt;`        |
+
+```systemverilog
+module bus_driver;
+  tri1 [15:0] address_bus; // Pull-up if undriven
+  wand shared_line;         // AND of all drivers
+endmodule
 ```
 
-### `real`
-A real number data type. (signed)
 
-```SV
-real pi = 3.14;
+## **User-Defined Data Types**  
+Custom types for improved readability and abstraction.
+
+### 1. **`typedef`**  
+Create aliases for existing types.  
+```systemverilog
+typedef logic [31:0] word_t; // 32-bit word
+word_t instruction;
 ```
 
-### `time`
-A 64-bit time data type. (unsigned)
-
-```SV
-time t;
+### 2. **`enum`**  
+Define a set of named values (ideal for state machines).  
+```systemverilog
+typedef enum {IDLE, START, DATA, STOP} state_t;
+state_t current_state = IDLE;
 ```
 
-### `realtime`
-A real number time data type. (unsigned)
-
-```SV
-realtime rt;
-```
-
-### `logic`
-A 4-state data type that can represent 0, 1, X, and Z. (4-state, unsigned)
-
-```SV
-logic [7:0] data;
-```
-
-### `bit`
-A 2-state data type that can represent 0 and 1. (2-state, unsigned)
-
-```SV
-bit flag;
-```
-
-### `byte`
-An 8-bit data type. (2-state, signed)
-
-```SV
-byte b;
-```
-
-### `shortint`
-A 16-bit signed integer. (2-state, signed)
-
-```SV
-shortint si;
-```
-
-### `int`
-A 32-bit signed integer. (2-state, signed)
-
-```SV
-int i;
-```
-
-### `longint`
-A 64-bit signed integer. (2-state, signed)
-
-```SV
-longint li;
-```
-
-### `shortreal`
-A 32-bit real number. (signed)
-
-```SV
-shortreal sr;
-```
-
-## Advanced Built-in Data Types
-SystemVerilog also provides advanced built-in data types for specific purposes.
-
-### `tri`
-A tri-state data type. (4-state, unsigned)
-
-```SV
-tri t;
-```
-
-### `tri0`
-A tri-state data type with a default value of 0. (3-state, unsigned)
-
-```SV
-tri0 t0;
-```
-
-### `tri1`
-A tri-state data type with a default value of 1. (3-state, unsigned)
-
-```SV
-tri1 t1;
-```
-
-### `wand`
-A wired-AND data type. (4-state, unsigned)
-
-```SV
-wand wa;
-```
-
-### `wor`
-A wired-OR data type. (4-state, unsigned)
-
-```SV
-wor wo;
-```
-
-## User-defined Data Types
-SystemVerilog allows users to define their own data types.
-
-### `enum`
-An enumerated type. (depends on base type)
-
-```SV
-typedef enum {RED, GREEN, BLUE} color_t;
-color_t color;
-```
-
-### `struct`
-A structure type. (depends on member types)
-
-```SV
+### 3. **`struct`**  
+Group related variables (similar to C structs).  
+```systemverilog
 typedef struct {
-  int x;
-  int y;
-} point_t;
-point_t p;
+  logic [7:0] addr;
+  logic [31:0] data;
+  bit rw; // 0=read, 1=write
+} transaction_t;
+
+transaction_t tx; // Instance of struct
+tx.addr = 8'hFF;  // Access fields
 ```
 
-### `union`
-A union type. (depends on member types)
-
-```SV
+### 4. **`union`**  
+Share storage between different data types.  
+```systemverilog
 typedef union {
   int i;
-  real r;
-} data_t;
-data_t d;
+  shortreal f;
+} data_union_t;
+
+data_union_t du;
+du.f = 3.14; // Interpret bits as float
 ```
 
-### `typedef`
-A type definition. (depends on base type)
 
-```SV
-typedef int my_int;
-my_int a;
+## **Packed vs. Unpacked Arrays**  
+### **Packed Arrays**  
+- Contiguous bits (treated as a single vector).  
+- Efficient for bit-level operations.  
+```systemverilog
+logic [3:0][7:0] packed_array; // 4x8-bit vector (32 bits total)
+assign packed_array = 32'hA5A5_A5A5;
 ```
 
-## Packed and Unpacked
-SystemVerilog supports both packed and unpacked arrays.
-
-### Packed Array
-A packed array is a contiguous set of bits.
-
-```SV
-logic [7:0] packed_array;
+### **Unpacked Arrays**  
+- Collections of elements (memory-efficient for large arrays).  
+```systemverilog
+int unpacked_array [0:1023]; // 1024 32-bit integers
+unpacked_array[0] = 42;      // Access individual elements
 ```
 
-### Unpacked Array
-An unpacked array is an array of elements.
 
-```SV
-int unpacked_array [0:3];
-```
-
-## Exercises
-1. Declare a `reg` variable and assign it a value.
-2. Create a `wire` and connect it to a `reg`.
-3. Define an `integer` variable and use it in a simple arithmetic operation.
-4. Declare a `real` variable and assign it a value.
-5. Use the `time` data type to store the current simulation time.
-6. Create a `logic` vector and perform bitwise operations on it.
-7. Define a `struct` type and create an instance of it.
-8. Use an `enum` type to represent different states in a state machine.
-9. Declare a packed array and initialize it with a value.
-10. Create an unpacked array and iterate over its elements.
-
+## **Exercises & Solutions**  
+1. **Declare a `reg` and assign a value:**  
+   ```systemverilog
+   reg [7:0] data_reg;
+   initial data_reg = 8'b1010_1100;
+   ```
+   
+   2. **Connect `wire` to `reg`:**  
+   ```systemverilog
+   reg  enable_reg;
+   wire enable_wire = enable_reg; // Continuous assignment
+   ```
+   
+   3. **Use `integer` in arithmetic:**  
+   ```systemverilog
+   integer a = 10, b = 20;
+   integer sum = a + b; // sum = 30
+   ```
+   
+   4. **Assign `real` value:**  
+   ```systemverilog
+   real capacitance = 1.2e-12; // 1.2 picofarads
+   ```
+   
+   5. **Store simulation time:**  
+   ```systemverilog
+   time timestamp;
+   initial timestamp = $time;
+   ```
+   
+   6. **Bitwise operations on `logic`:**  
+   ```systemverilog
+   logic [3:0] mask = 4'b1100;
+   logic [3:0] result = mask & 4'b1010; // 4'b1000
+   ```
+   
+   7. **Define and use `struct`:**  
+   ```systemverilog
+   typedef struct { int x; int y; } point_t;
+   point_t origin;
+   origin.x = 0;
+   ```
+   
+   8. **`enum` for state machine:**  
+   ```systemverilog
+   typedef enum {S_IDLE, S_ACTIVE} state_t;
+   state_t state = S_IDLE;
+   ```
+   
+   9. **Initialize packed array:**  
+   ```systemverilog
+   logic [3:0][3:0] matrix = '{4'hA, 4'hB, 4'hC, 4'hD};
+   ```
+   
+   10. **Iterate unpacked array:**  
+    ```systemverilog
+    int arr [4] = '{1, 2, 3, 4};
+    initial foreach (arr[i]) $display(arr[i]);
+    ```
