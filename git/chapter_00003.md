@@ -1,4 +1,4 @@
-# Git Concepts  
+# Concepts  
 
 ## Branch
 A **branch** is a parallel workspace that lets you develop features, fix bugs, or experiment **without altering the main codebase**. Think of it as a "safe zone" for changes.  

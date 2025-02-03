@@ -1,4 +1,4 @@
-# Git Basics Cheat Sheet
+# Basics
 
 ## `git init`  
 **Initialize a new Git repository** in your project folder.  

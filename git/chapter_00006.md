@@ -1,4 +1,4 @@
-# Git Workflow
+# Workflow
 
 ## Basic Git Workflow (Team Collaboration)
 
