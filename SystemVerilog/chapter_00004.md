@@ -1,104 +1,151 @@
 # Array
 
 ## Introduction
-Arrays in SystemVerilog are used to store collections of data elements. They can be packed or unpacked, fixed-size, dynamic, associative, or queues.
+Arrays in SystemVerilog are versatile data structures used to store collections of elements. They come in several types, each suited for specific use cases:
+- **Packed Arrays**: Contiguous bits for efficient bitwise operations (e.g., registers).
+- **Unpacked Arrays**: Collections of individual elements (e.g., memory blocks).
+- **Fixed-Size Arrays**: Size determined at compile time.
+- **Dynamic Arrays**: Size adjustable at runtime.
+- **Associative Arrays**: Key-value pairs with flexible indexing.
+- **Queues**: Ordered lists with fast insertion/deletion at ends.
 
-## Packed and Unpacked Arrays
+## Packed vs. Unpacked Arrays
+
 ### Packed Array
-A packed array is a contiguous set of bits.
+- Stored as a single contiguous bit vector.
+- Ideal for bit-level operations and hardware modeling.
+- Can have multiple dimensions (e.g., `[row][col]`).
 
 ```SV
-logic [7:0] packed_array;
+logic [3:0][7:0] packed_2d;  // 4x8 bit matrix (32 bits total)
+packed_2d = 32'hA5A5A5A5;     // Initialize with hexadecimal value
 ```
 
 ### Unpacked Array
-An unpacked array is an array of elements.
-
+- Elements stored separately in memory.
+- Dimensions declared after the identifier.
 ```SV
-int unpacked_array [0:3];
+int unpacked_array [4];       // 4 integer elements
+unpacked_array = '{1, 2, 3, 4};  // Initialize with values
 ```
 
-## Fixed Size Array
-A fixed-size array has a predefined number of elements.
+## Fixed-Size Array
+- Size defined at compile time.
+- Supports array manipulation methods (e.g., `sort`, `sum`).
 
 ```SV
-int fixed_array [0:9];
+int fixed_array [0:3] = '{4, 3, 2, 1};
+fixed_array.sort();  // Sorts to '{1, 2, 3, 4}
 ```
 
-### Methods for Fixed Size Arrays
-| Method | Description | Example |
-|--------|-------------|---------|
-| `size` | Returns the number of elements in the array | `int size = fixed_array.size();` |
+### Methods for Fixed-Size Arrays
+| Method     | Description                          | Example                             |
+|------------|--------------------------------------|-------------------------------------|
+| `size`     | Returns number of elements           | `int s = fixed_array.size();`       |
+| `sort`     | Sorts elements in ascending order    | `fixed_array.sort();`               |
+| `reverse`  | Reverses element order               | `fixed_array.reverse();`            |
+| `sum`      | Returns sum of all elements          | `int total = fixed_array.sum();`    |
+| `rsort`    | Sorts in descending order            | `fixed_array.rsort();`              |
 
 ## Dynamic Array
-A dynamic array can change its size during runtime.
+- Size can be changed at runtime using `new[]`.
+- Memory must be allocated before use.
 
 ```SV
 int dynamic_array [];
 initial begin
-  dynamic_array = new[10]; // Allocate 10 elements
+  dynamic_array = new[5];        // Allocate 5 elements
+  dynamic_array = '{5, 4, 3, 2, 1};
+  dynamic_array = new[10] (dynamic_array);  // Resize to 10, copy old values
 end
 ```
 
 ### Methods for Dynamic Arrays
-| Method | Description | Example |
-|--------|-------------|---------|
-| `size` | Returns the number of elements in the array | `int size = dynamic_array.size();` |
-| `new` | Allocates memory for the array | `dynamic_array = new[10];` |
-| `delete` | Deallocates memory for the array | `dynamic_array.delete();` |
+| Method     | Description                          | Example                             |
+|------------|--------------------------------------|-------------------------------------|
+| `size`     | Returns current size                 | `int s = dynamic_array.size();`     |
+| `new[N]`   | Allocates `N` elements               | `dynamic_array = new[20];`          |
+| `delete`   | Deallocates memory (size becomes 0)  | `dynamic_array.delete();`           |
+| `sort`     | Sorts elements                       | `dynamic_array.sort();`             |
 
 ## Associative Array
-An associative array uses an index of any data type to access its elements.
+- Indexed by keys of any data type (e.g., strings, integers).
+- Efficient for sparse data storage.
 
 ```SV
-int associative_array [string];
+int assoc_array [string];
 initial begin
-  associative_array["key1"] = 1;
-  associative_array["key2"] = 2;
+  assoc_array["Alice"] = 42;
+  assoc_array["Bob"] = 99;
+  if (assoc_array.exists("Alice")) 
+    $display("Alice: %d", assoc_array["Alice"]);
 end
 ```
 
 ### Methods for Associative Arrays
-| Method | Description | Example |
-|--------|-------------|---------|
-| `num` | Returns the number of elements in the array | `int num = associative_array.num();` |
-| `size` | Returns the number of elements in the array | `int size = associative_array.size();` |
-| `delete` | Deletes all elements in the array | `associative_array.delete();` |
-| `delete index` | Deletes the element at the specified index | `associative_array.delete("key1");` |
-| `exists` | Checks if an element exists at the specified index | `if (associative_array.exists("key1")) ...` |
-| `first` | Returns the first index in the array | `string first_index; associative_array.first(first_index);` |
-| `last` | Returns the last index in the array | `string last_index; associative_array.last(last_index);` |
-| `next` | Returns the next index in the array | `string next_index; associative_array.next(next_index);` |
-| `prev` | Returns the previous index in the array | `string prev_index; associative_array.prev(prev_index);` |
+| Method     | Description                          | Example                             |
+|------------|--------------------------------------|-------------------------------------|
+| `num`      | Returns number of entries            | `int n = assoc_array.num();`        |
+| `delete`   | Removes all entries                  | `assoc_array.delete();`             |
+| `delete(x)`| Removes entry at key `x`             | `assoc_array.delete("Alice");`      |
+| `exists(x)`| Checks if key `x` exists             | `if (assoc_array.exists("Bob"))...` |
+| `first(ref x)` | Assigns first key to `x`        | `string key; assoc_array.first(key);` |
+| `next(ref x)`  | Assigns next key to `x`         | `assoc_array.next(key);`            |
 
 ## Queue
-A queue is a variable-size, ordered collection of elements.
+- Ordered collection with fast access at both ends.
+- Automatically resizes as elements are added/removed.
 
 ```SV
-int queue [$];
+int queue [$] = '{1, 2, 3};  // Initialize with values
 initial begin
-  queue.push_back(1);
-  queue.push_back(2);
+  queue.push_back(4);   // Queue: '{1,2,3,4}
+  queue.push_front(0);  // Queue: '{0,1,2,3,4}
+  queue.pop_back();     // Queue: '{0,1,2,3}
 end
 ```
 
 ### Methods for Queues
-| Method | Description | Example |
-|--------|-------------|---------|
-| `size` | Returns the number of elements in the queue | `int size = queue.size();` |
-| `insert` | Inserts an element at the specified position | `queue.insert(1, 5);` |
-| `delete` | Deletes all elements in the queue | `queue.delete();` |
-| `delete index` | Deletes the element at the specified index | `queue.delete(4);` |
-| `pop_front` | Removes the first element in the queue | `queue.pop_front();` |
-| `pop_back` | Removes the last element in the queue | `queue.pop_back();` |
-| `push_front` | Adds an element to the front of the queue | `queue.push_front(0);` |
-| `push_back` | Adds an element to the end of the queue | `queue.push_back(3);` |
+| Method        | Description                          | Example                     |
+|---------------|--------------------------------------|-----------------------------|
+| `size`        | Returns number of elements           | `int s = queue.size();`     |
+| `insert(i,x)` | Inserts `x` at index `i`             | `queue.insert(2, 5);`       |
+| `delete`      | Clears all elements                  | `queue.delete();`           |
+| `pop_front`   | Removes and returns first element    | `int x = queue.pop_front();`|
+| `push_back(x)`| Adds `x` to the end                  | `queue.push_back(10);`      |
+| `sort`        | Sorts elements in place              | `queue.sort();`             |
 
 ## Exercises
-1. Declare a packed array and initialize it with a value.
-2. Create an unpacked array and iterate over its elements.
-3. Define a fixed-size array and assign values to its elements.
-4. Create a dynamic array and allocate memory for it.
-5. Use an associative array to store key-value pairs.
-6. Implement a queue and perform push and pop operations.
-
+1. **Packed Array**: Declare a 12-bit packed array and initialize it with `0xA3C`.
+   ```SV
+   logic [11:0] packed_arr = 12'hA3C;
+   ```
+2. **Unpacked Array**: Create an unpacked array of 4 strings and print each element.
+   ```SV
+   string names [4] = '{"Alice", "Bob", "Charlie", "Dana"};
+   foreach (names[i]) $display("%s", names[i]);
+   ```
+3. **Fixed-Size Array**: Declare a 5-element array, assign values, and compute their sum.
+   ```SV
+   int arr [5] = '{10, 20, 30, 40, 50};
+   $display("Sum: %d", arr.sum());
+   ```
+4. **Dynamic Array**: Allocate a dynamic array with 8 elements and fill it with even numbers.
+   ```SV
+   int dyn_arr [];
+   dyn_arr = new[8];
+   foreach (dyn_arr[i]) dyn_arr[i] = i*2;
+   ```
+5. **Associative Array**: Store ages of 3 people and check if "John" exists.
+   ```SV
+   int ages [string];
+   ages["Alice"] = 30;
+   ages["Bob"] = 25;
+   if (!ages.exists("John")) $display("John not found!");
+   ```
+6. **Queue**: Create a queue, push 3 elements, reverse it, and pop the first element.
+   ```SV
+   int q [$] = '{1, 2, 3};
+   q.reverse();       // Queue: '{3,2,1}
+   q.pop_front();     // Removes 3
+   ```
