@@ -5,13 +5,13 @@
   - Use Cases of SystemVerilog
   - Advantages of SystemVerilog
   - Key Features of SystemVerilog
-## 2. [Built-in System Tasks and System Functions in SystemVerilog](SystemVerilog/chapter_00002.md)
+## 2. [Built-in System Tasks and System Functions](SystemVerilog/chapter_00002.md)
   - **Display Tasks**  
   - **Wavedump Tasks**  
   - **Time-Related Functions**  
   - **Simulation Control Tasks**  
   - **Exercises with Solutions**  
-## 3. [Data Types in SystemVerilog](SystemVerilog/chapter_00003.md)
+## 3. [Data Types](SystemVerilog/chapter_00003.md)
   - **Built-in Data Types**  
   - **Advanced Built-in Types**  
   - **User-Defined Data Types**  
@@ -19,25 +19,28 @@
   - **Exercises & Solutions**  
 ## 4. [Array](SystemVerilog/chapter_00004.md)
   - Introduction
-  - Packed and Unpacked Arrays
-  - Fixed Size Array
+  - Packed vs. Unpacked Arrays
+  - Fixed-Size Array
   - Dynamic Array
   - Associative Array
   - Queue
   - Exercises
 ## 5. [Array Manipulation](SystemVerilog/chapter_00005.md)
   - Introduction
-  - Methods for Array Manipulation
-  - Examples
-  - Exercises
+  - Array Methods Overview
+  - Enhanced Examples with Outputs
+  - Key Considerations
+  - Practical Exercises
+  - Pro Tips
 ## 6. [Operators](SystemVerilog/chapter_00006.md)
   - Introduction
   - Arithmetic Operators
-  - Logical Operators
-  - Bitwise Operators
+  - Logical vs Bitwise Operators
   - Reduction Operators
   - Comparison Operators
-  - Exercises
+  - Operator Precedence
+  - Practical Exercises
+  - Common Pitfalls
 ## 7. [Control Flow](SystemVerilog/chapter_00007.md)
   - Introduction
   - Conditional Statements
