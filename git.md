@@ -1,8 +1,9 @@
 # git
 ## 1. [Introduction](git/chapter_00001.md)
-  - What is Git?
-  - Why Use Git?
-  - Install Git
+  - What is Git?  
+  - Why Use Git?  
+  - Install Git  
+  - Next Steps  
 ## 2. [Getting Started](git/chapter_00002.md)
   - Creating a new git repository in GitHub (cli)
   - Creating a new git repository in GitHub (web)
