@@ -1,161 +1,195 @@
 # Control Flow
 
 ## Introduction
-Control flow statements in SystemVerilog are used to control the execution of code based on certain conditions. They include conditional statements, case statements, and loops.
+Control flow statements in SystemVerilog dictate the order in which statements are executed, enabling dynamic decision-making and repetitive operations. These constructs are fundamental for creating testbenches, modeling hardware behavior, and implementing algorithms. Proper use of control flow ensures efficient and readable code, critical for both simulation and synthesis.
+
 
 ## Conditional Statements
-Conditional statements are used to execute code based on a condition.
+Conditional statements execute code blocks based on boolean conditions.
 
-### `if-else`
-The `if-else` statement executes code if a condition is true, and optionally executes different code if the condition is false.
+### `if-else` Statement
+Executes a block if a condition is `true`, with optional `else if` and `else` clauses.
+
+**Key Points**:
+- Use `else if` for multiple mutually exclusive conditions.
+- Braces `begin` `end` are optional for single-line blocks but recommended for clarity.
 
 ```SV
-module if_else_if_example;
-  int a = 10;
+module if_else_example;
+  int num = 42;
   initial begin
-    if (a > 10) begin
-      $display("a is greater than 10");
-    end else if (a == 10) begin
-      $display("a is equal to 10");
+    if (num > 50) begin
+      $display("%0d is greater than 50", num);
+    end else if (num > 30) begin
+      $display("%0d is between 31 and 50", num);  // This block executes
     end else begin
-      $display("a is less than 10");
+      $display("%0d is 30 or lower", num);
     end
   end
 endmodule
 ```
 
-## Case Statements
-Case statements are used to execute code based on the value of a variable.
 
-### `case`
-The `case` statement selects one of several blocks of code to execute based on the value of a variable.
+## Case Statements
+Select one branch from multiple options based on a variable's value.
+
+### 1. `case`
+- Matches **exact values** (no wildcards).
+- Always include a `default` case to avoid unintended latches in synthesis.
 
 ```SV
 module case_example;
-  int a = 2;
+  logic [2:0] day = 3'd3;
   initial begin
-    case (a)
-      1: $display("a is 1");
-      2: $display("a is 2");
-      3: $display("a is 3");
-      default: $display("a is not 1, 2, or 3");
+    case (day)
+      3'd1: $display("Monday");
+      3'd2: $display("Tuesday");
+      3'd3: $display("Wednesday");  // Matches this case
+      default: $display("Invalid day");
     endcase
   end
 endmodule
 ```
 
-### `casez`
-The `casez` statement treats `z` and `?` as don't-care values.
+### 2. `casez`
+- Treats `z` and `?` as don't-care values.
+- Useful for pattern matching with wildcards.
 
 ```SV
 module casez_example;
-  logic [3:0] a = 4'b1010;
+  logic [3:0] opcode = 4'b1x0z;
   initial begin
-    casez (a)
-      4'b1?10: $display("a matches 1?10");
-      default: $display("a does not match 1?10");
+    casez (opcode)
+      4'b1??1: $display("Pattern A");   // ? matches x/z
+      4'b10?z: $display("Pattern B");   // Matches this case
+      default: $display("No match");
     endcase
   end
 endmodule
 ```
 
-### `casex`
-The `casex` statement treats `x`, `z`, and `?` as don't-care values.
+### 3. `casex`
+- Treats `x`, `z`, and `?` as don't-care values.
+- Use cautiously in RTL design due to aggressive wildcard handling.
 
 ```SV
 module casex_example;
-  logic [3:0] a = 4'b10x0;
+  logic [3:0] data = 4'b10x1;
   initial begin
-    casex (a)
-      4'b10?0: $display("a matches 10?0");
-      default: $display("a does not match 10?0");
+    casex (data)
+      4'b101?: $display("Case 1");      // ? and x are ignored
+      4'b10x1: $display("Case 2");      // Direct match
+      default: $display("No match");    // This executes (exact match has priority)
     endcase
   end
 endmodule
 ```
 
-## Loops
-Loops are used to execute a block of code multiple times.
 
-### `repeat`
-The `repeat` loop executes a block of code a fixed number of times.
+## Loop Constructs
+Execute code blocks repeatedly under specified conditions.
+
+### 1. `repeat` Loop
+- Runs a block **fixed** number of times.
 
 ```SV
 module repeat_example;
-  int i;
   initial begin
-    repeat (5) begin
-      $display("Iteration: %0d", i);
-      i++;
+    repeat (3) begin
+      $display("Hello (repeat)");  // Prints 3 times
     end
   end
 endmodule
 ```
 
-### `while`
-The `while` loop executes a block of code as long as a condition is true.
+### 2. `while` Loop
+- Runs while a condition is `true`.
 
 ```SV
 module while_example;
-  int i = 0;
+  int count = 0;
   initial begin
-    while (i < 5) begin
-      $display("Iteration: %0d", i);
-      i++;
+    while (count < 3) begin
+      $display("Count = %0d", count);  // Prints 0, 1, 2
+      count++;
     end
   end
 endmodule
 ```
 
-### `for`
-The `for` loop executes a block of code a fixed number of times, with an initialization, condition, and increment.
+### 3. `for` Loop
+- Compact syntax with initialization, condition, and increment.
 
 ```SV
 module for_example;
   initial begin
-    for (int i = 0; i < 5; i++) begin
-      $display("Iteration: %0d", i);
+    for (int i=0; i<3; i++) begin
+      $display("i = %0d", i);  // Prints 0, 1, 2
     end
   end
 endmodule
 ```
 
-### `foreach`
-The `foreach` loop iterates over the elements of an array.
+### 4. `foreach` Loop
+- Iterates over array elements.
+**Syntax**: `foreach(array[index])`
 
 ```SV
 module foreach_example;
-  int array[5] = {0, 1, 2, 3, 4};
+  int nums[4] = '{10, 20, 30, 40};
   initial begin
-    foreach (array[i]) begin
-      $display("Element %0d: %0d", i, array[i]);
+    foreach (nums[i]) begin
+      $display("nums[%0d] = %0d", i, nums[i]);  // Prints all elements
     end
   end
 endmodule
 ```
 
-### `forever`
-The `forever` loop executes a block of code indefinitely.
+### 5. `forever` Loop
+- Runs indefinitely (used in testbenches).
+**Always include a delay** (`#`) or `disable` statement to prevent simulation hangs.
 
 ```SV
 module forever_example;
-  int i = 0;
-  initial begin
+  initial begin : main_block
+    int cycles = 0;
     forever begin
-      $display("Iteration: %0d", i);
-      i++;
-      if (i == 5) disable forever_example;
+      $display("Cycle %0d", cycles);
+      cycles++;
+      #10;  // Delay for 10 time units
+      if (cycles == 5) disable main_block;  // Exit after 5 cycles
     end
   end
 endmodule
 ```
 
+
+## Best Practices
+1. **Case Statements**:
+   - Use `unique case` to enforce single-branch execution.
+   - Use `priority case` to prioritize branches.
+   - Always include `default` unless all cases are covered.
+
+2. **Loops in RTL**:
+   - Ensure loops have **static bounds** for synthesis.
+   - Avoid infinite loops without exit conditions.
+
+3. **`forever` Loops**:
+   - Use only in testbenches with timing controls (`#`).
+
+
 ## Exercises
-1. Use an `if-else` statement to check if a variable is positive, negative, or zero.
-2. Use a `case` statement to print the name of a day based on a variable representing the day number.
-3. Use a `repeat` loop to print numbers from 1 to 10.
-4. Use a `while` loop to print the elements of an array.
-5. Use a `for` loop to calculate the factorial of a number.
-6. Use a `foreach` loop to sum the elements of an array.
-7. Use a `forever` loop to print a message indefinitely, and break the loop after 10 iterations.
+1. **Positive/Negative Check**: Use `if-else` to classify an integer variable as positive, negative, or zero.
+
+2. **Day Name Printer**: Implement a `case` statement that prints the weekday name for a number (1=Monday, ..., 7=Sunday).
+
+3. **Repeat Loop Counter**: Use `repeat` to print numbers from 1 to 10.
+
+4. **Array Traversal with `while`**: Print all elements of an integer array using a `while` loop.
+
+5. **Factorial Calculator**: Compute the factorial of a number using a `for` loop.
+
+6. **Array Summation**: Use `foreach` to calculate the sum of an integer array.
+
+7. **Controlled `forever` Loop**: Print "Simulating..." indefinitely but terminate after 10 iterations using `disable`.
 

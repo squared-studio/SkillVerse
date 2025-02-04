@@ -103,7 +103,7 @@ $display(a === b);  // 0 (exact match)
 
 ## Operator Precedence
 Order of operations (highest to lowest):
-1. `()` `[]` `::` 
+1. `()` `[]` `::`
 2. `!` `~` `&` `|` `^` `~^` (unary)
 3. `*` `/` `%`
 4. `+` `-` (binary)

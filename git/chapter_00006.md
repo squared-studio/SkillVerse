@@ -16,51 +16,51 @@ flowchart LR
 
 ### Step-by-Step Breakdown
 
-1. **Clone the Repository**  
+1. **Clone the Repository**
    ```bash
    git clone https://github.com/team/repo.git && cd repo
    ```
-   *Pro Tip: Use SSH for better security*  
+   *Pro Tip: Use SSH for better security*
    `git clone git@github.com:team/repo.git`
 
-2. **Create Feature Branch**  
+2. **Create Feature Branch**
    ```bash
    git checkout -b feat/login-form
    ```
-   *Branch Naming Convention*:  
+   *Branch Naming Convention*:
    `feat/`, `fix/`, `docs/`, `chore/` prefixes + kebab-case
 
-3. **Make Atomic Changes**  
+3. **Make Atomic Changes**
    - Edit files in small, logical units
    - Test changes locally
 
-4. **Stage & Commit**  
+4. **Stage & Commit**
    ```bash
    git add .  # Stage all changes
    git commit -m "feat(login): add email validation"
    ```
-   *Commit Message Guide*:  
-   - Use [Conventional Commits](https://www.conventionalcommits.org/)  
+   *Commit Message Guide*:
+   - Use [Conventional Commits](https://www.conventionalcommits.org/)
    - Limit to 72 characters
 
-5. **Push to Remote**  
+5. **Push to Remote**
    ```bash
    git push origin feat/login-form
    ```
 
-6. **Create PR/MR**  
+6. **Create PR/MR**
    - Link issues using `Fixes #123` in PR description
    - Request reviews from teammates
    - Pass CI/CD checks
 
-7. **Merge & Cleanup**  
+7. **Merge & Cleanup**
    - Squash commits if needed
    - Delete remote branch post-merge
    ```bash
    git branch -d feat/login-form
    ```
 
-8. **Stay Updated**  
+8. **Stay Updated**
    ```bash
    git checkout main
    git pull --rebase origin main
@@ -82,43 +82,43 @@ flowchart TB
 
 ### Step-by-Step Guide
 
-1. **Fork the Repository**  
-   ![Fork Button](https://example.com/fork-button.png)  
+1. **Fork the Repository**
+   ![Fork Button](https://example.com/fork-button.png)
    *GitHub → "Fork" button (top-right)*
 
-2. **Clone Your Fork**  
+2. **Clone Your Fork**
    ```bash
    git clone git@github.com:your-username/repo.git
    cd repo
    ```
 
-3. **Add Upstream Remote**  
+3. **Add Upstream Remote**
    ```bash
    git remote add upstream https://github.com/original/repo.git
    ```
    Verify with `git remote -v`
 
-4. **Branch Strategically**  
+4. **Branch Strategically**
    ```bash
    git checkout -b fix/header-styling
    ```
 
-5. **Develop & Commit**  
+5. **Develop & Commit**
    ```bash
    git add -p  # Interactive staging
    git commit -m "fix(ui): correct header padding"
    ```
 
-6. **Push to Your Fork**  
+6. **Push to Your Fork**
    ```bash
    git push origin fix/header-styling
    ```
 
-7. **Create Upstream PR**  
-   - Use GitHub's "Compare across forks"  
+7. **Create Upstream PR**
+   - Use GitHub's "Compare across forks"
    - Include testing evidence in PR comments
 
-8. **Keep Fork Fresh**  
+8. **Keep Fork Fresh**
    ```bash
    git fetch upstream
    git rebase upstream/main  # Preferred over merge
@@ -140,7 +140,7 @@ flowchart TB
 ## Best Practices
 
 ### Code Quality
-- Run linters before committing  
+- Run linters before committing
   ```bash
   npm run lint && npm test
   ```

@@ -77,7 +77,7 @@ int assoc_array [string];
 initial begin
   assoc_array["Alice"] = 42;
   assoc_array["Bob"] = 99;
-  if (assoc_array.exists("Alice")) 
+  if (assoc_array.exists("Alice"))
     $display("Alice: %d", assoc_array["Alice"]);
 end
 ```

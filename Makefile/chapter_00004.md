@@ -39,7 +39,7 @@ Automatic variables are special variables that represent specific parts of a rul
 ### Example
 ```makefile
 %.o: %.c
-    gcc -c $< -o $@ 
+    gcc -c $< -o $@
 ```
 
 In this example:

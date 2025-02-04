@@ -1,21 +1,21 @@
 # git
 ## 1. [Introduction](git/chapter_00001.md)
-  - What is Git?  
-  - Why Use Git?  
-  - Install Git  
-  - Next Steps  
+  - What is Git?
+  - Why Use Git?
+  - Install Git
+  - Next Steps
 ## 2. [Getting Started](git/chapter_00002.md)
-  - Creating a New Git Repository via CLI  
-  - Creating a New Repository via GitHub Web  
-  - Cloning a Git Repository  
-## 3. [Concepts](git/chapter_00003.md)
+  - Creating a New Git Repository via CLI
+  - Creating a New Repository via GitHub Web
+  - Cloning a Git Repository
+## 3. [Git Concepts](git/chapter_00003.md)
   - Branch
   - Commit
   - Issue
   - Push
   - Pull
   - Pull Request (PR)
-## 4. [Basics](git/chapter_00004.md)
+## 4. [Git Basics Cheat Sheet](git/chapter_00004.md)
   - `git init`  
   - `git clone`  
   - `git status`  
@@ -37,7 +37,7 @@
   - Real-World Scenario: The API Endpoint War  
   - Merge Conflict Cheat Sheet  
   - Wisdom Nuggets  
-## 6. [Workflow](git/chapter_00006.md)
+## 6. [Git Workflow](git/chapter_00006.md)
   - Basic Git Workflow (Team Collaboration)
   - Advanced Workflow (Open-Source Contribution)
   - Workflow Comparison

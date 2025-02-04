@@ -1,7 +1,7 @@
 # GNU Make
 
 ## Introduction
-GNU Make is a powerful tool that automates the process of building executable programs and libraries from source code. It's a build automation tool that was designed to manage dependencies in your project. 
+GNU Make is a powerful tool that automates the process of building executable programs and libraries from source code. It's a build automation tool that was designed to manage dependencies in your project.
 
 The `make` utility reads a file (commonly referred to as a `Makefile`) that describes the relationships among files in your program, and the commands needed to derive the target program from its source files. When a source file has been changed, `make` uses the rules specified in the `Makefile` to determine which parts of the program need to be recompiled, and then it recompiles only those parts.
 
