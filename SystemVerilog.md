@@ -45,14 +45,16 @@
   - Introduction
   - Conditional Statements
   - Case Statements
-  - Loops
+  - Loop Constructs
+  - Best Practices
   - Exercises
 ## 8. [Procedural Blocks](SystemVerilog/chapter_00008.md)
   - Introduction
   - Initial Blocks
   - Final Blocks
   - Always Blocks
-  - Assignments
+  - Assignment Types
+  - Best Practices & Pitfalls
   - Exercises
 ## 9. [Tasks and Functions](SystemVerilog/chapter_00009.md)
   - Introduction

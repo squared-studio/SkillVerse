@@ -8,36 +8,36 @@
   - Creating a New Git Repository via CLI
   - Creating a New Repository via GitHub Web
   - Cloning a Git Repository
-## 3. [Git Concepts](git/chapter_00003.md)
+## 3. [Concepts](git/chapter_00003.md)
   - Branch
   - Commit
   - Issue
   - Push
   - Pull
   - Pull Request (PR)
-## 4. [Git Basics Cheat Sheet](git/chapter_00004.md)
-  - `git init`  
-  - `git clone`  
-  - `git status`  
-  - `git add`  
-  - `git commit`  
-  - `git push`  
-  - `git fetch`  
-  - `git pull`  
-  - `git checkout`  
-  - `git log`  
-  - `git diff`  
-  - `git reset`  
-  - `git stash`  
+## 4. [Basics](git/chapter_00004.md)
+  - `git init`
+  - `git clone`
+  - `git status`
+  - `git add`
+  - `git commit`
+  - `git push`
+  - `git fetch`
+  - `git pull`
+  - `git checkout`
+  - `git log`
+  - `git diff`
+  - `git reset`
+  - `git stash`
 ## 5. [Merge Conflicts](git/chapter_00005.md)
-  - What Causes a Merge Conflict?  
-  - How to Spot Merge Conflicts  
-  - Resolving Conflicts: Step-by-Step  
-  - Pro Conflict Resolution Kit  
-  - Real-World Scenario: The API Endpoint War  
-  - Merge Conflict Cheat Sheet  
-  - Wisdom Nuggets  
-## 6. [Git Workflow](git/chapter_00006.md)
+  - What Causes a Merge Conflict?
+  - How to Spot Merge Conflicts
+  - Resolving Conflicts: Step-by-Step
+  - Pro Conflict Resolution Kit
+  - Real-World Scenario: The API Endpoint War
+  - Merge Conflict Cheat Sheet
+  - Wisdom Nuggets
+## 6. [Workflow](git/chapter_00006.md)
   - Basic Git Workflow (Team Collaboration)
   - Advanced Workflow (Open-Source Contribution)
   - Workflow Comparison
