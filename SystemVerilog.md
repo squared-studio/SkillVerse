@@ -58,23 +58,28 @@
   - Exercises
 ## 9. [Tasks and Functions](SystemVerilog/chapter_00009.md)
   - Introduction
-  - Differences between Tasks and Functions
-  - Defining and Using Tasks
-  - Defining and Using Functions
-  - Static and Automatic
-  - Return Type
+  - Key Differences: Tasks vs Functions
+  - Task Implementation
+  - Function Implementation
+  - Storage Classes: Static vs Automatic
+  - Advanced Features
+  - Best Practices
   - Exercises
 ## 10. [Interprocess Communications](SystemVerilog/chapter_00010.md)
   - Introduction
   - Mailbox
   - Semaphore
+  - Comparison: Mailboxes vs Semaphores
   - Exercises
+  - Best Practices
 ## 11. [Interfaces](SystemVerilog/chapter_00011.md)
   - Introduction
   - Defining Interfaces
-  - Using Interfaces in Modules
-  - Modport
-  - Exercises
+  - Interface Implementation in Modules
+  - Modports: Directional Control
+  - Practical Applications & Exercises
+  - Best Practices & Common Pitfalls
+  - Conclusion
 ## 12. [Modules](SystemVerilog/chapter_00012.md)
   - Introduction
   - Module Definition
