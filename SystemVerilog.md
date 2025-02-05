@@ -84,16 +84,19 @@
   - Introduction
   - Module Definition
   - Ports and Parameters
-  - Instantiating Modules
-  - Hierarchical Design
+  - Module Instantiation
+  - Testbench Integration
+  - Best Practices
   - Exercises
 ## 13. [Randomization](SystemVerilog/chapter_00013.md)
   - Introduction
-  - Random Variables
-  - Constraints
-  - Randomization Methods
+  - Random Variable Types
+  - Constraint Specification
+  - Randomization Control
+  - Verification Integration
+  - Best Practices
   - Exercises
-## 14. [Classes](SystemVerilog/chapter_00014.md)
+## 14. [Class](SystemVerilog/chapter_00014.md)
   - Introduction
   - Defining Classes
   - Creating Objects
@@ -106,24 +109,36 @@
   - Introduction
   - Defining Packages
   - Importing Packages
-  - Package Scope
-  - Exporting Packages
+  - Package Scope Resolution
+  - Package Export System
+  - Best Practices
   - Exercises
-## 16. [File Operators](SystemVerilog/chapter_00016.md)
+## 16. [File Operations](SystemVerilog/chapter_00016.md)
   - Introduction
-  - File Reading
-  - File Writing
-  - File Handling Functions
-  - Exercises
-## 17. [SystemVerilog Assertions (SVA)](SystemVerilog/chapter_00017.md)
-  - Introduction
-  - Immediate Assertions
-  - Concurrent Assertions
-  - Assertion Severity Levels
-  - Cover Properties
-  - Exercises
+  - File Handling Basics
+  - Reading from Files
+  - Writing to Files
+  - Advanced File Operations
+  - Comprehensive Function Reference
+  - Error Handling Techniques
+  - Best Practices Checklist
+  - Practical Exercises
+## 17. [SystemVerilog Assertions](SystemVerilog/chapter_00017.md)
+  - Introduction to Assertion-Based Verification
+  - Assertion Types Comparison
+  - Immediate Assertions Deep Dive
+  - Concurrent Assertions Architecture
+  - Temporal Operators Reference
+  - Assertion Severity Hierarchy
+  - Coverage-Driven Verification
+  - Advanced Assertion Techniques
+  - Debugging Methodologies
+  - Best Practices Checklist
+  - Practical Exercises
+  - Comprehensive Function Reference
 ## 18. [Coverage](SystemVerilog/chapter_00018.md)
   - Introduction
   - Code Coverage
   - Functional Coverage
-  - Exercises
+  - Practical Exercises
+  - Best Practices
