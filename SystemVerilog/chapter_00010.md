@@ -8,12 +8,12 @@ Interprocess Communication (IPC) in SystemVerilog is essential for coordinating 
 A mailbox is a communication channel that allows processes to exchange messages safely. It can be **bounded** (fixed size) or **unbounded**, and supports parameterization for type-specific data.
 
 ### Methods for Mailboxes
-| Method       | Description                                  | Return Value         | Example                    |
-|--------------|----------------------------------------------|----------------------|----------------------------|
-| `put()`      | Blocking send. Waits if the mailbox is full. | `void`               | `mbox.put(42);`            |
-| `get()`      | Blocking receive. Waits if the mailbox is empty. | `void`          | `mbox.get(msg);`           |
-| `try_put()`  | Non-blocking send. Fails if full.            | `1` (success) / `0`  | `if (mbox.try_put(42)) ...`|
-| `try_get()`  | Non-blocking receive. Fails if empty.        | `1` (success) / `0`  | `if (mbox.try_get(msg)) ...`|
+| Method       | Description                                      | Return Value         | Example                      |
+|--------------|--------------------------------------------------|----------------------|------------------------------|
+| `put()`      | Blocking send. Waits if the mailbox is full.     | `void`               | `mbox.put(42);`              |
+| `get()`      | Blocking receive. Waits if the mailbox is empty. | `void`               | `mbox.get(msg);`             |
+| `try_put()`  | Non-blocking send. Fails if full.                | `1` (success) / `0`  | `if (mbox.try_put(42)) ...`  |
+| `try_get()`  | Non-blocking receive. Fails if empty.            | `1` (success) / `0`  | `if (mbox.try_get(msg)) ...` |
 
 ### Creating a Mailbox
 ```SV
@@ -109,12 +109,12 @@ Now, Process 1 acquires the key at t=0, holds it until t=20. Process 2 tries to 
 
 
 ## Comparison: Mailboxes vs Semaphores
-| **Feature**      | **Mailbox**                          | **Semaphore**                     |
-|-------------------|--------------------------------------|------------------------------------|
-| **Purpose**       | Data exchange between processes      | Resource access control           |
-| **Blocking**      | Yes (with `put()`/`get()`)           | Yes (with `get()`)                |
-| **Data Type**     | Supports parameterization (e.g., `#(int)`) | Manages keys (no data)      |
-| **Use Cases**     | Producer-consumer models             | Critical section synchronization  |
+| **Feature**      | **Mailbox**                                | **Semaphore**                     |
+|------------------|--------------------------------------------|-----------------------------------|
+| **Purpose**      | Data exchange between processes            | Resource access control           |
+| **Blocking**     | Yes (with `put()`/`get()`)                 | Yes (with `get()`)                |
+| **Data Type**    | Supports parameterization (e.g., `#(int)`) | Manages keys (no data)            |
+| **Use Cases**    | Producer-consumer models                   | Critical section synchronization  |
 
 
 ## Exercises
