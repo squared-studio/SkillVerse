@@ -1,20 +1,21 @@
 # bash
 ## 1. [Introduction](bash/chapter_00001.md)
-  - Course Overview
-  - What is Bash?
-  - Setting Up the Environment
-  - Exercise
-## 2. [Basics of Bash](bash/chapter_00002.md)
-  - Hello World Script
-  - Basic Shell Commands
-  - Variables and Data Types
-  - Basic Operators
-  - Exercise
+  - Why Learn Bash?
+  - Setting Up Your Environment
+  - Your First Script: Hello World!
+## 2. [Bash Essentials](bash/chapter_00002.md)
+  - **Your First Script: Beyond Hello World**
+  - **Core Shell Commands: Navigate Like a Pro**
+  - **Variables: Store Data Like a Pro**
+  - **Operators: Math, Logic, and Comparisons**
+  - **Exercise: Build a Dynamic Greeting System**
+  - **Pro Tips for Bash Newbies**
 ## 3. [Control Structures](bash/chapter_00003.md)
-  - Conditional Statements
-  - Loops
-  - Case Statements
-  - Exercise
+  - **Conditional Statements: Make Your Scripts Smart**
+  - **Loops: Automate Repetitive Tasks**
+  - **`case` Statements: Simplify Complex Conditionals**
+  - **Exercise: Automate a Number Generator**
+  - **Pro Tips**
 ## 4. [Functions](bash/chapter_00004.md)
   - Defining Functions
   - Function Parameters
