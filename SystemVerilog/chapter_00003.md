@@ -14,8 +14,6 @@ Used for modeling hardware with **unknown (X)** and **high-impedance (Z)** state
 | `wire`    | Connects components (default: 1-bit) | `wire clk;`                 |
 | `logic`   | Modern replacement for `reg`/`wire`  | `logic [7:0] data_bus;`     |
 | `integer` | 32-bit signed integer (4-state)      | `integer timeout = 100;`    |
-| `time`    | 64-bit unsigned time value           | `time start_time;`          |
-| `realtime`| Real-number time (e.g., delays)      | `realtime delay = 2.5e-9;`  |
 
 ```SV
 module design_example;
@@ -29,15 +27,17 @@ endmodule
 ### **2-State Types (for Verification)**
 Used in testbenches for **high-performance simulation** (no X/Z states).
 
-| Type         | Description                     | Example                   |
-|--------------|---------------------------------|---------------------------|
-| `bit`        | 2-state, unsigned (default: 1-bit) | `bit flag = 1;`           |
-| `byte`       | 8-bit signed integer            | `byte temperature = -5;`  |
-| `shortint`   | 16-bit signed integer           | `shortint offset = 16'hFF;` |
-| `int`        | 32-bit signed integer           | `int packet_size = 1024;` |
-| `longint`    | 64-bit signed integer           | `longint universe_age;`   |
-| `shortreal`  | 32-bit floating-point           | `shortreal voltage = 3.3;`|
-| `real`       | 64-bit floating-point           | `real pi = 3.1415926535;` |
+| Type         | Description                        | Example                     |
+|--------------|------------------------------------|-----------------------------|
+| `bit`        | 2-state, unsigned (default: 1-bit) | `bit flag = 1;`             |
+| `byte`       | 8-bit signed integer               | `byte temperature = -5;`    |
+| `shortint`   | 16-bit signed integer              | `shortint offset = 16'hFF;` |
+| `int`        | 32-bit signed integer              | `int packet_size = 1024;`   |
+| `longint`    | 64-bit signed integer              | `longint universe_age;`     |
+| `shortreal`  | 32-bit floating-point              | `shortreal voltage = 3.3;`  |
+| `real`       | 64-bit floating-point              | `real pi = 3.1415926535;`   |
+| `time`    | 64-bit unsigned time value            | `time start_time;`          |
+| `realtime`| Real-number time (e.g., delays)       | `realtime delay = 2.5e-9;`  |
 
 ```SV
 module testbench;
@@ -52,13 +52,13 @@ endmodule
 Specialized types for modeling hardware-specific behavior.
 
 ### **Tri-State and Multi-Driver Types**
-| Type   | Description                     | Example                 |
-|--------|---------------------------------|-------------------------|
-| `tri`   | Tri-state bus (identical to `wire`) | `tri [7:0] data_bus;` |
-| `tri0`  | Pull-down when undriven         | `tri0 enable;`          |
-| `tri1`  | Pull-up when undriven           | `tri1 reset;`           |
-| `wand`  | Wired-AND resolution            | `wand signal;`          |
-| `wor`   | Wired-OR resolution             | `wor interrupt;`        |
+| Type   | Description                          | Example                 |
+|--------|--------------------------------------|-------------------------|
+| `tri`   | Tri-state bus (identical to `wire`) | `tri [7:0] data_bus;`   |
+| `tri0`  | Pull-down when undriven             | `tri0 enable;`          |
+| `tri1`  | Pull-up when undriven               | `tri1 reset;`           |
+| `wand`  | Wired-AND resolution                | `wand signal;`          |
+| `wor`   | Wired-OR resolution                 | `wor interrupt;`        |
 
 ```SV
 module bus_driver;
