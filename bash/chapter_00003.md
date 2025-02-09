@@ -1,99 +1,162 @@
 # Control Structures
 
-## Conditional Statements
-Conditional statements allow you to execute different commands based on certain conditions.
+## **Conditional Statements: Make Your Scripts Smart**
+Conditionals let your scripts react dynamically to different scenarios - essential for error handling, validation, and decision-based automation.
 
-### if, else, elif
-The `if` statement is used to test a condition. If the condition is true, the commands following the `if` statement are executed. You can use `else` and `elif` to add additional conditions.
-
-Example:
+### **`if`, `else`, `elif`**
+**Syntax Deep Dive**:
 ```bash
-#!/bin/bash
-a=10
-b=20
-
-if [ $a -gt $b ]; then
-  echo "$a is greater than $b"
-elif [ $a -lt $b ]; then
-  echo "$a is less than $b"
+if [ condition ]; then  # [ ] requires spaces around brackets
+  # Code if true
+elif [ condition ]; then
+  # Alternative check
 else
-  echo "$a is equal to $b"
+  # Fallback code
 fi
 ```
 
-## Loops
-Loops allow you to execute a block of code multiple times.
-
-### for Loop
-The `for` loop iterates over a list of items and executes the commands for each item.
-
-Example:
+**Real-World Example**: Check if a critical file exists before processing:
 ```bash
 #!/bin/bash
-for i in 1 2 3 4 5; do
-  echo "Number: $i"
+config_file="/etc/app/config.conf"
+
+if [ -f "$config_file" ]; then  # -f checks if file exists
+  echo "Config found. Starting service..."
+  ./start_service.sh
+elif [ -d "/etc/app/backups" ]; then  # -d checks for directory
+  echo "Config missing! Using backup directory."
+  cp "/etc/app/backups/config.conf" "$config_file"
+else
+  echo "Critical error: No config or backups!" >&2  # Output to stderr
+  exit 1
+fi
+```
+
+**Key Operators**:
+- Numeric: `-eq` (equal), `-ne` (not equal), `-gt`/`-lt` (greater/less than)
+- File Checks: `-f` (file exists), `-d` (directory), `-s` (file not empty)
+- String: `=`, `!=`, `-z` (string is empty)
+
+## **Loops: Automate Repetitive Tasks**
+
+### **`for` Loop: Iterate Over Known Items**
+**Use Cases**: Process files, run commands on multiple servers, generate reports.
+
+**Enhanced Example**: Rename all `.txt` files in a directory:
+```bash
+#!/bin/bash
+for file in *.txt; do
+  new_name="${file%.txt}.bak"  # Parameter expansion removes .txt
+  mv "$file" "$new_name"
+  echo "Renamed: $file → $new_name"
 done
 ```
 
-### while Loop
-The `while` loop executes the commands as long as the condition is true.
-
-Example:
+**Brace Expansion Trick**:
 ```bash
-#!/bin/bash
-count=1
-while [ $count -le 5 ]; do
-  echo "Count: $count"
-  count=$((count + 1))
+for i in {1..5}; do  # No need for spaces: {START..END..INCREMENT}
+  echo "Processing item $i"
 done
 ```
 
-### until Loop
-The `until` loop executes the commands until the condition becomes true.
+### **`while` Loop: Run Until Condition Fails**
+**Use Cases**: Read files line-by-line, monitor system resources.
 
-Example:
+**Real-World Example**: Monitor memory usage until it exceeds 90%:
 ```bash
 #!/bin/bash
-count=1
-until [ $count -gt 5 ]; do
-  echo "Count: $count"
-  count=$((count + 1))
+threshold=90
+
+while true; do
+  usage=$(free | awk '/Mem/{printf "%.0f", $3/$2*100}')
+  echo "Memory usage: $usage%"
+
+  if [ $usage -ge $threshold ]; then
+    echo "ALERT! Memory over $threshold%!" >&2
+    exit 1
+  fi
+
+  sleep 5  # Check every 5 seconds
 done
 ```
 
-## Case Statements
-The `case` statement allows you to execute commands based on different patterns.
+### **`until` Loop: Inverse of `while`**
+**Use Cases**: Wait for a service to start, retry failed operations.
 
-Example:
+**Server Ready Check**:
 ```bash
 #!/bin/bash
-fruit="apple"
+until curl -s http://localhost:8080/healthcheck; do
+  echo "Waiting for server..."
+  sleep 10
+done
+echo "Server is up!"
+```
 
-case $fruit in
-  "apple")
-    echo "Apple pie"
+## **`case` Statements: Simplify Complex Conditionals**
+**Ideal For**: Handling command-line flags, menu systems, or multiple matched patterns.
+
+**Advanced Example**: Process user input for a CLI tool:
+```bash
+#!/bin/bash
+read -p "Enter action (start/stop/restart): " user_input
+
+case "$user_input" in
+  start|s)  # Matches "start" or "s"
+    systemctl start myservice
     ;;
-  "banana")
-    echo "Banana split"
+  stop|halt)
+    systemctl stop myservice
     ;;
-  "cherry")
-    echo "Cherry tart"
+  restart|reload)
+    systemctl restart myservice
     ;;
-  *)
-    echo "Unknown fruit"
+  *)  # Default case
+    echo "Invalid action: $user_input" >&2
+    exit 1
     ;;
 esac
 ```
 
-## Exercise
-Create a script that uses a `for` loop to print numbers from 1 to 10.
+**Pattern Matching Features**:
+- `|` for multiple matches
+- Wildcards: `*.log` matches "error.log", "debug.log"
+- Ranges: `[a-z]`, `[0-9]`
 
-Example solution:
+## **Exercise: Automate a Number Generator**
+**Task**: Write a script that:
+1. Prints numbers from 1 to 10 using a `for` loop
+2. **Bonus**: Only print even numbers
+3. **Expert Challenge**: Sum all numbers and print the total
+
+**Example Solution**:
 ```bash
 #!/bin/bash
-# This script prints numbers from 1 to 10 using a for loop
+total=0
 
-for i in {1..10}; do
-  echo "Number: $i"
+for num in {1..10}; do
+  echo "Number: $num"
+  total=$((total + num))  # Arithmetic expansion
+done
+
+echo "Total sum: $total"
+```
+
+**Even Numbers Solution**:
+```bash
+for num in {2..10..2}; do  # Step by 2
+  echo "Even: $num"
 done
 ```
+
+## **Pro Tips**
+1. **Avoid Infinite Loops**: Always include an exit condition in `while true` loops.
+2. **Quote Variables**: Prevent word splitting with `"$var"`.
+3. **Use `(( ))` for Math**: More readable than `$(( ))` in conditionals:
+   ```bash
+   if (( count > 10 )); then ...
+   ```
+
+**Gotchas**:
+- Forgot `;;` in `case`? Your script will execute multiple blocks!
+- Missing spaces in `[ $a -eq $b ]` causes syntax errors.
