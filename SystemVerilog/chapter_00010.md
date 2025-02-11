@@ -1,7 +1,7 @@
 # Interprocess Communications
 
 ## Introduction
-Interprocess Communication (IPC) in SystemVerilog is essential for coordinating parallel processes in testbenches and design models. Processes often need to exchange data or synchronize their execution to avoid race conditions and ensure correct behavior. SystemVerilog provides two primary mechanisms for IPC: **mailboxes** for message passing and **semaphores** for resource access control. This guide explores their usage, differences, and practical applications.
+Interprocess Communication (IPC) in SystemVerilog is essential for coordinating parallel processes in testbenches and design models. Processes often need to exchange data or synchronize their execution to avoid race conditions and ensure correct behavior. SystemVerilog provides three primary mechanisms for IPC: **mailboxes** for message passing, **semaphores** for resource access control, and **events** for synchronization. This guide explores their usage, differences, and practical applications.
 
 
 ## Mailbox
@@ -47,12 +47,13 @@ module mailbox_example;
 endmodule
 ```
 **Key Points**:
-- `try_put()` fails when the mailbox is full.
+- Use `try_put()`/`try_get()` to handle bounded mailboxes safely.
 - Parameterization (`#(int)`) ensures type safety.
+- Blocking methods (`put()`/`get()`) are ideal for guaranteed data transfer.
 
 
 ## Semaphore
-A semaphore controls access to shared resources using a **counter**. Processes acquire/release "keys" to synchronize.
+A semaphore controls access to shared resources using a **counter**. Processes acquire/release "keys" to synchronize access.
 
 ### Methods for Semaphores
 | Method       | Description                                  | Parameters           | Example                    |
@@ -65,12 +66,12 @@ A semaphore controls access to shared resources using a **counter**. Processes a
 ### Example: Resource Access Control
 ```SV
 module semaphore_example;
-  semaphore sem = new(3); // 3 keys available
+  semaphore sem = new(1); // Only 1 key available
   int shared_resource = 0;
 
   // Process 1
   initial begin
-    sem.get(1); // Acquire 1 key
+    sem.get(1); // Acquire the only key
     $display("[P1] Accessed resource at t=%0t", $time);
     shared_resource += 1;
     #20;
@@ -81,7 +82,8 @@ module semaphore_example;
   // Process 2
   initial begin
     #10;
-    sem.get(1);
+    $display("[P2] Attempting to acquire key at t=%0t", $time);
+    sem.get(1); // Blocks until P1 releases at t=20
     $display("[P2] Accessed resource at t=%0t", $time);
     shared_resource += 1;
     #10;
@@ -93,40 +95,79 @@ endmodule
 **Output**:
 ```
 [P1] Accessed resource at t=0
-[P2] Accessed resource at t=10  // P2 waits until P1 releases at t=20? Wait, no—semaphore has 3 keys. Wait, initial count is 3. So P1 and P2 can both acquire keys immediately. Let me adjust the example to show contention.
-
+[P2] Attempting to acquire key at t=10
+[P1] Released resource at t=20
+[P2] Accessed resource at t=20
+[P2] Released resource at t=30
 ```
+**Key Points**:
+- Initialize semaphores with the number of available keys.
+- Use `try_get()` to avoid deadlocks in non-blocking scenarios.
 
-Hmm, the example may not show waiting. Let's correct that. Maybe set semaphore to 1 key initially.
 
-Let’s adjust the semaphore example to have 1 key:
+## Event
+Events synchronize processes without data transfer. They signal occurrences (e.g., task completion) using triggers.
 
+### Event Methods
+| Operation     | Description                                  | Example                     |
+|---------------|----------------------------------------------|-----------------------------|
+| `-> event`    | Triggers the event.                          | `-> data_ready;`            |
+| `@(event)`    | Blocks until the event is triggered.         | `@(data_ready);`            |
+| `wait(event.triggered)` | Checks if the event was triggered.   | `wait(data_ready.triggered);` |
+
+### Example: Synchronizing Processes
 ```SV
-semaphore sem = new(1); // Only 1 key available
+module event_example;
+  event data_ready;
+
+  // Process 1: Triggers event after delay
+  initial begin
+    #10;
+    -> data_ready;
+    $display("[Trigger] Event data_ready triggered at t=%0t", $time);
+  end
+
+  // Process 2: Waits for event
+  initial begin
+    $display("[Waiter] Waiting for data_ready...");
+    @data_ready;
+    $display("[Waiter] Received data_ready at t=%0t", $time);
+  end
+endmodule
+```
+**Output**:
+```
+[Waiter] Waiting for data_ready...
+[Trigger] Event data_ready triggered at t=10
+[Waiter] Received data_ready at t=10
 ```
 
-Now, Process 1 acquires the key at t=0, holds it until t=20. Process 2 tries to acquire at t=10 but blocks until t=20 when Process 1 releases.
+**Key Points**:
+- Use `->` to trigger events and `@` or `wait()` to wait for them.
+- `wait(event.triggered)` checks historical triggers, avoiding race conditions.
 
 
-## Comparison: Mailboxes vs Semaphores
-| **Feature**      | **Mailbox**                                | **Semaphore**                     |
-|------------------|--------------------------------------------|-----------------------------------|
-| **Purpose**      | Data exchange between processes            | Resource access control           |
-| **Blocking**     | Yes (with `put()`/`get()`)                 | Yes (with `get()`)                |
-| **Data Type**    | Supports parameterization (e.g., `#(int)`) | Manages keys (no data)            |
-| **Use Cases**    | Producer-consumer models                   | Critical section synchronization  |
+## Comparison: Mailboxes vs Semaphores vs Events
+| **Feature**      | **Mailbox**                                | **Semaphore**                     | **Event**                                |
+|------------------|--------------------------------------------|-----------------------------------|------------------------------------------|
+| **Purpose**      | Data exchange between processes            | Resource access control           | Synchronization without data transfer    |
+| **Blocking**     | Yes (with `put()`/`get()`)                 | Yes (with `get()`)                | Yes (with `@` or `wait`)                 |
+| **Data Type**    | Supports parameterization (e.g., `#(int)`) | Manages keys (no data)            | No data associated                       |
+| **Use Cases**    | Producer-consumer models                   | Critical section synchronization  | Notification between processes           |
 
 
 ## Exercises
 1. **Mailbox with Strings**: Create a mailbox parameterized for `string` type. Send "Hello" from one process and receive it in another.
 2. **Shared Counter Protection**: Implement a counter accessed by two processes. Use a semaphore to ensure atomic increments.
 3. **Bounded Mailbox**: Create a bounded mailbox of size 2. Demonstrate `try_put()` failures when full.
-4. **Semaphore Contention**: Initialize a semaphore with 2 keys. Spawn 4 processes that each acquire 1 key, showing how 2 processes proceed immediately while others wait.
+4. **Semaphore Contention**: Initialize a semaphore with 2 keys. Spawn 4 processes that each acquire 1 key, showing how 2 proceed immediately while others wait.
+5. **Event Synchronization**: Create an event triggered after a delay in one process. Use `wait(event.triggered)` in another process to handle pre-trigger scenarios.
 
 
 ## Best Practices
 - **Avoid Deadlocks**: Always release semaphores after acquisition.
 - **Bounded Mailboxes**: Use `try_put()`/`try_get()` to handle overflow/underflow.
 - **Parameterization**: Use `mailbox #(type)` for type safety.
-
+- **Event Timing**: Use `wait(event.triggered)` to handle events that might trigger before the wait.
+- **Resource Limits**: Prefer bounded mailboxes in resource-constrained environments.
 
