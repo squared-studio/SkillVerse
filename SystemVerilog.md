@@ -69,7 +69,8 @@
   - Introduction
   - Mailbox
   - Semaphore
-  - Comparison: Mailboxes vs Semaphores
+  - Event
+  - Comparison: Mailboxes vs Semaphores vs Events
   - Exercises
   - Best Practices
 ## 11. [Interfaces](SystemVerilog/chapter_00011.md)
