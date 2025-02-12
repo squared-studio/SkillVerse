@@ -8,6 +8,7 @@
   - ### [Circuits](Circuits.md)
   - ### [DDR Protocol](DDR_Protocol.md)
   - ### [Electronics](Electronics.md)
+  - ### [Formal Verification](Formal_Verification.md)
   - ### [git](git.md)
   - ### [I2C Protocol](I2C_Protocol.md)
   - ### [Linux Terminal](Linux_Terminal.md)
