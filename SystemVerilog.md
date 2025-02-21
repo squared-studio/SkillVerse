@@ -5,7 +5,7 @@
   - Why Use SystemVerilog? Key Applications
   - The Winning Advantages of SystemVerilog
   - Core Features That Set SystemVerilog Apart
-## 2. [SystemVerilog Tasks and Functions](SystemVerilog/chapter_00002.md)
+## 2. [SystemVerilog Built-in Tasks and Functions](SystemVerilog/chapter_00002.md)
   - **Display Tasks: Your Simulation's Voice**
   - **Wavedump Tasks: Visualizing Signal Behavior**
   - **Time-Related Functions: Measuring Simulation Progress**
