@@ -16,7 +16,7 @@
   - **`case` Statements: Simplify Complex Conditionals**
   - **Exercise: Automate a Number Generator**
   - **Pro Tips**
-## 4. [Functions](bash/chapter_00004.md)
+## 4. [Functions in Bash](bash/chapter_00004.md)
   - Defining Functions
   - Function Parameters
   - Returning Values
