@@ -21,7 +21,7 @@ The distinction between packed and unpacked arrays is fundamental in SystemVeril
 - **Hardware Modeling Focus**: They are primarily used for modeling hardware structures where bit-level access and operations are frequent, such as registers, memory interfaces, and data buses.
 - **Multi-Dimensionality**: Packed arrays can be multi-dimensional, allowing you to represent matrices or arrays of registers efficiently. Dimensions are specified **before** the variable name.
 
-```systemverilog
+```SV
 logic [2:0][15:0] register_file;  // 3x16-bit register file (48 bits total)
 register_file = 48'h1234_5678_9ABC_DEF0; // Initialize as a contiguous bit vector
 
@@ -36,7 +36,7 @@ byte_slice = register_file[1][15:8]; // Extract a byte slice from the 2D packed 
 - **Verification and Data Storage**: Unpacked arrays are commonly used in verification environments for testbench data storage, scoreboards, and general-purpose data structures.
 - **Dimensions After Identifier**: Dimensions are declared **after** the array identifier, resembling traditional array declarations in languages like C or Java.
 
-```systemverilog
+```SV
 int transaction_data [1024];   // Array to hold 1024 integer transactions
 transaction_data = '{default:0}; // Initialize all elements to 0
 
@@ -51,7 +51,7 @@ transaction_data[512] = 999;    // Access and modify individual elements
 - **Static Size**: Fixed-size arrays have their size determined at compile time, making them efficient and predictable in terms of memory allocation and performance.
 - **Built-in Methods**: SystemVerilog provides a rich set of built-in methods for fixed-size arrays, simplifying common array operations like sorting, summing, and reversing.
 
-```systemverilog
+```SV
 int scores [5] = '{95, 88, 76, 99, 82}; // Fixed-size array of scores
 int sorted_scores [5];
 
@@ -87,7 +87,7 @@ $display("Sum of scores: %0d", scores.sum());    // Output: Sum of scores: 440
 - **Memory Allocation with `new[]`**: You must explicitly allocate memory for dynamic arrays using the `new[]` operator before you can use them.
 - **Resizing and Copying**: Dynamic arrays can be resized using `new[size](array_name)`, which allocates a new array of the specified size and copies the elements from the original array (up to the smaller of the old and new sizes).
 
-```systemverilog
+```SV
 int packet_buffer []; // Declare a dynamic array (unsized)
 
 initial begin
@@ -125,7 +125,7 @@ end
 - **Sparse Data Storage**: They are highly efficient for storing sparse data, where only a small fraction of possible indices are actually used. Think of them as hash tables or dictionaries.
 - **Lookup Tables and Configuration**: Associative arrays are excellent for implementing lookup tables, memory models with non-contiguous addresses, and configuration settings indexed by names.
 
-```systemverilog
+```SV
 string error_messages [string]; // Associative array with string keys and string values
 
 initial begin
@@ -167,7 +167,7 @@ end
 - **Dynamic Sizing**: Queues automatically resize as elements are added or removed, making them convenient for managing data streams of varying lengths.
 - **Testbench Communication**: Queues are frequently used in verification testbenches for communication between different components, such as passing transaction objects between generators, monitors, and scoreboards.
 
-```systemverilog
+```SV
 class transaction; // Example transaction class
   int data;
   time timestamp;
@@ -210,27 +210,27 @@ end
 Test your understanding of SystemVerilog arrays with these exercises. Solutions are provided to help you check your work.
 
 1. **Packed Array Initialization**: Declare a 12-bit packed array named `config_bits` and initialize it with the hexadecimal value `0xA3C`.
-   ```systemverilog
+   ```SV
    logic [11:0] config_bits = 12'hA3C;
    // Solution: Declares a 12-bit packed array and initializes it.
    ```
 
 2. **Unpacked Array of Strings**: Create an unpacked array named `name_list` to hold 4 strings: "Alice", "Bob", "Charlie", and "Dana". Then, use a `foreach` loop to print each name.
-   ```systemverilog
+   ```SV
    string name_list [4] = '{"Alice", "Bob", "Charlie", "Dana"};
    foreach (name_list[i]) $display("Name: %s", name_list[i]);
    // Solution: Creates and initializes an unpacked array of strings and prints each element.
    ```
 
 3. **Fixed-Size Array Summation**: Declare a fixed-size array of 5 integers, initialize it with the values `{10, 20, 30, 40, 50}`, and use the `.sum()` method to calculate and display their sum.
-   ```systemverilog
+   ```SV
    int value_array [5] = '{10, 20, 30, 40, 50};
    $display("Sum of array elements: %0d", value_array.sum());
    // Solution: Calculates and displays the sum of the elements in the fixed-size array.
    ```
 
 4. **Dynamic Array with Even Numbers**: Create an empty dynamic array named `even_numbers`. Allocate space for 8 integers using `new[]`. Then, use a `foreach` loop to fill the array with the first 8 even numbers (0, 2, 4, ..., 14).
-   ```systemverilog
+   ```SV
    int even_numbers [];
    even_numbers = new[8];
    foreach (even_numbers[i]) even_numbers[i] = i * 2;
@@ -238,7 +238,7 @@ Test your understanding of SystemVerilog arrays with these exercises. Solutions 
    ```
 
 5. **Associative Array for Age Lookup**: Create an associative array named `age_map` that uses strings as keys and integers as values. Store the ages of three people: "Alice" (30), "Bob" (25), and "Charlie" (35). Then, check if an entry for "John" exists in the array and display "John not found!" if it doesn't.
-   ```systemverilog
+   ```SV
    int age_map [string];
    age_map["Alice"] = 30;
    age_map["Bob"] = 25;
@@ -248,7 +248,7 @@ Test your understanding of SystemVerilog arrays with these exercises. Solutions 
    ```
 
 6. **Queue Operations: Reverse and Pop**: Create a queue named `data_queue` and initialize it with the values `{1, 2, 3}`. Reverse the queue using `.reverse()`, and then remove and discard the element from the front of the queue using `.pop_front()`.
-   ```systemverilog
+   ```SV
    int data_queue [$] = '{1, 2, 3};
    data_queue.reverse();
    data_queue.pop_front();

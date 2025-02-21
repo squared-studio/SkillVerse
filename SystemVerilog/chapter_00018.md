@@ -28,7 +28,7 @@ SystemVerilog simulators typically measure several types of code coverage:
 
 **Example Illustrating Statement Coverage:**
 
-```systemverilog
+```SV
 module statement_coverage_example;
   logic [1:0] operation_mode = 2'b00; // Default mode is '00'
 
@@ -55,7 +55,7 @@ endmodule
 
 **Example Illustrating Branch Coverage:**
 
-```systemverilog
+```SV
 module branch_coverage_example;
   logic [1:0] current_state = 2'b01; // Initial state
 
@@ -83,7 +83,7 @@ endmodule
 
 **Example Illustrating Toggle Coverage:**
 
-```systemverilog
+```SV
 module toggle_coverage_example;
   logic clock_signal;
   logic enable_flag = 1'b0; // Initial value of enable_flag is 0
@@ -122,7 +122,7 @@ Functional coverage is a *user-defined* metric that directly addresses the quest
 
 **Example Covergroup for Address Range Coverage and Read/Write Operation Cross-Coverage:**
 
-```systemverilog
+```SV
 module functional_coverage_example;
   covergroup address_operation_coverage @(posedge clock); // Covergroup sampled at posedge of 'clock'
     option.per_instance = 1; // Each instance of this covergroup has its own coverage data
@@ -189,7 +189,7 @@ endmodule : functional_coverage_example
 
 **Example Covergroup with Data Value Coverpoint and Bins:**
 
-```systemverilog
+```SV
 covergroup data_coverage_group;
   // Coverpoint for a 4-bit data signal
   data_value_cp: coverpoint data_signal {
@@ -218,7 +218,7 @@ endgroup : data_coverage_group
 
 **Example Cross Coverage for Operation Mode and Speed Combinations:**
 
-```systemverilog
+```SV
 covergroup protocol_mode_speed_coverage;
   mode_cp: coverpoint operation_mode { // Coverpoint for operation mode
     bins low_power_mode  = {2'b00, 2'b01};
@@ -319,7 +319,7 @@ endgroup : protocol_mode_speed_coverage
 | **`sample()` method**      | Method to explicitly sample a covergroup instance to collect coverage data.   | `coverage_instance.sample();`                                             | Covergroups are sampled at specified events (e.g., clock edges). `sample()` allows explicit, procedural sampling when needed.                                                                                                                                  |
 | **Code Coverage Metrics (Statement, Branch, Toggle)** | Automatically collected metrics by simulators.                               | (No direct SystemVerilog syntax to invoke, enabled in simulator settings) | Code coverage metrics are structural and automatically tracked. Enable code coverage in your simulator to generate reports.                                                                                                                                |
 
-```systemverilog
+```SV
 // Sample Solution for Exercise 4: Functional Coverage - 8-bit Data Bus Bins
 module data_bus_coverage_example;
   covergroup data_bus_cg;

@@ -16,7 +16,7 @@ Display tasks are your primary means of communication with the simulator. They a
     - `%b`:  Shows values in binary format, useful for bit-level inspection.
     - `%h`:  Presents values in hexadecimal format, often used for memory addresses and register contents.
 
-```systemverilog
+```SV
 module display_example;
   initial begin
     integer value = 42;
@@ -34,7 +34,7 @@ endmodule
 - **Single Active Monitor**: Remember, only **one `$monitor` task can be actively monitoring** at any given time in your simulation. If you call `$monitor` again, it replaces the previous one.
 - **Controlling Monitoring**: Use `$monitoron` to start monitoring and `$monitoroff` to temporarily disable it without losing the monitor setup. This is useful for focusing on specific simulation phases.
 
-```systemverilog
+```SV
 module monitor_example;
   reg [3:0] a, b;
 
@@ -62,7 +62,7 @@ Time=10 ns: a=5, b=10
 
 - **Capturing Stable Values**:  `$strobe` is invaluable when you have concurrent assignments within the same time step and need to ensure you're capturing the final, stable values after all updates have propagated.
 
-```systemverilog
+```SV
 module strobe_example;
   reg [3:0] data;
   initial begin
@@ -90,7 +90,7 @@ Wavedump tasks are essential for generating **Value Change Dump (VCD)** files. T
 
 `$dumpfile` simply specifies the filename for the VCD file that will be generated during simulation. This task should be called **before** `$dumpvars`.
 
-```systemverilog
+```SV
 module dumpfile_example;
   initial begin
     $dumpfile("signals.vcd"); // Creates a VCD file named 'signals.vcd' in the simulation directory
@@ -109,7 +109,7 @@ endmodule
     - `$dumpvars(0, module_name)`: This powerful option dumps **all** signals and variables within the specified `module_name` and all modules below it in the hierarchy. The `0` indicates the dump level (0 means dump all levels).
     - `$dumpvars(levels, module_name_or_signal)`:  `levels` (integer) specifies the hierarchy levels to dump. `1` dumps only top-level signals, `2` dumps top-level and signals in modules instantiated directly in the top level, and so on. You can also specify a specific `signal` to dump only that signal.
 
-```systemverilog
+```SV
 module dumpvars_example;
   reg clk, enable;
   wire out;
@@ -136,7 +136,7 @@ SystemVerilog provides functions to access the current simulation time in differ
 
 `$time` returns the current simulation time as a **64-bit integer**. This offers the highest precision and is generally preferred for most time-related operations in SystemVerilog.
 
-```systemverilog
+```SV
 module time_example;
   initial begin
     #7.5ns;
@@ -151,7 +151,7 @@ endmodule
 
 `$stime` returns the current simulation time as a **32-bit integer**.  While it can be quicker in some simulators, it has a **limited range**. For very long simulations, `$stime` can wrap around or truncate, leading to incorrect time values. **It is generally recommended to use `$time` for most applications to avoid potential issues with range limitations.**
 
-```systemverilog
+```SV
 module stime_example;
   initial begin
     #100000ns;
@@ -166,7 +166,7 @@ endmodule
 
 `$realtime` returns the current simulation time as a **real number (floating-point)**. This is essential when your simulation involves **fractional time steps**, allowing you to accurately represent and display time with decimal precision.
 
-```systemverilog
+```SV
 module realtime_example;
   initial begin
     #3.75ns;
@@ -185,7 +185,7 @@ Simulation control tasks allow you to manage the execution of your simulation, p
 
 `$finish` is used to **terminate the simulation** and typically **close the simulator program** entirely. It signals that the simulation has reached a natural conclusion or an error condition that warrants stopping.
 
-```systemverilog
+```SV
 module finish_example;
   initial begin
     #10ns $display("Simulation about to finish.");
@@ -203,7 +203,7 @@ endmodule
 - **Inspect the Simulation State**: Examine variable values, signal states, and memory contents at the point of suspension.
 - **Interactive Debugging**: In interactive simulation environments (like ModelSim), you can often resume the simulation step-by-step or continue execution after `$stop`.
 
-```systemverilog
+```SV
 module stop_example;
   initial begin
     #20ns $display("Pausing simulation...");
@@ -218,7 +218,7 @@ endmodule
 
 `$exit` is designed to **immediately terminate the simulator process**.  Its behavior can be tool-dependent, but generally, it forces the simulator to quit abruptly, potentially without completing any cleanup or finalization steps that `$finish` might perform.
 
-```systemverilog
+```SV
 module exit_example;
   initial begin
     #5ns $display("Exiting simulator abruptly...");
@@ -240,13 +240,13 @@ endmodule
 Test your understanding with these exercises. Solutions are provided to help you verify your work.
 
 1. **Enhance `$display` with Time and Hexadecimal Output**:
-   ```systemverilog
+   ```SV
    initial $display("Time: %0t, Value in Hex: %0h", $time, 255);
    // Solution Output (Time will vary): "Time: 0, Value in Hex: ff"
    ```
 
 2. **Expand `$monitor` to Track Multiple Signals**:
-   ```systemverilog
+   ```SV
    reg [3:0] count;
    reg enable;
    initial begin
@@ -262,7 +262,7 @@ Test your understanding with these exercises. Solutions are provided to help you
    ```
 
 3. **Illustrate `$strobe` for Stable Values**:
-   ```systemverilog
+   ```SV
    reg a, b, result_strobe, result_display;
    assign result_strobe = a & b;
    assign result_display = a | b;
@@ -279,7 +279,7 @@ Test your understanding with these exercises. Solutions are provided to help you
    ```
 
 4. **Generate a Waveform VCD File**:
-   ```systemverilog
+   ```SV
    module wave_module;
      reg clock;
      initial begin
@@ -293,7 +293,7 @@ Test your understanding with these exercises. Solutions are provided to help you
    ```
 
 5. **Selective Variable Dumping with `$dumpvars`**:
-   ```systemverilog
+   ```SV
    module dump_select_module;
      reg signal_A, signal_B, signal_C;
      initial begin
@@ -308,7 +308,7 @@ Test your understanding with these exercises. Solutions are provided to help you
    ```
 
 6. **Observe `$time` at Different Simulation Points**:
-   ```systemverilog
+   ```SV
    initial begin
      $display("Start Time: %0t ns", $time);
      #25ns $display("Time after 25ns delay: %0t ns", $time);
@@ -321,7 +321,7 @@ Test your understanding with these exercises. Solutions are provided to help you
    ```
 
 7. **Illustrate `$realtime` for Fractional Time**:
-   ```systemverilog
+   ```SV
    initial begin
      #12.345ns $display("Real Time with precision: %0.3f ns", $realtime);
    end
@@ -329,7 +329,7 @@ Test your understanding with these exercises. Solutions are provided to help you
    ```
 
 8. **Terminate Simulation After a Delay**:
-   ```systemverilog
+   ```SV
    initial begin
      #100ns $display("Simulation finished after 100ns.");
      $finish;
@@ -338,7 +338,7 @@ Test your understanding with these exercises. Solutions are provided to help you
    ```
 
 9. **Pause Simulation with `$stop` and Resume (Simulator Dependent)**:
-   ```systemverilog
+   ```SV
    initial begin
      #50ns $display("Simulation about to pause at 50ns.");
      $stop;
@@ -348,7 +348,7 @@ Test your understanding with these exercises. Solutions are provided to help you
    ```
 
 10. **Experiment with `$exit` (Use with Caution)**:
-    ```systemverilog
+    ```SV
     initial begin
       #10ns $display("Attempting to exit simulator...");
       $exit; // Simulator will likely terminate immediately after this point
