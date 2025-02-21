@@ -1,4 +1,4 @@
-# Advanced Array Manipulation in SystemVerilog
+# SystemVerilog Array Manipulation: Boost Your Design Capabilities
 
 ## Introduction
 

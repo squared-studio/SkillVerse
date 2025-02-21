@@ -3,20 +3,20 @@
   - Why Bash is Your Indispensable Skill
   - Setting Up Your Bash Environment
   - Your First Bash Script: "Hello, World!" - Let's Get Scripting!
-## 2. [Bash Scripting Essentials: Your Toolkit](bash/chapter_00002.md)
+## 2. [Bash Scripting Essentials](bash/chapter_00002.md)
   - **Your First Script: "Hello, World!" and Beyond**
   - **Core Shell Commands: Your Navigation and File Management Toolkit**
   - **Variables: Your Script's Memory for Storing Data**
   - **Operators:  Performing Math, Logic, and Comparisons**
   - **Exercise: Build a Dynamic Greeting System - Enhanced!**
   - **Pro Tips for Bash Beginners (and Beyond!)**
-## 3. [Control Structures: Adding Logic and Automation to Your Scripts](bash/chapter_00003.md)
+## 3. [Control Structures](bash/chapter_00003.md)
   - **Conditional Statements: Making Smart Decisions in Your Scripts**
   - **Loops: Automating Repetitive Tasks with Ease**
   - **`case` Statements: Handling Multiple Choices Efficiently**
   - **Exercise: Automate an Enhanced Number Generator and Analyzer**
   - **Pro Tips for Mastering Control Structures**
-## 4. [Functions in Bash: Modularizing Your Scripts for Reusability](bash/chapter_00004.md)
+## 4. [Functions in Bash](bash/chapter_00004.md)
   - Defining Functions:  Creating Reusable Code Blocks
   - Function Parameters:  Passing Data to Functions
   - Returning Values from Functions:  Exit Status and Output Capture

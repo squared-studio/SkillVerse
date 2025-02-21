@@ -1,23 +1,23 @@
 # SystemVerilog
-## 1. [SystemVerilog Foundations: A Practical Introduction](SystemVerilog/chapter_00001.md)
+## 1. [SystemVerilog Foundations](SystemVerilog/chapter_00001.md)
   - Demystifying SystemVerilog
   - A Brief History of SystemVerilog
   - Why Use SystemVerilog? Key Applications
   - The Winning Advantages of SystemVerilog
   - Core Features That Set SystemVerilog Apart
-## 2. [SystemVerilog Tasks and Functions: Leverage Them for Design Efficiency](SystemVerilog/chapter_00002.md)
+## 2. [SystemVerilog Tasks and Functions](SystemVerilog/chapter_00002.md)
   - **Display Tasks: Your Simulation's Voice**
   - **Wavedump Tasks: Visualizing Signal Behavior**
   - **Time-Related Functions: Measuring Simulation Progress**
   - **Simulation Control Tasks: Guiding Simulation Flow**
   - **Hands-on Exercises with Solutions**
-## 3. [SystemVerilog Data Types: A Comprehensive Guide for Robust Design](SystemVerilog/chapter_00003.md)
+## 3. [SystemVerilog Data Types](SystemVerilog/chapter_00003.md)
   - **Built-in Data Types: The Foundation**
   - **Advanced Built-in Types: Specialized Hardware Modeling**
   - **User-Defined Data Types: Enhancing Readability and Abstraction**
   - **Packed vs. Unpacked Arrays: Memory Layout Matters**
   - **Exercises to Solidify Your Understanding**
-## 4. [Arrays in SystemVerilog: A Deep Dive](SystemVerilog/chapter_00004.md)
+## 4. [Arrays in SystemVerilog](SystemVerilog/chapter_00004.md)
   - Introduction to SystemVerilog Arrays
   - Packed vs. Unpacked Arrays: Memory Layout and Usage
   - Fixed-Size Arrays: Compile-Time Dimensions with Built-in Methods
@@ -25,7 +25,7 @@
   - Associative Arrays: Flexible Key-Based Lookup
   - Queues: Ordered Collections for Communication
   - Exercises to Practice Array Concepts
-## 5. [Advanced Array Manipulation in SystemVerilog](SystemVerilog/chapter_00005.md)
+## 5. [SystemVerilog Array Manipulation](SystemVerilog/chapter_00005.md)
   - Introduction
   - Array Indexing: Precision Access to Multidimensional Data
   - Array Manipulation Methods: Beyond Basic Indexing
@@ -33,7 +33,7 @@
   - Important Considerations for Array Manipulation
   - Practical Exercises to Enhance Your Skills
   - Pro-Level Tips for Array Mastery
-## 6. [SystemVerilog Operators: The Language of Hardware](SystemVerilog/chapter_00006.md)
+## 6. [SystemVerilog Operators](SystemVerilog/chapter_00006.md)
   - Introduction
   - Arithmetic Operators: The Foundation of Datapath Design
   - Logical vs. Bitwise Operators: Boolean vs. Vector Operations
@@ -42,13 +42,13 @@
   - Operator Precedence: Order of Evaluation
   - Common Pitfalls to Avoid
   - Practical Exercises to Solidify Operator Skills
-## 7. [Control Flow in SystemVerilog: Directing Execution](SystemVerilog/chapter_00007.md)
+## 7. [Control Flow in SystemVerilog](SystemVerilog/chapter_00007.md)
   - Introduction
   - Conditional Statements: Branching Logic
   - Case Statements: Multi-Way Branching Based on Value
   - Loop Constructs: Repetitive Operations
   - Exercises to Solidify Control Flow Understanding
-## 8. [Procedural Blocks in SystemVerilog: Behavioral Modeling Core](SystemVerilog/chapter_00008.md)
+## 8. [Procedural Blocks in SystemVerilog](SystemVerilog/chapter_00008.md)
   - Introduction
   - Initial Blocks: Simulation Setup and Initialization
   - Final Blocks: Simulation Wrap-up and Reporting
@@ -56,7 +56,7 @@
   - Assignment Types within Procedural Blocks: Blocking vs. Non-Blocking
   - Best Practices and Common Pitfalls with Procedural Blocks
   - Exercises to Practice Procedural Blocks
-## 9. [Tasks and Functions in SystemVerilog: Modular Code and Reusability](SystemVerilog/chapter_00009.md)
+## 9. [Tasks and Functions in SystemVerilog](SystemVerilog/chapter_00009.md)
   - Introduction
   - Key Differences: Tasks vs. Functions - Choosing the Right Tool
   - Task Implementation: Modeling Sequential Behavior
@@ -65,7 +65,7 @@
   - Advanced Features: Enhancing Task and Function Capabilities
   - Best Practices for Tasks and Functions
   - Exercises to Solidify Task and Function Concepts
-## 10. [Interprocess Communication (IPC) in SystemVerilog: Coordinating Parallel Processes](SystemVerilog/chapter_00010.md)
+## 10. [Interprocess Communication (IPC) in SystemVerilog](SystemVerilog/chapter_00010.md)
   - Introduction
   - Mailboxes: Message Passing for Data Exchange
   - Semaphores: Controlling Access to Shared Resources
@@ -73,7 +73,7 @@
   - Comparison: Choosing the Right IPC Mechanism
   - Exercises: Practical IPC Implementation
   - Best Practices for Effective IPC
-## 11. [SystemVerilog Interfaces: Streamlining Module Communication and Protocol Design](SystemVerilog/chapter_00011.md)
+## 11. [SystemVerilog Interfaces](SystemVerilog/chapter_00011.md)
   - Introduction: The Interface Revolution in SystemVerilog
   - Defining Interfaces: Creating Communication Contracts
   - Implementing Interfaces in Modules: Connecting and Using Communication Contracts
@@ -81,7 +81,7 @@
   - Practical Applications and Exercises to Master Interfaces
   - Best Practices and Common Pitfalls to Avoid
   - Conclusion: Interfaces - The Cornerstone of Modern Hardware Design
-## 12. [SystemVerilog Modules: The Foundation of Hierarchical and Reusable Hardware Designs](SystemVerilog/chapter_00012.md)
+## 12. [SystemVerilog Modules](SystemVerilog/chapter_00012.md)
   - Introduction: Modules as the Building Blocks of SystemVerilog Designs
   - Module Definition: Structuring Hardware Functionality
   - Ports and Parameters: Defining Module Interfaces and Configuration
@@ -89,7 +89,7 @@
   - Testbench Integration: Verifying Module Functionality
   - Best Practices for SystemVerilog Module Design
   - Exercises to Practice Module Design in SystemVerilog
-## 13. [SystemVerilog Randomization: Powering Advanced and Efficient Verification](SystemVerilog/chapter_00013.md)
+## 13. [SystemVerilog Randomization](SystemVerilog/chapter_00013.md)
   - Introduction: Embracing Constrained Random Verification for Design Confidence
   - Random Variable Types: Tailoring Randomness to Verification Needs
   - Constraint Specification: Guiding Randomization for Targeted Verification
@@ -97,7 +97,7 @@
   - Verification Integration: Building Coverage-Driven Random Testbenches
   - Best Practices for Effective SystemVerilog Randomization
   - Exercises to Master SystemVerilog Randomization
-## 14. [SystemVerilog Classes: Object-Oriented Programming for Advanced Verification](SystemVerilog/chapter_00014.md)
+## 14. [SystemVerilog Classes](SystemVerilog/chapter_00014.md)
   - Introduction: Building Scalable and Reusable Testbenches with OOP
   - Defining Classes: Blueprints for Objects
   - Creating Objects: Instances of Classes
@@ -106,7 +106,7 @@
   - Encapsulation: Data Hiding and Controlled Access
   - Randomization within Classes:  Constrained Random Stimulus Generation
   - Exercises to Practice SystemVerilog Classes and OOP
-## 15. [SystemVerilog Packages: Organizing and Reusing Verification Code](SystemVerilog/chapter_00015.md)
+## 15. [SystemVerilog Packages](SystemVerilog/chapter_00015.md)
   - Introduction: Namespaces for Modular and Reusable Code
   - Defining Packages: Creating Namespaces for Declarations
   - Importing Packages: Controlling Namespace Visibility
@@ -114,7 +114,7 @@
   - Package Export System: Creating Abstraction Layers and Hierarchical Packages
   - Best Practices for Effective Package Usage
   - Exercises to Practice SystemVerilog Packages
-## 16. [SystemVerilog File Operations: Interacting with External Data](SystemVerilog/chapter_00016.md)
+## 16. [SystemVerilog File Operations](SystemVerilog/chapter_00016.md)
   - Introduction: Bridging Simulation and the External World
   - File Handling Fundamentals
   - Reading Data from Files
@@ -124,7 +124,7 @@
   - Robust Error Handling Techniques
   - Best Practices Checklist for SystemVerilog File Operations
   - Practical Exercises to Solidify File Operation Skills
-## 17. [SystemVerilog Assertions (SVA): Formalizing and Automating Verification](SystemVerilog/chapter_00017.md)
+## 17. [SystemVerilog Assertions (SVA)](SystemVerilog/chapter_00017.md)
   - Introduction to Assertion-Based Verification: Specifying and Validating Design Behavior
   - Assertion Types: Immediate vs. Concurrent - Choosing the Right Tool for the Job
   - Immediate Assertions: Instantaneous Checks in Procedural Code
@@ -137,7 +137,7 @@
   - Best Practices Checklist for Effective SystemVerilog Assertion Usage
   - Practical Exercises to Master SystemVerilog Assertions
   - Comprehensive Function Reference Table for SystemVerilog Assertions
-## 18. [SystemVerilog Coverage: Measuring and Enhancing Verification Completeness](SystemVerilog/chapter_00018.md)
+## 18. [SystemVerilog Coverage](SystemVerilog/chapter_00018.md)
   - Introduction: Quantifying Verification and Closing Coverage Gaps
   - Code Coverage: Automatic Metrics of RTL Execution
   - Functional Coverage: User-Defined Metrics for Specification Verification

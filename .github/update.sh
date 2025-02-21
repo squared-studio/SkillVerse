@@ -12,7 +12,7 @@ for i in ${LIST} ; do
     # Add each directory as a section in README.md
     echo "  - ### [$(echo ${i} | sed -e 's/_/ /g')](${i}.md)" >> README.md
     # Create a new markdown file for each directory with a title
-    echo "# $(echo ${i} | sed -e 's/_/ /g' | sed -e 's/\:.*//g')" > ${i}.md
+    echo "# $(echo ${i} | sed -e 's/_/ /g')" > ${i}.md
 
     # Find all chapter markdown files in the directory and rename them temporarily
     LIST1=$(find ${i} -mindepth 1 -maxdepth 1 -type f -name "chapter_*.md")
@@ -33,7 +33,7 @@ for i in ${LIST} ; do
     # Add each chapter file as a section in the directory's markdown file
     LIST3=$(find ${i} -mindepth 1 -maxdepth 1 -type f -name "chapter_*.md")
     for j in ${LIST3} ; do
-        TITLE=$(cat ${j} | grep -m 1 "^# " | sed "s/^# //g")
+        TITLE=$(cat ${j} | grep -m 1 "^# " | sed "s/^# //g" | sed "s/:.*//g")
         echo "## $(echo "${j}" | sed "s/.*chapter_0*//g" | sed "s/\..*//g"). [$(echo ${TITLE} | sed -e 's/_/ /g')](${j})" >> ${i}.md
         cat ${j} | grep "^## " | sed "s/^## /  - /g" >> ${i}.md
     done
