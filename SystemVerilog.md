@@ -27,6 +27,7 @@
   - Exercises
 ## 5. [Array Manipulation](SystemVerilog/chapter_00005.md)
   - Introduction
+  - Array Indexing Fundamentals
   - Array Methods Overview
   - Enhanced Examples with Outputs
   - Key Considerations
