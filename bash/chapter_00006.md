@@ -1,68 +1,122 @@
-# Advanced Scripting
+# Advanced Scripting Techniques
 
-## Regular Expressions
-Regular expressions are patterns used to match character combinations in strings. They are commonly used with tools like `grep`, `sed`, and `awk`.
+## Regular Expressions (RegEx)
+Regular expressions are pattern-matching tools using special syntax to identify text patterns. They're essential for search, validation, and text transformations. Common in tools like `grep`, `sed`, and `awk`.
 
-Example:
+**Key Concepts**:
+- `^` = Start of line, `$` = End of line
+- `[0-9]` = Digit, `+` = One or more occurrences
+- `\d` = Digit (Perl-style, use `grep -P` where supported)
+- `.*` = Any character (wildcard)
+
+**Examples**:
 ```bash
-#!/bin/bash
+# Find lines containing digits (extended regex)
 echo "Hello 123" | grep -E '[0-9]+'
+
+# Validate email format (simplified)
+echo "test@domain.com" | grep -E '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$'
 ```
 
-## Sed and Awk
-`sed` and `awk` are powerful text processing tools.
 
-### Sed
-`sed` is a stream editor used to perform basic text transformations.
+## Sed: Stream Editor
+A line-oriented text processor for substitutions, deletions, and transformations.
 
-Example:
+**Common Flags**:
+- `s/pattern/replacement/` = Substitute first match per line
+- `/g` = Global replacement (all matches in line)
+- `-i` = In-place file modification (caution advised)
+
+**Examples**:
 ```bash
-#!/bin/bash
-echo "Hello World" | sed 's/World/Bash/'
+# Basic substitution
+echo "Hello World" | sed 's/World/Linux/'
+
+# Replace all digits with 'X'
+echo "User123" | sed 's/[0-9]/X/g'
+
+# Delete lines containing 'error' (case insensitive)
+sed '/error/Id' logfile.txt
 ```
 
-### Awk
-`awk` is a programming language for pattern scanning and processing.
 
-Example:
+## Awk: Column-Based Processing
+A versatile programming language for structured text parsing, ideal for columnar data.
+
+**Key Features**:
+- `$1`, `$2` = First/second column fields
+- `NF` = Number of fields, `NR` = Current record number
+- Built-in math functions and variables
+
+**Examples**:
 ```bash
-#!/bin/bash
-echo "1 2 3" | awk '{print $1 + $2 + $3}'
+# Sum values in the first column
+echo -e "5 apple\n3 banana\n2 cherry" | awk '{sum += $1} END {print sum}'  # Output: 10
+
+# Print lines where column 2 > 100
+awk '$2 > 100 {print $1, $3}' data.csv
+
+# Calculate average of second field
+awk '{total += $2; count++} END {print "Avg:", total/count}' numbers.txt
 ```
+
 
 ## Process Substitution
-Process substitution allows you to use the output of a command as a file.
+Treat command outputs as temporary files for programs requiring file arguments.
 
-Example:
+**Syntax**: `<(command)` or `>(command)`
+
+**Examples**:
 ```bash
-#!/bin/bash
+# Compare directory listings
 diff <(ls dir1) <(ls dir2)
+
+# Merge sorted outputs
+sort -m <(sort file1) <(sort file2) > combined_sorted.txt
 ```
+
 
 ## Command Substitution
-Command substitution allows you to capture the output of a command and use it as a variable.
+Embed command output into variables or other commands.
 
-Example:
+**Best Practices**:
+- Prefer `$(...)` over backticks `` `...` `` for readability and nesting
+- Use quotes to preserve whitespace: `"$(...)"`
+
+**Examples**:
 ```bash
-#!/bin/bash
-date=$(date)
-echo "Current date and time: $date"
+# Store date in variable
+current_date=$(date +%F)
+echo "Today: $current_date"
+
+# Inline usage in strings
+echo "System has $(df -h / | awk 'NR==2 {print $4}') free space in root."
 ```
 
-## Exercise
-Create a script that uses `awk` to calculate the sum of numbers in a file. The file should contain one number per line.
 
-Example solution:
+## Exercise: Sum Numbers in a File
+Create a script using `awk` to sum numbers from a file with one number per line.
+
+**Enhanced Solution**:
 ```bash
 #!/bin/bash
-# This script calculates the sum of numbers in a file using awk
+# Calculates sum of numbers with basic error checking
 
-# Define the file name
 file="numbers.txt"
 
-# Calculate the sum using awk
-sum=$(awk '{sum += $1} END {print sum}' $file)
+# Verify file exists and is readable
+if [[ ! -f "$file" || ! -r "$file" ]]; then
+  echo "Error: Cannot read $file" >&2
+  exit 1
+fi
 
-# Print the result
-echo "Sum of numbers in $file: $sum"
+# Calculate sum, handle empty files
+sum=$(awk '{sum += $1} END {printf sum}' "$file" 2>/dev/null)
+
+# Validate numeric result
+if [[ -n "$sum" ]]; then
+  echo "Sum of numbers in $file: $sum"
+else
+  echo "No valid numbers found or empty file"
+fi
 ```

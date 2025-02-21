@@ -1,80 +1,136 @@
-# Working with Files
+# Working with Files in Bash
 
 ## File Test Operators
-Bash provides several file test operators to check the properties of files.
+Use test operators to verify file properties. Always quote variables to handle spaces in filenames.
 
-Example:
+**Common Operators:**
+| Operator | Description                      |
+|----------|----------------------------------|
+| `-e`     | File exists                      |
+| `-f`     | Regular file (not directory)     |
+| `-d`     | Directory                        |
+| `-s`     | File exists and is not empty     |
+| `-r`     | Readable by current user         |
+| `-w`     | Writable by current user         |
+| `-x`     | Executable by current user       |
+| `-L`     | Symbolic link                    |
+| `-O`     | Owned by current user            |
+
+**Improved Example:**
 ```bash
 #!/bin/bash
 file="example.txt"
 
-if [ -e $file ]; then
+if [ -e "$file" ]; then
   echo "File exists"
+  if [ -s "$file" ]; then
+    echo "File is non-empty"
+  fi
 else
-  echo "File does not exist"
+  echo "File does not exist" >&2
+  exit 1
 fi
 ```
 
-Common file test operators:
-- `-e`: Check if file exists
-- `-f`: Check if file is a regular file
-- `-d`: Check if file is a directory
-- `-r`: Check if file is readable
-- `-w`: Check if file is writable
-- `-x`: Check if file is executable
-
 ## Reading and Writing Files
-You can read from and write to files using redirection and the `cat` command.
+### Best Practices:
+- Use `printf` for more reliable output formatting
+- Prefer `$(< file)` for efficient file reading
+- Always check write permissions before modifying files
 
-Example:
+**Enhanced Examples:**
 ```bash
-#!/bin/bash
-# Write to a file
-echo "Hello, World!" > example.txt
+# Safe write with error checking
+if [ -w . ]; then
+  printf "%s\n" "Hello World" "Second line" > example.txt
+else
+  echo "No write permission in current directory" >&2
+  exit 1
+fi
 
-# Read from a file
-cat example.txt
+# Read file into variable (alternative to cat)
+content=$(< example.txt)
+echo "$content"
+
+# Process file line-by-line
+while IFS= read -r line; do
+  echo "Processing: $line"
+done < example.txt
 ```
 
 ## File Permissions
-You can change file permissions using the `chmod` command.
+Understand permission modes:
+- Symbolic: `u+r` (user read), `g-w` (group write remove)
+- Octal: `755` (rwxr-xr-x), `644` (rw-r--r--)
 
-Example:
+**Practical Examples:**
 ```bash
-#!/bin/bash
-# Make a file executable
-chmod +x example.sh
+# Set secure permissions
+chmod 644 config.txt  # Owner: read/write, Others: read-only
+
+# Make executable and verify
+chmod u+x script.sh
+[ -x script.sh ] && ./script.sh
 ```
 
 ## Directory Management
-You can create and manage directories using the `mkdir` and `rmdir` commands.
+**Key Commands:**
+- `mkdir -p`: Create nested directories
+- `rm -rf`: Remove directories recursively (use with caution)
+- `find`: Advanced directory operations
 
-Example:
+**Improved Examples:**
 ```bash
-#!/bin/bash
-# Create a directory
-mkdir my_directory
+# Create nested directory structure
+mkdir -p project/{src,dist,test}
 
-# Remove a directory
-rmdir my_directory
+# Safe directory removal
+dir_to_remove="temp/"
+if [ -d "$dir_to_remove" ]; then
+  rm -rf "$dir_to_remove"
+  echo "Directory removed"
+fi
 ```
 
-## Exercise
-Create a script that checks if a file exists and is readable. If the file exists and is readable, print its contents.
+## File Handling Best Practices
+1. Always quote file path variables
+2. Verify operations with `-i` flags (e.g., `rm -i`)
+3. Use `mktemp` for temporary files
+4. Prefer absolute paths in critical operations
 
-Example solution:
+## Enhanced Exercise
+Create a script that:
+1. Accepts a filename as an argument
+2. Checks if it's a regular file and readable
+3. Displays contents with line numbers
+4. Handles edge cases (missing arguments, special files)
+
+**Improved Solution:**
 ```bash
 #!/bin/bash
-# This script checks if a file exists and is readable, then prints its contents
+# File inspection script
 
-# Define the file name
-file="example.txt"
-
-# Check if the file exists and is readable
-if [ -e $file ] && [ -r $file ]; then
-  # Print the file contents
-  cat $file
-else
-  echo "File does not exist or is not readable"
+# Verify argument provided
+if [ $# -ne 1 ]; then
+  echo "Usage: $0 <filename>" >&2
+  exit 1
 fi
+
+filename="$1"
+
+# Perform safety checks
+if [ ! -e "$filename" ]; then
+  echo "Error: File '$filename' does not exist" >&2
+  exit 2
+elif [ ! -f "$filename" ]; then
+  echo "Error: '$filename' is not a regular file" >&2
+  exit 3
+elif [ ! -r "$filename" ]; then
+  echo "Error: No read permission for '$filename'" >&2
+  exit 4
+fi
+
+# Display contents with line numbers
+echo "Contents of $filename:"
+nl -ba "$filename"
 ```
