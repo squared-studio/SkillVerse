@@ -14,8 +14,8 @@ Let's break down the "Hello, World!" script to grasp the fundamental concepts of
     ```
 
     *   **Explanation:**
-        *   `#!/bin/bash`:  This is the **shebang** line (pronounced "sha-bang"). It's the very first line of your script and is crucial. It tells the operating system which interpreter should be used to execute the script. In this case, we're specifying `/bin/bash`, which is the path to the Bash executable.  Without this line, the system might not know how to run your script directly.
-        *   `echo "Hello, World!"`:  `echo` is a built-in Bash command that displays text (or variables) to the standard output, which is typically your terminal screen.  Here, it will print the literal text "Hello, World!".
+        - `#!/bin/bash`:  This is the **shebang** line (pronounced "sha-bang"). It's the very first line of your script and is crucial. It tells the operating system which interpreter should be used to execute the script. In this case, we're specifying `/bin/bash`, which is the path to the Bash executable.  Without this line, the system might not know how to run your script directly.
+        - `echo "Hello, World!"`:  `echo` is a built-in Bash command that displays text (or variables) to the standard output, which is typically your terminal screen.  Here, it will print the literal text "Hello, World!".
 
 2.  **Make the Script Executable**: In your terminal, navigate to the directory where you saved `hello_world.sh`.  Use the `chmod` command to add execute permissions:
 

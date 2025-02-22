@@ -359,8 +359,8 @@ In this randomization example:
 
     *   Create a SystemVerilog class named `Car`.
     *   Add the following *public* properties:
-        *   `string model;` (to store the car model name)
-        *   `int speed;` (to store the current speed of the car, initially 0)
+        - `string model;` (to store the car model name)
+        - `int speed;` (to store the current speed of the car, initially 0)
     *   Implement a *public* method `function void accelerate();` that increases the `speed` property of the `Car` object by 10.
     *   In a module, instantiate a `Car` object, set its `model` property to "Sedan", call the `accelerate()` method twice, and then display the final `speed` of the car.
 
@@ -386,19 +386,19 @@ In this randomization example:
 
     *   Modify the `Car` class (from Exercise 1 or 3) to make the `speed` property `local` (private).
     *   Add two *public* methods:
-        *   `function int getSpeed();` that returns the current value of the `speed` property.
-        *   `function void setSpeed(int new_speed);` that allows setting the `speed` property to a new value, but only if the `new_speed` is not negative (add a check to prevent negative speeds). If the `new_speed` is negative, display an error message and do not update the speed.
+        - `function int getSpeed();` that returns the current value of the `speed` property.
+        - `function void setSpeed(int new_speed);` that allows setting the `speed` property to a new value, but only if the `new_speed` is not negative (add a check to prevent negative speeds). If the `new_speed` is negative, display an error message and do not update the speed.
     *   In a module, create a `Car` object. Try to directly access and modify the `speed` property (this should result in a compilation error, demonstrating encapsulation). Use the `setSpeed()` method to set the speed to a valid value, then use `getSpeed()` to retrieve and display the speed, demonstrating controlled access through public methods. Also, try to use `setSpeed()` to set a negative speed and observe the error message and that the speed is not updated.
 
 6.  **Randomization: `Transaction` Class with Constraints**:
 
     *   Create a class named `Transaction`.
     *   Add the following *random* properties (`rand` keyword):
-        *   `rand bit [31:0] address;`
-        *   `rand bit [7:0] data;`
+        - `rand bit [31:0] address;`
+        - `rand bit [7:0] data;`
     *   Add *constraint blocks* to the `Transaction` class to define the following constraints:
-        *   `address` should be within the range `[0x1000 : 0x8000]` (inclusive).
-        *   `data` should be an even number and within the range `[0 : 254]` (inclusive).  You'll need two separate constraints or combine them appropriately.
+        - `address` should be within the range `[0x1000 : 0x8000]` (inclusive).
+        - `data` should be an even number and within the range `[0 : 254]` (inclusive).  You'll need two separate constraints or combine them appropriately.
     *   In a module, create a `Transaction` object.  In a loop that iterates 10 times, call `randomize()` on the `Transaction` object.  After each successful randomization, display the randomized values of `address` and `data`.  Run the simulation and verify that all generated `address` and `data` values satisfy the defined constraints.
 
 These exercises will provide a solid foundation in SystemVerilog classes and object-oriented programming concepts, essential for building advanced verification environments. They cover class definition, object instantiation, inheritance, polymorphism, encapsulation, and randomization, all within the context of SystemVerilog for hardware verification.

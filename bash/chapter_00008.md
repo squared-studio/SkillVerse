@@ -226,8 +226,8 @@ echo "Disk usage monitoring completed."
     *   If the disk usage exceeds the threshold, an `alert_message` is constructed.
     *   `echo "$alert_message"`: The alert message is printed to the console.
     *   **Optional Email Alert:**
-        *   `if [ -n "$alert_email" ]`: Checks if the `alert_email` variable is not empty (meaning an email address is configured).
-        *   `echo "$alert_message" | mail -s "Disk Usage Alert" "$alert_email"`: If an email address is configured, the `mail` command is used to send an email alert.  **Note:** This requires the `mail` command to be installed and properly configured on your system to send emails.  You might need to install a mail transfer agent (MTA) like `postfix` or `sendmail` and configure it.
+        - `if [ -n "$alert_email" ]`: Checks if the `alert_email` variable is not empty (meaning an email address is configured).
+        - `echo "$alert_message" | mail -s "Disk Usage Alert" "$alert_email"`: If an email address is configured, the `mail` command is used to send an email alert.  **Note:** This requires the `mail` command to be installed and properly configured on your system to send emails.  You might need to install a mail transfer agent (MTA) like `postfix` or `sendmail` and configure it.
 *   **Informative Output:** The script prints a message indicating the completion of disk usage monitoring.
 
 **System Resources to Monitor (Beyond Disk Usage):**

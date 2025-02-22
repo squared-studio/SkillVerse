@@ -100,8 +100,8 @@ Time to write your very first Bash script and confirm that your environment is s
     echo "Hello, World!" # The 'echo' command prints text to your terminal.
     ```
     *   **Explanation:**
-        *   `#!/bin/bash`: This is called the "shebang" line. It's the magic ingredient that tells the system, "Hey, use Bash to run this script!". It must be the very first line of your script.
-        *   `echo "Hello, World!"`:  `echo` is a fundamental Bash command that simply prints whatever follows it to your terminal screen. In this case, it will print the text "Hello, World!".
+        - `#!/bin/bash`: This is called the "shebang" line. It's the magic ingredient that tells the system, "Hey, use Bash to run this script!". It must be the very first line of your script.
+        - `echo "Hello, World!"`:  `echo` is a fundamental Bash command that simply prints whatever follows it to your terminal screen. In this case, it will print the text "Hello, World!".
 
 2.  **Save and Make Executable**: Save the file as `hello_world.sh`. Then, in your terminal, navigate to the directory where you saved the file (using the `cd` command if needed).  Make the script executable using the `chmod` command:
 
