@@ -47,7 +47,7 @@
   - Parsing Logs: Extracting Insights from Data
   - System Monitoring Scripts: Keeping Tabs on System Health
   - Exercise: Batch Rename `.log` Files with Backup
-## 9. [Improved Best Practices for Shell Scripting](bash/chapter_00009.md)
+## 9. [Best Practices for Shell Scripting](bash/chapter_00009.md)
   - Writing Readable Code
   - Commenting and Documentation
   - Script Optimization
