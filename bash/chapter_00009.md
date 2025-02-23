@@ -1,4 +1,4 @@
-# Improved Best Practices for Shell Scripting
+# Best Practices for Shell Scripting
 
 ## Writing Readable Code
 
