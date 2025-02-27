@@ -21,3 +21,6 @@ Coverage analysis is used to measure how thoroughly the design has been verified
   - **Example**: Checking if all possible input combinations have been tested. For instance, verifying that all possible states of a state machine have been exercised.
 - **Coverage Metrics**: Quantitative measures of verification completeness.
   - **Example**: Using metrics like statement coverage, branch coverage, and condition coverage to assess verification completeness. For example, statement coverage measures the percentage of executable statements that have been executed, while branch coverage measures the percentage of branches (e.g., if-else conditions) that have been taken.
+
+###### Copyright (c) 2025 squared-studio
+

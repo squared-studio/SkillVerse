@@ -31,3 +31,6 @@
 ## Chapter 8: Integrate with Existing Verification Flows**
    - Hybrid Verification
    - Coverage Analysis
+
+###### Copyright (c) 2025 squared-studio
+

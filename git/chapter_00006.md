@@ -288,3 +288,6 @@ git fetch upstream
 git rebase upstream/main       # Rebase main onto upstream
 git push --force-with-lease origin main # Update your fork's main
 ```
+
+###### Copyright (c) 2025 squared-studio
+

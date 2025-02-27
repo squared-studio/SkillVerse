@@ -55,3 +55,6 @@
   - Keep Your Repo Tidy: A Place for Everything
   - Go the Extra Mile: Git Pro Tips
   - Bonus Git Power-Ups
+
+###### Copyright (c) 2025 squared-studio
+

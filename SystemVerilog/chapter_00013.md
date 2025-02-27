@@ -475,3 +475,6 @@ To maximize the benefits of SystemVerilog randomization and CRV, follow these be
     -   **Run Simulation and Analyze Coverage**: Run the simulation and analyze the generated coverage report. Verify that the coverage goals are met and that all constraints have been exercised. If coverage is not sufficient, refine the constraints, add more coverpoints, or increase the number of test cases.
 
 These exercises provide a practical introduction to using SystemVerilog randomization for verification, covering various aspects from basic random variable generation to advanced constraints, error injection, and coverage-driven verification methodologies. By completing these exercises, you will gain hands-on experience in leveraging randomization to create effective and efficient verification environments.
+
+###### Copyright (c) 2025 squared-studio
+

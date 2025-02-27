@@ -92,3 +92,6 @@ utils.o: utils.c
 clean:
     rm -f program main.o utils.o
 ```
+
+###### Copyright (c) 2025 squared-studio
+

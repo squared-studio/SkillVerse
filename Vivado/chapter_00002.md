@@ -52,3 +52,6 @@ Before installing Vivado, ensure that your system meets the following requiremen
 2. **Environment Setup**: Set up the environment variables required for Vivado to function correctly. This is typically done automatically during installation, but you can verify by checking the settings in your system's environment variables.
 
 By following these steps, you will have Vivado installed and ready to use on your system. You can now proceed to create and manage your FPGA and SoC designs using the powerful tools provided by Vivado.
+
+###### Copyright (c) 2025 squared-studio
+

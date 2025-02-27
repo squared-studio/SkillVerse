@@ -425,3 +425,6 @@ This workflow allows you to quickly switch to a hotfix branch, resolve an urgent
 | `git stash`               | Temporarily save uncommitted changes                                    |
 | `git stash list`          | List all saved stashes                                                   |
 | `git stash pop`           | Apply and remove the most recent stash                                   |
+
+###### Copyright (c) 2025 squared-studio
+

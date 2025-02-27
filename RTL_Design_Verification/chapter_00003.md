@@ -338,3 +338,6 @@ This chapter introduces constrained-random verification, a powerful methodology 
         - If certain FIFO error conditions (overflow, underflow) are not covered, relax constraints that prevent these conditions and add constraints to encourage them.
     *   **Re-run Simulations and Re-analyze Coverage:** Re-run simulations with the refined constraints and generate new coverage reports. Compare the new coverage reports with the previous reports. Check if coverage has improved in the targeted areas and if overall coverage has increased.
     *   **Iterate:** Repeat the process of analyzing coverage, refining constraints, and re-simulating until you achieve your desired coverage goals for the FIFO design.
+
+###### Copyright (c) 2025 squared-studio
+

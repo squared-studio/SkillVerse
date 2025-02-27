@@ -247,3 +247,6 @@ This automatically closes issue #12 when the pull request is merged, streamlinin
 | `git fetch`         | Download changes from remote but don't merge          |
 | `git merge`         | Integrate changes from one branch into another        |
 | `gh pr create`      | Create a pull request (using GitHub CLI)              |
+
+###### Copyright (c) 2025 squared-studio
+

@@ -420,3 +420,6 @@ module timestamp_data_logger;
 
 endmodule
 ```
+
+###### Copyright (c) 2025 squared-studio
+

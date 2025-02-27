@@ -41,3 +41,6 @@
   - Integrating Makefile with Other Build Tools
   - Case Studies and Real-world Examples
   - Simple Exercise
+
+###### Copyright (c) 2025 squared-studio
+

@@ -27,3 +27,6 @@ Open-source tools are freely available and can be used for learning and small pr
 - **CoSA**: A formal verification tool for hardware designs.
   - **Features**: Supports property checking and model checking.
   - **Example**: Using CoSA to verify the correctness of a combinational logic circuit by writing properties and running checks.
+
+###### Copyright (c) 2025 squared-studio
+

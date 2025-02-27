@@ -430,3 +430,6 @@ This chapter builds upon the foundational UVM concepts introduced in earlier and
     *   **Register Factory Overrides in Test:**  In your UVM test class, use the UVM factory mechanism (`set_type_override_by_type()` or `set_type_override_by_name()`) to register type overrides to replace the default `fifo_driver` or `fifo_monitor` with your variations.
     *   **Run Tests with Different Component Implementations:**  Run different test cases, each using a different factory override to activate a different component implementation. Observe how the testbench behavior changes based on the component replacement.
     *   **Experiment with Instance Overrides (Optional):**  Explore using instance overrides (`set_inst_override_by_type()` or `set_inst_override_by_name()`) to replace specific instances of components instead of all components of a type.
+
+###### Copyright (c) 2025 squared-studio
+

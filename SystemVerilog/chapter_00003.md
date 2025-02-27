@@ -292,3 +292,6 @@ Test your knowledge of SystemVerilog data types with these exercises. Solutions 
     ```
 
 By understanding and effectively using SystemVerilog's data types, you can create accurate, efficient, and maintainable hardware designs and verification environments. Experiment with these types and exercises to deepen your mastery.
+
+###### Copyright (c) 2025 squared-studio
+

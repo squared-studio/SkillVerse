@@ -194,3 +194,6 @@ This chapter focuses on Finite State Machines (FSMs), a fundamental concept in d
     *   **Synthesis:** Synthesize both implementations (binary and one-hot) using a synthesis tool (e.g., Vivado Synthesis or Quartus Prime). Use the same target technology and constraints for both syntheses.
     *   **Compare Synthesis Reports:** Compare the synthesis reports for area (number of flip-flops, LUTs) and timing (critical path delay) for both implementations.
     *   **Analyze Results:** Discuss the trade-offs between binary and one-hot encoding in terms of area and performance for the specific FSM design. Observe how state encoding choices can impact implementation characteristics.
+
+###### Copyright (c) 2025 squared-studio
+

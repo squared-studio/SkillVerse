@@ -50,3 +50,6 @@
 - ARM AMBA AXI Protocol Specification
 - Online Tutorials and Courses
 - Relevant Research Papers and Articles
+
+###### Copyright (c) 2025 squared-studio
+

@@ -197,3 +197,6 @@ This chapter introduces the fundamental concepts of memory design in digital sys
         * Read data from the FIFO until it's empty, verify `empty` flag.
         * Test concurrent read and write operations.
         * Test FIFO reset functionality.
+
+###### Copyright (c) 2025 squared-studio
+

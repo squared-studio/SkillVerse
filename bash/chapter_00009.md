@@ -322,3 +322,6 @@ else
   exit 1 # Exit script with error if function failed
 fi
 ```
+
+###### Copyright (c) 2025 squared-studio
+

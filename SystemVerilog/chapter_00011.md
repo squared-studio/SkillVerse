@@ -422,3 +422,6 @@ interface smart_bus_if #(parameter DATA_WIDTH = 8);
   endtask
 endinterface
 ```
+
+###### Copyright (c) 2025 squared-studio
+

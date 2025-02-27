@@ -97,3 +97,6 @@ To debug the Makefile, run:
 make -n
 ```
 
+
+###### Copyright (c) 2025 squared-studio
+

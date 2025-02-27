@@ -226,3 +226,6 @@ endmodule
 7.  **Controlled Clock Generator (`forever` Loop)**: Create a testbench module that uses a `forever` loop with a `#delay` to simulate a clock signal.  Have the simulation run for a fixed number of clock cycles (e.g., 20 cycles) and then terminate using `disable`. Display the cycle count in each iteration.
 
 By practicing with these exercises and understanding the nuances of each control flow statement, you'll gain the proficiency to write effective and well-structured SystemVerilog code for a wide range of hardware design and verification tasks.
+
+###### Copyright (c) 2025 squared-studio
+

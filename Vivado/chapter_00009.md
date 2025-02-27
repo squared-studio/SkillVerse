@@ -37,3 +37,6 @@ In this chapter, we will explore how to use the IP Catalog in Vivado to integrat
 5. Use the IP Integrator tool to connect the FIFO IP core to other modules in your design.
 
 By following these steps, you can efficiently integrate IP cores from the Vivado IP Catalog into your design, leveraging pre-built components to accelerate your development process.
+
+###### Copyright (c) 2025 squared-studio
+

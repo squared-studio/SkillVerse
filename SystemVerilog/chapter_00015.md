@@ -356,3 +356,6 @@ To leverage the full benefits of SystemVerilog packages and maintain a clean and
         -   **Resolve the name conflict using renaming imports (if supported by your SystemVerilog simulator)**.  If your simulator supports renaming imports (some older simulators might not fully support this feature), try to import the `print_message()` function from one of the packages with a different name (alias), for example: `import package_A_pkg::print_message as print_message_A;`. Then, call both `print_message_A()` and `package_B_pkg::print_message()` to demonstrate calling both functions without conflict.
 
 These exercises will provide practical experience in defining, importing, using, and organizing SystemVerilog packages, as well as handling namespace management and conflict resolution, which are crucial skills for developing robust and maintainable verification environments.
+
+###### Copyright (c) 2025 squared-studio
+
