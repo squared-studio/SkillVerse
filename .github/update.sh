@@ -39,3 +39,17 @@ for i in ${LIST} ; do
     done
 
 done
+
+list=$(find -type f -name "*.md")
+
+for file in ${list} ; do
+
+  if grep -Eq "Copyright \(c\) [0-9]{4} squared-studio" $file ; then
+    sed -i "s/Copyright (c) [0-9]\{4\} squared-studio/Copyright (c) $(date +%Y) squared-studio/g" $file
+  else
+    echo "" >> $file
+    echo "###### Copyright (c) $(date +%Y) squared-studio" >> $file
+    echo "" >> $file
+  fi
+
+done
