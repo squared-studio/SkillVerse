@@ -45,7 +45,7 @@
   - Adding an IP Core to Your Design
   - Integrating the IP Core
   - Generating the IP Core
-  - Example: Adding a FIFO IP Core
+  - Example
 
 ##### Copyright (c) 2025 squared-studio
 

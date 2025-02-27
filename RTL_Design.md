@@ -1,10 +1,10 @@
 # RTL Design
 ## 1. [Introduction to RTL Design](RTL_Design/chapter_00001.md)
   - What is RTL (Register-Transfer Level) Design?
-  - Abstraction Levels in Digital Design:
-  - Importance of RTL Design in ASIC and FPGA Development:
-  - RTL Design Flow: Specification, Design, Verification, Synthesis, Implementation:
-  - Introduction to Synthesis and FPGA/ASIC Implementation:
+  - Abstraction Levels in Digital Design
+  - Importance of RTL Design in ASIC and FPGA Development
+  - RTL Design Flow
+  - Introduction to Synthesis and FPGA/ASIC Implementation
   - Learning Resources
   - Exercises
 ## 2. [Digital Design Fundamentals Review](RTL_Design/chapter_00002.md)

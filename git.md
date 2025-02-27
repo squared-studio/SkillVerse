@@ -1,6 +1,6 @@
 # git
 ## 1. [Introduction to Git](git/chapter_00001.md)
-  - Understanding Git: Your Project's Time Machine
+  - Understanding Git
   - Why Git is the Industry Standard
   - Installing Git on Your System
   - Next Steps After Installation
@@ -37,7 +37,7 @@
   - Identifying Merge Conflicts
   - Step-by-Step Guide to Resolving Merge Conflicts
   - Pro Conflict Resolution Toolkit
-  - Real-World Scenario: The Great API Endpoint Debate
+  - Real-World Scenario
   - Merge Conflict Resolution Cheat Sheet
   - Wisdom Nuggets for Conflict Wrangling
 ## 6. [Git Workflow Guide](git/chapter_00006.md)
@@ -50,10 +50,10 @@
 ## 7. [Level Up Your Git Skills](git/chapter_00007.md)
   - Craft Commit Messages That Shine
   - Branch Like a Git Guru
-  - Stay Synced Upstream: Remote Harmony
-  - Review Code Before It Lands: Quality First
-  - Keep Your Repo Tidy: A Place for Everything
-  - Go the Extra Mile: Git Pro Tips
+  - Stay Synced Upstream
+  - Review Code Before It Lands
+  - Keep Your Repo Tidy
+  - Go the Extra Mile
   - Bonus Git Power-Ups
 
 ##### Copyright (c) 2025 squared-studio
