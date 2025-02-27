@@ -35,7 +35,7 @@ for i in ${LIST} ; do
     for j in ${LIST3} ; do
         TITLE=$(cat ${j} | grep -m 1 "^# " | sed "s/^# //g" | sed "s/:.*//g")
         echo "## $(echo "${j}" | sed "s/.*chapter_0*//g" | sed "s/\..*//g"). [$(echo ${TITLE} | sed -e 's/_/ /g')](${j})" >> ${i}.md
-        cat ${j} | grep "^## " | sed "s/^## /  - /g" >> ${i}.md
+        cat ${j} | grep "^## " | sed "s/^## /  - /g" | sed "s/:.*//g" >> ${i}.md
     done
 
 done
