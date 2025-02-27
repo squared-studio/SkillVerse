@@ -58,5 +58,5 @@
   - Include `set -euxo pipefail`
   - Exercise
 
-###### Copyright (c) 2025 squared-studio
+##### Copyright (c) 2025 squared-studio
 

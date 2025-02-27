@@ -87,5 +87,5 @@ This chapter provides a foundational understanding of Register-Transfer Level (R
   - **Identify Data Paths and Operations:** Trace the arrows representing data flow between registers. Identify functional blocks like "ALU (Arithmetic Logic Unit)," "Adder," "Multiplier," "Shifter," "Memory Interface," "Control Unit." These blocks represent operations performed on data as it moves between registers.
   - **Recognize RTL Representation:** Understand that the registers and the data paths connecting them, along with the functional blocks performing operations, are the core components represented in RTL design. The block diagram provides a visual, higher-level representation of what would be described in detail using RTL code.
 
-###### Copyright (c) 2025 squared-studio
+##### Copyright (c) 2025 squared-studio
 

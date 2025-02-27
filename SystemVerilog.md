@@ -145,5 +145,5 @@
   - Best Practices for Effective Coverage-Driven Verification
   - Comprehensive Function Reference Table for SystemVerilog Coverage
 
-###### Copyright (c) 2025 squared-studio
+##### Copyright (c) 2025 squared-studio
 

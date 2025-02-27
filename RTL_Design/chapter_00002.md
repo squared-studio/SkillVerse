@@ -144,5 +144,5 @@ This chapter revisits the essential building blocks of digital circuits, providi
     - Simple finite state machine (e.g., sequence detector - covered in more detail in later chapters, but a basic example here is helpful)
   - **SystemVerilog Constructs:** Focus on using `always_ff` blocks with appropriate clock edge triggering for sequential logic. Experiment with different types of flip-flops (D, JK, SR if desired for practice).
 
-###### Copyright (c) 2025 squared-studio
+##### Copyright (c) 2025 squared-studio
 

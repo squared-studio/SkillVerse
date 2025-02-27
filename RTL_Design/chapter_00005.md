@@ -198,5 +198,5 @@ This chapter introduces the fundamental concepts of memory design in digital sys
         * Test concurrent read and write operations.
         * Test FIFO reset functionality.
 
-###### Copyright (c) 2025 squared-studio
+##### Copyright (c) 2025 squared-studio
 

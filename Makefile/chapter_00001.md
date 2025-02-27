@@ -93,5 +93,5 @@ clean:
     rm -f program main.o utils.o
 ```
 
-###### Copyright (c) 2025 squared-studio
+##### Copyright (c) 2025 squared-studio
 

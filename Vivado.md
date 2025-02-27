@@ -47,5 +47,5 @@
   - Generating the IP Core
   - Example: Adding a FIFO IP Core
 
-###### Copyright (c) 2025 squared-studio
+##### Copyright (c) 2025 squared-studio
 

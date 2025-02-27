@@ -24,5 +24,5 @@
   - ### [VIM](VIM.md)
   - ### [Vivado](Vivado.md)
 
-###### Copyright (c) 2025 squared-studio
+##### Copyright (c) 2025 squared-studio
 

@@ -56,5 +56,5 @@
   - Go the Extra Mile: Git Pro Tips
   - Bonus Git Power-Ups
 
-###### Copyright (c) 2025 squared-studio
+##### Copyright (c) 2025 squared-studio
 

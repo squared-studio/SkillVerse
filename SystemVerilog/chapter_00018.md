@@ -349,5 +349,5 @@ module data_bus_coverage_example;
 endmodule : data_bus_coverage_example
 ```
 
-###### Copyright (c) 2025 squared-studio
+##### Copyright (c) 2025 squared-studio
 
