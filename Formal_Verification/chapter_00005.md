@@ -24,3 +24,6 @@ Writing properties is a crucial part of formal verification. Properties describe
 - **Liveness Properties**: Ensure that something good eventually happens.
   - **Example**: assert property (eventually (done)); // Checks that the done signal is eventually asserted.
     - **Explanation**: This property ensures that the 'done' signal is eventually asserted, indicating that the design completes its intended operation.
+
+###### Copyright (c) 2025 squared-studio
+

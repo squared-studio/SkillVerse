@@ -211,3 +211,6 @@ This chapter introduces the crucial steps of synthesis and implementation in the
         * **Device Utilization Report:**  Detailed report showing the utilization of FPGA resources (LUTs, flip-flops, routing resources, BRAMs, DSPs) after implementation.
         * **Power Report (if available):**  Estimate of power consumption after implementation.
     * **Device View (Optional):**  Explore the device view in the FPGA tool to visualize how the design is placed and routed on the FPGA fabric (if the tool offers such a view).
+
+###### Copyright (c) 2025 squared-studio
+

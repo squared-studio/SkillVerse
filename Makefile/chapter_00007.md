@@ -120,3 +120,6 @@ set(CMAKE_CXX_STANDARD 11)
 add_executable(program main.c utils.c)
 ```
 
+
+###### Copyright (c) 2025 squared-studio
+

@@ -24,3 +24,6 @@ PSL is another language for specifying properties of digital designs. It is simi
   - **Example**: always (a -> eventually b); // Checks if b eventually follows a.
 - **Verification Directives**: Instructions for the verification tool.
   - **Example**: assume property (a); // Assumes a is always true during verification.
+
+###### Copyright (c) 2025 squared-studio
+

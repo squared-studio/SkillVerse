@@ -133,3 +133,6 @@ If you see "Hello, World!" printed in your terminal, congratulations! You've suc
 **Pro Challenge:  Personalized Greeting!**  Ready for a tiny modification?  Edit your `hello_world.sh` script to make it greet you by name!
 
 *   **Hint:** Bash has a built-in variable called `$USER` that automatically stores your username.  Try using this variable within your `echo` command to personalize the greeting.  For example, you could try something like `echo "Hello, $USER!"`.
+
+###### Copyright (c) 2025 squared-studio
+

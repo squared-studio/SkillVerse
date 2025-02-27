@@ -367,3 +367,6 @@ endmodule
 7.  **`check_range_function` with Default Argument**: Implement a function named `check_range_function` that checks if an input integer `value` is within a specified range [`min_val`, `max_val`]. The function should take `value`, `min_val`, and `max_val` as `input` arguments and return a `bit` (1 for in range, 0 for out of range). Provide a default value of 0 for `min_val` and 100 for `max_val`. Test the function with different values, including cases using the default range and overriding the default range.
 
 By mastering tasks and functions and practicing with these exercises, you will be well-equipped to write modular, reusable, and efficient SystemVerilog code for complex hardware designs and sophisticated verification environments.
+
+###### Copyright (c) 2025 squared-studio
+

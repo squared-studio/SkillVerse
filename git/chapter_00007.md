@@ -231,3 +231,6 @@ Git is constantly evolving. Stay curious and keep exploring!
 By making these best practices a habit, you're not just *using* Git—you're *mastering* it. The result? A smoother, more efficient workflow that lets you and your team focus on building amazing things.
 
 **Remember**: Git is your coding ally. Treat it well, keep learning, and it will be your steadfast partner in every project journey.
+
+###### Copyright (c) 2025 squared-studio
+

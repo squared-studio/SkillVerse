@@ -267,3 +267,6 @@ This chapter dives into the practical aspects of building verification environme
         - Report pass/fail status for each transaction.
         - Keep track of overall test status (pass/fail).
     *   **Scoreboard Class (Optional):** For better organization, encapsulate the scoreboard logic within a SystemVerilog class.
+
+###### Copyright (c) 2025 squared-studio
+

@@ -470,3 +470,6 @@ This is a basic example, and real-world testbenches can be significantly more co
     -   **Self-Checking**: The testbench should automatically determine if the FIFO is working correctly and report pass/fail status at the end of the simulation without manual waveform inspection. Use `$display` statements to indicate test status (pass/fail) clearly.
 
 These exercises will provide hands-on practice in designing SystemVerilog modules, using parameters, creating hierarchical designs, and developing basic testbenches for verification. They cover essential concepts for building more complex hardware systems in SystemVerilog.
+
+###### Copyright (c) 2025 squared-studio
+

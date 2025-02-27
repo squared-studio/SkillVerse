@@ -21,3 +21,6 @@ Equivalence checking is used to ensure that two versions of a design are functio
   - **Example**: Ensuring that two different implementations of a state machine produce the same sequence of states.
 - **Formal Methods**: Techniques used to prove equivalence.
   - **Example**: Using formal proofs to show that two designs are equivalent under all possible inputs.
+
+###### Copyright (c) 2025 squared-studio
+

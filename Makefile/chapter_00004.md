@@ -89,3 +89,6 @@ program: $(OBJ)
 clean:
     rm -f program $(OBJ)
 ```
+
+###### Copyright (c) 2025 squared-studio
+

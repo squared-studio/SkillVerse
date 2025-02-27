@@ -37,3 +37,6 @@
 ## 10. [Advanced RTL Design Topics (Optional)](RTL_Design/chapter_00010.md)
   - Learning Resources
   - Exercises
+
+###### Copyright (c) 2025 squared-studio
+

@@ -187,3 +187,6 @@ Welcome to the world of hardware verification! This chapter lays the foundation 
     *   **Outline Testbench Architecture (for the simple DUT):**  Sketch a basic block diagram of a testbench for This chapter. What components would you need? (clock generation, reset, stimulus driver, monitor, checker).
     *   **Test Case Strategy (for the simple DUT):**  How would you generate test cases? (Directed tests to cover all input combinations for the adder might be feasible for a small bit-width adder).
     *   **Start a Verification Plan Document:**  Begin writing a simple verification plan document outlining these elements for your chosen simple RTL module. This will be a very basic plan, but it's a starting point for understanding the planning process.
+
+###### Copyright (c) 2025 squared-studio
+

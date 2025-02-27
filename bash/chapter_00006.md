@@ -120,3 +120,6 @@ else
   echo "No valid numbers found or empty file"
 fi
 ```
+
+###### Copyright (c) 2025 squared-studio
+

@@ -34,3 +34,6 @@ synth_design -top top_module -flatten_hierarchy full -opt_mode Performance -reti
 ```
 
 By following these steps, you can synthesize your RTL design using Vivado and analyze the results to ensure your design meets the required specifications.
+
+###### Copyright (c) 2025 squared-studio
+

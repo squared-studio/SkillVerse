@@ -23,3 +23,6 @@
 ## 8. [Chapter 8](Formal_Verification/chapter_00008.md)
   - Hybrid Verification
   - Coverage Analysis
+
+###### Copyright (c) 2025 squared-studio
+

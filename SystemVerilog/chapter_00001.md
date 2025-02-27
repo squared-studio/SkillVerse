@@ -74,3 +74,6 @@ SystemVerilog's richness lies in its extensive set of features, making it a powe
     - **Verification of Complex Interactions**:  Simulating and verifying systems with concurrent operations and interactions, essential for modern, high-performance designs.
 
 By leveraging these features, SystemVerilog empowers hardware engineers to design and verify increasingly sophisticated digital systems with greater efficiency, reliability, and confidence.
+
+###### Copyright (c) 2025 squared-studio
+

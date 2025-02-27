@@ -402,3 +402,6 @@ In this randomization example:
     *   In a module, create a `Transaction` object.  In a loop that iterates 10 times, call `randomize()` on the `Transaction` object.  After each successful randomization, display the randomized values of `address` and `data`.  Run the simulation and verify that all generated `address` and `data` values satisfy the defined constraints.
 
 These exercises will provide a solid foundation in SystemVerilog classes and object-oriented programming concepts, essential for building advanced verification environments. They cover class definition, object instantiation, inheritance, polymorphism, encapsulation, and randomization, all within the context of SystemVerilog for hardware verification.
+
+###### Copyright (c) 2025 squared-studio
+

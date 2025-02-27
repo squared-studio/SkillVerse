@@ -22,3 +22,6 @@
   - Exercises
 ## 8. [Verification Project and Advanced Verification Topics](RTL_Design_Verification/chapter_00008.md)
   - Learning Resources
+
+###### Copyright (c) 2025 squared-studio
+

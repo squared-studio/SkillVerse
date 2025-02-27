@@ -364,3 +364,6 @@ git clone --branch feature-branch https://github.com/username/repo.git
 ```
 
   * This command clones only the `feature-branch` branch and its history, making the cloning process faster and reducing the size of the cloned repository, especially for large projects.
+
+###### Copyright (c) 2025 squared-studio
+

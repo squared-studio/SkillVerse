@@ -111,3 +111,6 @@ chmod +x run_simulation.sh
 ```
 
 By following these steps, you can perform RTL simulation using Vivado's command-line tools, allowing for greater flexibility and automation in your design verification process.
+
+###### Copyright (c) 2025 squared-studio
+

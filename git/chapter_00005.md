@@ -303,3 +303,6 @@ Quick commands to help you navigate merge conflicts:
 *   **"Conflicts are Opportunities for Better Design"**: Embrace merge conflicts as chances to have important conversations about code. Conflicts often highlight areas where different developers made assumptions or took diverging paths. Resolving them collaboratively can lead to a more robust and well-thought-out design as you reconcile different perspectives and requirements.
 *   **Leverage GitHub/GitLab's Web-Based Conflict Editor**: GitHub and GitLab offer web-based interfaces for resolving merge conflicts directly in the browser when you create a pull request. These editors often provide a visual side-by-side diff and tools to help you choose between versions or manually edit the merged result online, which can be convenient for simpler conflicts or quick online collaboration.
 *   **Celebrate Conflict Resolutions!**:  Resolving merge conflicts is a sign of active collaboration and progress. Acknowledge and celebrate successful resolutions within your team—perhaps with a `:tada:` emoji in your pull request comments!—to foster a positive attitude towards collaboration and conflict resolution.
+
+###### Copyright (c) 2025 squared-studio
+

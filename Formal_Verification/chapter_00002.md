@@ -31,3 +31,6 @@ Temporal logic is used to reason about sequences of events in time, which is cru
   - **Eventually (F)**: A condition that must eventually be true.
   - **Next (X)**: A condition that must be true in the next state.
   - **Until (U)**: A condition that must be true until another condition becomes true.
+
+###### Copyright (c) 2025 squared-studio
+

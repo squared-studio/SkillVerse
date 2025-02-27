@@ -279,3 +279,6 @@ endmodule
     -   Another module using **non-blocking assignments** to attempt to swap the values (and observe the outcome). Display the variable values after the assignments in both modules to illustrate the difference in behavior.
 
 By working through these exercises and carefully considering the best practices, you will develop a strong foundation in using SystemVerilog procedural blocks effectively for both RTL design and verification.
+
+###### Copyright (c) 2025 squared-studio
+

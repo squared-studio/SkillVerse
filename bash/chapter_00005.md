@@ -134,3 +134,6 @@ fi
 echo "Contents of $filename:"
 nl -ba "$filename"
 ```
+
+###### Copyright (c) 2025 squared-studio
+

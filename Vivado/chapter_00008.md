@@ -23,3 +23,6 @@ In this chapter, we will cover the steps to debug your design using the Vivado G
 3. If you find any issues, go back to your RTL code, make the necessary changes, and re-run the implementation and debugging process.
 
 By following these steps, you can debug your design using Vivado and ensure it functions correctly on the FPGA.
+
+###### Copyright (c) 2025 squared-studio
+

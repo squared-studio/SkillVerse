@@ -25,3 +25,6 @@ Deadlock and livelock are critical issues in digital designs. Formal verificatio
   - **Example**: Two processes continuously changing states without making progress.
   - **Checking Techniques**: Writing properties to detect and prevent livelock conditions.
     - **Example**: assert property (!livelock); // Checks that livelock does not occur.
+
+###### Copyright (c) 2025 squared-studio
+

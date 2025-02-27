@@ -216,3 +216,6 @@ sudo apt-get -y install vim
 | ctrl+wv | Split windows vertically |
 
 Source: http://www.keyxl.com/aaa8263/290/VIM-keyboard-shortcuts.htm
+
+###### Copyright (c) 2025 squared-studio
+

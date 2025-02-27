@@ -571,3 +571,6 @@ module packet_protocol_checker(
 
 endmodule : packet_protocol_checker
 ```
+
+###### Copyright (c) 2025 squared-studio
+
