@@ -114,7 +114,16 @@
   - Package Export System
   - Best Practices for Effective Package Usage
   - Exercises to Practice SystemVerilog Packages
-## 16. [SystemVerilog File Operations](SystemVerilog/chapter_00016.md)
+## 16. [SystemVerilog Command Line Arguments](SystemVerilog/chapter_00016.md)
+  - Introduction
+  - Accessing Command Line Arguments
+  - Parameter Overriding with Command Line Arguments
+  - Best Practices for Command Line Arguments
+  - Comprehensive Function Reference Table
+  - Robust Error Handling for Command Line Arguments
+  - Best Practices Checklist for SystemVerilog Command Line Arguments
+  - Practical Exercises to Solidify Command Line Argument Skills
+## 17. [SystemVerilog File Operations](SystemVerilog/chapter_00017.md)
   - Introduction
   - File Handling Fundamentals
   - Reading Data from Files
@@ -124,7 +133,7 @@
   - Robust Error Handling Techniques
   - Best Practices Checklist for SystemVerilog File Operations
   - Practical Exercises to Solidify File Operation Skills
-## 17. [SystemVerilog Assertions (SVA)](SystemVerilog/chapter_00017.md)
+## 18. [SystemVerilog Assertions (SVA)](SystemVerilog/chapter_00018.md)
   - Introduction to Assertion-Based Verification
   - Assertion Types
   - Immediate Assertions
@@ -137,7 +146,7 @@
   - Best Practices Checklist for Effective SystemVerilog Assertion Usage
   - Practical Exercises to Master SystemVerilog Assertions
   - Comprehensive Function Reference Table for SystemVerilog Assertions
-## 18. [SystemVerilog Coverage](SystemVerilog/chapter_00018.md)
+## 19. [SystemVerilog Coverage](SystemVerilog/chapter_00019.md)
   - Introduction
   - Code Coverage
   - Functional Coverage
