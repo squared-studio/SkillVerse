@@ -153,6 +153,17 @@
   - Practical Exercises to Solidify Coverage Concepts
   - Best Practices for Effective Coverage-Driven Verification
   - Comprehensive Function Reference Table for SystemVerilog Coverage
+## 20. [SystemVerilog Macros](SystemVerilog/chapter_00020.md)
+  - Introduction
+  - Defining and Using Macros
+  - Types and Applications of Macros
+  - Scope of Macro Definitions
+  - Predefined Macros
+  - Best Practices for Macros
+  - Comprehensive Directive Reference Table
+  - Robust Macro Usage and Error Prevention
+  - Best Practices Checklist for SystemVerilog Macros
+  - Practical Exercises to Solidify Macro Skills
 
 ##### Copyright (c) 2025 squared-studio
 
