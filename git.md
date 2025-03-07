@@ -19,19 +19,19 @@
   - Pull
   - Pull Request (PR)
 ## 4. [Essential Git Commands](git/chapter_00004.md)
-  - `git init`
-  - `git clone`
-  - `git status`
-  - `git add`
-  - `git commit`
-  - `git push`
-  - `git fetch`
-  - `git pull`
-  - `git checkout`
-  - `git log`
-  - `git diff`
-  - `git reset`
-  - `git stash`
+  - git init
+  - git clone
+  - git status
+  - git add
+  - git commit
+  - git push
+  - git fetch
+  - git pull
+  - git checkout
+  - git log
+  - git diff
+  - git reset
+  - git stash
 ## 5. [Mastering Git Merge Conflicts](git/chapter_00005.md)
   - Understanding the Root Causes of Merge Conflicts
   - Identifying Merge Conflicts

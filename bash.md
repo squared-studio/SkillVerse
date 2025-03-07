@@ -4,18 +4,18 @@
   - Setting Up Your Bash Environment
   - Your First Bash Script
 ## 2. [Bash Scripting Essentials](bash/chapter_00002.md)
-  - **Your First Script
-  - **Core Shell Commands
-  - **Variables
-  - **Operators
-  - **Exercise
-  - **Pro Tips for Bash Beginners (and Beyond!)**
+  - Your First Script
+  - Core Shell Commands
+  - Variables
+  - Operators
+  - Exercise
+  - Pro Tips for Bash Beginners (and Beyond!)
 ## 3. [Control Structures](bash/chapter_00003.md)
-  - **Conditional Statements
-  - **Loops
-  - **`case` Statements
-  - **Exercise
-  - **Pro Tips for Mastering Control Structures**
+  - Conditional Statements
+  - Loops
+  - case Statements
+  - Exercise
+  - Pro Tips for Mastering Control Structures
 ## 4. [Functions in Bash](bash/chapter_00004.md)
   - Defining Functions
   - Function Parameters
@@ -55,7 +55,7 @@
   - Input Validation
   - Use Functions for Reusability
   - Always Quote Variables
-  - Include `set -euxo pipefail`
+  - Include set -euxo pipefail
   - Exercise
 
 ##### Copyright (c) 2025 squared-studio

@@ -6,17 +6,17 @@
   - The Winning Advantages of SystemVerilog
   - Core Features That Set SystemVerilog Apart
 ## 2. [SystemVerilog Built-in Tasks and Functions](SystemVerilog/chapter_00002.md)
-  - **Display Tasks
-  - **Wavedump Tasks
-  - **Time-Related Functions
-  - **Simulation Control Tasks
-  - **Hands-on Exercises with Solutions**
+  - Display Tasks
+  - Wavedump Tasks
+  - Time-Related Functions
+  - Simulation Control Tasks
+  - Hands-on Exercises with Solutions
 ## 3. [SystemVerilog Data Types](SystemVerilog/chapter_00003.md)
-  - **Built-in Data Types
-  - **Advanced Built-in Types
-  - **User-Defined Data Types
-  - **Packed vs. Unpacked Arrays
-  - **Exercises to Solidify Your Understanding**
+  - Built-in Data Types
+  - Advanced Built-in Types
+  - User-Defined Data Types
+  - Packed vs. Unpacked Arrays
+  - Exercises to Solidify Your Understanding
 ## 4. [Arrays in SystemVerilog](SystemVerilog/chapter_00004.md)
   - Introduction to SystemVerilog Arrays
   - Packed vs. Unpacked Arrays
