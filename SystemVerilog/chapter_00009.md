@@ -12,7 +12,7 @@ SystemVerilog offers two primary mechanisms for code modularization: tasks and f
 | --------------------------- | ----------------------------------------- | -------------------------------------------- |
 | **Timing Controls**         | **Allowed** (`#`, `@`, `wait`, events)   | **Prohibited** (must execute in zero simulation time) |
 | **Return Value**            | **None** (results passed via `output` or `inout` arguments) | **Mandatory** (must return a single value) |
-| **Call Hierarchy**          | Can call **both tasks and functions**     | Can call **only other functions**           |
+| **Call Hierarchy**          | Can call **both tasks and functions**     | Can call **only other functions in most cases**           |
 | **Execution Time**          | **Can consume simulation time** (due to timing controls) | **Zero-time execution** (combinational behavior) |
 | **Typical Use Cases**       | **Testbench stimulus generation**, sequences, protocol modeling, operations involving delays | **RTL combinational logic**, data transformations, calculations, assertions, quick value lookups |
 | **Synthesis for RTL**      | **Generally not synthesizable** if containing timing controls. Can be synthesizable if used as purely behavioral abstractions without delays. | **Synthesizable** (if adhering to function synthesis rules - combinational logic) |
