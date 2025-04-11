@@ -1,4 +1,4 @@
-# I2C Protocol
+#    python
 
 ##### Copyright (c) 2025 squared-studio
 

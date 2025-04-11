@@ -10,7 +10,9 @@ echo "# SkillVerse" > README.md
 LIST=$(find -mindepth 1 -maxdepth 1 -type d ! -name ".*" | sed "s/.*\///g")
 for i in ${LIST} ; do
     # Add each directory as a section in README.md
-    echo "  - ### [$(echo ${i} | sed -e 's/_/ /g')](${i}.md)" >> README.md
+    if [[ ${i} != ___* ]]; then
+      echo "  - ### [$(echo ${i} | sed -e 's/_/ /g')](${i}.md)" >> README.md
+    fi
     # Create a new markdown file for each directory with a title
     echo "# $(echo ${i} | sed -e 's/_/ /g')" > ${i}.md
 

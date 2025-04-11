@@ -1,4 +1,4 @@
-# PCIe Protocol
+#    UART Protocol
 
 ##### Copyright (c) 2025 squared-studio
 
