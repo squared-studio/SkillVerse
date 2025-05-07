@@ -152,7 +152,7 @@
   - Functional Coverage
   - Practical Exercises to Solidify Coverage Concepts
   - Best Practices for Effective Coverage-Driven Verification
-  - Comprehensive Function Reference Table for SystemVerilog Coverage
+  - Comprehensive Reference Table
 ## 20. [SystemVerilog Macros](SystemVerilog/chapter_00020.md)
   - Introduction
   - Defining and Using Macros
