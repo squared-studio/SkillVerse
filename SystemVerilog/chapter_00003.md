@@ -1,297 +1,363 @@
-# SystemVerilog Data Types: A Comprehensive Guide for Robust Design
+# SystemVerilog Built-in Tasks and Functions: Leverage Them for Design Efficiency
 
-SystemVerilog's strength in both hardware design and verification comes, in part, from its rich and versatile set of **data types**. Choosing the right data type is crucial for accurately modeling hardware behavior and building efficient verification environments. This section provides a comprehensive guide to SystemVerilog data types, categorized for easy understanding and illustrated with practical examples.
+SystemVerilog equips designers with a set of built-in **system tasks and system functions** that are indispensable for effective debugging, precise simulation control, and in-depth waveform analysis. These utilities are your allies in understanding and verifying your designs. Let's explore these powerful tools with clear explanations, practical examples, and hands-on exercises.
 
-## **Built-in Data Types: The Foundation**
+## **Display Tasks: Your Simulation's Voice**
 
-SystemVerilog's built-in types are the fundamental building blocks for representing data. They are broadly divided into **2-state** and **4-state** types, each serving distinct purposes in hardware design and verification.
+Display tasks are your primary means of communication with the simulator. They allow you to print messages and inspect variable values during simulation, making debugging a more transparent process.
 
-### **4-State Types: Modeling Hardware Reality (RTL Design)**
+### 1. **`$display`**: Immediate Output to Console
 
-4-state types are essential for Register Transfer Level (RTL) design because they accurately reflect the physical behavior of hardware signals. They account for four possible states:
+`$display` acts like a print statement, instantly outputting formatted text to your simulation console the moment it's executed. It's perfect for logging events, checking values at specific points in time, and providing immediate feedback during simulation.
 
-- **0**: Logical zero, false condition.
-- **1**: Logical one, true condition.
-- **X**: Unknown logic value (initial state, contention, or uninitialized).
-- **Z**: High impedance, floating state (often from tri-state buffers).
-
-| Type         | Description                                  | Use Case                               | Example                       |
-|--------------|----------------------------------------------|----------------------------------------|-------------------------------|
-| **`reg`**      | 4-state storage element (legacy from Verilog) | Modeling flip-flops, registers, memory | `reg [31:0] instruction_reg;` |
-| **`wire`**     | 4-state connection (default bit width: 1)     | Interconnecting modules, signals       | `wire interrupt_line;`       |
-| **`logic`**    | Modern 4-state type, versatile replacement   | RTL design, replacing `reg` and `wire` | `logic [15:0] data_bus;`      |
-| **`integer`**  | 4-state, 32-bit signed integer               | Counters, loop indices, general-purpose integers in RTL | `integer loop_count = 0;`    |
+- **Format Specifiers**:  Control how your output is displayed. Key specifiers include:
+    - `%t`:  Displays the current simulation time, crucial for time-annotated debugging.
+    - `%d`:  Formats values as decimal integers, the standard for integer representation.
+    - `%b`:  Shows values in binary format, useful for bit-level inspection.
+    - `%h`:  Presents values in hexadecimal format, often used for memory addresses and register contents.
 
 ```SV
-module rtl_module;
-  logic [7:0] address;   // 'logic' for address bus
-  wire chip_select;     // 'wire' for control signal
-  integer error_count;  // 'integer' for counting errors
-
-  // ... design logic using address, chip_select, error_count ...
+module display_example;
+  initial begin
+    integer value = 42;
+    $display("[%0t ns] Value = %0d (binary: %b, hex: %0h)", $time, value, value, value);
+    // Output (at time 0): "[0 ns] Value = 42 (binary: 101010, hex: 2a)"
+  end
 endmodule
 ```
-**Explanation**: In `rtl_module`, `logic` is used for the `address` bus as it's a modern, versatile type suitable for signals. `wire` is used for `chip_select` to represent a simple connection. `integer` is used for `error_count`, a general-purpose counter within the RTL design.
+**Explanation**: This example demonstrates `$display` printing the simulation time (`%0t`), a decimal value (`%0d`), and its binary (`%b`) and hexadecimal (`%h`) representations, all in a single line for clear, informative output.
 
-### **2-State Types: Speed and Efficiency (Verification)**
+### 2. **`$monitor`**:  Real-time Variable Tracking
 
-2-state types are optimized for verification environments where the **X** and **Z** states are typically not needed and can slow down simulation. By excluding these states, 2-state types enable faster, more efficient simulations, crucial for complex testbenches. They can only represent:
+`$monitor` is like setting up a watch on variables. Once activated, it continuously observes the variables you specify and automatically prints an update to the console **every time any of those variables change** value.
 
-- **0**: Logical zero, false condition.
-- **1**: Logical one, true condition.
-
-| Type          | Description                                  | Use Case                               | Example                         |
-|---------------|----------------------------------------------|----------------------------------------|---------------------------------|
-| **`bit`**       | 2-state, unsigned (default bit width: 1)     | Flags, simple binary variables         | `bit valid_packet = 0;`         |
-| **`byte`**      | 2-state, 8-bit signed integer                | Byte-level data, memory access         | `byte data_byte = 8'hA5;`       |
-| **`shortint`**  | 2-state, 16-bit signed integer               | Small integers, offsets               | `shortint offset = -1024;`      |
-| **`int`**       | 2-state, 32-bit signed integer               | General-purpose integers in verification | `int transaction_count = 1000;` |
-| **`longint`**   | 2-state, 64-bit signed integer               | Large integers, counters               | `longint memory_address;`        |
-| **`shortreal`** | 2-state, 32-bit floating-point               | Single-precision floating-point values | `shortreal tolerance = 0.01;`   |
-| **`real`**      | 2-state, 64-bit floating-point               | Double-precision floating-point values | `real simulation_time = 12.5;`  |
-| **`time`**      | 2-state, 64-bit unsigned time value          | Storing simulation timestamps          | `time event_time;`              |
-| **`realtime`**  | 2-state, Real-number time                     | Representing delays, time intervals    | `realtime delay_time = 3.14e-9;`|
+- **Single Active Monitor**: Remember, only **one `$monitor` task can be actively monitoring** at any given time in your simulation. If you call `$monitor` again, it replaces the previous one.
+- **Controlling Monitoring**: Use `$monitoron` to start monitoring and `$monitoroff` to temporarily disable it without losing the monitor setup. This is useful for focusing on specific simulation phases.
 
 ```SV
-module verification_env;
-  bit reset_flag;             // 2-state 'bit' for reset
-  int packet_count;           // 2-state 'int' for counters
-  real clock_period_ns = 5.0; // 2-state 'real' for time
+module monitor_example;
+  reg [3:0] a, b;
 
-  // ... verification logic using 2-state types for efficiency ...
+  initial begin
+    $monitor("Time=%0t ns: a=%0d, b=%0d", $time, a, b); // Start monitoring a and b
+    a = 0; b = 0;
+    #5 a = 5;      // Value of 'a' changes, triggers $monitor
+    #5 b = 10;     // Value of 'b' changes, triggers $monitor again
+    #5 $monitoroff; // Stop monitoring
+    #5 a = 7;      // No output, $monitor is off
+  end
 endmodule
 ```
-**Explanation**: In `verification_env`, 2-state types like `bit`, `int`, and `real` are used to optimize simulation speed. Since verification often deals with ideal conditions and abstract models, the 4-state complexity is often unnecessary and can be avoided for performance gains.
+**Output**:
+```
+Time=0 ns: a=x, b=x     // Initial values are 'x' (unknown)
+Time=5 ns: a=5, b=x
+Time=10 ns: a=5, b=10
+```
+**Explanation**:  `$monitor` automatically prints whenever `a` or `b` changes. Notice the initial output at time 0 shows 'x' because the registers are initially in an unknown state. After `$monitoroff`, changes to `a` no longer produce output.
 
-## **Advanced Built-in Types: Specialized Hardware Modeling**
+### 3. **`$strobe`**:  Stable Value Sampling
 
-SystemVerilog includes advanced built-in types designed to model specific hardware scenarios, particularly those involving multiple drivers or wired connections.
+`$strobe` is similar to `$display` but with a crucial timing difference. It prints values **at the very end of the current simulation time step**, specifically after all active assignments within that time step have been fully executed and settled.
 
-### **Tri-State and Multi-Driver Resolution Types**
-
-These types are used to model situations where multiple sources can drive a signal, and the resulting value depends on the driver types and strengths.
-
-| Type      | Description                                      | Use Case                                  | Example                       |
-|-----------|--------------------------------------------------|-------------------------------------------|-------------------------------|
-| **`tri`**      | Tri-state bus (functionally identical to `wire`) | Modeling tri-state buses (less common now) | `tri [15:0] data_bus;`        |
-| **`tri0`**     | Pull-down behavior when no driver is active      | Default low state for undriven signals    | `tri0 memory_select;`         |
-| **`tri1`**     | Pull-up behavior when no driver is active        | Default high state for undriven signals   | `tri1 interrupt_enable;`     |
-| **`wand`**     | Wired-AND resolution (dominant 0)              | Multiple drivers ANDed together           | `wand arbitration_grant;`    |
-| **`wor`**      | Wired-OR resolution (dominant 1)               | Multiple drivers ORed together            | `wor data_available;`        |
+- **Capturing Stable Values**:  `$strobe` is invaluable when you have concurrent assignments within the same time step and need to ensure you're capturing the final, stable values after all updates have propagated.
 
 ```SV
-module multi_driver_example;
-  tri1 [7:0] address_bus; // 'tri1' for pull-up on address bus
-  wand control_line;      // 'wand' for wired-AND control
-
-  // ... logic driving address_bus and control_line ...
+module strobe_example;
+  reg [3:0] data;
+  initial begin
+    data = 0;
+    #5 data = 5;
+    #0; // Force delta cycle to ensure assignments settle
+    $strobe("[Strobe] Time=%0t ns, Data=%0d", $time, data);
+    // Output: "[Strobe] Time=5 ns, Data=5"
+  end
 endmodule
 ```
-**Explanation**: `tri1 address_bus` models a bus that defaults to a known high state when no driver is actively driving it. `wand control_line` represents a control signal where multiple sources can drive it low to assert control (wired-AND behavior).
+**Explanation**: Even though `data` is assigned at time 5, `$strobe` ensures that the value printed is the final value of `data` at the end of the time step, after any potential delta delays have resolved. The `#0` delay is added to explicitly trigger a delta cycle and ensure all assignments from the previous time step are fully processed before `$strobe` executes.
 
-## **User-Defined Data Types: Enhancing Readability and Abstraction**
+**Choosing the Right Display Task**:
 
-User-defined data types allow you to create custom types, improving code readability, maintainability, and abstraction.
+- Use **`$display`** for immediate, point-in-time value checks and general logging.
+- Use **`$monitor`** for continuous tracking of variables and observing changes over time.
+- Use **`$strobe`** when you need to capture stable values at the end of a time step, especially in designs with concurrent assignments.
 
-### 1. **`typedef`**: Creating Type Aliases
+## **Wavedump Tasks: Visualizing Signal Behavior**
 
-`typedef` lets you define a new name (alias) for an existing data type. This enhances code clarity by using descriptive names and simplifies code modifications.
+Wavedump tasks are essential for generating **Value Change Dump (VCD)** files. These files record signal changes over time, which can then be visualized using waveform viewers. Waveform analysis is a cornerstone of digital verification, allowing you to graphically examine signal interactions and pinpoint timing-related issues.
 
-```SV
-typedef logic [63:0] address_t; // Define 'address_t' as 64-bit logic vector
-typedef enum {READ, WRITE} access_mode_t; // Define 'access_mode_t' enum
+### 1. **`$dumpfile`**: Naming Your Waveform File
 
-address_t memory_location;       // Use 'address_t' for address variables
-access_mode_t current_access;   // Use 'access_mode_t' for access mode
-```
-**Benefit**: `typedef` improves code readability by replacing less descriptive types (like `logic [63:0]`) with meaningful names (`address_t`). If you need to change the underlying type (e.g., to `logic [39:0]`), you only modify the `typedef` definition, not every instance in your code.
-
-### 2. **`enum`**: Defining Named Value Sets
-
-`enum` (enumeration) is ideal for creating state machines and representing a fixed set of named values. It improves code readability and prevents magic numbers.
+`$dumpfile` simply specifies the filename for the VCD file that will be generated during simulation. This task should be called **before** `$dumpvars`.
 
 ```SV
-typedef enum logic [2:0] { // Optional: specify underlying type
-  STATE_IDLE = 3'b000,
-  STATE_FETCH = 3'b001,
-  STATE_DECODE = 3'b010,
-  STATE_EXECUTE = 3'b011
-} processor_state_t;
-
-processor_state_t current_state; // Variable of enum type
-current_state = STATE_FETCH;     // Assigning an enumerated value
-
-case (current_state)
-  STATE_IDLE:  // ...
-  STATE_FETCH: // ...
-  // ...
-endcase
+module dumpfile_example;
+  initial begin
+    $dumpfile("signals.vcd"); // Creates a VCD file named 'signals.vcd' in the simulation directory
+    $dumpvars; // Enable dumping of all variables in the design (for simplicity in this example)
+    #100 $finish;
+  end
+endmodule
 ```
-**Benefit**: `enum` makes state machine code much more readable and less error-prone than using raw integer values for states. The optional type declaration (`logic [2:0]`) specifies the underlying data type for the enum, allowing type-safe operations.
+**Explanation**: This code will create a file named `signals.vcd` in the directory where you run your simulation. This file will store the waveform data.
 
-### 3. **`struct`**: Grouping Related Data
+### 2. **`$dumpvars`**: Selecting Signals for Waveform Recording
 
-`struct` (structure) allows you to group related variables together under a single name, similar to structures in C. This is useful for creating data packets, transaction objects, or any composite data structure.
+`$dumpvars` is the task that controls **which signals and variables are recorded** in the VCD file. You can selectively dump specific signals or entire modules.
+
+- **Arguments**:
+    - `$dumpvars(0, module_name)`: This powerful option dumps **all** signals and variables within the specified `module_name` and all modules below it in the hierarchy. The `0` indicates the dump level (0 means dump all levels).
+    - `$dumpvars(levels, module_name_or_signal)`:  `levels` (integer) specifies the hierarchy levels to dump. `1` dumps only top-level signals, `2` dumps top-level and signals in modules instantiated directly in the top level, and so on. You can also specify a specific `signal` to dump only that signal.
 
 ```SV
-typedef struct packed { // 'packed' for bit-level access
-  logic [7:0] address;
-  logic [31:0] data;
-  bit read_write; // 0=read, 1=write
-} bus_transaction_t;
+module dumpvars_example;
+  reg clk, enable;
+  wire out;
+  assign out = clk & enable;
 
-bus_transaction_t current_transaction; // Instance of the struct
-current_transaction.address = 8'h40;    // Access struct members using dot notation
-current_transaction.data = 32'h1234_5678;
-current_transaction.read_write = 1;
+  initial begin
+    $dumpfile("waveform.vcd");
+    $dumpvars(0, dumpvars_example); // Dump ALL variables and signals in this module and below
+    clk = 0;
+    enable = 1;
+    forever #5 clk = ~clk;
+  end
+endmodule
 ```
-**Benefit**: `struct` organizes related data into logical units, improving code structure and making it easier to pass complex data as arguments to tasks and functions. The `packed` keyword ensures that the struct members are laid out contiguously in memory, useful for bit-level manipulation.
+**Explanation**:  `$dumpvars(0, dumpvars_example)` ensures that all signals (`clk`, `enable`, `out`) within `dumpvars_example` module will be recorded in `waveform.vcd`.
 
-### 4. **`union`**: Sharing Memory Space
+**Using Waveform Viewers**: After simulation, open the generated VCD file (e.g., `signals.vcd`, `waveform.vcd`) with a waveform viewer (like GTKWave, Verdi, or ModelSim's waveform viewer). You'll see a graphical representation of how your signals change over time, which is invaluable for debugging and understanding design behavior.
 
-`union` allows multiple variables to share the same memory storage. Only one member of a union can hold a valid value at any given time. Unions are useful for memory optimization or when you need to interpret the same bits in different ways.
+## **Time-Related Functions: Measuring Simulation Progress**
+
+SystemVerilog provides functions to access the current simulation time in different formats and precisions.
+
+### 1. **`$time`**: High-Precision 64-bit Time
+
+`$time` returns the current simulation time as a **64-bit integer**. This offers the highest precision and is generally preferred for most time-related operations in SystemVerilog.
 
 ```SV
-typedef union packed { // 'packed' for bit-level overlay
-  int integer_val;
-  real float_val;
-  logic [31:0] bit_pattern;
-} data_variant_t;
-
-data_variant_t data_var;
-data_var.float_val = 2.718; // Store a float
-$display("Union as integer: %0d", data_var.integer_val); // Interpret float bits as integer
-data_var.bit_pattern = 32'hABCDEF01; // Overwrite with bit pattern
-$display("Union as float: %0.2f", data_var.float_val);   // Interpret bit pattern as float
+module time_example;
+  initial begin
+    #7.5ns;
+    $display("64-bit Time: %0t ns", $time);
+    // Output: "64-bit Time: 7 ns" (Time unit depends on `timescale directive`)
+  end
+endmodule
 ```
-**Caution**: Using unions requires careful management as writing to one member will overwrite the value of other members because they share the same memory location.
+**Explanation**: Even though we used a fractional delay `#7.5ns`, `$time` returns the integer part, `7`. The time unit (`ns` in the output example) is determined by the timescale directive set for the module or design.
 
-## **Packed vs. Unpacked Arrays: Memory Layout Matters**
+### 2. **`$stime`**:  32-bit Time (Potentially Limited Range)
 
-SystemVerilog arrays come in two flavors, packed and unpacked, which differ significantly in their memory representation and intended use.
-
-### **Packed Arrays: Contiguous Bit Vectors**
-
-Packed arrays are declared with the packed dimensions **before** the variable name. They represent a contiguous block of bits, essentially forming a single, multi-dimensional vector. Packed arrays are efficient for bit-level operations and hardware modeling.
+`$stime` returns the current simulation time as a **32-bit integer**.  While it can be quicker in some simulators, it has a **limited range**. For very long simulations, `$stime` can wrap around or truncate, leading to incorrect time values. **It is generally recommended to use `$time` for most applications to avoid potential issues with range limitations.**
 
 ```SV
-logic [7:0] data_byte;           // Packed 1D array (8 bits)
-logic [3:0][7:0] byte_array_packed; // Packed 2D array (4 bytes, 32 bits total)
-
-assign byte_array_packed = 32'h1122_3344; // Assign a 32-bit value
-$display("Byte 0 (packed): %h", byte_array_packed[0]); // Access as bit vector
+module stime_example;
+  initial begin
+    #100000ns;
+    $display("32-bit Time: %0d ns", $stime);
+    // Output: "32-bit Time: 100000 ns" (May truncate or wrap in very long simulations)
+  end
+endmodule
 ```
-**Key Feature**: Packed arrays are treated as a single vector. Indexing into packed arrays accesses bit or bit ranges within this contiguous vector. They are ideal for representing hardware signals, registers, and memory where bit-level manipulation is common.
+**Caution**: Be mindful of the simulation duration when using `$stime`, especially for lengthy simulations where the 32-bit range might be exceeded.
 
-### **Unpacked Arrays: Collections of Elements**
+### 3. **`$realtime`**: Real Number Time for Fractional Steps
 
-Unpacked arrays are declared with dimensions **after** the variable name. They are collections of individual elements of a specified data type. Unpacked arrays are memory-efficient for large arrays and are commonly used in verification testbenches for data storage and manipulation.
+`$realtime` returns the current simulation time as a **real number (floating-point)**. This is essential when your simulation involves **fractional time steps**, allowing you to accurately represent and display time with decimal precision.
 
 ```SV
-int integer_array_unpacked [0:1023]; // Unpacked array of 1024 integers
-bit flag_array [64];               // Unpacked array of 64 bits
-
-integer_array_unpacked[0] = 123;     // Access individual integer elements
-flag_array[5] = 1;
+module realtime_example;
+  initial begin
+    #3.75ns;
+    $display("Real Time: %0.2f ns", $realtime);
+    // Output: "Real Time: 3.75 ns"
+  end
+endmodule
 ```
-**Key Feature**: Unpacked arrays are collections of individual elements. Indexing accesses elements, not bits. They are more memory-efficient for large arrays because elements are not necessarily stored contiguously in memory like packed arrays.
+**Explanation**: `$realtime` correctly displays the fractional time step `3.75`, making it suitable for simulations where precise fractional delays are important.
 
-**Choosing Between Packed and Unpacked Arrays**:
+## **Simulation Control Tasks: Guiding Simulation Flow**
 
-- Use **packed arrays** for:
-    - Modeling hardware signals and buses.
-    - Bit-level operations (slicing, concatenation, bitwise logic).
-    - When you need to treat data as a contiguous bit stream.
+Simulation control tasks allow you to manage the execution of your simulation, providing commands to stop, pause, or terminate the process.
 
-- Use **unpacked arrays** for:
-    - Verification testbenches.
-    - Large data storage (memories, lookup tables).
-    - Element-wise access and manipulation.
-    - When memory efficiency for large arrays is a priority.
+### 1. **`$finish`**:  Ending the Simulation Gracefully
 
-## **Exercises to Solidify Your Understanding**
+`$finish` is used to **terminate the simulation** and typically **close the simulator program** entirely. It signals that the simulation has reached a natural conclusion or an error condition that warrants stopping.
 
-Test your knowledge of SystemVerilog data types with these exercises. Solutions are provided below to check your work.
+```SV
+module finish_example;
+  initial begin
+    #10ns $display("Simulation about to finish.");
+    $finish; // Ends simulation execution here
+    $display("This line will NOT be printed."); // Simulation terminated above
+  end
+endmodule
+```
+**Explanation**: When `$finish` is executed, the simulator stops, and any code after `$finish` in the same or subsequent blocks will not be executed.
 
-1. **Declare and Initialize a `reg`**:
+### 2. **`$stop`**:  Pausing for Inspection
+
+`$stop` **pauses the simulation** at the point where it's encountered. The simulator remains active but is halted, allowing you to:
+
+- **Inspect the Simulation State**: Examine variable values, signal states, and memory contents at the point of suspension.
+- **Interactive Debugging**: In interactive simulation environments (like ModelSim), you can often resume the simulation step-by-step or continue execution after `$stop`.
+
+```SV
+module stop_example;
+  initial begin
+    #20ns $display("Pausing simulation...");
+    $stop; // Simulation pauses at time 20ns
+    #10ns $display("Simulation Resumed."); // Only executed if you manually resume
+  end
+endmodule
+```
+**Explanation**: The simulation will pause at time 20ns. The message "Simulation Resumed." will only be displayed if you manually instruct the simulator to continue (e.g., using a 'run -continue' command in ModelSim or a similar command in your simulator).
+
+### 3. **`$exit`**: Immediate Simulator Termination
+
+`$exit` is designed to **immediately terminate the simulator process**.  Its behavior can be tool-dependent, but generally, it forces the simulator to quit abruptly, potentially without completing any cleanup or finalization steps that `$finish` might perform.
+
+```SV
+module exit_example;
+  initial begin
+    #5ns $display("Exiting simulator abruptly...");
+    $exit; // Simulator terminates immediately, potentially without full cleanup
+    $display("This line may or may not be printed, depending on the tool.");
+  end
+endmodule
+```
+**Caution**:  `$exit` should be used sparingly, primarily in situations where you need to force-terminate the simulation due to a critical error or unrecoverable state.  `$finish` is generally the preferred method for ending simulations under normal or expected termination conditions.
+
+**Choosing the Right Control Task**:
+
+- Use **`$finish`** to signal the normal end of a simulation or to gracefully terminate upon encountering a fatal error.
+- Use **`$stop`** for pausing the simulation to interactively debug and examine the design state.
+- Use **`$exit`** with caution, only when a forceful, immediate termination of the simulator is necessary.
+
+## **Hands-on Exercises with Solutions**
+
+Test your understanding with these exercises. Solutions are provided to help you verify your work.
+
+1. **Enhance `$display` with Time and Hexadecimal Output**:
    ```SV
-   reg [15:0] config_reg;
-   initial config_reg = 16'hABCD;
-   // Solution: Declares a 16-bit reg named 'config_reg' and initializes it to hexadecimal value ABCD.
+   initial $display("Time: %0t, Value in Hex: %0h", $time, 255);
+   // Solution Output (Time will vary): "Time: 0, Value in Hex: ff"
    ```
 
-2. **Connect a `wire` to a `logic` signal**:
+2. **Expand `$monitor` to Track Multiple Signals**:
    ```SV
-   logic data_enable_logic;
-   wire data_enable_wire;
-   assign data_enable_wire = data_enable_logic;
-   // Solution: Creates a wire 'data_enable_wire' that continuously reflects the value of 'data_enable_logic'.
+   reg [3:0] count;
+   reg enable;
+   initial begin
+     $monitor("Time=%0t: Count=%0d, Enable=%b", $time, count, enable);
+     count = 0; enable = 0;
+     #5 count = 5;
+     #5 enable = 1;
+   end
+   // Solution Output:
+   // Time=0: Count=x, Enable=0
+   // Time=5: Count=5, Enable=0
+   // Time=10: Count=5, Enable=1
    ```
 
-3. **Perform Arithmetic with `integer` Types**:
+3. **Illustrate `$strobe` for Stable Values**:
    ```SV
-   integer count_start = 50;
-   integer count_end = 150;
-   integer count_range = count_end - count_start;
-   // Solution: 'count_range' will be calculated as 100 (150 - 50).
+   reg a, b, result_strobe, result_display;
+   assign result_strobe = a & b;
+   assign result_display = a | b;
+
+   initial begin
+     a = 0; b = 0;
+     #5 a = 1; b = 1; // a and b change at the same time
+     $strobe("Strobe: Time=%0t, AND=%b", $time, result_strobe); // Stable AND value
+     $display("Display: Time=%0t, OR=%b", $time, result_display); // Potentially intermediate OR value
+   end
+   // Solution Output (Order may vary slightly depending on simulator):
+   // Display: Time=5, OR=0  // May show intermediate value if display happens before assignment settles
+   // Strobe: Time=5, AND=1   // Shows stable AND value at the end of time step
    ```
 
-4. **Declare and Assign a `real` Value**:
+4. **Generate a Waveform VCD File**:
    ```SV
-   real frequency_GHz = 2.4;
-   // Solution: Declares a real variable 'frequency_GHz' and assigns it the floating-point value 2.4.
+   module wave_module;
+     reg clock;
+     initial begin
+       $dumpfile("my_wave.vcd");
+       $dumpvars(0, wave_module);
+       clock = 0;
+       forever #10 clock = ~clock;
+     end
+   endmodule
+   // Solution: Simulating this will create 'my_wave.vcd' in your simulation directory. Open it with a waveform viewer to see the 'clock' signal.
    ```
 
-5. **Capture Simulation Time in a `time` Variable**:
+5. **Selective Variable Dumping with `$dumpvars`**:
    ```SV
-   time event_timestamp;
-   initial event_timestamp = $time;
-   // Solution: 'event_timestamp' will store the simulation time at the beginning of the initial block.
+   module dump_select_module;
+     reg signal_A, signal_B, signal_C;
+     initial begin
+       $dumpfile("select_wave.vcd");
+       $dumpvars(1, signal_A); // Only dump signal_A (top-level, level 1)
+       signal_A = 0; signal_B = 0; signal_C = 0;
+       #10 signal_A = 1; #10 signal_B = 1; #10 signal_C = 1;
+       #50 $finish;
+     end
+   endmodule
+   // Solution: 'select_wave.vcd' will only contain waveform data for 'signal_A'.
    ```
 
-6. **Perform Bitwise AND on `logic` Vectors**:
+6. **Observe `$time` at Different Simulation Points**:
    ```SV
-   logic [7:0] pattern = 8'b1011_0101;
-   logic [7:0] mask_logic = 8'b1111_0000;
-   logic [7:0] masked_pattern = pattern & mask_logic; // Bitwise AND operation
-   // Solution: 'masked_pattern' will be 8'b1011_0000 (bits masked by 'mask_logic').
+   initial begin
+     $display("Start Time: %0t ns", $time);
+     #25ns $display("Time after 25ns delay: %0t ns", $time);
+     #75ns $display("Time after another 75ns delay: %0t ns", $time);
+   end
+   // Solution Output (Time values will accumulate):
+   // Start Time: 0 ns
+   // Time after 25ns delay: 25 ns
+   // Time after another 75ns delay: 100 ns
    ```
 
-7. **Define and Instantiate a `struct`**:
+7. **Illustrate `$realtime` for Fractional Time**:
    ```SV
-   typedef struct packed { logic [7:0] opcode; logic [23:0] operand; } instruction_t;
-   instruction_t current_instruction;
-   current_instruction.opcode = 8'h01;
-   current_instruction.operand = 24'hABC_123;
-   // Solution: Defines a struct 'instruction_t' and creates an instance 'current_instruction', initializing its members.
+   initial begin
+     #12.345ns $display("Real Time with precision: %0.3f ns", $realtime);
+   end
+   // Solution Output: "Real Time with precision: 12.345 ns"
    ```
 
-8. **Use `enum` for State Machine States**:
+8. **Terminate Simulation After a Delay**:
    ```SV
-   typedef enum {STATE_RESET, STATE_WAIT, STATE_PROCESS} control_state_t;
-   control_state_t current_control_state = STATE_RESET;
-   // Solution: Defines an enum 'control_state_t' with states and initializes 'current_control_state' to 'STATE_RESET'.
+   initial begin
+     #100ns $display("Simulation finished after 100ns.");
+     $finish;
+   end
+   // Solution: Simulation will run for 100ns, print the message, and then terminate.
    ```
 
-9. **Initialize a Packed Array with Literal Values**:
+9. **Pause Simulation with `$stop` and Resume (Simulator Dependent)**:
    ```SV
-   logic [1:0][3:0] nibble_matrix = '{4'h3, 4'h6, 4'h9, 4'hC};
-   // Solution: Initializes a 2x4 packed array 'nibble_matrix' with hexadecimal nibble values.
+   initial begin
+     #50ns $display("Simulation about to pause at 50ns.");
+     $stop;
+     #50ns $display("This line will only print if simulation is resumed.");
+   end
+   // Solution: Simulation will pause at 50ns. In interactive simulators, you can then manually resume to see the second display message.
    ```
 
-10. **Iterate Through an Unpacked Array and Display Elements**:
+10. **Experiment with `$exit` (Use with Caution)**:
     ```SV
-    int data_values [5] = '{10, 20, 30, 40, 50};
-    initial foreach (data_values[i]) $display("Element [%0d] = %0d", i, data_values[i]);
-    // Solution Output:
-    // Element [0] = 10
-    // Element [1] = 20
-    // Element [2] = 30
-    // Element [3] = 40
-    // Element [4] = 50
+    initial begin
+      #10ns $display("Attempting to exit simulator...");
+      $exit; // Simulator will likely terminate immediately after this point
+      $display("This may or may not print."); // Execution might stop before reaching here
+    end
+    // Solution: Running this will likely terminate your simulator abruptly around 10ns. Observe the simulator's behavior.
     ```
 
-By understanding and effectively using SystemVerilog's data types, you can create accurate, efficient, and maintainable hardware designs and verification environments. Experiment with these types and exercises to deepen your mastery.
+By mastering these system tasks and functions, you gain essential control and visibility into your SystemVerilog simulations, significantly enhancing your debugging and verification capabilities.
 
 ##### Copyright (c) 2025 squared-studio
 

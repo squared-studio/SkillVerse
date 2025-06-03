@@ -1,372 +1,284 @@
-# Tasks and Functions in SystemVerilog: Modular Code and Reusability
+# Procedural Blocks in SystemVerilog: Behavioral Modeling Core
 
 ## Introduction
 
-Tasks and functions are fundamental building blocks for creating modular, reusable, and well-structured SystemVerilog code. They are essential for breaking down complex designs and verification environments into manageable, self-contained units.  By encapsulating code into tasks and functions, you can significantly improve code organization, readability, and maintainability, leading to more efficient design and verification processes. This guide delves into the key features, differences, and best practices for effectively using tasks and functions in SystemVerilog for both RTL design and verification.
+Procedural blocks are the engines of behavioral modeling in SystemVerilog. They allow you to describe the dynamic behavior of your hardware designs, create testbench environments, and control simulation flow. Unlike continuous assignments that react instantly to input changes, procedural blocks execute **sequentially**, step-by-step, making them essential for modeling sequential logic, state machines, memory elements, and complex control algorithms. Understanding and effectively using procedural blocks is fundamental for both RTL design and robust verification.
 
-## Key Differences: Tasks vs. Functions - Choosing the Right Tool
+## Initial Blocks: Simulation Setup and Initialization
 
-SystemVerilog offers two primary mechanisms for code modularization: tasks and functions. While both promote reusability, they have distinct characteristics that dictate their appropriate use cases. Understanding these differences is crucial for effective SystemVerilog coding.
+`initial` blocks are executed **once at the very beginning of simulation**, at time 0. Their primary role is to set up the simulation environment, initialize signals and variables, and kickstart simulation activities.
 
-| Feature                     | Tasks                                     | Functions                                    |
-| --------------------------- | ----------------------------------------- | -------------------------------------------- |
-| **Timing Controls**         | **Allowed** (`#`, `@`, `wait`, events)   | **Prohibited** (must execute in zero simulation time) |
-| **Return Value**            | **None** (results passed via `output` or `inout` arguments) | **Mandatory** (must return a single value) |
-| **Call Hierarchy**          | Can call **both tasks and functions**     | Can call **only other functions in most cases**           |
-| **Execution Time**          | **Can consume simulation time** (due to timing controls) | **Zero-time execution** (combinational behavior) |
-| **Typical Use Cases**       | **Testbench stimulus generation**, sequences, protocol modeling, operations involving delays | **RTL combinational logic**, data transformations, calculations, assertions, quick value lookups |
-| **Synthesis for RTL**      | **Generally not synthesizable** if containing timing controls. Can be synthesizable if used as purely behavioral abstractions without delays. | **Synthesizable** (if adhering to function synthesis rules - combinational logic) |
-| **Variable Scope**          | Can access variables in the calling scope  | Can access variables in the calling scope  |
+**Key Characteristics and Usage:**
 
-**In essence:**
-
--   **Tasks** are procedures that can model sequential behavior, consume simulation time, and are ideal for testbench operations and complex sequences.
--   **Functions** are primarily for combinational logic, calculations, and quick value returns, executing in zero simulation time and being synthesizable for RTL designs.
-
-## Task Implementation: Modeling Sequential Behavior
-
-Tasks in SystemVerilog are procedural blocks designed to encapsulate sequences of operations, especially those involving timing and side effects. They are the primary mechanism for creating reusable testbench procedures and modeling complex, timed hardware behaviors in simulation.
-
-### Basic Task Structure
+-   **Single Execution**:  Code within an `initial` block runs only once, sequentially from top to bottom, at the start of the simulation.
+-   **Concurrent Execution of Multiple Blocks**: If you have multiple `initial` blocks in your design, they all begin execution concurrently at time 0. The order in which they complete is non-deterministic.
+-   **Testbench Focus**: `initial` blocks are **not synthesizable** and are exclusively used in testbenches and simulation environments.
+-   **Common Use Cases**:
+    -   **Testbench Initialization**: Setting initial values for input signals, design variables, and memory contents.
+    -   **Signal Stimulation**: Generating initial stimulus or sequences of input patterns to drive the design under test (DUT).
+    -   **One-Time Configuration**: Loading configuration data, setting up simulation parameters, and opening output files.
 
 ```SV
-task [automatic] task_name ( [argument_direction] [data_type] argument_name, ... );
-  // Argument directions: input, output, inout, ref
-  // Data types: logic, bit, integer, real, etc.
-  begin
-    // Task code - can include timing controls (#delay, @event, wait)
-    // Statements execute sequentially
-  end
-endtask
-```
-
--   **`task` Keyword**:  Declares the beginning of a task definition.
--   **`[automatic]` (Optional but Recommended)**: Specifies automatic storage.  Crucial for tasks called concurrently or recursively to prevent variable sharing issues.
--   **`task_name`**:  The identifier used to call the task.
--   **`(arguments)`**:  Optional list of arguments passed to the task.
-    -   **Argument Directions**:
-        -   `input`:  Data is passed into the task; task cannot modify the original variable.
-        -   `output`: Data is passed out of the task; task modifies the variable passed as argument.
-        -   `inout`:  Data is passed in and out; task can modify the original variable.
-        -   `ref`: (Pass by reference)  Task directly operates on the original variable in the calling scope (efficient for large data structures).
-    -   **Data Types**: Specify the data type (e.g., `logic`, `integer`, `bit`) for each argument.
--   **`begin ... end`**: Enclose the task's code block.
--   **Timing Controls**: Tasks can contain timing control statements (`#delay`, `@(event)`, `wait(condition)`) to model time-dependent behavior.
-
-### Example: Testbench Transaction Generation Task
-
-```SV
-module bus_interface_tb;
-  interface bus_if vif; // Virtual interface to connect to DUT
+module testbench;
   logic clk;
+  logic rst_n;
+  logic [7:0] data_in;
+  logic start_transaction;
 
-  task automatic generate_bus_transaction(input logic [31:0] address, input logic [63:0] write_data, output logic success);
-    begin
-      success = 0; // Initialize success flag
-      vif.valid <= 1'b1;
-      vif.addr  <= address;
-      vif.wdata <= write_data;
-      $display("[%0t] TB: Driving bus - Address: 0x%h, Data: 0x%h", $time, address, write_data);
+  initial begin // Initialization block 1
+    clk = 0;          // Initialize clock
+    rst_n = 0;        // Assert reset
+    data_in = 0;
+    start_transaction = 0;
 
-      @(posedge clk); // Wait for clock edge
-      #2;             // Small delay
-      vif.valid <= 1'b0;
+    $display("Testbench: Simulation starting at time %0t", $time);
+    #20 rst_n = 1;     // De-assert reset after 20 time units
+    #50 start_transaction = 1; // Start transaction after reset
+    #100 start_transaction = 0;
+  end
 
-      wait (vif.ready); // Wait for DUT to acknowledge
-      $display("[%0t] TB: Bus transaction acknowledged for Address: 0x%h", $time, address);
-      success = 1;
+  initial begin // Initialization block 2 (runs concurrently with block 1)
+    #1000 $finish;     // End simulation after 1000 time units
+  end
+
+  always #5 clk = ~clk; // Clock generation (runs continuously)
+
+  // ... (DUT instantiation and other testbench logic) ...
+
+endmodule
+```
+
+## Final Blocks: Simulation Wrap-up and Reporting
+
+`final` blocks are executed **once when the simulation is about to terminate**. They provide a mechanism to perform cleanup tasks, report simulation results, and generate summary information at the end of a simulation run.
+
+**Key Characteristics and Usage:**
+
+-   **End-of-Simulation Execution**: Code in a `final` block executes only once, after all other simulation activity has ceased (including `initial` blocks and any ongoing `always` blocks that are not explicitly stopped).
+-   **Non-Synthesizable**: Like `initial` blocks, `final` blocks are **not synthesizable** and are used exclusively in simulation and verification environments.
+-   **Reporting and Cleanup**:
+    -   **Result Reporting**: Displaying simulation statistics, error counts, coverage metrics, and overall test status.
+    -   **File Closing**: Closing log files, output data files, and any other files opened during simulation.
+    -   **Resource Cleanup**: Releasing any simulation-specific resources or memory allocations (though typically handled automatically by the simulator).
+
+```SV
+module verification_environment;
+  integer transaction_count = 0;
+  integer error_count = 0;
+  integer log_file_desc;
+
+  initial begin
+    log_file_desc = $fopen("simulation_log.txt", "w"); // Open log file
+    // ... (rest of testbench and simulation setup) ...
+  end
+
+  // ... (simulation logic, transaction processing, error checking, incrementing transaction_count and error_count) ...
+
+  final begin
+    $display("\n--- Simulation Summary ---");
+    $display("Total Transactions Processed: %0d", transaction_count);
+    $display("Total Errors Detected: %0d", error_count);
+    if (error_count > 0) begin
+      $display("SIMULATION FAILED!");
+    end else begin
+      $display("SIMULATION PASSED!");
     end
-  endtask
-
-  initial begin
-    clk = 0; forever #5 clk = ~clk; // Clock generation
-
-    #10; // Initial delay
-    $display("[%0t] TB: Starting bus transactions...", $time);
-
-    logic transaction_status;
-    generate_bus_transaction(32'h1000, 64'hAABBCCDD_EEFF0011, transaction_status);
-    if (transaction_status) $display("[%0t] TB: Transaction 1 successful", $time);
-    else $display("[%0t] TB: Transaction 1 failed!", $time);
-
-    #20;
-    generate_bus_transaction(32'h2000, 64'h11223344_55667788, transaction_status);
-    if (transaction_status) $display("[%0t] TB: Transaction 2 successful", $time);
-    else $display("[%0t] TB: Transaction 2 failed!", $time);
-
-    #50 $finish;
+    $fclose(log_file_desc); // Close the log file
+    $display("Log file 'simulation_log.txt' closed.");
   end
 endmodule
 ```
 
-**Explanation:**
+## Always Blocks: Continuous, Reactive Behavior
 
--   The `generate_bus_transaction` task models a sequence of actions to drive a bus interface in a testbench.
--   It includes timing controls (`#delay`, `@(posedge clk)`, `wait(vif.ready)`) to simulate real-world bus protocol timing.
--   Arguments (`address`, `write_data`, `success`) are used to pass data into and out of the task.
--   The `automatic` keyword ensures that each call to the task has its own local variable scope, preventing data corruption if the task is called concurrently.
+`always` blocks are the workhorses of SystemVerilog behavioral modeling, especially for RTL design. They describe blocks of code that execute **repeatedly** in response to events or conditions defined by their sensitivity lists or timing controls.
 
-## Function Implementation: Combinational Logic and Calculations
+### 1. General `always` Block: Continuous Processes (Testbench Clock Generation)
 
-Functions in SystemVerilog are primarily intended for modeling combinational logic, performing calculations, and returning a single value. They are designed for zero-time execution and are synthesizable, making them suitable for use in RTL designs.
-
-### Basic Function Structure
+-   **Continuous, Unconditional Execution**: A general `always` block, when combined with timing control statements (like `#delay`), creates a continuously running process.
+-   **Primary Testbench Use**:  In RTL design, general `always` blocks without sensitivity lists are **rarely synthesizable**. They are primarily used in testbenches for tasks like clock generation and background processes.
 
 ```SV
-function [automatic] [return_data_type] function_name ( [input] [data_type] argument_name, ... );
-  // Argument direction: input (default, can be omitted)
-  // Data types: logic, bit, integer, real, etc.
-  begin
-    // Function code - must be purely combinational (no timing controls)
-    // Must contain a return statement
-    return function_return_value; // Or function_name = function_return_value; (legacy style)
-  end
-endfunction
+module clock_generator;
+  output logic clk_out;
+
+  initial clk_out = 0; // Initialize clock
+
+  always #5 clk_out = ~clk_out; // Toggle clock every 5 time units (period = 10)
+                                 // Creates a free-running clock signal
+endmodule
 ```
 
--   **`function` Keyword**: Declares the beginning of a function definition.
--   **`[automatic]` (Optional but Recommended)**:  Specifies automatic storage, essential for reentrant functions, especially in class-based verification.
--   **`[return_data_type]`**:  **Mandatory** declaration of the data type of the value returned by the function (e.g., `integer`, `logic [7:0]`, `real`). Use `void` for functions that don't return a value (primarily for side effects in verification, less common in RTL functions).
--   **`function_name`**:  Identifier to call the function.
--   **`(arguments)`**: Optional list of input arguments. Functions can only have `input` arguments (implicitly `input` if no direction is specified).  `output`, `inout`, and `ref` arguments are **not allowed** in standard functions (use `ref function` for pass-by-reference in specific cases, but less common in typical RTL functions).
--   **`begin ... end`**: Enclose the function's code block.
--   **`return function_return_value;`**:  **Mandatory** `return` statement to specify the value the function returns.  Alternatively, you can assign the return value to the `function_name` itself (legacy style, less preferred).
--   **No Timing Controls**: Functions **cannot contain any timing control statements** (`#delay`, `@event`, `wait`). They must execute in zero simulation time, representing combinational logic.
+### 2. `always_comb` Block: Combinational Logic Inference
 
-### Example: RTL Parity Calculation Function
+-   **Combinational Logic Description**: `always_comb` blocks are specifically designed to model combinational logic. They infer combinational circuits based on the code within the block.
+-   **Automatic Sensitivity List**:  The key feature of `always_comb` is its **automatic sensitivity list**. The simulator automatically infers all input signals that the output depends on. Whenever any of these input signals change value, the `always_comb` block is re-evaluated, ensuring the output is always up-to-date with the inputs.
+-   **Single Execution at Time 0**:  `always_comb` blocks are also evaluated once at the beginning of simulation (time 0) to establish initial output values.
+-   **Blocking Assignments (`=`)**: Use **blocking assignments** inside `always_comb` blocks. This ensures that the logic is evaluated and updated immediately when inputs change, reflecting the behavior of combinational circuits.
 
 ```SV
-module data_processing_unit;
-  input  logic [7:0] data_bus;
-  output logic parity_bit;
-
-  function automatic logic parity_calculate (input logic [7:0] data_in);
-    // Function to calculate parity (even parity in this example)
-    parity_calculate = ~^data_in; // Using reduction XOR and NOT for even parity
-  endfunction
-
-  assign parity_bit = parity_calculate(data_bus); // Calling the function in a continuous assignment
-
-  initial begin
-    $display("Data Bus: %b, Parity: %b", 8'b10101010, parity_calculate(8'b10101010)); // Output: Parity: 1 (even parity)
-    $display("Data Bus: %b, Parity: %b", 8'b11001100, parity_calculate(8'b11001100)); // Output: Parity: 0 (odd parity)
+module combinational_adder(
+  input  logic [7:0] input_a,
+  input  logic [7:0] input_b,
+  output logic [7:0] sum
+);
+  always_comb begin // Combinational logic block
+    sum = input_a + input_b; // Sum is re-calculated whenever input_a or input_b changes
   end
 endmodule
 ```
 
-**Explanation:**
+### 3. `always_ff` Block: Sequential Logic (Flip-Flop) Inference
 
--   The `parity_calculate` function is designed to compute the parity of an 8-bit input.
--   It is declared as `automatic` for reentrancy.
--   It has a `logic` return type, indicating it returns a single bit representing the parity.
--   It uses a reduction XOR operator (`^`) and NOT (`~`) for efficient parity calculation, typical for combinational logic.
--   The function is called within a continuous assignment (`assign parity_bit = ...`) to create combinational logic that continuously updates `parity_bit` whenever `data_bus` changes. It is also called in the `initial` block for simulation and display.
-
-## Storage Classes: `static` vs. `automatic` - Memory Management
-
-SystemVerilog tasks and functions can have two storage classes: `static` (default for tasks in modules) and `automatic` (default for functions in classes, and recommended for most tasks and functions). The storage class determines how variables declared within the task or function are allocated and managed in memory, especially when the task or function is called multiple times or concurrently.
-
-| Characteristic            | `static` Storage                               | `automatic` Storage                              |
-| ------------------------- | ---------------------------------------------- | ------------------------------------------------- |
-| **Memory Allocation**     | **Persistent, shared (global-like)**            | **Stack-based, per-call (local)**                 |
-| **Variable Lifetime**     | Variables retain their values between calls.   | Variables are created on each call and destroyed on exit. |
-| **Recursion Support**     | **Not reentrant, no recursion** (shared variables can lead to corruption) | **Reentrant, supports recursion** (each call has its own variables) |
-| **Concurrency Handling**  | Shared variables can cause race conditions in concurrent calls. | Safe for concurrent calls; each call has isolated variables. |
-| **Default in Modules**    | Tasks in modules are `static` by default.      | Functions in modules are `static` by default.     |
-| **Default in Classes**     | Tasks in classes are `automatic` by default.   | Functions in classes are `automatic` by default.  |
-| **Recommendation**        | **Avoid `static` in most cases** in modern SystemVerilog, especially for tasks and functions intended for reuse or concurrency. | **Use `automatic` for most tasks and functions**, especially in verification and class-based environments. |
-
-### Pitfall of `static` Variables: Shared State and Concurrency Issues
+-   **Sequential Logic Modeling**: `always_ff` blocks are specifically for modeling sequential logic elements, primarily flip-flops and registers.
+-   **Explicit Sensitivity List Required**:  `always_ff` **requires an explicit sensitivity list** that specifies the events that trigger the block's execution. This list typically includes the clock edge (e.g., `posedge clk`) and any asynchronous control signals like reset (e.g., `negedge rst_n`).
+-   **Non-Blocking Assignments (`<=`)**:  **Use non-blocking assignments (`<=`)** inside `always_ff` blocks. This is crucial for correctly modeling the behavior of flip-flops, where outputs are updated only at the clock edge and all updates within a clock cycle happen concurrently.
 
 ```SV
-task static_counter_task ();
-  static integer call_count = 0; // Static variable - shared across all calls
-
-  begin
-    call_count++;
-    $display("[%0t] Static Counter Task - Call Count: %0d", $time, call_count);
-  end
-endtask
-
-module static_task_example;
-  initial begin
-    fork
-      static_counter_task(); // Call 1
-      static_counter_task(); // Call 2 - Concurrent call!
-    join
-
-    #10 static_counter_task(); // Call 3 - Later call
+module d_flip_flop(
+  input logic clk,
+  input logic rst_n,
+  input logic data_in,
+  output logic data_out
+);
+  always_ff @(posedge clk or negedge rst_n) begin // Sequential logic block
+    if (!rst_n) begin // Asynchronous reset (active low)
+      data_out <= 1'b0; // Reset output to 0
+    end else begin      // Clocked behavior
+      data_out <= data_in; // Update output on positive clock edge
+    end
   end
 endmodule
 ```
 
-**Explanation of `static` Pitfall:**
+### 4. `always_latch` Block: Latch Inference (Use with Caution)
 
--   The `call_count` variable in `static_counter_task` is `static`. This means it is allocated **once** and is shared across all calls to `static_counter_task`.
--   When `static_counter_task` is called concurrently using `fork-join`, both calls operate on the **same `call_count` variable**. This can lead to **race conditions** and unpredictable results because the increment and display operations might interleave in unexpected ways.
--   Even in sequential calls, the `call_count` persists between calls, which might not be desired in all situations if you expect each call to have its own independent counter.
-
-### `automatic` Tasks and Functions: Reentrancy and Recursion
+-   **Latch Modeling**: `always_latch` blocks are intended to model latches. Latches are level-sensitive memory elements, unlike flip-flops which are edge-triggered.
+-   **Conditional Assignments for Latch Behavior**: Latches are typically inferred when a signal is assigned a value conditionally within an `always_latch` (or sometimes `always_comb`) block, and there is no `else` clause or default assignment to cover all conditions.
+-   **Use Sparingly in RTL**: Latches are often **undesirable in synchronous digital designs** because they can introduce timing hazards and make timing analysis more complex.  Avoid intentional latch inference in most RTL designs unless specifically required by the architecture.
 
 ```SV
-function automatic integer recursive_factorial (input integer n);
-  if (n <= 1) begin
-    return 1;
-  end else begin
-    return n * recursive_factorial(n - 1); // Recursive call - safe with 'automatic'
-  end
-endfunction
-
-task automatic automatic_counter_task ();
-  integer call_count = 0; // Automatic variable - local to each call
-
-  begin
-    call_count++;
-    $display("[%0t] Automatic Counter Task - Call Count: %0d", $time, call_count);
-  end
-endtask
-
-
-module automatic_example;
-  initial begin
-    $display("Factorial of 5: %0d", recursive_factorial(5)); // Recursion works correctly
-
-    fork
-      automatic_counter_task(); // Call 1 - Independent count
-      automatic_counter_task(); // Call 2 - Independent count
-    join
-
-    #10 automatic_counter_task(); // Call 3 - Independent count
+module level_sensitive_latch(
+  input logic enable,
+  input logic data_in,
+  output logic data_out
+);
+  always_latch begin // Latch inference block
+    if (enable) begin
+      data_out = data_in; // Latch is transparent when enable is high
+    end // No 'else' - latch holds previous value when enable is low
   end
 endmodule
 ```
 
-**Explanation of `automatic` Benefits:**
+## Assignment Types within Procedural Blocks: Blocking vs. Non-Blocking
 
--   **Reentrancy and Recursion**:  The `automatic` keyword makes tasks and functions reentrant. Each time an `automatic` task or function is called, a new set of local variables (like `call_count` in `automatic_counter_task` or the stack frames in `recursive_factorial`) is allocated on the stack. These variables are local to that specific invocation and are destroyed when the task or function completes. This enables recursion and safe concurrent calls.
--   **Local Variable Scope**: Variables declared inside `automatic` tasks and functions are local to each call. They do not retain values between calls and do not interfere with variables in other concurrent calls.
--   **Recommended for Modern SystemVerilog**: In modern SystemVerilog, especially for verification environments and reusable code, it is highly recommended to use `automatic` for most tasks and functions to ensure reentrancy, avoid unintended side effects, and enable safe concurrent operations.
+The type of assignment used within procedural blocks (`always`, `initial`, `final`) significantly impacts the behavior of your SystemVerilog code, especially in RTL design.
 
-## Advanced Features: Enhancing Task and Function Capabilities
+### Blocking Assignments (`=`): Sequential Execution
 
-SystemVerilog provides several advanced features to make tasks and functions more versatile and powerful.
-
-### 1. `void` Functions: Functions without Return Values
-
--   **Functions for Side Effects**:  While functions are primarily designed to return values, SystemVerilog allows you to declare functions with a `void` return type. `void` functions do not return a value and are typically used for performing actions or side effects, such as displaying messages, updating global variables (though generally discouraged for good coding practice in RTL functions), or triggering events.
--   **Verification Utilities**: `void` functions are more commonly used in verification testbenches for utility procedures that perform actions without needing to return a value directly.
+-   **Sequential Execution**: Blocking assignments (`=`) execute in the order they appear within the procedural block. When a blocking assignment is encountered, the assignment is performed **immediately**, and the procedural block execution **pauses** until the assignment is complete.
+-   **Immediate Value Update**: The variable on the left-hand side of a blocking assignment is updated with the new value **before** the execution proceeds to the next statement in the block.
+-   **Combinational Logic and Testbenches**: Blocking assignments are primarily used:
+    -   **Inside `always_comb` blocks** to model combinational logic accurately.
+    -   **In `initial` and `final` blocks** and in testbench procedures where sequential, step-by-step execution is desired.
 
 ```SV
-class verification_utils;
-  static function void print_test_banner (input string test_name);
-    $display("\n=======================================");
-    $display("  Running Test: %s", test_name);
-    $display("=======================================\n");
-  endfunction
-endclass
+module blocking_assignment_example;
+  integer variable_x, variable_y;
 
-module test_sequence;
   initial begin
-    verification_utils::print_test_banner("Address Bus Write Test");
-    // ... (test sequence code) ...
+    variable_x = 5;          // Line 1: variable_x becomes 5 immediately
+    variable_y = variable_x + 3; // Line 2: variable_y becomes 5 + 3 = 8 (using the updated value of variable_x)
+    $display("variable_x = %0d, variable_y = %0d", variable_x, variable_y); // Output: variable_x = 5, variable_y = 8
   end
 endmodule
 ```
 
-### 2. Argument Directions: Controlling Data Flow
+### Non-Blocking Assignments (`<=`): Concurrent Updates
 
-SystemVerilog provides flexible argument directions to control how data is passed into and out of tasks and functions:
-
--   **`input` (Default)**: Data flows into the task/function. The task/function cannot modify the original variable passed as input.
--   **`output`**: Data flows out of the task/function. The task/function modifies the variable passed as output, and the modified value is available to the caller after the task/function completes.
--   **`inout`**: Data flows both into and out of the task/function. The task/function can modify the original variable, and the modified value is reflected in the caller's scope.
--   **`ref` (Pass by Reference)**:  Passes a reference (pointer) to the original variable.  The task/function directly operates on the original variable in the calling scope.  This is efficient for passing large data structures as it avoids copying data.
+-   **Concurrent Scheduling**: Non-blocking assignments (`<=`) schedule assignments to occur at the **end of the current simulation time step**. When a non-blocking assignment is encountered, the assignment is scheduled, but the procedural block execution **does not pause**. It continues to the next statement.
+-   **Delayed Value Update**: The actual update of the variable on the left-hand side of a non-blocking assignment happens **only after all statements in the current procedural block (and potentially other concurrently executing blocks) have been evaluated for the current time step.**  The right-hand side expression is evaluated at the time the non-blocking assignment is encountered, but the result is not assigned until later.
+-   **Sequential Logic Modeling**: Non-blocking assignments are **essential for modeling sequential logic** (flip-flops, registers) correctly, particularly within `always_ff` blocks. They ensure that all register updates triggered by the same clock edge happen concurrently, reflecting real hardware behavior.
 
 ```SV
-task automatic data_manipulation_task (input integer input_val, output integer output_val, inout integer inout_val, ref integer ref_val);
-  begin
-    output_val = input_val * 2;     // Calculate output value
-    inout_val = inout_val + 10;    // Modify inout value
-    ref_val = ref_val * output_val; // Modify ref value directly
-    $display("Inside task: input_val=%0d, output_val=%0d, inout_val=%0d, ref_val=%0d", input_val, output_val, inout_val, ref_val);
-  end
-endtask
-
-module argument_direction_example;
-  integer arg_in = 5;
-  integer arg_out;
-  integer arg_inout = 20;
-  integer arg_ref = 100;
+module non_blocking_assignment_example;
+  logic [1:0] register_a, register_b;
 
   initial begin
-    $display("Before task call: arg_in=%0d, arg_out=%0d, arg_inout=%0d, arg_ref=%0d", arg_in, arg_out, arg_inout, arg_ref);
-    data_manipulation_task(arg_in, arg_out, arg_inout, arg_ref); // Task call
-    $display("After task call:  arg_in=%0d, arg_out=%0d, arg_inout=%0d, arg_ref=%0d", arg_in, arg_out, arg_inout, arg_ref);
-    // Output:
-    // Before task call: arg_in=5, arg_out=          0, arg_inout=         20, arg_ref=        100
-    // Inside task call: input_val=5, output_val=         10, inout_val=         30, ref_val=       1000
-    // After task call:  arg_in=5, arg_out=         10, arg_inout=         30, arg_ref=       1000
+    register_a <= 2'b10; // Line 1: Schedule update for register_a at the end of the time step
+    register_b <= register_a; // Line 2: Schedule update for register_b at the end of the time step, using the *original* value of register_a (before update)
+
+    #1 $display("register_a = %b, register_b = %b", register_a, register_b);
+    // Output at time 1: register_a = 10, register_b = 00
+    // register_a gets updated to 2'b10 as scheduled.
+    // register_b gets the *old* value of register_a (which was 0 at the start of the time step)
   end
 endmodule
 ```
 
-### 3. Default Arguments: Providing Flexibility and Reducing Redundancy
+**Key Rules for Assignment Types:**
 
-SystemVerilog allows you to specify default values for function arguments. If a caller omits an argument with a default value, the default value is used. This enhances function flexibility and reduces code duplication when certain argument values are commonly used.
+-   **`always_comb`**: **Blocking assignments (`=`)** - for combinational logic.
+-   **`always_ff`**: **Non-blocking assignments (`<=`)** - for sequential logic (flip-flops, registers).
+-   **`initial` and `final` blocks**: **Blocking assignments (`=`)** - for sequential, step-by-step initialization and reporting.
+-   **General `always` blocks (testbench)**: Typically **blocking assignments (`=`)** unless modeling specific concurrent behavior.
+-   **Never mix blocking and non-blocking assignments to the same variable within the same procedural block.** This can lead to unpredictable and simulation-dependent behavior.
 
-```SV
-function automatic integer calculate_timeout (input integer base_time, input integer multiplier = 2, input integer offset = 5);
-  // Function to calculate timeout with optional multiplier and offset
-  calculate_timeout = base_time * multiplier + offset;
-endfunction
+## Best Practices and Common Pitfalls with Procedural Blocks
 
-module default_argument_example;
-  initial begin
-    $display("Timeout 1: %0d", calculate_timeout(100));      // Uses default multiplier=2, offset=5 -> 100*2 + 5 = 205
-    $display("Timeout 2: %0d", calculate_timeout(100, 3));   // Uses multiplier=3, default offset=5 -> 100*3 + 5 = 305
-    $display("Timeout 3: %0d", calculate_timeout(50, 4, 10)); // Uses multiplier=4, offset=10 -> 50*4 + 10 = 210
-  end
-endmodule
-```
+1.  **Synthesis Guidelines for `always` Blocks**:
+    -   **`always_comb` for Combinational**:  Use `always_comb` for all combinational logic descriptions. It provides automatic sensitivity lists and helps prevent latches.
+    -   **`always_ff` for Sequential**: Use `always_ff` exclusively for flip-flop and register modeling. Always include the clock and relevant reset signals in the sensitivity list.
+    -   **Avoid General `always` in RTL**:  Minimize the use of general `always` blocks in synthesizable RTL designs, as they can be less clear about the intended logic type (combinational or sequential) and may lead to synthesis issues. Reserve general `always` for testbench clock generation or specific, well-understood cases.
 
-## Best Practices for Tasks and Functions
-
-1.  **RTL Design Guidelines**:
-    -   **Functions for Combinational Logic in RTL**: Use functions extensively to model combinational logic in RTL designs. Functions are synthesizable and promote modularity. Keep functions short, focused on specific calculations or data transformations, and ensure they are purely combinational (no timing controls).
-    -   **Avoid Tasks in Synthesizable RTL**: Generally, avoid using tasks directly in synthesizable RTL code, especially if they contain timing controls or complex sequential behavior. Tasks are primarily for testbenches and behavioral modeling. For sequential logic in RTL, use `always_ff` blocks.  However, tasks *can* be used as purely behavioral abstractions in RTL if they are synthesizable (no timing controls) and simplify complex logic, but functions are often preferred for clarity and synthesis tool optimization.
-
-2.  **Testbench Development Best Practices**:
-    -   **Tasks for Test Sequences and Protocols**: Use tasks extensively in testbenches to create reusable test sequences, protocol drivers, and monitor procedures. Tasks are ideal for modeling timed behavior and managing complex verification flows.
-    -   **`automatic` Storage for Testbench Tasks and Functions**:  Always use the `automatic` keyword for tasks and functions in testbenches, especially in class-based verification environments, to ensure reentrancy and prevent unintended variable sharing in concurrent test scenarios.
-    -   **Functions for Testbench Utilities**: Use functions in testbenches for utility operations like data packing/unpacking, data conversions, scoreboarding calculations, and assertion checks.  `void` functions are useful for actions like printing test status banners or logging messages.
-
-3.  **Debugging and Verification**:
-    -   **`$debug` System Function for Function Debugging**: SystemVerilog provides the `$debug` system function, similar to `$display`, but often handled differently by simulation tools (e.g., may be conditionally compiled or have different verbosity levels).  Use `$debug` strategically within functions to print intermediate values or trace execution flow during debugging without cluttering standard output in normal simulation runs.
+2.  **Latch Prevention - Completeness in Combinational Logic**:
+    -   **Problem: Incomplete `if` or `case` in `always_comb` can infer latches.** If not all possible conditions are explicitly handled in an `always_comb` block, and a signal is assigned a value only under certain conditions, the synthesizer may infer a latch to "hold" the previous value when none of the specified conditions are met.
 
     ```SV
-    function automatic integer calculate_checksum(input bit [63:0] data);
-      calculate_checksum = data ^ (data >> 32);
-      $debug("Checksum Calculation: Input Data = 0x%h, Checksum = 0x%h", data, calculate_checksum); // Debug message
-    endfunction
+    // BAD - Latch Inferred (incomplete conditional assignment)
+    always_comb begin
+      if (enable)
+        output_signal = input_data; // What happens to output_signal when 'enable' is false? - Latch!
+    end
+
+    // GOOD - Full Combinational Logic (using conditional operator)
+    always_comb begin
+      output_signal = enable ? input_data : 1'b0; // Explicitly define output for both 'enable' true and false
+    end
+
+    // GOOD - Full Combinational Logic (using if-else)
+    always_comb begin
+      if (enable) begin
+        output_signal = input_data;
+      end else begin
+        output_signal = 1'b0; // Explicit 'else' branch prevents latch
+      end
+    end
     ```
+    -   **Solution**: Ensure that within `always_comb` blocks, for every output signal, you have a **complete assignment** that covers all possible input conditions. Use `else` clauses in `if` statements and `default` cases in `case` statements to explicitly define the output value in all scenarios.
 
-4.  **Code Style and Readability**:
-    -   **Meaningful Names**: Choose descriptive and meaningful names for tasks and functions that clearly indicate their purpose.
-    -   **Keep Tasks and Functions Focused**: Design tasks and functions to perform specific, well-defined operations. Avoid creating overly long or complex tasks and functions that try to do too much. Break down complex logic into smaller, more manageable units.
-    -   **Consistent Argument Passing**: Use appropriate argument directions (`input`, `output`, `inout`, `ref`) to clearly define data flow into and out of tasks and functions.
-    -   **Use Parentheses for Clarity in Function Calls**: When calling functions, especially with multiple arguments, use parentheses to improve readability, even if arguments are optional.
+3.  **Sensitivity Lists in `always_ff`**:
+    -   **Include Clock and Asynchronous Resets**:  For `always_ff` blocks modeling flip-flops, the sensitivity list **must include the clock edge** (e.g., `posedge clk`) and **any asynchronous reset signals** (e.g., `negedge rst_n`).
+    -   **Complete Sensitivity**: Ensure all signals that can cause a change in the flip-flop's state are in the sensitivity list.  Missing signals can lead to simulation mismatches with synthesized hardware.
 
-## Exercises to Solidify Task and Function Concepts
+4.  **Avoid Mixing Assignment Types**:
+    -   **Never mix blocking and non-blocking assignments to the same variable within a single `always`, `initial`, or `final` block.** This is a common source of subtle errors and unpredictable simulation behavior.
+    -   **Consistent Assignment Style**:  Choose the appropriate assignment type (blocking or non-blocking) for each procedural block based on whether you are modeling combinational or sequential logic, and stick to that type consistently within the block.
 
-1.  **`sum_task`**: Create a task named `sum_task` that takes two integer inputs and displays their sum using `$display`. Call this task from an `initial` block.
-2.  **`multiply_function`**: Implement a function named `multiply_function` that takes two integer inputs and returns their product as an integer. Call this function from an `initial` block and display the returned result.
-3.  **Recursive Factorial Task (`factorial_task`)**: Create an `automatic` task named `factorial_task` that calculates the factorial of a non-negative integer input recursively. The task should take an integer input `n` and an `output` integer argument `result` to return the factorial. Call this task to calculate the factorial of 6 and display the result.
-4.  **`circle_area_function`**: Implement a function named `circle_area_function` that calculates the area of a circle. The function should take a `real` input argument `radius` and return the area as a `real` value (Area = πr², use `real PI = 3.1415926535;`). Call this function and display the area for a radius of 2.5.
-5.  **`byte_swap_task` with `inout`**: Create an `automatic` task named `byte_swap_task` that takes an `inout logic [7:0]` argument. The task should swap the upper and lower nibbles (4 bits) of the byte in place. Write a testbench to call this task and demonstrate that it modifies the original byte variable passed to it.
-6.  **`config_load_task` with Timing**: Design an `automatic` task named `config_load_task` that simulates loading configuration data over a serial interface. The task should take an `input` array of bytes representing configuration data. Inside the task, simulate sending each byte serially with a `#10` delay between bytes. Display each byte being sent. Call this task from an `initial` block with a sample configuration array.
-7.  **`check_range_function` with Default Argument**: Implement a function named `check_range_function` that checks if an input integer `value` is within a specified range [`min_val`, `max_val`]. The function should take `value`, `min_val`, and `max_val` as `input` arguments and return a `bit` (1 for in range, 0 for out of range). Provide a default value of 0 for `min_val` and 100 for `max_val`. Test the function with different values, including cases using the default range and overriding the default range.
+## Exercises to Practice Procedural Blocks
 
-By mastering tasks and functions and practicing with these exercises, you will be well-equipped to write modular, reusable, and efficient SystemVerilog code for complex hardware designs and sophisticated verification environments.
+1.  **Initial Block Message**: Create a testbench module with an `initial` block that displays the message "System Initialization Started..." at the beginning of the simulation.
+2.  **Final Block Simulation Time Report**: Write a testbench module that uses a `final` block to report the total simulation time elapsed using the `$time` system function at the end of the simulation.
+3.  **100MHz Clock Generator**: Design a clock generator module using a general `always` block to produce a 100MHz clock signal with a 50% duty cycle.
+4.  **Combinational 8-bit Multiplier**: Implement a combinational 8-bit multiplier module using an `always_comb` block. The module should take two 8-bit inputs and output their 16-bit product.
+5.  **4-bit Synchronous Counter with Asynchronous Reset**: Design a 4-bit synchronous counter module using an `always_ff` block. The counter should have a clock input, an active-low asynchronous reset input, and a 4-bit count output.
+6.  **Transparent Latch**: Create a module that implements a transparent latch using an `always_latch` block. The latch should be enabled by an `enable` input and pass the `data_in` to `data_out` when enabled, holding the last value when disabled.
+7.  **Blocking vs. Non-blocking Assignment Value Swap**: Write two separate modules to demonstrate value swapping between two variables:
+    -   One module using **blocking assignments** to swap the values.
+    -   Another module using **non-blocking assignments** to attempt to swap the values (and observe the outcome). Display the variable values after the assignments in both modules to illustrate the difference in behavior.
+
+By working through these exercises and carefully considering the best practices, you will develop a strong foundation in using SystemVerilog procedural blocks effectively for both RTL design and verification.
 
 ##### Copyright (c) 2025 squared-studio
 

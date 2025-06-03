@@ -1,427 +1,269 @@
-# SystemVerilog Interfaces: Streamlining Module Communication and Protocol Design
+# Interprocess Communication (IPC) in SystemVerilog: Coordinating Parallel Processes
 
-## Introduction: The Interface Revolution in SystemVerilog
+## Introduction
 
-SystemVerilog interfaces represent a significant advancement in hardware design methodology, fundamentally changing how modules communicate and interact. In essence, interfaces act as **communication contracts**, encapsulating a bundle of related signals and the protocols that govern their interaction within a single, reusable entity. This approach offers a powerful alternative to traditional, often verbose and error-prone, port lists, especially as designs grow in complexity.
+Interprocess Communication (IPC) is a cornerstone of SystemVerilog, enabling the effective coordination and synchronization of concurrent processes. In both complex testbenches and sophisticated design models, multiple processes often operate in parallel to simulate different aspects of a system or to verify concurrent hardware operations.  To ensure correct and predictable behavior, these processes frequently need to exchange data, signal events, or manage shared resources without creating race conditions or deadlocks. SystemVerilog provides robust IPC mechanisms – **mailboxes**, **semaphores**, and **events** – each designed for specific communication and synchronization needs. Mastering these IPC tools is essential for building advanced verification environments and modeling concurrent hardware designs accurately. This guide explores the purpose, methods, and best practices for each of these IPC mechanisms, illustrating their practical application in SystemVerilog.
 
-**Key Advantages of Using Interfaces:**
+## Mailboxes: Message Passing for Data Exchange
 
--   **Reduced Redundancy and Complexity**: Interfaces eliminate the need to repeatedly declare the same sets of signals in module port lists. Instead of listing individual signals (like `clk`, `rst_n`, `data`, `valid`, `ready`) for every module that uses a particular communication protocol, you define them once within an interface. This drastically reduces code duplication and makes module declarations cleaner and more manageable.
--   **Prevention of Wiring Errors**: By defining communication channels as interfaces, you ensure consistent and correct connections between modules. When you connect modules using interfaces, you are connecting them at a higher level of abstraction, reducing the chances of miswiring individual signals. The interface definition acts as a blueprint, guaranteeing that connected modules adhere to the same signal and protocol structure.
--   **Enhanced Design Scalability and Maintainability**: Interfaces significantly simplify system expansion and modification. Adding new modules that use a standard interface becomes straightforward. Changes to the interface protocol are localized within the interface definition, rather than requiring modifications across numerous module port lists. This modularity is crucial for managing the complexity of large System-on-Chip (SoC) designs.
--   **Enablement of Advanced Verification and Abstraction**: Interfaces are not just signal bundles; they can also encapsulate functional behavior through tasks and functions. This allows you to embed protocol checking, transaction-level operations, and other high-level functionalities directly within the interface. Furthermore, interfaces are essential for advanced verification methodologies like the Universal Verification Methodology (UVM), where virtual interfaces are used to connect testbench components to the design under verification at an abstract level.
--   **Support for Complex Protocols**: Interfaces are particularly invaluable in complex SoC designs that implement multiple communication protocols, such as AMBA AXI, USB, PCIe, Ethernet, and custom protocols. They provide a structured and organized way to manage the intricate signal sets and timing rules associated with these protocols, making the design and verification process more efficient and less error-prone.
+A mailbox in SystemVerilog acts as a message queue, providing a type-safe channel for processes to exchange data. Think of it as a secure post office for your simulation processes. Mailboxes can be **bounded** (with a fixed capacity) or **unbounded** (dynamically sized), and they are parameterized to enforce the type of data (messages) that can be passed through them, enhancing code reliability.
 
-In essence, SystemVerilog interfaces promote a more abstract, modular, and robust approach to hardware design, shifting the focus from individual signal wiring to protocol-level communication contracts.
+### Mailbox Methods: Sending and Receiving Messages
 
-## Defining Interfaces: Creating Communication Contracts
+SystemVerilog mailboxes offer a set of methods for sending and receiving messages, with both blocking and non-blocking options to suit different synchronization needs.
 
-Interfaces are created using the `interface` keyword, defining a named block that encapsulates signals, parameters, and optional methods (tasks and functions) that represent a communication protocol.
+| Method        | Description                                                                 | Blocking Behavior                                   | Return Value        | Example                                     |
+| ------------- | --------------------------------------------------------------------------- | --------------------------------------------------- | ------------------- | ------------------------------------------- |
+| `put(message)`   | **Blocking Send**: Sends a `message` to the mailbox.                     | **Blocks** if the mailbox is full until space is available. | `void`              | `data_mbox.put(transaction_pkt);`          |
+| `get(message)`   | **Blocking Receive**: Receives a `message` from the mailbox.                | **Blocks** if the mailbox is empty until a message arrives. | `void`              | `data_mbox.get(received_pkt);`         |
+| `try_put(message)` | **Non-blocking Send**: Attempts to send a `message`.                      | **Non-blocking**: Returns immediately.               | `1` (success) / `0` | `if (data_mbox.try_put(new_packet)) ...`  |
+| `try_get(message)` | **Non-blocking Receive**: Attempts to receive a `message`.                 | **Non-blocking**: Returns immediately.               | `1` (success) / `0` | `if (data_mbox.try_get(received_pkt)) ...` |
+| `peek(message)`  | **Non-blocking Peek**:  Retrieves the next message without removing it.  | **Non-blocking**: Returns immediately.               | `1` (success) / `0` | `if (data_mbox.peek(next_pkt)) ...`     |
+| `num()`         | **Query Message Count**: Returns the current number of messages in the mailbox. | **Non-blocking**: Returns immediately.               | `integer`           | `integer msg_count = data_mbox.num();`     |
 
-### Basic Interface Structure
+### Creating Mailbox Instances: Bounded and Unbounded
 
 ```SV
-// Example: Simple bus interface definition
-interface simple_bus_if; // 'if' suffix is a common naming convention for interfaces
-  logic clk;         // System clock signal
-  logic rst_n;       // Active-low reset signal
-  logic [7:0] data;    // 8-bit data bus
-  logic valid;       // Data valid indicator signal
+mailbox data_mbox;                  // Unbounded mailbox (default size)
+mailbox #(packet_type) pkt_mbox;    // Unbounded mailbox for 'packet_type'
+mailbox #(integer) bounded_mbox = new(10); // Bounded mailbox for integers, capacity 10
+mailbox #(string) string_mbox = new(3);   // Bounded mailbox for strings, capacity 3
 
-  // Optional: Interface methods (functions and tasks) to encapsulate protocol behavior
-  function automatic bit is_active(); // Example function within the interface
-    return valid && !rst_n;
-  endfunction
-
-  task automatic reset_bus(); // Example task within the interface
-    rst_n = 0;
-    #10 rst_n = 1;
-  endtask
-endinterface
+initial begin
+  data_mbox = new();          // Instantiate unbounded mailbox
+  pkt_mbox  = new();          // Instantiate unbounded parameterized mailbox
+end
 ```
 
-### Key Features of Interface Definitions
-
--   **Signal Grouping**: Interfaces serve to group together all signals that are logically related and participate in a specific communication protocol. In the `simple_bus_if` example, `clk`, `rst_n`, `data`, and `valid` are bundled as they collectively define a basic bus communication channel.
--   **Parameter Support**: Interfaces can be parameterized, making them highly flexible and reusable. You can define parameters (like data width, address width, bus type) that can be customized when the interface is instantiated, allowing you to create variations of the same interface for different design needs. (See the AXI-Lite example later).
--   **Method Inclusion (Tasks and Functions)**: Interfaces can contain tasks and functions. These methods encapsulate protocol-related operations and provide a higher level of abstraction for interacting with the interface signals. For example, a `reset()` task within an interface can encapsulate the sequence of signals required to reset the interface and connected modules. A function like `is_active()` can provide a convenient way to check the interface's operational status.
--   **Hierarchical Access and Connectivity**: Interfaces can be instantiated and connected at any level of the design hierarchy. You can pass interfaces as ports to modules, allowing modules at different levels of hierarchy to communicate using the defined protocol. This hierarchical nature makes interfaces suitable for complex, multi-level designs.
-
-## Implementing Interfaces in Modules: Connecting and Using Communication Contracts
-
-To use an interface, modules declare interface instances as ports in their port lists. This establishes a connection between the module and the communication channel defined by the interface.
-
-### Module Connection Syntax with Interfaces
+### Example: Producer-Consumer Model with a Bounded Mailbox
 
 ```SV
-module data_producer(simple_bus_if bus_intf); // Interface instance 'bus_intf' as a port
-  // 'simple_bus_if' is the interface type, 'bus_intf' is the port name (instance handle)
+module producer_consumer_example;
+  typedef struct packed {         // Define a packet structure
+    int data_id;
+    logic [31:0] payload;
+  } packet_type;
 
-  always_ff @(posedge bus_intf.clk or negedge bus_intf.rst_n) begin // Access interface signals using instance.signal_name
-    if (!bus_intf.rst_n) begin
-      bus_intf.data  <= 8'h00;
-      bus_intf.valid <= 1'b0;
-    end else begin
-      bus_intf.data  <= bus_intf.data + 1;
-      bus_intf.valid <= 1'b1;
+  mailbox #(packet_type) packet_mailbox = new(2); // Bounded mailbox, capacity 2
+
+  // Producer Process
+  initial begin : producer_process
+    packet_type pkt;
+    for (int i = 0; i < 5; i++) begin
+      pkt.data_id = i;
+      pkt.payload = $random();
+      if (packet_mailbox.try_put(pkt)) begin // Non-blocking put attempt
+        $display("[%0t] Producer: Sent packet ID %0d, Payload 0x%h", $time, pkt.data_id, pkt.payload);
+      end else begin
+        $display("[%0t] Producer: Mailbox FULL! Failed to send packet ID %0d", $time, pkt.data_id);
+      end
+      #($urandom_range(5, 15)); // Random delay before next send
     end
+    $display("[%0t] Producer: Finished sending packets.", $time);
   end
-endmodule
 
-module data_consumer(simple_bus_if bus_intf); // Interface instance 'bus_intf' as a port
-  always_ff @(posedge bus_intf.clk) begin
-    if (bus_intf.valid && bus_intf.is_active()) begin // Call interface method using instance.method_name()
-      $display("[%0t] Consumer received data: 0x%02h", $time, bus_intf.data);
+  // Consumer Process
+  initial begin : consumer_process
+    packet_type received_packet;
+    #10; // Start consumer slightly later
+    while (1) begin
+      if (packet_mailbox.try_get(received_packet)) begin // Non-blocking get attempt
+        $display("[%0t] Consumer: Received packet ID %0d, Payload 0x%h", $time, received_packet.data_id, received_packet.payload);
+      end else begin
+        $display("[%0t] Consumer: Mailbox EMPTY! Waiting for packets...");
+      end
+      #($urandom_range(8, 20)); // Random delay before next receive attempt
+      if (received_packet.data_id == 4) break; // Simple exit condition after receiving packet ID 4
     end
+    $display("[%0t] Consumer: Finished receiving packets.", $time);
   end
 endmodule
 ```
 
-### Top-Level Module and Interface Instantiation
+**Key Mailbox Usage Points:**
 
-In a top-level module or testbench, you instantiate the interface itself and then connect it to the module instances.
+-   **Bounded vs. Unbounded**:
+    -   **Bounded Mailboxes**:  Have a fixed size, useful for modeling systems with limited buffer capacity and for backpressure mechanisms. Use `try_put()` and `try_get()` to handle potential full or empty conditions gracefully without blocking indefinitely.
+    -   **Unbounded Mailboxes**: Dynamically grow as needed, suitable when the number of messages is not strictly limited or when blocking behavior is acceptable for `put()` and `get()`.
+-   **Type Parameterization**:  `mailbox #(<data_type>)` enforces type safety, ensuring only messages of the specified type can be passed, preventing type-related errors.
+-   **Blocking (`put()`, `get()`) vs. Non-blocking (`try_put()`, `try_get()`) Methods**:
+    -   **Blocking Methods**:  Guarantee message delivery and reception.  `put()` blocks the sender until space is available; `get()` blocks the receiver until a message arrives. Ideal for reliable communication where synchronization is critical.
+    -   **Non-blocking Methods**: Provide flexibility to avoid process stalls. `try_put()` and `try_get()` return immediately, indicating success or failure. Useful for scenarios where processes need to check for mailbox status without blocking, allowing for alternative actions if the mailbox is not ready.
+-   **`peek()` Method**: Allows inspection of the next message in the mailbox without removing it, useful for lookahead operations or conditional reception logic.
+-   **`num()` Method**: Provides the current message count in the mailbox, enabling processes to check mailbox occupancy and make decisions based on message queue depth.
+
+## Semaphores: Controlling Access to Shared Resources
+
+A semaphore is a synchronization primitive that controls access to shared resources by managing a pool of "keys" or permits. It acts like a gatekeeper, ensuring that only a limited number of processes can access a critical resource at any given time, preventing data corruption and race conditions. Semaphores are initialized with a count representing the number of available keys.
+
+### Semaphore Methods: Acquiring and Releasing Keys
+
+| Method        | Description                                                                | Blocking Behavior                                  | Parameters      | Example                                     |
+| ------------- | -------------------------------------------------------------------------- | -------------------------------------------------- | --------------- | ------------------------------------------- |
+| `get([count])`  | **Acquire Keys**: Attempts to acquire `count` keys (default `count` is 1). | **Blocks** if not enough keys are available until they are released. | `count` (int)   | `resource_sem.get(2);`                      |
+| `put([count])`  | **Release Keys**: Releases `count` keys back to the semaphore (default `count` is 1). | **Non-blocking**: Always returns immediately.         | `count` (int)   | `resource_sem.put(1);`                      |
+| `try_get([count])`| **Non-blocking Acquire**: Attempts to acquire `count` keys.              | **Non-blocking**: Returns immediately.              | `count` (int)   | `if (resource_sem.try_get(1)) ...`         |
+| `try_put([count])`| **Non-blocking Release**: Attempts to release `count` keys. (Less common). | **Non-blocking**: Returns immediately.              | `count` (int)   | `if (resource_sem.try_put(1)) ...`         |
+| `num()`         | **Query Available Keys**: Returns the current number of available keys.   | **Non-blocking**: Returns immediately.              | None            | `integer keys_available = resource_sem.num();` |
+
+### Example: Protecting a Shared Resource with a Semaphore
 
 ```SV
-module top_level_design;
-  simple_bus_if bus_instance(); // Instantiate the interface - 'bus_instance' is the interface instance name
+module shared_resource_protection;
+  semaphore resource_semaphore = new(1); // Binary semaphore (mutex) - 1 key available
+  integer shared_data = 0;
 
-  data_producer producer_unit (.bus_intf(bus_instance)); // Connect producer to the interface
-  data_consumer consumer_unit (.bus_intf(bus_instance)); // Connect consumer to the same interface
+  // Process 1: Access and modify shared data
+  initial begin : process_one
+    $display("[%0t] Process 1: Attempting to acquire semaphore...", $time);
+    resource_semaphore.get(1); // Acquire the semaphore (blocking) - exclusive access granted
+    $display("[%0t] Process 1: Semaphore acquired. Accessing shared resource...", $time);
+    shared_data++; // Access and modify shared_data - critical section
+    $display("[%0t] Process 1: Shared data incremented to %0d", $time, shared_data);
+    #20; // Simulate resource usage time
+    resource_semaphore.put(1); // Release the semaphore - allows other processes to access
+    $display("[%0t] Process 1: Semaphore released.", $time);
+  end
 
-  // Testbench initialization and clock generation
+  // Process 2: Access and modify shared data concurrently
+  initial begin : process_two
+    #10; // Start process 2 slightly later
+    $display("[%0t] Process 2: Attempting to acquire semaphore...", $time);
+    resource_semaphore.get(1); // Process 2 will block here until Process 1 releases semaphore
+    $display("[%0t] Process 2: Semaphore acquired. Accessing shared resource...", $time);
+    shared_data += 5; // Access and modify shared_data - critical section
+    $display("[%0t] Process 2: Shared data incremented to %0d", $time, shared_data);
+    #15; // Simulate resource usage time
+    resource_semaphore.put(1); // Release the semaphore
+    $display("[%0t] Process 2: Semaphore released.", $time);
+  end
+
   initial begin
-    bus_instance.rst_n = 0; // Access interface signals using instance.signal_name
-    bus_instance.clk   = 0;
-    #20 bus_instance.rst_n = 1;
-    #100 $finish;
+    #50 $finish; // Simulation timeout
   end
-
-  always #5 bus_instance.clk = ~bus_instance.clk; // Clock generation for the interface signals
 endmodule
 ```
 
-In this example:
+**Example Output (Illustrative):**
 
--   `simple_bus_if bus_instance();` instantiates an interface of type `simple_bus_if` named `bus_instance`. This creates a concrete instance of the communication channel with all the signals defined in the interface.
--   `data_producer producer_unit (.bus_intf(bus_instance));` and `data_consumer consumer_unit (.bus_intf(bus_instance));` instantiate the `producer` and `consumer` modules and connect their interface ports (`.bus_intf`) to the interface instance `bus_instance`. This establishes the communication link between the modules through the interface.
--   Within the `initial` and `always` blocks in the `top_level_design` module, you can directly access and drive the signals of the interface instance (e.g., `bus_instance.rst_n = 0;`, `bus_instance.clk = ~bus_instance.clk;`).
+```
+[0] Process 1: Attempting to acquire semaphore...
+[0] Process 1: Semaphore acquired. Accessing shared resource...
+[0] Process 1: Shared data incremented to 1
+[10] Process 2: Attempting to acquire semaphore...
+[20] Process 1: Semaphore released.
+[20] Process 2: Semaphore acquired. Accessing shared resource...
+[20] Process 2: Shared data incremented to 6
+[35] Process 2: Semaphore released.
+```
 
-## Modports: Enforcing Directionality and Access Control within Interfaces
+**Key Semaphore Usage Points:**
 
-Modports (Module Ports within Interfaces) are a powerful feature of SystemVerilog interfaces that provide **directional control** and **access policies** for interface signals. Modports define different "views" or perspectives of an interface, specifying which signals are inputs and outputs from the viewpoint of a particular type of module connecting to the interface.
+-   **Resource Protection**: Semaphores are primarily used to protect shared resources (variables, memory regions, hardware blocks) from simultaneous access by multiple processes, preventing race conditions and ensuring data integrity.
+-   **Mutual Exclusion (Mutex)**: A semaphore initialized with a count of 1 acts as a mutex (mutual exclusion lock). Only one process can acquire the key at a time, providing exclusive access to the protected resource.
+-   **Counting Semaphores**: Semaphores initialized with a count greater than 1 can control access to resources that can handle a limited number of concurrent users (e.g., a pool of buffers, a limited number of processing units).
+-   **Blocking (`get()`) vs. Non-blocking (`try_get()`) Acquisition**:
+    -   **Blocking `get()`**:  Guarantees exclusive access but can lead to process blocking if the resource is unavailable. Suitable for critical sections where exclusive access is mandatory.
+    -   **Non-blocking `try_get()`**: Allows processes to attempt to acquire the semaphore without blocking. Useful for implementing non-blocking algorithms, priority-based resource access, or deadlock avoidance strategies. Processes can check the return value of `try_get()` to determine if the acquisition was successful and take alternative actions if needed.
+-   **`put()` for Releasing Keys**: Processes **must** release the semaphore keys using `put()` after they are finished accessing the shared resource. Failing to release semaphores can lead to resource starvation and deadlocks, where processes are blocked indefinitely waiting for keys that will never be released.
+-   **`num()` for Monitoring**: The `num()` method allows processes to check the number of available keys, useful for resource monitoring and dynamic resource allocation decisions.
 
-### The Importance of Modports: Clarity, Error Prevention, and Reusability
+## Events: Process Synchronization without Data Transfer
 
--   **Preventing Signal Contention and Errors**: Modports are crucial for preventing accidental signal contention and wiring errors. By explicitly defining signal directions (input or output) for each type of module connecting to the interface, SystemVerilog's compiler and simulator can detect and flag potential conflicts where multiple drivers might attempt to drive the same signal.
--   **Clarifying Design Intent and Improving Readability**: Modports significantly enhance design clarity by clearly documenting the intended direction of signals for different modules interacting through the interface. This makes the code self-documenting and easier to understand, especially in complex designs with multiple interfaces and modules.
--   **Enabling Interface Reuse with Different Connection Paradigms**: Modports make interfaces more versatile and reusable. A single interface definition can be used to connect different types of modules (e.g., masters and slaves, producers and consumers) by providing different modport views tailored to each module's role in the communication protocol.
--   **Facilitating Verification and Protocol Checking**: Modports, when combined with clocking blocks and assertions within interfaces, are essential for building robust verification environments. They allow you to define clear protocol boundaries and enforce protocol rules at the interface level, making it easier to verify correct communication between modules.
+Events in SystemVerilog are lightweight synchronization objects used to signal occurrences or trigger actions between processes. Unlike mailboxes, events do not carry data; they simply act as flags to indicate that something has happened. Processes can trigger events and wait for events to be triggered, enabling synchronization of execution flow.
 
-### Advanced Modport Implementation Example: AXI-Stream Interface with Modports
+### Event Operations: Triggering and Waiting
+
+| Operation               | Description                                                                 | Blocking Behavior                                 | Example                                    |
+| ----------------------- | --------------------------------------------------------------------------- | ------------------------------------------------- | ------------------------------------------ |
+| `-> event_name;`        | **Trigger Event**: Signals the occurrence of the event.                      | **Non-blocking**: Returns immediately.             | `-> data_available_event;`                 |
+| `@(event_name);`        | **Wait for Event**: Process suspends execution until `event_name` is triggered. | **Blocking**: Process blocks until event is triggered. | `@(data_ready_event);`                    |
+| `wait(event_name.triggered);` | **Check Event Triggered Status**: Checks if `event_name` has been triggered (and remains triggered). | **Blocking**: Process blocks until event is triggered (if not already). | `wait(start_event.triggered);`           |
+| `event_name.triggered`  | **Query Triggered Flag**:  Returns `1` if the event has been triggered at any point, `0` otherwise. | **Non-blocking**: Returns immediately.             | `if (config_done_event.triggered) ...`   |
+
+### Example: Event-Based Process Synchronization
 
 ```SV
-interface axi_stream_if; // Interface for AXI Streaming protocol
-  logic aclk;     // Clock signal
-  logic aresetn;  // Reset signal (active low)
-  logic [31:0] tdata;   // Data payload
-  logic tvalid;   // Data valid signal (source to sink)
-  logic tready;   // Data ready signal (sink to source)
+module event_synchronization_example;
+  event config_ready_event; // Declare an event
+  event data_processed_event;
 
-  // Modport for a data source (producer/master) module
-  modport source_port ( // 'source_port' is the name of this modport view
-    output tdata, tvalid, // From source to interface (outputs from source's perspective)
-    input  aclk, aresetn, tready // From interface to source (inputs to source's perspective)
-  );
-
-  // Modport for a data sink (consumer/slave) module
-  modport sink_port (   // 'sink_port' is the name of this modport view
-    input  tdata, tvalid, aclk, aresetn, // Inputs to sink from interface
-    output tready                      // Output from sink to interface
-  );
-
-  // Modport for a passive monitor module (observes only)
-  modport monitor_port ( // 'monitor_port' for passive observation
-    input  aclk, aresetn, tdata, tvalid, tready // All signals are inputs for a monitor
-  );
-endinterface
-
-module axi_stream_data_source(axi_stream_if.source_port stream_intf); // Using 'source_port' modport
-  // 'axi_stream_if.source_port' - specifies both interface type and modport view
-
-  always_ff @(posedge stream_intf.aclk or negedge stream_intf.aresetn) begin
-    if (!stream_intf.aresetn) begin
-      stream_intf.tdata  <= 0;
-      stream_intf.tvalid <= 0;
-    end else begin
-      stream_intf.tdata  <= stream_intf.tdata + 1;
-      stream_intf.tvalid <= 1;
-    end
+  // Configuration Process
+  initial begin : config_process
+    $display("[%0t] Configuration Process: Starting...", $time);
+    #25; // Simulate configuration time
+    $display("[%0t] Configuration Process: Configuration complete. Triggering event...", $time);
+    -> config_ready_event; // Trigger the event to signal configuration completion
+    wait(data_processed_event.triggered); // Wait for data processing to complete
+    $display("[%0t] Configuration Process: Data processing acknowledged. Exiting.", $time);
   end
-endmodule
 
-module axi_stream_data_sink(axi_stream_if.sink_port stream_intf); // Using 'sink_port' modport
-  always_ff @(posedge stream_intf.aclk) begin
-    if (stream_intf.tvalid) begin
-      $display("[%0t] Sink received data: 0x%08h", $time, stream_intf.tdata);
-      stream_intf.tready <= 1; // Assert ready to accept data
-    end else begin
-      stream_intf.tready <= 0;
-    end
+  // Data Processing Process
+  initial begin : data_process
+    $display("[%0t] Data Process: Waiting for configuration...", $time);
+    @(config_ready_event); // Wait for the configuration_ready_event to be triggered
+    $display("[%0t] Data Process: Configuration ready. Starting data processing...", $time);
+    #30; // Simulate data processing time
+    $display("[%0t] Data Process: Data processing complete.", $time);
+    -> data_processed_event; // Signal data processing completion
   end
-endmodule
 
-module top_axi_stream_example;
-  axi_stream_if axi_stream_bus(); // Instantiate AXI-Stream interface
-
-  axi_stream_data_source source_unit (.stream_intf(axi_stream_bus.source_port)); // Connect source using 'source_port' modport
-  axi_stream_data_sink   sink_unit   (.stream_intf(axi_stream_bus.sink_port));   // Connect sink using 'sink_port' modport
-  // A monitor could be connected using 'monitor_port' modport
-
-  // Clock and reset generation
   initial begin
-    axi_stream_bus.aresetn = 0;
-    axi_stream_bus.aclk    = 0;
-    #20 axi_stream_bus.aresetn = 1;
-    #200 $finish;
+    #100 $finish; // Simulation timeout
   end
-  always #5 axi_stream_bus.aclk = ~axi_stream_bus.aclk;
 endmodule
 ```
 
-**Explanation of Modport Features:**
+**Example Output (Illustrative):**
 
--   **Directional Signal Views**: The `axi_stream_if` interface defines three modports: `source_port`, `sink_port`, and `monitor_port`. Each modport provides a specific view of the interface signals with defined directions:
-    -   `source_port`: For modules acting as data sources (e.g., masters, producers). From the source's perspective, `tdata` and `tvalid` are outputs (driven by the source), while `tready`, `aclk`, and `aresetn` are inputs (received by the source).
-    -   `sink_port`: For modules acting as data sinks (e.g., slaves, consumers). From the sink's perspective, `tdata` and `tvalid` are inputs (received by the sink), and `tready` is an output (driven by the sink).
-    -   `monitor_port`: For passive monitor modules that only observe the interface signals. All signals are declared as `input` in the `monitor_port` as the monitor only samples or observes the signals without driving them.
--   **Enforced Directionality**: When you connect modules to an interface using a specific modport (e.g., `axi_stream_data_source` using `axi_stream_if.source_port`), the SystemVerilog compiler enforces the signal directions defined in that modport.  Attempting to drive an `input` signal or read an `output` signal from within a module connected through a modport will result in a compilation error, preventing common connectivity mistakes.
--   **Modport-Specific Instantiation**: In the module instantiations in `top_axi_stream_example`, note how the modport view is specified when connecting the interface:
-    -   `axi_stream_data_source source_unit (.stream_intf(axi_stream_bus.source_port));`
-    -   `axi_stream_data_sink   sink_unit   (.stream_intf(axi_stream_bus.sink_port));`
-    This syntax explicitly associates each module instance with the appropriate modport view of the `axi_stream_bus` interface.
-
-### Modport Best Practices for Robust Interface Design
-
-1.  **Meaningful Modport Naming**: Use descriptive and meaningful names for modports that clearly indicate the role or perspective they represent. Common naming conventions include using terms like `master`, `slave`, `initiator`, `target`, `source`, `sink`, `driver`, `monitor`, `agent`, `producer`, `consumer`, etc. Choose names that align with the protocol and the module's function within the communication framework.
-2.  **Principle of Least Privilege - Minimize Exposed Signals**: Design modports to expose only the signals that are strictly necessary for a module to perform its intended function within that specific interface view.  Avoid including signals in a modport that a module does not need to access or drive. This principle of least privilege enhances modularity, reduces accidental misuse, and improves design security.
-3.  **Clocking Blocks Integration for Synchronous Interfaces**: For synchronous interfaces, tightly integrate modports with clocking blocks. Define clocking blocks within the interface and reference them within modport definitions. This practice clearly associates timing and synchronization information with the interface protocol and modport views, making it easier to reason about and verify timing-critical aspects of the design.
-4.  **Layered Modports for Verification Components**: In advanced verification environments (like UVM), create specialized modports tailored for different types of verification components (e.g., drivers, monitors, agents, scoreboards).  This layered approach allows you to define precise interfaces for each verification component, enforce clear separation of concerns, and build highly modular and reusable verification IP. For instance, you might have `driver_port`, `monitor_port`, `sequencer_port`, and `scoreboard_port` modports within a single interface definition for a complex protocol.
-
-## Practical Applications and Exercises to Master Interfaces
-
-### Exercise 1: Implementing a Basic Memory Interface
-
-**Objective**: Design a simple memory interface and connect a memory controller and a memory module using this interface.
-
-```SV
-interface memory_if; // Define the memory interface
-  logic clk;      // Clock
-  logic cs_n;     // Chip Select (active low)
-  logic we_n;     // Write Enable (active low)
-  logic [15:0] addr;  // 16-bit address bus
-  logic [31:0] data;  // 32-bit data bus
-endinterface
-
-module memory_controller(memory_if mem_intf);
-  // ... (Memory controller logic to drive mem_intf signals) ...
-endmodule
-
-module memory_array(memory_if mem_intf);
-  // ... (Memory array logic responding to mem_intf signals) ...
-endmodule
-
-module top_memory_system;
-  memory_if memory_bus(); // Instantiate memory interface
-
-  memory_controller ctrl (.mem_intf(memory_bus)); // Connect controller
-  memory_array      mem  (.mem_intf(memory_bus)); // Connect memory array
-
-  // ... (Testbench and clock/reset generation) ...
-endmodule
+```
+[0] Configuration Process: Starting...
+[0] Data Process: Waiting for configuration...
+[25] Configuration Process: Configuration complete. Triggering event...
+[25] Data Process: Configuration ready. Starting data processing...
+[55] Data Process: Data processing complete.
+[55] Configuration Process: Data processing acknowledged. Exiting.
 ```
 
-**Task**:
+**Key Event Usage Points:**
 
-1.  Complete the `memory_controller` and `memory_array` modules to implement basic memory read and write operations using the `memory_if` interface.
-2.  Write a testbench in `top_memory_system` to drive the `memory_if` signals and verify memory read and write functionality.
+-   **Synchronization Signals**: Events are primarily used as synchronization signals between processes. They indicate that a specific condition has been met or that a certain stage of processing has been completed.
+-   **Triggering (`-> event_name`)**: The `-> event_name;` statement triggers the event, signaling to any processes waiting for this event that it has occurred. Triggering an event is non-blocking.
+-   **Waiting (`@(event_name)`)**: The `@(event_name);` statement causes the process to suspend execution and wait until the specified event is triggered.  This is a blocking wait. Once the event is triggered by another process, the waiting process resumes execution.
+-   **`wait(event_name.triggered)` for Robust Waiting**:  `wait(event_name.triggered);` is a more robust waiting mechanism. It checks if the event has already been triggered **at any point in the past**. If the event has already occurred before the `wait()` statement is reached, the process will not block and will continue immediately. If the event has not yet occurred, the process will block until it is triggered. This is crucial for avoiding race conditions where an event might be triggered *before* a process starts waiting for it.
+-   **`.triggered` Property**: The `.triggered` property of an event is a non-blocking way to check if an event has been triggered at any point. It returns `1` if the event has been triggered, and `0` otherwise. Useful for conditional logic based on event status.
+-   **No Data Transfer**: Events themselves do not carry data. For data exchange in conjunction with synchronization, mailboxes are the appropriate mechanism.
 
-### Exercise 2: Creating a Direction-Controlled UART Interface with Modports
+## Comparison: Choosing the Right IPC Mechanism
 
-**Task**: Implement a UART (Universal Asynchronous Receiver/Transmitter) interface using modports to define directions for DTE (Data Terminal Equipment) and DCE (Data Communication Equipment) connections.
+| Feature             | Mailbox                                    | Semaphore                                      | Event                                          |
+| ------------------- | ------------------------------------------ | --------------------------------------------- | ---------------------------------------------- |
+| **Primary Purpose**   | **Data exchange** between processes        | **Resource access control**, mutual exclusion    | **Process synchronization**, signaling events |
+| **Data Transfer**     | **Yes**, carries messages (type-parameterized) | **No**, manages keys (permits), no data transfer | **No**, just signals occurrence of an event     |
+| **Blocking Methods**  | `put()`, `get()`                           | `get()`                                        | `@(event)`, `wait(event.triggered)`           |
+| **Non-blocking Methods**| `try_put()`, `try_get()`, `peek()`, `num()`| `try_get()`, `try_put()`, `num()`             | `event.triggered`                             |
+| **Type Safety**       | **Yes**, parameterized for data type        | **No**, typeless, manages integer keys          | **No**, typeless, just a signal               |
+| **Synthesizable?**    | **No**, primarily for verification         | **No**, primarily for verification              | **No**, primarily for verification              |
+| **Typical Use Cases** | Producer-consumer patterns, message queues, data streaming, testbench communication | Protecting shared resources, critical sections, mutual exclusion, limiting concurrent access | Testbench phase synchronization, event-driven stimulus, signaling completion, triggering actions |
 
-```SV
-interface uart_if;
-  logic clk;    // Clock
-  logic rx;     // Receive data line
-  logic tx;     // Transmit data line
-  logic cts;    // Clear To Send (DTE output, DCE input)
-  logic rts;    // Request To Send (DTE input, DCE output)
+## Exercises: Practical IPC Implementation
 
-  // Modport for DTE (e.g., computer, microcontroller)
-  modport DTE_port ( // Modport for DTE perspective
-    input  rx, rts, clk,  // Inputs to DTE
-    output tx, cts       // Outputs from DTE
-  );
+1.  **String Mailbox**: Create a mailbox parameterized to carry `string` messages. Implement two processes: one process sends a series of string messages (e.g., "Hello", "World", "SystemVerilog") into the mailbox, and another process receives and displays these string messages.
+2.  **Shared Counter with Semaphore Protection**: Design a module with a shared integer counter variable. Create two concurrent processes that both increment this counter multiple times. Use a binary semaphore (mutex) to protect the counter and ensure that increments from both processes are atomic and do not lead to race conditions. Display the final counter value.
+3.  **Bounded Mailbox Overflow Handling**: Create a bounded mailbox with a small capacity (e.g., size 2) for integers. Implement a sender process that attempts to send more messages than the mailbox capacity. Use `try_put()` in the sender and demonstrate how it handles mailbox full conditions and reports failures. Implement a receiver process to consume messages.
+4.  **Semaphore for Limited Resource Access**: Simulate a system with a limited resource (e.g., 2 processing units) using a semaphore initialized with 2 keys. Create 4 concurrent processes that each need to acquire the resource (semaphore) to perform some operation. Show how only 2 processes can proceed at a time, while the others wait for a resource to become available.
+5.  **Event-Driven Testbench Phase Synchronization**: Design a testbench with two initial blocks representing different test phases (e.g., "Configuration Phase" and "Verification Phase"). Use an event (`config_phase_done`) to synchronize these phases. The "Configuration Phase" process should simulate configuration tasks and then trigger the `config_phase_done` event. The "Verification Phase" process should wait for `config_phase_done` before starting its verification activities. Display messages to indicate the start and end of each phase and the synchronization point.
+6.  **Event with `wait(event.triggered)` Robustness**: Create a scenario where an event (`early_event`) might be triggered *before* a process starts waiting for it.  Process 1 should trigger `early_event` after a short delay. Process 2 should start after a longer delay and then use `wait(early_event.triggered)` to wait for the event. Demonstrate that Process 2 correctly proceeds even if the event was triggered before it started waiting, highlighting the robustness of `wait(event.triggered)`.
 
-  // Modport for DCE (e.g., modem, UART chip)
-  modport DCE_port ( // Modport for DCE perspective
-    output rx, rts, clk, // Outputs from DCE
-    input  tx, cts      // Inputs to DCE
-  );
-endinterface
+## Best Practices for Effective IPC
 
-module uart_transmitter(uart_if.DTE_port uart_dte_intf);
-  // ... (UART transmitter logic using DTE modport view) ...
-endmodule
-
-module uart_receiver(uart_if.DCE_port uart_dce_intf);
-  // ... (UART receiver logic using DCE modport view) ...
-endmodule
-
-module top_uart_system;
-  uart_if uart_bus(); // Instantiate UART interface
-
-  uart_transmitter tx_unit (.uart_dte_intf(uart_bus.DTE_port)); // Connect transmitter using DTE modport
-  uart_receiver    rx_unit (.uart_dce_intf(uart_bus.DCE_port)); // Connect receiver using DCE modport
-
-  // ... (Testbench and clock generation) ...
-endmodule
-```
-
-**Task**:
-
-1.  Complete the `uart_transmitter` and `uart_receiver` modules, using the `DTE_port` and `DCE_port` modports respectively, to implement basic UART communication.
-2.  Write a testbench in `top_uart_system` to drive the `uart_if` signals and verify UART data transmission and reception.
-
-### Exercise 3: Creating a Parameterized AXI-Lite Interface
-
-**Challenge**: Design a parameterized AXI-Lite interface to support configurable address and data widths.
-
-```SV
-interface axi_lite_if #(parameter ADDR_WIDTH = 32, parameter DATA_WIDTH = 32);
-  // AXI-Lite Write Address Channel
-  logic [ADDR_WIDTH-1:0] awaddr;
-  logic awvalid;
-  logic awready;
-
-  // AXI-Lite Write Data Channel
-  logic [DATA_WIDTH-1:0] wdata;
-  logic wvalid;
-  logic wready;
-
-  // AXI-Lite Write Response Channel (add signals for read channels as well)
-  logic bresp; // Example: Write response signal (adjust width as needed)
-  logic bvalid;
-  logic bready;
-
-  // Clock and Reset (common to all channels)
-  logic aclk;
-  logic aresetn;
-
-  // Modport for AXI-Lite Master
-  modport master_port ( // Master modport view
-    output awaddr, awvalid, wdata, wvalid, bready, // Outputs from master
-    input  awready, wready, bresp, bvalid, aclk, aresetn // Inputs to master
-    // ... (Include signals for read channels in master modport) ...
-  );
-
-  // Modport for AXI-Lite Slave
-  modport slave_port ( // Slave modport view
-    input  awaddr, awvalid, wdata, wvalid, bready, aclk, aresetn, // Inputs to slave
-    output awready, wready, bresp, bvalid                     // Outputs from slave
-    // ... (Include signals for read channels in slave modport) ...
-  );
-endinterface
-
-module axi_lite_master_unit(axi_lite_if.master_port axi_master_intf);
-  // ... (AXI-Lite master logic using master_port modport view) ...
-endmodule
-
-module axi_lite_slave_unit(axi_lite_if.slave_port axi_slave_intf);
-  // ... (AXI-Lite slave logic using slave_port modport view) ...
-endmodule
-
-module top_axi_lite_system;
-  // Instantiate AXI-Lite interface with specific parameter values (e.g., 32-bit address, 64-bit data)
-  axi_lite_if #(.ADDR_WIDTH(32), .DATA_WIDTH(64)) axi_lite_bus();
-
-  axi_lite_master_unit master_inst (.axi_master_intf(axi_lite_bus.master_port)); // Connect master
-  axi_lite_slave_unit  slave_inst  (.axi_slave_intf(axi_lite_bus.slave_port));  // Connect slave
-
-  // ... (Testbench and clock/reset generation) ...
-endmodule
-```
-
-**Challenge Tasks**:
-
-1.  Complete the `axi_lite_if` interface definition by adding signals for the AXI-Lite read address channel, read data channel, and any necessary control signals.
-2.  Complete the `master_port` and `slave_port` modport definitions to include directions for all AXI-Lite signals.
-3.  Implement basic logic for `axi_lite_master_unit` and `axi_lite_slave_unit` modules to perform AXI-Lite write transactions.
-4.  Write a testbench in `top_axi_lite_system` to instantiate the parameterized `axi_lite_if` with different address and data widths and verify basic AXI-Lite write operations between the master and slave units.
-
-## Best Practices and Common Pitfalls to Avoid
-
-### SystemVerilog Interface "Do's" for Robust Designs
-
--   **Adopt Clear and Unique Naming Conventions**: Use consistent and descriptive naming conventions for interfaces and modports. Interface names should clearly indicate the protocol or communication standard they represent (e.g., `pci_express_if`, `ddr4_memory_if`, `usb3_protocol_if`). Modport names should reflect the role of the module connecting through them (e.g., `master_port`, `slave_port`, `initiator_modport`, `target_modport`, `monitor_modport`). Using a suffix like `_if` for interfaces is a common practice (e.g., `simple_bus_if`, `axi_stream_if`).
--   **Incorporate Reset Strategies within Interfaces**: Include reset signals (e.g., `rst_n`, `reset`) as part of your interface definitions. Define a clear reset strategy for the interface and document whether the reset is synchronous or asynchronous, active-high or active-low. Consider adding a `reset()` task within the interface to encapsulate the reset sequence for connected modules, as shown in the "Final Example" interface.
--   **Integrate Protocol Checkers and Assertions**: Enhance interface robustness by embedding assertion-based verification directly within the interface definition. Add assertion statements (`assert property (...)`) within interfaces to check for protocol violations, timing constraints, and data integrity. You can also include tasks or functions within the interface that act as protocol checkers or monitors, providing runtime verification of interface behavior.
--   **Implement Interface Versioning and Compatibility**: For interfaces intended for reuse across multiple projects or over long periods, establish a versioning scheme to track interface changes systematically. Clearly document interface versions, changes between versions, and compatibility considerations. This is crucial for managing interface evolution and ensuring interoperability between different design components that might use different versions of the same interface.
-
-### SystemVerilog Interface "Don'ts" - Common Mistakes to Avoid
-
--   **Don't Use Global Interfaces - Favor Explicit Instantiation and Connection**: Avoid creating "global" interfaces that are implicitly accessible throughout the design without explicit instantiation and connection. Global interfaces can reduce modularity, make dependencies unclear, and hinder code reuse. Instead, always instantiate interfaces locally within modules or higher-level scopes and explicitly pass interface instances as ports to modules that need to communicate through them. This promotes modularity, clarity, and controlled communication paths.
--   **Prevent Over-Complexity - Split Interfaces When Responsibilities Diverge**: Resist the temptation to create overly monolithic interfaces that try to encompass too many signals or functionalities. If an interface starts becoming too large and complex, or if you find that different sets of modules only use subsets of its signals, consider splitting it into smaller, more focused interfaces that represent distinct communication sub-protocols or functional aspects. Well-decomposed interfaces are easier to understand, maintain, and reuse.
--   **Don't Ignore Clock Domain Crossing (CDC) Issues**: When designing interfaces that span clock domains, explicitly identify and mark signals that cross clock domains within the interface definition. Use naming conventions (e.g., suffix signals with `_sync` or `_async`) and comments to clearly indicate CDC signals.  Incorporate appropriate CDC synchronization mechanisms (e.g., synchronizers, FIFOs) in modules that connect to these interfaces to handle clock domain crossing safely and prevent metastability issues. Ignoring CDC at the interface level can lead to significant timing and functional problems in the design.
--   **Avoid Direct Signal Assignments in Interfaces for Complex Operations**: While interfaces can contain tasks and functions, avoid placing complex procedural code or direct signal assignments within the interface itself to implement core protocol logic. Interfaces should primarily focus on *defining* the communication protocol (signals, structure, basic methods) rather than *implementing* complex protocol state machines or data processing. Keep the logic within interfaces concise and focused on interface-level operations. Implement complex protocol behavior within the modules that connect to the interface, using the interface methods as needed for abstraction and control. Overloading interfaces with complex logic can blur the lines between interface definition and module implementation, reducing modularity and making the design harder to understand and verify.
-
-## Conclusion: Interfaces - The Cornerstone of Modern Hardware Design
-
-SystemVerilog interfaces are not just a syntactic convenience; they represent a fundamental shift towards a more structured, modular, and robust hardware design methodology. By effectively utilizing interfaces and modports, hardware designers can:
-
-1.  **Create Self-Documenting and Intent-Driven Code Structures**: Interfaces, especially with well-defined modports and methods, make SystemVerilog code more self-documenting. They clearly express the communication protocols and signal directions, making designs easier to understand, review, and maintain. The interface definition itself becomes a form of living documentation for the communication architecture.
-2.  **Implement Error-Resistant and Robust Communication Channels**: Modports, type parameterization, and built-in assertions within interfaces contribute to creating error-resistant communication channels. Directional enforcement by modports prevents common wiring errors and signal contention. Type parameterization enhances data integrity. Assertions enable early detection of protocol violations, improving overall design robustness and reliability.
-3.  **Develop IP-Agnostic and Reusable Integration Frameworks**: Interfaces promote IP (Intellectual Property) reuse and integration by providing standardized communication boundaries. Modules designed to communicate through well-defined interfaces become more IP-agnostic – they are less dependent on the specific implementation details of other modules. This facilitates plug-and-play integration of different design components and IP blocks, accelerating design assembly and verification.
-4.  **Accelerate Verification and Enhance Testability through Built-in Protocol Checking**: Interfaces, particularly when combined with assertions and clocking blocks, significantly accelerate verification efforts. By embedding protocol checks and timing constraints directly within the interface, you create a verifiable communication contract. This enables early detection of protocol violations at the interface level, simplifying debugging and improving overall testability. Verification components (like UVM agents) built around interfaces become more focused and effective, leading to more efficient and comprehensive verification campaigns.
-
-As you advance in SystemVerilog design and verification, it is crucial to explore and master related advanced concepts that build upon interfaces, such as:
-
--   **Virtual Interfaces**: Essential for creating abstract testbenches and connecting verification components to the design under verification in a flexible and configurable manner. Virtual interfaces decouple testbench architecture from the specific instantiation hierarchy of the design, enabling highly reusable and adaptable verification environments.
--   **Clocking Blocks**: Provide a structured way to manage timing and synchronization in synchronous interfaces. Clocking blocks, often used in conjunction with modports, define clock domains, signal sampling, and driving edges, making it easier to design and verify synchronous interfaces and handle timing-related issues.
--   **Parameterized Interface Customization**: Leverage parameters in interfaces to create highly configurable and adaptable communication channels. Parameterization allows you to tailor interface characteristics (like data width, address width, protocol options) to specific design requirements without redefining the entire interface structure, promoting reuse and flexibility.
--   **Interface-Based UVM Verification Components**: Understand how interfaces are fundamental to building UVM verification components (agents, drivers, monitors, sequencers). UVM agents are typically built around interfaces, encapsulating the communication protocol and providing a structured and reusable approach to verification IP development. Mastering interface-based UVM methodology is key to building advanced, efficient, and reusable verification environments for complex SystemVerilog designs.
-
-By embracing SystemVerilog interfaces and consistently applying best practices in interface design, you will be well-positioned to tackle the challenges of modern hardware design and verification, creating more modular, robust, and maintainable digital systems.
-
-```SV
-// Final Example: A Complete Smart Bus Interface System with Reset Task
-interface smart_bus_if #(parameter DATA_WIDTH = 8);
-  logic clk, rst_n;
-  logic [DATA_WIDTH-1:0] data;
-  logic valid, ready;
-
-  // Modport for Transmitter (Source)
-  modport transmitter_port (
-    output logic [DATA_WIDTH-1:0] data, valid,
-    input  logic clk, rst_n, ready
-  );
-
-  // Modport for Receiver (Sink)
-  modport receiver_port (
-    input  logic [DATA_WIDTH-1:0] data, valid, clk, rst_n,
-    output logic ready
-  );
-
-  // Reset Task encapsulated within the interface
-  task automatic reset_interface();
-    @(negedge rst_n); // Wait for reset to be asserted
-    data  <= '0;
-    valid <= 0;
-    ready <= 0;
-    $display("[%0t] Interface %m: Reset complete", $time); // %m for interface instance name
-  endtask
-endinterface
-```
+-   **Deadlock Prevention**: Be mindful of potential deadlocks, especially when using semaphores. Ensure that processes always release semaphores after acquiring them, even in error conditions. Design your IPC logic to avoid circular dependencies in resource acquisition. Use timeouts with blocking `get()` and `put()` methods in critical sections if necessary to prevent indefinite blocking.
+-   **Bounded Mailboxes for Flow Control**: In systems with potential for message buildup or resource constraints, prefer bounded mailboxes over unbounded ones. Use `try_put()` and `try_get()` to implement flow control and handle mailbox full/empty conditions explicitly, preventing buffer overflows and ensuring responsiveness.
+-   **Type Parameterization for Mailboxes**: Always parameterize mailboxes with specific data types (`mailbox #(<data_type>)`) to enforce type safety and catch potential data type mismatch errors at compile time. This improves code robustness and maintainability.
+-   **Strategic Use of `wait(event.triggered)`**: When waiting for events, especially in scenarios where events might be triggered asynchronously or before the waiting process starts, use `wait(event.triggered)` for a more robust and race-condition-resistant approach.
+-   **Resource Management with Semaphores**: Initialize semaphores with an appropriate number of keys based on the number of concurrent accesses allowed for the shared resource. Use semaphores to protect critical sections of code that access shared variables or hardware resources. Follow a consistent pattern of `semaphore.get()` before accessing the resource and `semaphore.put()` after finishing to ensure proper mutual exclusion.
+-   **Choosing the Right IPC Mechanism**: Select the IPC mechanism that best suits the communication and synchronization needs of your processes. Use mailboxes for data exchange, semaphores for resource access control, and events for simple synchronization signaling. Avoid using a more complex mechanism than necessary for the task at hand.
+-   **Clear Naming Conventions**: Use descriptive names for mailboxes, semaphores, and events that clearly indicate their purpose and the type of data or resource they are managing. This improves code readability and understanding of the IPC mechanisms in your design or testbench.
 
 ##### Copyright (c) 2025 squared-studio
 
