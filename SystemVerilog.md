@@ -6,10 +6,11 @@
   - The Winning Advantages of SystemVerilog
   - Core Features That Set SystemVerilog Apart
 ## 2. [Basics](SystemVerilog/chapter_00002.md)
-  - module
-  - initial Block
-  - $display
-  - $finish
+  - I. Basic SystemVerilog Syntax Fundamentals
+  - II. The module Construct
+  - III. Procedural Blocks
+  - IV. The initial Block
+  - V. System Tasks for Simulation Control and Output
 ## 3. [SystemVerilog Built-in Tasks and Functions](SystemVerilog/chapter_00003.md)
   - Display Tasks
   - Wavedump Tasks
