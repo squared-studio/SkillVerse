@@ -210,7 +210,51 @@ endgroup : data_coverage_group
 * **`default` Bin**: Ensures that any values not captured by other explicit bins are accounted for in the coverage report, highlighting potentially unexpected or unbinned values.
 * **`illegal_bins`**: Used to mark values that represent an invalid or erroneous state according to the design specification. A hit in an `illegal_bin` indicates a verification failure or a design bug.
 * **`ignore_bins`**: Used to exclude values from coverage calculations. This is useful for "don't care" states or values that are not relevant to the current verification objective.
-* **Automatic Bins**: If no explicit bins are defined for a coverpoint, simulators may automatically create bins based on the data type. However, explicit binning is generally preferred for precise control over coverage targets.
+* **Automatic Bins**: If no explicit bins are defined for a coverpoint, or if specific syntaxes like `bins name[] = {[0:$]};` or `bins name[] = default;` are used, SystemVerilog can **automatically create bins** for all possible values of the coverpoint's expression. This is a convenient way to ensure comprehensive coverage of all states without manually listing every single value, particularly for wider data types.
+
+    **Example of Automatic Bin Creation:**
+
+    ```SV
+    module automatic_bins_example;
+      logic [2:0] state_reg; // 3-bit variable, values 0-7
+
+      covergroup state_coverage @(posedge clk);
+        // No explicit bins defined for state_reg_cp.
+        // SystemVerilog will automatically create 8 bins:
+        // auto[0], auto[1], ..., auto[7]
+        state_reg_cp: coverpoint state_reg;
+
+        // Using explicit syntax for automatic bins (alternative to just leaving it blank)
+        // This also creates 8 bins: auto_explicit[0], auto_explicit[1], ..., auto_explicit[7]
+        state_reg_cp_explicit: coverpoint state_reg {
+          bins auto_explicit[] = {[0:$]};
+        }
+      endgroup : state_coverage
+
+      logic clk;
+      state_coverage cov_inst = new();
+
+      initial begin
+        clk = 0;
+        forever #5 clk = ~clk;
+      end
+
+      initial begin
+        // Drive various states to hit the automatic bins
+        state_reg = 3'b000; @(posedge clk); cov_inst.sample();
+        state_reg = 3'b001; @(posedge clk); cov_inst.sample();
+        state_reg = 3'b010; @(posedge clk); cov_inst.sample();
+        state_reg = 3'b011; @(posedge clk); cov_inst.sample();
+        state_reg = 3'b100; @(posedge clk); cov_inst.sample();
+        state_reg = 3'b101; @(posedge clk); cov_inst.sample();
+        state_reg = 3'b110; @(posedge clk); cov_inst.sample();
+        state_reg = 3'b111; @(posedge clk); cov_inst.sample(); // All 8 bins are hit
+
+        #100 $finish;
+      end
+    endmodule : automatic_bins_example
+    ```
+    In the example above, for `state_reg_cp`, the simulator will automatically generate bins for each possible value of `state_reg` (0 through 7). The coverage report would show entries for `state_reg_cp.auto[0]`, `state_reg_cp.auto[1]`, and so on, up to `state_reg_cp.auto[7]`. Similarly for `state_reg_cp_explicit`, bins named `auto_explicit[0]` to `auto_explicit[7]` would be created.
 
 ### 3. Cross Coverage: Verifying Value Combinations
 
