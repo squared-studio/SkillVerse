@@ -1,5 +1,7 @@
 # Introduction to Git
 
+Update chapter_00001: small edits
+
 ## Understanding Git: Your Project's Time Machine
 
 **Git** is a powerful **Distributed Version Control System (DVCS)** that has revolutionized how developers manage and collaborate on code.  Imagine Git as a sophisticated "time machine" for your software projects. It meticulously tracks every modification, enabling effortless teamwork and providing robust safeguards for your valuable work.  At its heart, Git offers these core functionalities:
