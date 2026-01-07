@@ -98,5 +98,5 @@ make -n
 ```
 
 
-##### Copyright (c) 2025 squared-studio
+##### Copyright (c) 2026 squared-studio
 

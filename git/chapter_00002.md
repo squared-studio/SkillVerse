@@ -30,19 +30,19 @@ Using the command line interface (CLI) offers a direct and efficient way to mana
     You'll see a confirmation message, usually: `Initialized empty Git repository in .git/`. This indicates that the hidden `.git` directory has been successfully created.
 
 4.  **Stage Your Project Files**:
-    Tell Git which files you want to include in your first commit.  The `git add` command stages files, preparing them for a snapshot (commit).
+    Tell Git which files you want to include in your first commit. The `git add` command stages files, preparing them for a snapshot (commit).
 
-      * **Stage all files in the current directory and subdirectories**:
+    - **Stage all files in the current directory and subdirectories**:
 
-        ```bash
-        git add .
-        ```
+      ```bash
+      git add .
+      ```
 
-      * **Stage specific files**:
+    - **Stage specific files**:
 
-        ```bash
-        git add file1.txt file2.js
-        ```
+      ```bash
+      git add file1.txt file2.js
+      ```
 
 5.  **Commit Your Initial Snapshot**:
     Create your first commit. A commit is a snapshot of your staged files at a specific point in time, along with a descriptive message.
@@ -58,7 +58,7 @@ Using the command line interface (CLI) offers a direct and efficient way to mana
 To collaborate online and back up your local repository, you can connect it to a remote repository on GitHub.
 
 1.  **Create a Repository on GitHub**:
-    Go to [GitHub](https://github.com/new) and create a new, empty repository.  Choose a repository name and decide if it should be public or private. You do **not** need to initialize it with a README, license, or .gitignore at this stage if you are connecting an existing local repository.
+    Go to [GitHub](https://github.com/new) and create a new, empty repository. Choose a repository name and decide if it should be public or private. You do **not** need to initialize it with a README, license, or .gitignore at this stage if you are connecting an existing local repository.
 
 2.  **Link Local Repository to Remote on GitHub**:
     Use the `git remote add origin` command to create a connection between your local Git repository and the remote repository on GitHub. Replace `https://github.com/username/repo-name.git` with the actual URL of your GitHub repository.
@@ -91,15 +91,15 @@ Creating a repository directly on the GitHub website is an excellent option, esp
 3.  **Configure Your Repository**:
     You'll be taken to the "Create a new repository" page where you need to configure a few settings:
 
-      * **Repository name**: Enter a name for your repository in the "Repository name" field. Keep it concise and descriptive, using hyphens instead of spaces (e.g., `my-new-project`).
-      * **Description** (Optional): Add a brief description of your project. This helps others understand what your repository is about.
-      * **Visibility**: Choose between:
-          * **Public**:  Anyone on the internet can see your repository. This is common for open-source projects.
-          * **Private**: You control who can access your repository. This is suitable for personal or proprietary projects.
-      * **Initialize this repository with**: It's highly recommended to initialize your repository with the following options:
-          * **Add a README**: Check this box to automatically create a `README.md` file. This file is typically used to provide an overview of your project, instructions, and other important information.
-          * **Add .gitignore**: Select this to create a `.gitignore` file.  Choose a template relevant to your project's programming language or framework (e.g., `Node`, `Python`, etc.). This file prevents unnecessary files like temporary files or dependency folders (like `node_modules/`) from being tracked by Git.
-          * **Choose a license**:  Adding a license clarifies how others can use your code. Common open-source licenses include MIT, Apache 2.0, and GPLv3. If you're unsure, resources like [Choose a License](https://www.google.com/url?sa=E&source=gmail&q=https://choosealicense.com/) can help you decide.
+    - **Repository name**: Enter a name for your repository in the "Repository name" field. Keep it concise and descriptive, using hyphens instead of spaces (e.g., `my-new-project`).
+    - **Description** (Optional): Add a brief description of your project. This helps others understand what your repository is about.
+    - **Visibility**: Choose between:
+      - **Public**: Anyone on the internet can see your repository. This is common for open-source projects.
+      - **Private**: You control who can access your repository. This is suitable for personal or proprietary projects.
+    - **Initialize this repository with**: It's highly recommended to initialize your repository with the following options:
+      - **Add a README**: Check this box to automatically create a `README.md` file. This file is typically used to provide an overview of your project, instructions, and other important information.
+      - **Add .gitignore**: Select this to create a `.gitignore` file. Choose a template relevant to your project's programming language or framework (e.g., `Node`, `Python`, etc.). This file prevents unnecessary files like temporary files or dependency folders (like `node_modules/`) from being tracked by Git.
+      - **Choose a license**: Adding a license clarifies how others can use your code. Common open-source licenses include MIT, Apache 2.0, and GPLv3. If you're unsure, resources like [Choose a License](https://www.google.com/url?sa=E&source=gmail&q=https://choosealicense.com/) can help you decide.
 
 4.  **Create the Repository**:
     After configuring all settings, click the **"Create repository"** button. Your new repository is now set up on GitHub\!
@@ -126,18 +126,18 @@ After creating your repository on GitHub, you'll likely want to work on it local
 
 ### Why Clone a Repository?
 
-  * **Offline Work**: Once cloned, you have the entire repository on your local machine, allowing you to work even without an internet connection.
-  * **Contribute to Open Source**: Cloning is the first step to contribute to open-source projects. You clone the project, make your changes, and then propose them back to the original repository.
-  * **Experiment and Learn**: You can clone repositories to study code, test out changes, or learn new technologies without directly altering the original project.
-  * **Backup and Redundancy**: Cloning provides a local backup of the remote repository.
+- **Offline Work**: Once cloned, you have the entire repository on your local machine, allowing you to work even without an internet connection.
+- **Contribute to Open Source**: Cloning is the first step to contribute to open-source projects. You clone the project, make your changes, and then propose them back to the original repository.
+- **Experiment and Learn**: You can clone repositories to study code, test out changes, or learn new technologies without directly altering the original project.
+- **Backup and Redundancy**: Cloning provides a local backup of the remote repository.
 
 ### Step-by-Step Guide: Cloning a Repository
 
 1.  **Get the Repository URL**:
     Navigate to the repository on GitHub (or the platform where it's hosted). Click on the **"Code"** button. You'll be presented with URLs. Choose either:
 
-      * **HTTPS URL**:  Starts with `https://`. Easier to use initially, generally requires username and password for push operations unless using a credential manager. Example: `https://github.com/username/repo.git`
-      * **SSH URL**: Starts with `git@github.com`. Requires SSH keys to be set up for authentication but is more secure for frequent push/pull operations. Example: `git@github.com:username/repo.git`
+    - **HTTPS URL**: Starts with `https://`. Easier to use initially, generally requires username and password for push operations unless using a credential manager. Example: `https://github.com/username/repo.git`
+    - **SSH URL**: Starts with `git@github.com`. Requires SSH keys to be set up for authentication but is more secure for frequent push/pull operations. Example: `git@github.com:username/repo.git`
 
     Copy your preferred URL.
 
@@ -209,26 +209,26 @@ Using the command line interface (CLI) to create a Git repository offers more co
     git init
     ```
 
-      * This command will create a `.git` subdirectory in your project folder. This directory contains all of the necessary repository metadata.
+    - This command will create a `.git` subdirectory in your project folder. This directory contains all of the necessary repository metadata.
 
 4.  **Stage Your Project Files**:
     Prepare your files for the first commit by adding them to the staging area. This tells Git which changes you want to include in the next snapshot.
 
-      * **To stage all files in your project**:
+    - **To stage all files in your project**:
 
-        ```bash
-        git add .
-        ```
+      ```bash
+      git add .
+      ```
 
-        Use this command to include all files and changes in your current directory and its subdirectories.
+      Use this command to include all files and changes in your current directory and its subdirectories.
 
-      * **To stage specific files**:
+    - **To stage specific files**:
 
-        ```bash
-        git add file1.txt file2.js
-        ```
+      ```bash
+      git add file1.txt file2.js
+      ```
 
-        List the names of the files you want to stage.
+      List the names of the files you want to stage.
 
 5.  **Commit Initial Snapshot**:
     Save the staged changes with a descriptive commit message. This message should summarize the changes you've made.
@@ -237,7 +237,7 @@ Using the command line interface (CLI) to create a Git repository offers more co
     git commit -m "Initial commit: project setup"
     ```
 
-      * The `-m` flag allows you to write a commit message directly in the command. Good commit messages are essential for understanding the history of your project.
+    - The `-m` flag allows you to write a commit message directly in the command. Good commit messages are essential for understanding the history of your project.
 
 ### Connecting to GitHub (Optional, but Recommended)
 
@@ -253,7 +253,7 @@ To collaborate with others online and backup your repository, connect your local
     git remote add origin https://github.com/username/repo-name.git
     ```
 
-      * `origin` is a common alias for the remote repository URL; you can think of it as a shortcut name.
+    - `origin` is a common alias for the remote repository URL; you can think of it as a shortcut name.
 
 3.  **Push Your Initial Commit to GitHub**:
     Upload your local repository content to the remote repository on GitHub.
@@ -262,8 +262,8 @@ To collaborate with others online and backup your repository, connect your local
     git push -u origin main
     ```
 
-      * `git push` uploads your local commits to the remote repository.
-      * `-u origin main` sets the upstream branch for future pushes from your local `main` branch to the `origin` remote's `main` branch. You only need to use `-u origin main` for the first push. For subsequent pushes, you can simply use `git push`.
+    - `git push` uploads your local commits to the remote repository.
+    - `-u origin main` sets the upstream branch for future pushes from your local `main` branch to the `origin` remote's `main` branch. You only need to use `-u origin main` for the first push. For subsequent pushes, you can simply use `git push`.
 
 ## Creating a New Repository via GitHub Website
 
@@ -282,15 +282,15 @@ Creating a repository directly on the GitHub website is a straightforward approa
 3.  **Configure Your Repository**:
     You'll be directed to a page to set up your new repository.
 
-      * **Repository name**: Enter a name for your repository in the "Repository name" field. Choose a concise and descriptive name (e.g., `your-repo-name`). Avoid spaces; use hyphens or underscores instead.
-      * **Description (optional)**: Provide a brief description of your project to help others understand its purpose.
-      * **Visibility**:
-          * Choose **"Public"** to make your repository visible to everyone on the internet. This is typically used for open-source projects.
-          * Choose **"Private"** to restrict access to only yourself and people you explicitly invite. This is suitable for personal or proprietary projects.
-      * **Initialize with**: It's highly recommended to initialize your repository with the following options:
-          * **Add a README**: Check this box to automatically create a `README.md` file. This file is used to describe your project and is the first thing visitors see in your repository.
-          * **Add .gitignore**: Select a template for your `.gitignore` file, which prevents unnecessary files (like temporary files or dependencies such as `node_modules/`) from being tracked by Git. Choose a template relevant to your project's programming language or environment (e.g., "Node" for Node.js projects, "Python" for Python projects).
-          * **Choose a license**: Select a license for your project (e.g., MIT License, Apache License 2.0, GPLv3). A license clarifies how others can use your code and is important for open-source projects. If you're unsure, the MIT License is a permissive and popular choice.
+    - **Repository name**: Enter a name for your repository in the "Repository name" field. Choose a concise and descriptive name (e.g., `your-repo-name`). Avoid spaces; use hyphens or underscores instead.
+    - **Description (optional)**: Provide a brief description of your project to help others understand its purpose.
+    - **Visibility**:
+      - Choose **"Public"** to make your repository visible to everyone on the internet. This is typically used for open-source projects.
+      - Choose **"Private"** to restrict access to only yourself and people you explicitly invite. This is suitable for personal or proprietary projects.
+    - **Initialize with**: It's highly recommended to initialize your repository with the following options:
+      - **Add a README**: Check this box to automatically create a `README.md` file. This file is used to describe your project and is the first thing visitors see in your repository.
+      - **Add .gitignore**: Select a template for your `.gitignore` file, which prevents unnecessary files (like temporary files or dependencies such as `node_modules/`) from being tracked by Git. Choose a template relevant to your project's programming language or environment (e.g., "Node" for Node.js projects, "Python" for Python projects).
+      - **Choose a license**: Select a license for your project (e.g., MIT License, Apache License 2.0, GPLv3). A license clarifies how others can use your code and is important for open-source projects. If you're unsure, the MIT License is a permissive and popular choice.
 
 4.  **Finalize and Create**:
     After configuring all settings, click the **"Create repository"** button to create your new repository on GitHub.
@@ -303,7 +303,7 @@ Once you've created your repository on GitHub, clone it to your local machine to
 git clone https://github.com/username/your-repo-name.git
 ```
 
-  * Replace `https://github.com/username/your-repo-name.git` with the URL of your newly created GitHub repository. You can find this URL on your repository's main page on GitHub, usually under a button labeled "Code."
+- Replace `https://github.com/username/your-repo-name.git` with the URL of your newly created GitHub repository. You can find this URL on your repository's main page on GitHub, usually under a button labeled "Code."
 
 ## Cloning a Git Repository
 
@@ -311,18 +311,18 @@ Cloning in Git means creating a local copy of a repository that already exists r
 
 ### Why Clone a Repository?
 
-  * **Offline Work**: Cloning allows you to work on a project locally, even without an internet connection. You can make changes, commit them, and then synchronize with the remote repository when you're back online.
-  * **Contributing to Open Source**:  To contribute to projects hosted on platforms like GitHub, you first clone the repository to your local machine. This allows you to make changes and propose them back to the original project.
-  * **Experimentation and Learning**: Cloning a repository is a safe way to explore and modify code without directly affecting the original project. You can try out new ideas or learn from existing codebases in isolation.
-  * **Backup and Redundancy**: Cloning provides a local backup of the remote repository, ensuring you have a copy of the codebase even if the remote repository becomes unavailable.
+- **Offline Work**: Cloning allows you to work on a project locally, even without an internet connection. You can make changes, commit them, and then synchronize with the remote repository when you're back online.
+- **Contributing to Open Source**: To contribute to projects hosted on platforms like GitHub, you first clone the repository to your local machine. This allows you to make changes and propose them back to the original project.
+- **Experimentation and Learning**: Cloning a repository is a safe way to explore and modify code without directly affecting the original project. You can try out new ideas or learn from existing codebases in isolation.
+- **Backup and Redundancy**: Cloning provides a local backup of the remote repository, ensuring you have a copy of the codebase even if the remote repository becomes unavailable.
 
 ### Step-by-Step Guide: Cloning a Repository
 
 1.  **Get the Repository URL**:
     Navigate to the repository on GitHub (or the platform where it's hosted) that you want to clone. Click on the **"Code"** button. You'll see options for the repository URL.
 
-      * **HTTPS URL**:  Looks like `https://github.com/username/repo.git`. Use this if you prefer using HTTPS for cloning, which generally works through firewalls and is simpler to set up initially.
-      * **SSH URL**: Looks like `git@github.com:username/repo.git`. SSH is recommended for secure access and when you plan to frequently push changes. It requires setting up SSH keys but avoids needing to enter your username and password every time. Choose the URL type based on your preference and setup. For beginners, HTTPS is often easier to start with.
+    - **HTTPS URL**: Looks like `https://github.com/username/repo.git`. Use this if you prefer using HTTPS for cloning, which generally works through firewalls and is simpler to set up initially.
+    - **SSH URL**: Looks like `git@github.com:username/repo.git`. SSH is recommended for secure access and when you plan to frequently push changes. It requires setting up SSH keys but avoids needing to enter your username and password every time. Choose the URL type based on your preference and setup. For beginners, HTTPS is often easier to start with.
 
 2.  **Open Your Terminal**:
     Launch your terminal and navigate to the directory where you want to clone the repository. For example, if you want to clone it into your "Projects" folder:
@@ -338,15 +338,15 @@ Cloning in Git means creating a local copy of a repository that already exists r
     git clone https://github.com/username/repo.git
     ```
 
-      * Replace `https://github.com/username/repo.git` with the actual URL you copied.
+    - Replace `https://github.com/username/repo.git` with the actual URL you copied.
 
-      * Git will download the repository to a new folder named after the repository (in this case, `repo`). You'll see output in your terminal indicating the cloning process, such as:
+    - Git will download the repository to a new folder named after the repository (in this case, `repo`). You'll see output in your terminal indicating the cloning process, such as:
 
-        ```bash
-        Cloning into 'repo'...
-        remote: Counting objects: 100% (75/75), done.
-        remote: Resolving deltas: 100% (30/30), done.
-        ```
+      ```bash
+      Cloning into 'repo'...
+      remote: Counting objects: 100% (75/75), done.
+      remote: Resolving deltas: 100% (30/30), done.
+      ```
 
 4.  **Navigate into the Cloned Repository**:
     After cloning is complete, change your current directory to the newly created repository folder to start working on the project.
@@ -363,7 +363,6 @@ If you need to clone only a specific branch instead of the entire repository (in
 git clone --branch feature-branch https://github.com/username/repo.git
 ```
 
-  * This command clones only the `feature-branch` branch and its history, making the cloning process faster and reducing the size of the cloned repository, especially for large projects.
+- This command clones only the `feature-branch` branch and its history, making the cloning process faster and reducing the size of the cloned repository, especially for large projects.
 
-##### Copyright (c) 2025 squared-studio
-
+##### Copyright (c) 2026 squared-studio

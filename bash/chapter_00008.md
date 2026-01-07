@@ -303,5 +303,5 @@ done
 echo "Log file renaming process completed."
 ```
 
-##### Copyright (c) 2025 squared-studio
+##### Copyright (c) 2026 squared-studio
 

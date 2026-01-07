@@ -359,5 +359,5 @@ Test your understanding with these exercises. Solutions are provided to help you
 
 By mastering these system tasks and functions, you gain essential control and visibility into your SystemVerilog simulations, significantly enhancing your debugging and verification capabilities.
 
-##### Copyright (c) 2025 squared-studio
+##### Copyright (c) 2026 squared-studio
 

@@ -199,5 +199,5 @@ $display("Sum of unique values: %0d", unique_sum);
 
 By deeply understanding and practicing these array manipulation techniques, you will significantly enhance your SystemVerilog proficiency, enabling you to tackle complex verification challenges and design sophisticated hardware architectures with greater efficiency and precision.
 
-##### Copyright (c) 2025 squared-studio
+##### Copyright (c) 2026 squared-studio
 

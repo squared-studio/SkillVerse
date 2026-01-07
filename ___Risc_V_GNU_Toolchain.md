@@ -5,5 +5,5 @@
   - Inside the SECTIONS Block
   - RISC-V Specific Considerations
 
-##### Copyright (c) 2025 squared-studio
+##### Copyright (c) 2026 squared-studio
 
