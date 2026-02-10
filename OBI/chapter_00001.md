@@ -74,14 +74,14 @@ The master initiates a read operation by:
 **Timing Requirements:**
 - All request signals (req, addr, we) must remain stable until gnt is asserted
 - Once gnt = 1, the slave has accepted the request
-- The master can issue a subsequent request immediately after receiving gnt (pipelined operation)
+- The master must wait for rvalid before issuing the next request (no pipelining)
 - The request and grant phases are decoupled from the response phase
 
 **Response Phase:**
 - The slave completes the read by asserting rvalid = 1
 - When rvalid = 1, valid read data is available on rdata
 - The master must sample rdata on the rising clock edge when rvalid = 1
-- Multiple requests can be outstanding, with responses returned in order or out-of-order (implementation-dependent)
+- Responses are always returned in order; only one request can be outstanding at a time
 
 ### Write Operation
 
@@ -95,7 +95,7 @@ The master initiates a write operation by:
 **Timing Requirements:**
 - All request signals (req, addr, we, wdata, be) must remain stable until gnt is asserted
 - Once gnt = 1, the slave has accepted the write request and captured the data
-- The master can issue a subsequent request immediately after receiving gnt (pipelined operation)
+- The master must wait for rvalid before issuing the next request (no pipelining)
 - The request and grant phases are decoupled from the response phase
 
 **Response Phase:**
@@ -103,7 +103,7 @@ The master initiates a write operation by:
 - When rvalid = 1, the write operation has been completed successfully
 - The rdata bus is not used during write operations and should be ignored by the master
 - The be signal allows partial word writes; only bytes with be[i] = 1 are written to memory
-- Multiple write requests can be outstanding, with completions signaled via rvalid
+- Only one request can be outstanding at a time; the master must wait for rvalid before starting a new transaction
 
 **Byte Enable Examples:**
 - For a 32-bit data bus: be = 4'b1111 writes all 4 bytes
