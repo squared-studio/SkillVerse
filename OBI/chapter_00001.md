@@ -34,3 +34,6 @@ The master initiates a read operation by asserting the request (req) signal high
 ### Write Operation
 
 The master initiates a write operation by asserting the request (req) signal high and providing the address on the addr bus, the data on the wdata bus, and the byte enable signals on the be bus. The we must be set to high for a write operation. The bus must stay stable until the slave asserts the grant (gnt) signal high. Subsequent request can follow immediately after the grant signal is asserted. The write operation is completed when the slave asserts the rvalid signal high. Rdata on the rdata bus is not valid for a write operation and should be ignored by the master.
+
+##### Copyright (c) 2026 squared-studio
+
