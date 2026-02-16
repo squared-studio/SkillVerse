@@ -75,3 +75,6 @@ ss -tuln | head   # or netstat -tuln
 
 ## Prep for Next Chapter
 - Save a few failing command examples (PATH issues, permission errors) to practice troubleshooting.
+
+##### Copyright (c) 2026 squared-studio
+

@@ -71,3 +71,6 @@ lsof -i :8080
 
 ## Prep for Next Chapter
 - Gather a small workflow you can automate end-to-end for the capstone.
+
+##### Copyright (c) 2026 squared-studio
+

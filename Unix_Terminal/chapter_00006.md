@@ -65,3 +65,6 @@ main "$@"
 
 ## Prep for Next Chapter
 - Collect aliases and prompt tweaks you like; we'll fold them into startup files.
+
+##### Copyright (c) 2026 squared-studio
+
